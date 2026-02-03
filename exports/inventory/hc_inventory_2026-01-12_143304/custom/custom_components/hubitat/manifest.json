@@ -1,0 +1,19 @@
+{
+  "$schema": "../../manifest-schema.json",
+  "version": "0.9.43",
+  "domain": "hubitat",
+  "name": "Hubitat",
+  "config_flow": true,
+  "documentation": "https://github.com/jason0x43/hacs-hubitat",
+  "issue_tracker": "https://github.com/jason0x43/hacs-hubitat/issues",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@jason0x43"
+  ],
+  "iot_class": "local_push",
+  "integration_type": "hub"
+}

@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-01-10T21:24:46",
+  "count": 8,
+  "items": [
+    {
+      "climate_entity_id": "climate.z1_first_floor_bedroom_and_bath",
+      "original_name": "z1 first floor bedroom and bath",
+      "config_entry_id": "01KBK94TH7WZE9W28V9R8EX2G7",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "z1 first floor bedroom and bath",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 2.0,
+        "heater": "switch.z1",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 3,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "z1 first floor bedroom and bath",
+        "target_sensor": "sensor.1f_fr_n_t_fp3001_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_2_second_floor_office_and_upper_guest",
+      "original_name": "zone 2 second floor office and upper guest",
+      "config_entry_id": "01KBK9822M4A4EJWWS4K2QCCQ9",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 2 second floor office and upper guest",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z2",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 2 second floor office and upper guest",
+        "target_sensor": "sensor.hc_office_guest_avg_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_3_basement_bath_and_common",
+      "original_name": "zone 3 basement bath and common",
+      "config_entry_id": "01KBK9AJFQ4P1WHGJFZT3DD8GR",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 3 basement bath and common",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z3",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 3,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 3 basement bath and common",
+        "target_sensor": "sensor.b1_tv_c_z_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_5_virtual_thermostat_first_floor_living",
+      "original_name": "zone 5 virtual thermostat - first floor living",
+      "config_entry_id": "01KBGNR1DBEPJYDA3F021J55H8",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 5 virtual thermostat - first floor living",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "activity_temp": 0.0,
+        "away_temp": 0.0,
+        "cold_tolerance": 3.0,
+        "comfort_temp": 0.0,
+        "eco_temp": 0.0,
+        "heater": "switch.z5",
+        "home_temp": 0.0,
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 52.0,
+        "name": "zone 5 virtual thermostat - first floor living",
+        "sleep_temp": 0.0,
+        "target_sensor": "sensor.1f_gr_s_z_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_6_master_thermostat",
+      "original_name": "zone 6 master thermostat",
+      "config_entry_id": "01KBK90A84SSJPNEC25F9QMP93",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 6 master thermostat",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z6",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 6 master thermostat",
+        "target_sensor": "sensor.2f_mb_c_z_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_7_basement_bar_and_tv_room_south_side",
+      "original_name": "zone 7 basement bar and tv room south side",
+      "config_entry_id": "01KBK9HHYW9KJF0DG6NBDSQYDG",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 7 basement bar and tv room south side",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z7",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 7 basement bar and tv room south side",
+        "target_sensor": "sensor.b1_tv_c_z_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_8_dining_room",
+      "original_name": "zone 8 Dining room",
+      "config_entry_id": "01KBK9MZ5EQC4G177KFJWBAZWP",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 8 Dining room",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z8",
+        "hot_tolerance": -0.2,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 8 Dining room",
+        "target_sensor": "sensor.madmen_temp_temperature"
+      }
+    },
+    {
+      "climate_entity_id": "climate.zone_9_basement_bedroom",
+      "original_name": "zone 9 basement bedroom",
+      "config_entry_id": "01KBK9Q3V9GKMFQKM4F6JK3GHS",
+      "config_entry_domain": "generic_thermostat",
+      "config_entry_title": "zone 9 basement bedroom",
+      "data": {},
+      "options": {
+        "ac_mode": false,
+        "cold_tolerance": 3.0,
+        "heater": "switch.z9",
+        "hot_tolerance": 0.0,
+        "max_temp": 80.0,
+        "min_cycle_duration": {
+          "hours": 0,
+          "minutes": 5,
+          "seconds": 0
+        },
+        "min_temp": 50.0,
+        "name": "zone 9 basement bedroom",
+        "target_sensor": "sensor.basement_kitchen_temperature_temperature"
+      }
+    }
+  ]
+}

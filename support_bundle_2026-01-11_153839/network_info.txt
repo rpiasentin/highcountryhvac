@@ -1,0 +1,36 @@
+docker:
+  address: 172.30.32.0/23
+  dns: 172.30.32.3
+  gateway: 172.30.32.1
+  interface: hassio
+host_internet: true
+interfaces:
+- connected: true
+  enabled: true
+  interface: enp6s18
+  ipv4:
+    address:
+    - 192.168.1.113/24
+    gateway: 192.168.1.1
+    method: auto
+    nameservers:
+    - 192.168.1.1
+    ready: true
+  ipv6:
+    addr_gen_mode: default
+    address:
+    - fd61:1979:394a:294f:fe09:c854:93cf:326f/64
+    - fe80::d0b0:34a0:48f6:23f0/64
+    gateway: null
+    ip6_privacy: default
+    method: auto
+    nameservers: []
+    ready: true
+  llmnr: default
+  mac: BC:24:11:BD:8D:B3
+  mdns: default
+  primary: true
+  type: ethernet
+  vlan: null
+  wifi: null
+supervisor_internet: true

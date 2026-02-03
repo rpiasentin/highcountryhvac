@@ -1,0 +1,100 @@
+[32m2026-01-11 14:15:14.010 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 14:20:06.725 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 14:20:06.743 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 14:20:07.116 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 14:20:07.118 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 14:30:13.612 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 14:30:13.634 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 14:30:14.016 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 14:30:14.017 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 14:33:27.260 INFO (MainThread) [supervisor.resolution.check] Starting system checks with state running[0m
+[32m2026-01-11 14:33:27.260 INFO (MainThread) [supervisor.resolution.checks.base] Run check for no_current_backup/system[0m
+[32m2026-01-11 14:33:27.261 INFO (MainThread) [supervisor.resolution.checks.base] Run check for multiple_data_disks/system[0m
+[32m2026-01-11 14:33:27.261 INFO (MainThread) [supervisor.resolution.checks.base] Run check for ipv4_connection_problem/system[0m
+[32m2026-01-11 14:33:27.261 INFO (MainThread) [supervisor.resolution.checks.base] Run check for disk_lifetime/system[0m
+[32m2026-01-11 14:33:27.264 INFO (MainThread) [supervisor.resolution.checks.base] Run check for disabled_data_disk/system[0m
+[32m2026-01-11 14:33:27.264 INFO (MainThread) [supervisor.resolution.checks.base] Run check for pwned/addon[0m
+[32m2026-01-11 14:33:27.408 INFO (MainThread) [supervisor.resolution.checks.base] Run check for security/core[0m
+[32m2026-01-11 14:33:27.408 INFO (MainThread) [supervisor.resolution.checks.base] Run check for dns_server_ipv6_error/dns_server[0m
+[32m2026-01-11 14:33:27.408 INFO (MainThread) [supervisor.resolution.checks.base] Run check for dns_server_failed/dns_server[0m
+[32m2026-01-11 14:33:27.409 INFO (MainThread) [supervisor.resolution.checks.base] Run check for docker_config/system[0m
+[32m2026-01-11 14:33:27.409 INFO (MainThread) [supervisor.resolution.checks.base] Run check for free_space/system[0m
+[32m2026-01-11 14:33:27.411 INFO (MainThread) [supervisor.resolution.check] System checks complete[0m
+[32m2026-01-11 14:33:27.411 INFO (MainThread) [supervisor.resolution.evaluate] Starting system evaluation with state running[0m
+[32m2026-01-11 14:33:27.437 INFO (MainThread) [supervisor.resolution.evaluate] System evaluation complete[0m
+[32m2026-01-11 14:33:27.437 INFO (MainThread) [supervisor.resolution.fixup] Starting system autofix at state running[0m
+[32m2026-01-11 14:33:27.438 INFO (MainThread) [supervisor.resolution.fixup] System autofix complete[0m
+[32m2026-01-11 14:34:22.181 INFO (MainThread) [supervisor.homeassistant.api] Updated Home Assistant API token[0m
+[32m2026-01-11 14:34:28.461 INFO (MainThread) [supervisor.store.git] Update add-on /data/addons/git/a0d7b954 repository from https://github.com/hassio-addons/repository[0m
+[32m2026-01-11 14:34:28.462 INFO (MainThread) [supervisor.store.git] Update add-on /data/addons/git/5c53de3b repository from https://github.com/esphome/home-assistant-addon[0m
+[32m2026-01-11 14:34:28.462 INFO (MainThread) [supervisor.store.git] Update add-on /data/addons/core repository from https://github.com/home-assistant/addons[0m
+[32m2026-01-11 14:34:28.463 INFO (MainThread) [supervisor.store.git] Update add-on /data/addons/git/d5369777 repository from https://github.com/music-assistant/home-assistant-addon[0m
+[32m2026-01-11 14:34:28.469 INFO (MainThread) [supervisor.store.git] Update add-on /data/addons/git/cb646a50 repository from https://github.com/hacs/addons[0m
+[32m2026-01-11 14:35:06.724 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 14:35:06.742 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 14:35:07.101 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 14:35:07.104 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 14:45:13.594 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 14:45:13.636 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 14:45:14.054 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 14:45:14.055 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 14:50:06.877 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 14:50:06.896 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 14:50:07.165 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 14:50:07.167 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:00:13.745 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:00:13.770 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:00:14.123 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:00:14.125 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:04:26.123 INFO (MainThread) [supervisor.homeassistant.api] Updated Home Assistant API token[0m
+[32m2026-01-11 15:05:06.848 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:05:06.871 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:05:07.238 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:05:07.240 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:15:14.119 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:15:14.146 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:15:14.455 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:15:14.457 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:18:45.939 INFO (MainThread) [supervisor.api.middleware.security] /addons access from a0d7b954_ssh[0m
+[32m2026-01-11 15:18:45.947 INFO (MainThread) [supervisor.api.middleware.security] /backups/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:18:45.956 INFO (MainThread) [supervisor.api.middleware.security] /supervisor/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:20:07.374 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:20:07.394 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:20:07.753 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:20:07.755 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:30:13.237 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:30:13.266 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:30:13.630 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:30:13.633 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:33:27.442 INFO (MainThread) [supervisor.resolution.check] Starting system checks with state running[0m
+[32m2026-01-11 15:33:27.442 INFO (MainThread) [supervisor.resolution.checks.base] Run check for no_current_backup/system[0m
+[32m2026-01-11 15:33:27.442 INFO (MainThread) [supervisor.resolution.checks.base] Run check for multiple_data_disks/system[0m
+[32m2026-01-11 15:33:27.443 INFO (MainThread) [supervisor.resolution.checks.base] Run check for ipv4_connection_problem/system[0m
+[32m2026-01-11 15:33:27.443 INFO (MainThread) [supervisor.resolution.checks.base] Run check for disk_lifetime/system[0m
+[32m2026-01-11 15:33:27.445 INFO (MainThread) [supervisor.resolution.checks.base] Run check for disabled_data_disk/system[0m
+[32m2026-01-11 15:33:27.445 INFO (MainThread) [supervisor.resolution.checks.base] Run check for pwned/addon[0m
+[32m2026-01-11 15:33:27.602 INFO (MainThread) [supervisor.resolution.checks.base] Run check for security/core[0m
+[32m2026-01-11 15:33:27.602 INFO (MainThread) [supervisor.resolution.checks.base] Run check for dns_server_ipv6_error/dns_server[0m
+[32m2026-01-11 15:33:27.603 INFO (MainThread) [supervisor.resolution.checks.base] Run check for dns_server_failed/dns_server[0m
+[32m2026-01-11 15:33:27.603 INFO (MainThread) [supervisor.resolution.checks.base] Run check for docker_config/system[0m
+[32m2026-01-11 15:33:27.603 INFO (MainThread) [supervisor.resolution.checks.base] Run check for free_space/system[0m
+[32m2026-01-11 15:33:27.604 INFO (MainThread) [supervisor.resolution.check] System checks complete[0m
+[32m2026-01-11 15:33:27.604 INFO (MainThread) [supervisor.resolution.evaluate] Starting system evaluation with state running[0m
+[32m2026-01-11 15:33:27.633 INFO (MainThread) [supervisor.resolution.evaluate] System evaluation complete[0m
+[32m2026-01-11 15:33:27.633 INFO (MainThread) [supervisor.resolution.fixup] Starting system autofix at state running[0m
+[32m2026-01-11 15:33:27.634 INFO (MainThread) [supervisor.resolution.fixup] System autofix complete[0m
+[32m2026-01-11 15:34:29.486 INFO (MainThread) [supervisor.homeassistant.api] Updated Home Assistant API token[0m
+[32m2026-01-11 15:35:07.556 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:35:07.577 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:35:07.967 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:35:07.969 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:38:39.746 INFO (MainThread) [supervisor.api.middleware.security] /core/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.753 INFO (MainThread) [supervisor.api.middleware.security] /supervisor/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.760 INFO (MainThread) [supervisor.api.middleware.security] /host/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.768 INFO (MainThread) [supervisor.api.middleware.security] /os/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.774 INFO (MainThread) [supervisor.api.middleware.security] /network/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.781 INFO (MainThread) [supervisor.api.middleware.security] /resolution/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.787 INFO (MainThread) [supervisor.api.middleware.security] /addons access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.794 INFO (MainThread) [supervisor.api.middleware.security] /backups/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.801 INFO (MainThread) [supervisor.api.middleware.security] /core/logs access from a0d7b954_ssh[0m
+[32m2026-01-11 15:38:39.822 INFO (MainThread) [supervisor.api.middleware.security] /supervisor/logs access from a0d7b954_ssh[0m

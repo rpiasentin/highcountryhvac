@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "minor_version": 7,
+  "key": "backup",
+  "data": {
+    "backups": [
+      {
+        "backup_id": "dfaa00a9",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "bfb81b97",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "06176b73",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "28e35b0d",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "0fdabfa4",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "2ff5a0ef",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "d4e09df1",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "c945a7c0",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "a8a536e2",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "d53ff914",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "f6285e1a",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "029e77c0",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "b12d8c5d",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "9dd51093",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "fff00941",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "c795730d",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "75eeab0a",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "838aef66",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "a3aec8c7",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      },
+      {
+        "backup_id": "dc4a049e",
+        "failed_addons": [],
+        "failed_agent_ids": [],
+        "failed_folders": []
+      }
+    ],
+    "config": {
+      "agents": {
+        "google_drive.richardpiasentin_gmail_com": {
+          "protected": false,
+          "retention": {
+            "copies": null,
+            "days": null
+          }
+        }
+      },
+      "automatic_backups_configured": true,
+      "create_backup": {
+        "agent_ids": [
+          "hassio.local",
+          "google_drive.richardpiasentin_gmail_com"
+        ],
+        "include_addons": [],
+        "include_all_addons": true,
+        "include_database": true,
+        "include_folders": null,
+        "name": null,
+        "password": "UL2R-4NBO-J9OY-VY4G-VO3A-I91A-7RQO"
+      },
+      "last_attempted_automatic_backup": "2026-01-30T05:39:12.001505-07:00",
+      "last_completed_automatic_backup": "2026-01-30T05:44:46.336623-07:00",
+      "retention": {
+        "copies": 3,
+        "days": null
+      },
+      "schedule": {
+        "days": [],
+        "recurrence": "daily",
+        "time": null
+      }
+    }
+  }
+}

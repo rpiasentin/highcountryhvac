@@ -1,0 +1,4 @@
+total 12
+drwxr-xr-x    3 root     root          4096 Dec  3 14:05 .
+drwxr-xr-x   12 root     root          4096 Jan  5 09:43 ..
+drwxr-xr-x    3 root     root          4096 Dec  3 14:05 community

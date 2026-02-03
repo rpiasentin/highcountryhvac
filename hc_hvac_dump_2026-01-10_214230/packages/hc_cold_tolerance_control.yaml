@@ -1,0 +1,9 @@
+input_number:
+  hc_cold_tolerance:
+    name: "HC Cold Tolerance"
+    min: 0.0
+    max: 3.0
+    step: 0.1
+    mode: slider
+    unit_of_measurement: "°F"
+    icon: mdi:snowflake-alert

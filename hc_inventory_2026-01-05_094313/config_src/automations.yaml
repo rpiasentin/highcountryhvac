@@ -1,0 +1,99 @@
+- id: '1762466176853'
+  alias: reboot hubitat integration
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    hours: '0'
+    minutes: '5'
+  conditions: []
+  actions: []
+  mode: single
+- id: '1764736926515'
+  alias: Master heat on
+  description: ''
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.2f_mb_c_z_temperature
+    above: 40
+    below: 61
+  conditions: []
+  actions:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.z6
+  mode: single
+- id: '1764737341675'
+  alias: Master heat on off
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.2f_mb_c_z_temperature
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sensor.2f_mb_c_z_temperature
+        above: 35
+        below: 59
+      sequence:
+      - action: switch.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: switch.z6
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: numeric_state
+          entity_id: sensor.2f_mb_c_z_temperature
+          above: 35
+          below: 61
+      sequence:
+      - action: switch.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: switch.z6
+  mode: single
+- id: '1764739945517'
+  alias: ' Basement heat on and off'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.basement_kitchen_temperature_temperature
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sensor.basement_kitchen_temperature_temperature
+        above: 35
+        below: 59
+      sequence:
+      - action: switch.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - switch.z7
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: numeric_state
+          entity_id: sensor.basement_kitchen_temperature_temperature
+          above: 35
+          below: 61
+      sequence:
+      - action: switch.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - switch.z7
+  mode: single

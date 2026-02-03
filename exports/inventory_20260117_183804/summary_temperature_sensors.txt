@@ -1,0 +1,35 @@
+sensor.1f_fr_n_t_fp3001_temperature	58.5	°F	1F-Fr-N-T-Fp3001 Temperature
+sensor.1f_gr_s_z_temperature	62.0	°F	1F-Gr-S-Z Temperature
+sensor.1f_ha_c_afp3002_temperature	61.3	°F	1F-Ha-C-Afp3002 Temperature
+sensor.2f_h_c_z_temperature	61.8	°F	2F-H-C-Z Temperature
+sensor.2f_mb_c_z_temperature	68.3	°F	2F-Mb-C-Z Temperature
+sensor.2nd_floor_office_temperature_temperature	63.87	°F	2Nd Floor Office Temperature Temperature
+sensor.b1_tv_c_z_temperature	58.1	°F	B1-Tv-C-Z Temperature
+sensor.basement_bath_and_utility_temperature	59.83	°F	Basement Bath And Utility Temperature
+sensor.basement_kitchen_temperature_temperature	57.42	°F	B1-Bguestroom Temperature
+sensor.hc_desired_upper_setpoint	58.0	°F	HC Desired Upper Setpoint
+sensor.hc_indoor_outdoor_delta	40.2	°F	HC Indoor–Outdoor Delta
+sensor.hc_master_mini_split_reported_setpoint	62	°F	HC Master Mini-split Reported Setpoint
+sensor.hc_master_minisplit_reported_setpoint	62	°F	HC Master Minisplit Reported Setpoint
+sensor.hc_office_guest_avg_temperature	61.9	°F	HC Office+Guest Avg Temperature
+sensor.hc_office_mini_split_reported_setpoint	62	°F	HC Office Mini-split Reported Setpoint
+sensor.hc_office_minisplit_reported_setpoint	62	°F	HC Office Minisplit Reported Setpoint
+sensor.hc_upper_guest_mini_split_reported_setpoint	62	°F	HC Upper Guest Mini-split Reported Setpoint
+sensor.hc_upper_guest_minisplit_reported_setpoint	62	°F	HC Upper Guest Minisplit Reported Setpoint
+sensor.hc_upper_hall_reported_setpoint	62	°F	HC Upper Hall Reported Setpoint
+sensor.hc_z1_delta	0.0	°F	HC Z1 Delta
+sensor.hc_z2_delta	-4.0	°F	HC Z2 Delta
+sensor.hc_z3_delta	-3.0	°F	HC Z3 Delta
+sensor.hc_z4_delta	-4.0	°F	HC Z4 Delta
+sensor.hc_z5_delta	-4.0	°F	HC Z5 Delta
+sensor.hc_z6_delta	-10.0	°F	HC Z6 Delta
+sensor.hc_z7_delta	-1.0	°F	HC Z7 Delta
+sensor.hc_z8_delta	-1.0	°F	HC Z8 Delta
+sensor.hc_z9_delta	0.0	°F	HC Z9 Delta
+sensor.high_country_front_door_multi_temperature	27.83	°F	Out-N-T Temperature
+sensor.madmen_temp_temperature	58.59	°F	Dining Temp Temperature
+sensor.main_floor_temperature_sensor_temperature	62.37	°F	1F-Kit-C-T Temperature
+sensor.main_water_cutoff_temperature	unavailable	°F	Main Water Cutoff Temperature
+sensor.new_garage_motion_sensor_temperature	50.3	°F	New Garage Motion Sensor Temperature
+sensor.upper_guest_temp_temperature	59.89	°F	Upper Guest Temp Temperature
+sensor.upstairs_mantle_temperature_temperature	48.92	°F	2F-Fb-C-T Temperature

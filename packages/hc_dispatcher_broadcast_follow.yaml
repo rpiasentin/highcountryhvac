@@ -1,0 +1,146 @@
+# Stage 1 - Dispatcher Broadcast Follow (SAFE: only sets dispatcher helper setpoints)
+# This listens to your existing broadcast setpoint helpers and keeps dispatcher setpoints in sync,
+# but ONLY if:
+#  - input_boolean.hc_disp_follow_sync_enabled == on
+#  - input_boolean.hc_disp_zX_follow_broadcast == on (per zone)
+
+automation:
+  - id: hc_disp_follow_master_setpoint
+    alias: HC DISP Follow Master Setpoint
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_master
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_disp_follow_sync_enabled
+        state: "on"
+    action:
+      - variables:
+          sp: "{{ states('input_number.hc_setpoint_master') | float }}"
+      - repeat:
+          for_each: [1, 2, 3, 5, 6, 7, 8, 9]
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                follow_ok: "{{ is_state('input_boolean.hc_disp_z' ~ z ~ '_follow_broadcast','on') }}"
+            - condition: template
+              value_template: "{{ follow_ok }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_z' ~ z ~ '_setpoint_f' }}"
+              data:
+                value: "{{ sp }}"
+
+  - id: hc_disp_follow_basement_setpoint
+    alias: HC DISP Follow Basement Setpoint
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_basement
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_disp_follow_sync_enabled
+        state: "on"
+    action:
+      - variables:
+          sp: "{{ states('input_number.hc_setpoint_basement') | float }}"
+      - repeat:
+          for_each: [3, 7, 9]
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                follow_ok: "{{ is_state('input_boolean.hc_disp_z' ~ z ~ '_follow_broadcast','on') }}"
+            - condition: template
+              value_template: "{{ follow_ok }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_z' ~ z ~ '_setpoint_f' }}"
+              data:
+                value: "{{ sp }}"
+
+  - id: hc_disp_follow_first_floor_setpoint
+    alias: HC DISP Follow First Floor Setpoint
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_first_floor
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_disp_follow_sync_enabled
+        state: "on"
+    action:
+      - variables:
+          sp: "{{ states('input_number.hc_setpoint_first_floor') | float }}"
+      - repeat:
+          for_each: [1, 5, 8]
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                follow_ok: "{{ is_state('input_boolean.hc_disp_z' ~ z ~ '_follow_broadcast','on') }}"
+            - condition: template
+              value_template: "{{ follow_ok }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_z' ~ z ~ '_setpoint_f' }}"
+              data:
+                value: "{{ sp }}"
+
+  - id: hc_disp_follow_upper_floor_setpoint
+    alias: HC DISP Follow Upper Floor Setpoint
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_upper_floor
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_disp_follow_sync_enabled
+        state: "on"
+    action:
+      - variables:
+          sp: "{{ states('input_number.hc_setpoint_upper_floor') | float }}"
+      - repeat:
+          for_each: [2, 6]
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                follow_ok: "{{ is_state('input_boolean.hc_disp_z' ~ z ~ '_follow_broadcast','on') }}"
+            - condition: template
+              value_template: "{{ follow_ok }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_z' ~ z ~ '_setpoint_f' }}"
+              data:
+                value: "{{ sp }}"
+
+  - id: hc_disp_follow_garage_setpoint
+    alias: HC DISP Follow Garage Setpoint
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_garage
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_disp_follow_sync_enabled
+        state: "on"
+    action:
+      - variables:
+          sp: "{{ states('input_number.hc_setpoint_garage') | float }}"
+      - repeat:
+          for_each: [4]
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                follow_ok: "{{ is_state('input_boolean.hc_disp_z' ~ z ~ '_follow_broadcast','on') }}"
+            - condition: template
+              value_template: "{{ follow_ok }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_z' ~ z ~ '_setpoint_f' }}"
+              data:
+                value: "{{ sp }}"

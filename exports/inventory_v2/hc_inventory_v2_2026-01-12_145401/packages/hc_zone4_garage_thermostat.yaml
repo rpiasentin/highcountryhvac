@@ -1,0 +1,14 @@
+climate:
+  - platform: generic_thermostat
+    name: "Zone 4 Garage"
+    heater: switch.z4
+    target_sensor: sensor.new_garage_motion_sensor_temperature
+    ac_mode: false
+    min_temp: 40
+    max_temp: 75
+    target_temp_step: 0.5
+    cold_tolerance: 0.5
+    hot_tolerance: 0.0
+    min_cycle_duration: "00:01:00"
+    keep_alive: "00:01:00"
+    initial_hvac_mode: "heat"

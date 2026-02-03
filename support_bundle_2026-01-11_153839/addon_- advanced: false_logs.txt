@@ -1,0 +1,28 @@
+Error: unknown shorthand flag: ' ' in - advanced: false
+Usage:
+  ha addons logs [slug] [flags]
+
+Aliases:
+  logs, log, lg
+
+Examples:
+
+  ha addons logs core_ssh
+
+
+Flags:
+  -b, --boot string    Logs of particular boot ID
+  -f, --follow         Continuously print new log entries
+  -h, --help           help for logs
+  -n, --lines uint32   Number of log entries to show
+  -v, --verbose        Return logs in verbose format
+
+Global Flags:
+      --api-token string   Home Assistant Supervisor API token
+      --config string      Optional config file (default is $HOME/.homeassistant.yaml)
+      --endpoint string    Endpoint for Home Assistant Supervisor (default is 'supervisor')
+      --log-level string   Log level (defaults to Warn)
+      --no-progress        Disable the progress spinner
+      --raw-json           Output raw JSON from the API
+
+Error: unknown shorthand flag: ' ' in - advanced: false

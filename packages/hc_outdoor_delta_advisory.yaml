@@ -1,0 +1,39 @@
+template:
+  - sensor:
+      - name: "HC Indoor–Outdoor Delta"
+        unique_id: hc_indoor_outdoor_delta
+        unit_of_measurement: "°F"
+        icon: mdi:thermometer-lines
+        state: >
+          {% set outdoor_s = states('sensor.high_country_front_door_multi_temperature') %}
+          {% set indoor_v = state_attr('climate.zone_6_master_thermostat','current_temperature') %}
+          {% if indoor_v is none %}
+            {% set indoor_s = states('sensor.2f_mb_c_z_temperature') %}
+            {% set indoor_ok = indoor_s not in ['unknown','unavailable','none'] %}
+            {% set indoor = indoor_s|float(0) if indoor_ok else none %}
+          {% else %}
+            {% set indoor = indoor_v|float(0) %}
+          {% endif %}
+
+          {% if outdoor_s in ['unknown','unavailable','none'] or indoor is none %}
+            unknown
+          {% else %}
+            {{ (indoor - (outdoor_s|float(0))) | round(1) }}
+          {% endif %}
+        attributes:
+          indoor_entity: "climate.zone_6_master_thermostat"
+          outdoor_entity: "sensor.high_country_front_door_multi_temperature"
+          indoor_temp_f: >
+            {{ state_attr('climate.zone_6_master_thermostat','current_temperature')
+               if state_attr('climate.zone_6_master_thermostat','current_temperature') is not none
+               else states('sensor.2f_mb_c_z_temperature') }}
+          outdoor_temp_f: "{{ states('sensor.high_country_front_door_multi_temperature') }}"
+          master_setpoint_f: "{{ state_attr('climate.zone_6_master_thermostat','temperature') }}"
+          setpoint_minus_outdoor_f: >
+            {% set sp = state_attr('climate.zone_6_master_thermostat','temperature') %}
+            {% set out = states('sensor.high_country_front_door_multi_temperature') %}
+            {% if sp is none or out in ['unknown','unavailable','none'] %}
+              unknown
+            {% else %}
+              {{ (sp|float(0) - out|float(0)) | round(1) }}
+            {% endif %}

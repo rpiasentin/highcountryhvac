@@ -1,0 +1,100 @@
+2026-01-11 18:33:26.111 homeassistant NetworkManager[425]: <info>  [1768156406.1119] device (vetha8dead4): carrier: link connected
+2026-01-11 18:33:26.112 homeassistant kernel: hassio: port 5(vetha8dead4) entered blocking state
+2026-01-11 18:33:26.112 homeassistant kernel: hassio: port 5(vetha8dead4) entered forwarding state
+2026-01-11 18:33:26.112 homeassistant dockerd[517]: time="2026-01-11T11:33:26.112198899-07:00" level=info msg="Skipping check for route to send NA, EMSGSIZE" eid=0a8effecc7cf3590f043de012441a7295450d6bfc5506c79146d48acf48f1372 ep=hassio_audio net=hassio nid=cf5c8d4113801a4376bbdef666d283b8c2a452f3d3985d89ba68100aa20f7dac
+2026-01-11 18:33:26.116 homeassistant systemd-resolved[409]: Detected conflict on homeassistant IN A 192.168.1.113
+2026-01-11 18:33:26.117 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant11'.
+2026-01-11 18:33:26.263 homeassistant systemd[1]: var-lib-docker-overlay2-bc061c30f599ec26cb21d79bbdecfbfb62ad1d2ae9d867ee7e3ecc363282e292\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:26.263 homeassistant systemd[1]: mnt-data-docker-overlay2-bc061c30f599ec26cb21d79bbdecfbfb62ad1d2ae9d867ee7e3ecc363282e292\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:26.369 homeassistant systemd[1]: Started libcontainer container 1d8164de419391b77d2d0bc0dca0c728aa617635bf4271b70400ced8c1ffe490.
+2026-01-11 18:33:26.384 homeassistant systemd-resolved[409]: System hostname changed to 'homeassistant'.
+2026-01-11 18:33:26.657 homeassistant systemd-resolved[409]: Detected conflict on homeassistant.local IN A 192.168.1.113
+2026-01-11 18:33:26.657 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant9'.
+2026-01-11 18:33:26.914 homeassistant systemd[1]: Bluetooth service was skipped because of an unmet condition check (ConditionPathIsDirectory=/sys/class/bluetooth).
+2026-01-11 18:33:27.317 homeassistant systemd[1]: Started libcontainer container c3f3a9d32caf8a665087d65913792c316e7e64fdfdb337de3c551c053b69585a.
+2026-01-11 18:33:27.332 homeassistant systemd-resolved[409]: System hostname changed to 'homeassistant'.
+2026-01-11 18:33:27.391 homeassistant systemd-resolved[409]: Detected conflict on homeassistant IN A 192.168.1.113
+2026-01-11 18:33:27.391 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant11'.
+2026-01-11 18:33:27.479 homeassistant systemd[1]: var-lib-docker-overlay2-cc63f89f0eb582fbb4eb04e6516dbc57561511121dcca20de98bba83fe3b8ac7\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:27.480 homeassistant systemd[1]: mnt-data-docker-overlay2-cc63f89f0eb582fbb4eb04e6516dbc57561511121dcca20de98bba83fe3b8ac7\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:27.591 homeassistant systemd[1]: Started libcontainer container a49d80008c92154d1d91089b8c0a475b0edcefc06f87151ad2cfe4052e5a6126.
+2026-01-11 18:33:27.621 homeassistant systemd-resolved[409]: System hostname changed to 'homeassistant'.
+2026-01-11 18:33:27.673 homeassistant systemd-resolved[409]: Detected conflict on homeassistant.local IN A 192.168.1.113
+2026-01-11 18:33:27.673 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant3'.
+2026-01-11 18:33:32.778 homeassistant systemd[1]: Started libcontainer container 73def5eb433b209ef53c83202fb2824921851e520da5d7fb7c99a3aa659feaa7.
+2026-01-11 18:33:32.793 homeassistant systemd-resolved[409]: System hostname changed to 'homeassistant'.
+2026-01-11 18:33:33.060 homeassistant systemd-resolved[409]: Detected conflict on homeassistant.local IN A 192.168.1.113
+2026-01-11 18:33:33.060 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant6'.
+2026-01-11 18:33:33.325 homeassistant systemd-resolved[409]: Detected conflict on homeassistant6 IN A 192.168.1.113
+2026-01-11 18:33:33.325 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant6' to 'homeassistant13'.
+2026-01-11 18:33:35.205 homeassistant systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+2026-01-11 18:33:41.177 homeassistant systemd[1]: Bluetooth service was skipped because of an unmet condition check (ConditionPathIsDirectory=/sys/class/bluetooth).
+2026-01-11 18:33:41.193 homeassistant kernel: Bluetooth: Core ver 2.22
+2026-01-11 18:33:41.193 homeassistant kernel: NET: Registered PF_BLUETOOTH protocol family
+2026-01-11 18:33:41.193 homeassistant kernel: Bluetooth: HCI device and connection manager initialized
+2026-01-11 18:33:41.193 homeassistant kernel: Bluetooth: HCI socket layer initialized
+2026-01-11 18:33:41.193 homeassistant kernel: Bluetooth: L2CAP socket layer initialized
+2026-01-11 18:33:41.193 homeassistant kernel: Bluetooth: SCO socket layer initialized
+2026-01-11 18:33:41.217 homeassistant systemd[1]: Starting Bluetooth service...
+2026-01-11 18:33:41.233 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:33:41.245 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:33:41.317 homeassistant bluetoothd[2823]: Bluetooth daemon 5.83
+2026-01-11 18:33:41.317 homeassistant systemd[1]: Started Bluetooth service.
+2026-01-11 18:33:41.318 homeassistant bluetoothd[2823]: Starting SDP server
+2026-01-11 18:33:41.321 homeassistant kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+2026-01-11 18:33:41.321 homeassistant kernel: Bluetooth: BNEP filters: protocol multicast
+2026-01-11 18:33:41.321 homeassistant kernel: Bluetooth: BNEP socket layer initialized
+2026-01-11 18:33:41.322 homeassistant bluetoothd[2823]: Bluetooth management interface 1.23 initialized
+2026-01-11 18:33:54.917 homeassistant systemd[1]: systemd-timedated.service: Deactivated successfully.
+2026-01-11 18:33:58.072 homeassistant systemd[1]: var-lib-docker-overlay2-abff2be9ce01556f4f40c9efd8dc5057543a2397c2c4f65537a7b222b737671c\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:58.073 homeassistant systemd[1]: mnt-data-docker-overlay2-abff2be9ce01556f4f40c9efd8dc5057543a2397c2c4f65537a7b222b737671c\x2dinit-merged.mount: Deactivated successfully.
+2026-01-11 18:33:58.235 homeassistant systemd[1]: Started libcontainer container b521263ff5594ed82ffa8951ed5a1498c5cd9adcaed7438b720b23070b27b4a8.
+2026-01-11 18:33:58.261 homeassistant systemd-resolved[409]: System hostname changed to 'homeassistant'.
+2026-01-11 18:33:58.274 homeassistant kernel: hassio: port 6(veth52d021f) entered blocking state
+2026-01-11 18:33:58.274 homeassistant kernel: hassio: port 6(veth52d021f) entered disabled state
+2026-01-11 18:33:58.274 homeassistant kernel: veth52d021f: entered allmulticast mode
+2026-01-11 18:33:58.274 homeassistant kernel: veth52d021f: entered promiscuous mode
+2026-01-11 18:33:58.274 homeassistant NetworkManager[425]: <info>  [1768156438.2736] manager: (veth52d021f): new Veth device (/org/freedesktop/NetworkManager/Devices/11)
+2026-01-11 18:33:58.296 homeassistant systemd-resolved[409]: Detected conflict on homeassistant IN AAAA fe80::d0b0:34a0:48f6:23f0
+2026-01-11 18:33:58.297 homeassistant systemd-resolved[409]: Hostname conflict, changing published hostname from 'homeassistant' to 'homeassistant3'.
+2026-01-11 18:33:58.319 homeassistant kernel: eth0: renamed from vethadeb8f7
+2026-01-11 18:33:58.323 homeassistant kernel: hassio: port 6(veth52d021f) entered blocking state
+2026-01-11 18:33:58.323 homeassistant kernel: hassio: port 6(veth52d021f) entered forwarding state
+2026-01-11 18:33:58.323 homeassistant NetworkManager[425]: <info>  [1768156438.3234] device (veth52d021f): carrier: link connected
+2026-01-11 18:33:58.323 homeassistant dockerd[517]: time="2026-01-11T11:33:58.323697948-07:00" level=info msg="Skipping check for route to send NA, EMSGSIZE" eid=85d94bd71e76d0f558777cc2302f461d6d41a5db627e5922ae1dcaf87e2d6504 ep=addon_core_configurator net=hassio nid=cf5c8d4113801a4376bbdef666d283b8c2a452f3d3985d89ba68100aa20f7dac
+2026-01-11 18:34:11.332 homeassistant systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+2026-01-11 18:34:28.458 homeassistant systemd[1]: Starting Hostname Service...
+2026-01-11 18:34:28.484 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:34:28.503 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:34:28.512 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:34:28.525 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:34:28.609 homeassistant systemd[1]: Started Hostname Service.
+2026-01-11 18:34:28.620 homeassistant systemd[1]: Starting Time & Date Service...
+2026-01-11 18:34:28.642 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:34:28.655 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:34:28.752 homeassistant systemd[1]: Started Time & Date Service.
+2026-01-11 18:34:58.650 homeassistant systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+2026-01-11 18:34:58.789 homeassistant systemd[1]: systemd-timedated.service: Deactivated successfully.
+2026-01-11 18:40:46.224 homeassistant systemd[1]: Started Journal Gateway Service.
+2026-01-11 18:40:46.232 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:40:46.244 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:40:46.253 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:40:46.273 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:40:46.275 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 18:40:46.304 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 18:48:21.334 homeassistant systemd[1]: Starting Cleanup of Temporary Directories...
+2026-01-11 18:48:21.395 homeassistant systemd[1]: systemd-tmpfiles-clean.service: Deactivated successfully.
+2026-01-11 18:48:21.395 homeassistant systemd[1]: Finished Cleanup of Temporary Directories.
+2026-01-11 18:48:21.399 homeassistant systemd[1]: run-credentials-systemd\x2dtmpfiles\x2dclean.service.mount: Deactivated successfully.
+2026-01-11 20:41:08.471 homeassistant systemd[1]: Starting Hostname Service...
+2026-01-11 20:41:08.514 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 20:41:08.529 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 20:41:08.538 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 20:41:08.551 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 20:41:08.638 homeassistant systemd[1]: Started Hostname Service.
+2026-01-11 20:41:08.649 homeassistant systemd[1]: Starting Time & Date Service...
+2026-01-11 20:41:08.673 homeassistant systemd-timesyncd[504]: Network configuration changed, trying to establish connection.
+2026-01-11 20:41:08.691 homeassistant systemd-timesyncd[504]: Contacted time server 162.159.200.123:123 (time.cloudflare.com).
+2026-01-11 20:41:08.784 homeassistant systemd[1]: Started Time & Date Service.
+2026-01-11 20:41:38.652 homeassistant systemd[1]: systemd-hostnamed.service: Deactivated successfully.
+2026-01-11 20:41:38.821 homeassistant systemd[1]: systemd-timedated.service: Deactivated successfully.

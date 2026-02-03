@@ -1,0 +1,118 @@
+# High Country - Mini-split Setpoint Sync + Mismatch + Retry
+# Adds entities referenced by the "Mini-split Setpoint Sync" card + Retry button.
+
+template:
+  - sensor:
+      - name: "HC Desired Upper Setpoint"
+        unique_id: hc_desired_upper_setpoint
+        unit_of_measurement: "°F"
+        state: >
+          {{ states('input_number.hc_setpoint_upper_floor') }}
+
+      - name: "HC Upper Hall Reported Setpoint"
+        unique_id: hc_upper_hall_reported_setpoint
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.upper_hall', 'temperature') %}
+          {{ v if v is not none else none }}
+
+      - name: "HC Master Mini-split Reported Setpoint"
+        unique_id: hc_master_minisplit_reported_setpoint
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.giovani_s_device', 'temperature') %}
+          {{ v if v is not none else none }}
+
+      - name: "HC Office Mini-split Reported Setpoint"
+        unique_id: hc_office_minisplit_reported_setpoint
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.giovani_s_device_2', 'temperature') %}
+          {{ v if v is not none else none }}
+
+      - name: "HC Upper Guest Mini-split Reported Setpoint"
+        unique_id: hc_upper_guest_minisplit_reported_setpoint
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.upper_guest', 'temperature') %}
+          {{ v if v is not none else none }}
+
+  - binary_sensor:
+      - name: "HC Upper Hall Setpoint Mismatch"
+        unique_id: hc_upper_hall_setpoint_mismatch
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_upper_hall_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Master Mini-split Setpoint Mismatch"
+        unique_id: hc_master_minisplit_setpoint_mismatch
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_master_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Office Mini-split Setpoint Mismatch"
+        unique_id: hc_office_minisplit_setpoint_mismatch
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_office_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Upper Guest Mini-split Setpoint Mismatch"
+        unique_id: hc_upper_guest_minisplit_setpoint_mismatch
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_upper_guest_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Any Mini-split Setpoint Mismatch"
+        unique_id: hc_any_minisplit_setpoint_mismatch
+        device_class: problem
+        state: >
+          {{ is_state('binary_sensor.hc_upper_hall_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_master_minisplit_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_office_minisplit_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch','on') }}
+
+script:
+  hc_retry_mismatched_minisplits:
+    alias: "HC Retry Mismatched Mini-splits (3x, 10s)"
+    mode: single
+    sequence:
+      - variables:
+          desired: "{{ states('sensor.hc_desired_upper_setpoint')|float(none) }}"
+          attempts: 3
+          delay_s: 10
+          targets:
+            - climate: climate.upper_hall
+              mismatch: binary_sensor.hc_upper_hall_setpoint_mismatch
+            - climate: climate.giovani_s_device
+              mismatch: binary_sensor.hc_master_minisplit_setpoint_mismatch
+            - climate: climate.giovani_s_device_2
+              mismatch: binary_sensor.hc_office_minisplit_setpoint_mismatch
+            - climate: climate.upper_guest
+              mismatch: binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch
+
+      - condition: template
+        value_template: "{{ desired is not none }}"
+
+      - repeat:
+          count: "{{ attempts }}"
+          sequence:
+            - repeat:
+                for_each: "{{ targets }}"
+                sequence:
+                  - condition: template
+                    value_template: "{{ is_state(repeat.item.mismatch, 'on') }}"
+                  - service: climate.set_temperature
+                    target:
+                      entity_id: "{{ repeat.item.climate }}"
+                    data:
+                      temperature: "{{ desired }}"
+            - delay:
+                seconds: "{{ delay_s }}"

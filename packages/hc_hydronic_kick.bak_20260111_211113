@@ -1,0 +1,60 @@
+# Auto-generated kick helper for hydronic broadcasts
+script:
+  hc_kick_hydronic_after_broadcast:
+    alias: "HC Kick Hydronic After Broadcast"
+    mode: queued
+    sequence:
+      # If the cold-tolerance gate is enabled, temporarily turn it OFF so the initial valve turn-on isn't blocked.
+      - variables:
+          gate_was_on: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ gate_was_on }}"
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.hc_enable_cold_tolerance_gate
+              - delay:
+                  seconds: 2
+
+      # Update the sensors feeding the hydronic thermostats (forces a re-evaluation path)
+      - service: homeassistant.update_entity
+        target:
+          entity_id:
+          - sensor.1f_fr_n_t_fp3001_temperature
+          - sensor.1f_gr_s_z_temperature
+          - sensor.2f_mb_c_z_temperature
+          - sensor.b1_tv_c_z_temperature
+          - sensor.basement_kitchen_temperature_temperature
+          - sensor.hc_office_guest_avg_temperature
+          - sensor.madmen_temp_temperature
+
+      - delay:
+          seconds: 1
+
+      # Update the hydronic climates themselves (refresh hvac_action/state)
+      - service: homeassistant.update_entity
+        target:
+          entity_id:
+          - climate.z1_first_floor_bedroom_and_bath
+          - climate.zone_2_second_floor_office_and_upper_guest
+          - climate.zone_3_basement_bath_and_common
+          - climate.zone_5_virtual_thermostat_first_floor_living
+          - climate.zone_6_master_thermostat
+          - climate.zone_7_basement_bar_and_tv_room_south_side
+          - climate.zone_8_dining_room
+          - climate.zone_9_basement_bedroom
+
+      - delay:
+          seconds: 1
+
+      # Restore the gate to its original state
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ gate_was_on }}"
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.hc_enable_cold_tolerance_gate

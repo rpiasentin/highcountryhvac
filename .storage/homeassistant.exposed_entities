@@ -1,0 +1,381 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "homeassistant.exposed_entities",
+  "data": {
+    "assistants": {},
+    "exposed_entities": {
+      "conversation.home_assistant": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "zone.home": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sun.sun": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "hubitat.hub": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z1_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z3_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z2_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z6_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z4_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z7_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z5_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_basement_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z8_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z9_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_upper_floor_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_whole_house_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_first_floor_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_garage_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_master_minisplit_reported_setpoint": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_office_minisplit_reported_setpoint": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_upper_guest_minisplit_reported_setpoint": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_master_minisplit_setpoint_mismatch": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_office_minisplit_setpoint_mismatch": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_any_minisplit_setpoint_mismatch": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z1_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z2_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z3_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z4_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z5_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z6_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z7_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z8_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z9_delta": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z1_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z2_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z3_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z5_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z6_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z7_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z8_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z9_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "binary_sensor.hc_z4_heat_allowed": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "climate.zone_4_garage": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "sensor.hc_z1_first_floor_bedroom_bath_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z2_office_upper_guest_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z5_first_floor_living_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z3_basement_bath_common_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z4_garage_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z8_dining_room_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z7_basement_bar_tv_south_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z6_master_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "sensor.hc_z9_basement_bedroom_call_for_heat_hours_today": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+climate_entity	climate_name	platform	domain	heater	target_sensor	target_sensor_name	target_sensor_state	climate_current_temp	diff(climate-target)
+climate.basement_zone_3_better_thermostat_common_and_utility		better_thermostat	better_thermostat						
+climate.basement_zone_7_better_thermostat		better_thermostat	better_thermostat						
+climate.basement_zone_9_bedroom_better_thermostat		better_thermostat	better_thermostat						
+climate.giovani_s_device	master	sensibo	sensibo					69.1	
+climate.giovani_s_device_2	office	sensibo	sensibo					59.4	
+climate.main_floor_hall		honeywell	honeywell						
+climate.master_better_thermostat		better_thermostat	better_thermostat						
+climate.second_floor_better_thermostat		better_thermostat	better_thermostat						
+climate.upper_guest	upper guest	sensibo	sensibo					61.9	
+climate.upper_hall	upper hall	sensibo	sensibo					62.8	
+climate.z1_first_floor_bedroom_and_bath	z1 first floor bedroom and bath	generic_thermostat	generic_thermostat					61	
+climate.zone_2_second_floor_office_and_upper_guest	zone 2 second floor office and upper guest	generic_thermostat	generic_thermostat					60	
+climate.zone_3_basement_bath_and_common	zone 3 basement bath and common	generic_thermostat	generic_thermostat					60	
+climate.zone_5_virtual_thermostat_first_floor_living	zone 5 virtual thermostat - first floor living	generic_thermostat	generic_thermostat					61	
+climate.zone_6_master_thermostat	zone 6 master thermostat	generic_thermostat	generic_thermostat					67	
+climate.zone_7_basement_bar_and_tv_room_south_side	zone 7 basement bar and tv room south side	generic_thermostat	generic_thermostat					58	
+climate.zone_8_dining_room	zone 8 Dining room	generic_thermostat	generic_thermostat					61	
+climate.zone_9_basement_bedroom	zone 9 basement bedroom	generic_thermostat	generic_thermostat					59	

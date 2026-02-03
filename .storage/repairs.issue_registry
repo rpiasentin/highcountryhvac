@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "repairs.issue_registry",
+  "data": {
+    "issues": [
+      {
+        "created": "2025-12-05T02:39:43.987414+00:00",
+        "dismissed_version": null,
+        "domain": "better_thermostat",
+        "is_persistent": false,
+        "issue_id": "missing_entity_sensor.basement_kitchen_temperature_temperature"
+      },
+      {
+        "created": "2025-12-05T02:39:43.987561+00:00",
+        "dismissed_version": null,
+        "domain": "better_thermostat",
+        "is_persistent": false,
+        "issue_id": "missing_entity_sensor.2f_h_c_z_temperature"
+      },
+      {
+        "created": "2025-12-05T02:39:43.987665+00:00",
+        "dismissed_version": null,
+        "domain": "better_thermostat",
+        "is_persistent": false,
+        "issue_id": "missing_entity_sensor.b1_tv_c_z_temperature"
+      },
+      {
+        "created": "2025-12-05T02:39:43.987902+00:00",
+        "dismissed_version": null,
+        "domain": "better_thermostat",
+        "is_persistent": false,
+        "issue_id": "missing_entity_sensor.2f_mb_c_z_temperature"
+      },
+      {
+        "created": "2025-12-17T22:48:53.107124+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "config_entry_reauth_honeywell_01KA6PEZBF6ZXZPPAQS6CBFPHC"
+      },
+      {
+        "created": "2026-01-29T17:49:39.171138+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_235943258_tags/v0.10.1"
+      }
+    ]
+  }
+}

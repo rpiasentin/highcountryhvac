@@ -1,0 +1,37 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+homeassistant:
+  packages: !include_dir_named packages
+lovelace:
+  dashboards:
+    high-country-hvac:
+      mode: yaml
+      title: High Country HVAC
+      icon: mdi:home-thermometer
+      show_in_sidebar: true
+      require_admin: true
+      filename: high-country-hvac.yaml
+    hvac-admin-verify:
+      mode: yaml
+      title: "HVAC Admin (Verify)"
+      icon: mdi:check-decagram
+      show_in_sidebar: true
+      require_admin: true
+      filename: dashboards/hc_hvac_admin_verify.yaml
+    c-hydronic-test:
+      mode: yaml
+      title: HC Hydronic Test
+      icon: mdi:link
+      show_in_sidebar: true
+      require_admin: true
+      filename: lovelace/hc_hydronic_test.yaml

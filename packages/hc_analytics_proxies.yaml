@@ -1,0 +1,119 @@
+# Hydronic analytics proxies + placeholders
+#
+# - Boiler firing + circulator running are proxies based on "any call for heat"
+#   with an assumed 1 minute delay between call and actual firing.
+# - Supply/return temps are placeholder sensors (proxy values) until clamp probes exist.
+
+input_number:
+  hc_boiler_supply_temp_proxy_f:
+    name: "HC Boiler Supply Temp Proxy (°F)"
+    icon: mdi:thermometer
+    min: 60
+    max: 220
+    step: 0.5
+    mode: box
+    initial: 190
+
+  hc_boiler_return_temp_proxy_f:
+    name: "HC Boiler Return Temp Proxy (°F)"
+    icon: mdi:thermometer
+    min: 60
+    max: 220
+    step: 0.5
+    mode: box
+    initial: 170
+
+template:
+  - binary_sensor:
+      # Any call-for-heat across zones (ground truth proxy for "system demand")
+      - name: "HC Any Call For Heat"
+        unique_id: hc_any_call_for_heat
+        default_entity_id: binary_sensor.hc_any_call_for_heat
+        device_class: heat
+        state: >
+          {{ is_state('binary_sensor.hc_z1_call_for_heat','on')
+             or is_state('binary_sensor.hc_z2_call_for_heat','on')
+             or is_state('binary_sensor.hc_z3_call_for_heat','on')
+             or is_state('binary_sensor.hc_z4_call_for_heat','on')
+             or is_state('binary_sensor.hc_z5_call_for_heat','on')
+             or is_state('binary_sensor.hc_z6_call_for_heat','on')
+             or is_state('binary_sensor.hc_z7_call_for_heat','on')
+             or is_state('binary_sensor.hc_z8_call_for_heat','on')
+             or is_state('binary_sensor.hc_z9_call_for_heat','on') }}
+
+      # Boiler firing proxy: any call must be true for 1 minute before "firing" turns on
+      - name: "HC Boiler Firing Proxy"
+        unique_id: hc_boiler_firing_proxy
+        default_entity_id: binary_sensor.hc_boiler_firing_proxy
+        device_class: running
+        delay_on: "0:01:00"
+        delay_off: "0:00:30"
+        state: >
+          {{ is_state('binary_sensor.hc_any_call_for_heat','on') }}
+
+      # Circulator proxy: same 1 minute start delay; slightly longer off-delay to represent coast-down
+      - name: "HC Circulator Running Proxy"
+        unique_id: hc_circulator_running_proxy
+        default_entity_id: binary_sensor.hc_circulator_running_proxy
+        device_class: running
+        delay_on: "0:01:00"
+        delay_off: "0:02:00"
+        state: >
+          {{ is_state('binary_sensor.hc_any_call_for_heat','on') }}
+
+  - sensor:
+      # Placeholder temp sensors (look like normal temperature sensors)
+      - name: "HC Boiler Supply Temp"
+        unique_id: hc_boiler_supply_temp_f
+        default_entity_id: sensor.hc_boiler_supply_temp
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: "°F"
+        state: "{{ states('input_number.hc_boiler_supply_temp_proxy_f') | float(0) }}"
+
+      - name: "HC Boiler Return Temp"
+        unique_id: hc_boiler_return_temp_f
+        default_entity_id: sensor.hc_boiler_return_temp
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: "°F"
+        state: "{{ states('input_number.hc_boiler_return_temp_proxy_f') | float(0) }}"
+
+      # Helpful system-load indicators (optional, but very useful for analysis)
+      - name: "HC Open Zones Count"
+        unique_id: hc_open_zones_count
+        default_entity_id: sensor.hc_open_zones_count
+        state_class: measurement
+        unit_of_measurement: "zones"
+        state: >
+          {{
+            [ is_state('switch.z1','on'),
+              is_state('switch.z2','on'),
+              is_state('switch.z3','on'),
+              is_state('switch.z4','on'),
+              is_state('switch.z5','on'),
+              is_state('switch.z6','on'),
+              is_state('switch.z7','on'),
+              is_state('switch.z8','on'),
+              is_state('switch.z9','on') ]
+            | select('eq', true) | list | length
+          }}
+
+      - name: "HC Calling Zones Count"
+        unique_id: hc_calling_zones_count
+        default_entity_id: sensor.hc_calling_zones_count
+        state_class: measurement
+        unit_of_measurement: "zones"
+        state: >
+          {{
+            [ is_state('binary_sensor.hc_z1_call_for_heat','on'),
+              is_state('binary_sensor.hc_z2_call_for_heat','on'),
+              is_state('binary_sensor.hc_z3_call_for_heat','on'),
+              is_state('binary_sensor.hc_z4_call_for_heat','on'),
+              is_state('binary_sensor.hc_z5_call_for_heat','on'),
+              is_state('binary_sensor.hc_z6_call_for_heat','on'),
+              is_state('binary_sensor.hc_z7_call_for_heat','on'),
+              is_state('binary_sensor.hc_z8_call_for_heat','on'),
+              is_state('binary_sensor.hc_z9_call_for_heat','on') ]
+            | select('eq', true) | list | length
+          }}

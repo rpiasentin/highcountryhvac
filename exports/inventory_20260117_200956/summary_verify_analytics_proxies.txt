@@ -1,0 +1,9 @@
+OK	binary_sensor.hc_any_call_for_heat	state=on	unit=	name=HC Any Call For Heat
+OK	binary_sensor.hc_boiler_firing_proxy	state=on	unit=	name=HC Boiler Firing Proxy
+OK	binary_sensor.hc_circulator_running_proxy	state=on	unit=	name=HC Circulator Running Proxy
+OK	sensor.hc_boiler_supply_temp	state=190.0	unit=°F	name=HC Boiler Supply Temp
+OK	sensor.hc_boiler_return_temp	state=170.0	unit=°F	name=HC Boiler Return Temp
+OK	input_number.hc_boiler_supply_temp_proxy_f	state=190.0	unit=	name=HC Boiler Supply Temp Proxy (°F)
+OK	input_number.hc_boiler_return_temp_proxy_f	state=170.0	unit=	name=HC Boiler Return Temp Proxy (°F)
+OK	sensor.hc_open_zones_count	state=3	unit=zones	name=HC Open Zones Count
+OK	sensor.hc_calling_zones_count	state=3	unit=zones	name=HC Calling Zones Count

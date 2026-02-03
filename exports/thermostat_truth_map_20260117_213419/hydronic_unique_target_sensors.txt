@@ -1,0 +1,8 @@
+sensor.1f_fr_n_t_fp3001_temperature
+sensor.1f_gr_s_z_temperature
+sensor.2f_mb_c_z_temperature
+sensor.b1_tv_c_z_temperature
+sensor.basement_bath_and_utility_temperature
+sensor.basement_kitchen_temperature_temperature
+sensor.hc_office_guest_avg_temperature
+sensor.madmen_temp_temperature

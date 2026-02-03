@@ -1,0 +1,261 @@
+title: High Country HVAC
+views:
+  - title: Control
+    path: control
+    icon: mdi:thermostat
+    cards:
+      - type: entities
+        title: Setpoints & Safety
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hc_setpoint_master
+            name: Master Setpoint
+          - entity: input_number.hc_setpoint_basement
+            name: Basement Setpoint
+          - entity: input_number.hc_setpoint_first_floor
+            name: First Floor Setpoint
+          - entity: input_number.hc_setpoint_upper_floor
+            name: Upper Floor Setpoint
+          - type: section
+          - entity: input_boolean.hc_enable_setpoint_broadcast
+            name: Enable Broadcast
+          - entity: input_boolean.hc_enable_minisplit_auto_on_setpoint
+            name: Mini-splits Auto-On on Setpoint Change
+          - entity: input_select.hc_minisplit_preferred_mode
+            name: Mini-split Preferred Mode
+
+      - type: grid
+        title: Quick Actions
+        columns: 3
+        square: false
+        cards:
+          - type: button
+            name: Apply Master
+            icon: mdi:thermometer
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_master_setpoint
+
+          - type: button
+            name: Apply Basement
+            icon: mdi:home-floor-b
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_basement_setpoint
+
+          - type: button
+            name: Apply First Floor
+            icon: mdi:home-floor-1
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_first_floor_setpoint
+
+          - type: button
+            name: Apply Upper Floor
+            icon: mdi:home-floor-2
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_upper_floor_setpoint
+
+          - type: button
+            name: Retry Mini-splits (3x)
+            icon: mdi:refresh-alert
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_retry_mismatched_minisplits
+
+          - type: button
+            name: "Splits: Apply Mode"
+            icon: mdi:air-conditioner
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_minisplits_apply_mode
+
+      - type: entities
+        title: Mini-split Setpoint Sync (Desired vs Reported)
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.hc_desired_upper_setpoint
+            name: Desired Upper Setpoint (°F)
+          - entity: binary_sensor.hc_any_minisplit_setpoint_mismatch
+            name: Any Mini-split Mismatch (problem)
+          - type: section
+          - entity: climate.upper_hall
+            name: Upper Hall (Sensibo)
+          - entity: sensor.hc_upper_hall_reported_setpoint
+            name: Reported Setpoint
+          - entity: binary_sensor.hc_upper_hall_setpoint_mismatch
+            name: Mismatch (problem)
+          - type: section
+          - entity: climate.giovani_s_device
+            name: Master (Sensibo)
+          - entity: sensor.hc_master_minisplit_reported_setpoint
+            name: Reported Setpoint
+          - entity: binary_sensor.hc_master_minisplit_setpoint_mismatch
+            name: Mismatch (problem)
+          - type: section
+          - entity: climate.giovani_s_device_2
+            name: Office (Sensibo)
+          - entity: sensor.hc_office_minisplit_reported_setpoint
+            name: Reported Setpoint
+          - entity: binary_sensor.hc_office_minisplit_setpoint_mismatch
+            name: Mismatch (problem)
+          - type: section
+          - entity: climate.upper_guest
+            name: Upper Guest (Sensibo)
+          - entity: sensor.hc_upper_guest_minisplit_reported_setpoint
+            name: Reported Setpoint
+          - entity: binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch
+            name: Mismatch (problem)
+
+      - type: entities
+        title: Hydronic Call for Heat (Now)
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.hc_whole_house_call_for_heat
+            name: Whole House
+          - entity: binary_sensor.hc_basement_call_for_heat
+            name: Basement
+          - entity: binary_sensor.hc_first_floor_call_for_heat
+            name: First Floor
+          - entity: binary_sensor.hc_upper_floor_call_for_heat
+            name: Upper Floor
+          - entity: binary_sensor.hc_garage_call_for_heat
+            name: Garage
+
+      - type: entities
+        title: Hydronic Duty Cycle (Hours Today)
+        show_header_toggle: false
+        entities:
+          - entity: sensor.hc_whole_house_call_for_heat_hours_today
+            name: Whole House (hrs today)
+          - entity: sensor.hc_basement_call_for_heat_hours_today
+            name: Basement (hrs today)
+          - entity: sensor.hc_first_floor_call_for_heat_hours_today
+            name: First Floor (hrs today)
+          - entity: sensor.hc_upper_floor_call_for_heat_hours_today
+            name: Upper Floor (hrs today)
+          - entity: sensor.hc_garage_call_for_heat_hours_today
+            name: Garage (hrs today)
+
+      - type: entity-filter
+        title: Active Hydronic Zones (Calling Now)
+        show_empty: false
+        state_filter:
+          - "on"
+        entities:
+          - binary_sensor.hc_z1_call_for_heat
+          - binary_sensor.hc_z2_call_for_heat
+          - binary_sensor.hc_z3_call_for_heat
+          - binary_sensor.hc_z4_call_for_heat
+          - binary_sensor.hc_z5_call_for_heat
+          - binary_sensor.hc_z6_call_for_heat
+          - binary_sensor.hc_z7_call_for_heat
+          - binary_sensor.hc_z8_call_for_heat
+          - binary_sensor.hc_z9_call_for_heat
+
+      - type: history-graph
+        title: Call for Heat Trend (Last 24h)
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - entity: binary_sensor.hc_whole_house_call_for_heat
+            name: Whole House
+          - entity: binary_sensor.hc_basement_call_for_heat
+            name: Basement
+          - entity: binary_sensor.hc_first_floor_call_for_heat
+            name: First Floor
+          - entity: binary_sensor.hc_upper_floor_call_for_heat
+            name: Upper Floor
+          - entity: binary_sensor.hc_garage_call_for_heat
+            name: Garage
+
+      - type: history-graph
+        title: "Call for Heat Trend — Zones (Last 24h)"
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - entity: binary_sensor.hc_z1_call_for_heat
+            name: "Z1"
+          - entity: binary_sensor.hc_z2_call_for_heat
+            name: "Z2"
+          - entity: binary_sensor.hc_z3_call_for_heat
+            name: "Z3"
+          - entity: binary_sensor.hc_z4_call_for_heat
+            name: "Z4 (Garage)"
+          - entity: binary_sensor.hc_z5_call_for_heat
+            name: "Z5"
+          - entity: binary_sensor.hc_z6_call_for_heat
+            name: "Z6"
+          - entity: binary_sensor.hc_z7_call_for_heat
+            name: "Z7"
+          - entity: binary_sensor.hc_z8_call_for_heat
+            name: "Z8"
+          - entity: binary_sensor.hc_z9_call_for_heat
+            name: "Z9"
+
+      - type: entities
+        title: "Hydronic Tuning"
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hc_cold_tolerance
+            name: "Cold Tolerance Gate Threshold (°F)"
+          - entity: input_boolean.hc_enable_cold_tolerance_gate
+            name: "Enable Cold Tolerance Gate (Pattern A)"
+          - type: section
+          - entity: binary_sensor.hc_z1_heat_allowed
+            name: "Z1 Heat Allowed"
+          - entity: binary_sensor.hc_z2_heat_allowed
+            name: "Z2 Heat Allowed"
+          - entity: binary_sensor.hc_z3_heat_allowed
+            name: "Z3 Heat Allowed"
+          - entity: binary_sensor.hc_z5_heat_allowed
+            name: "Z5 Heat Allowed"
+          - entity: binary_sensor.hc_z6_heat_allowed
+            name: "Z6 Heat Allowed"
+          - entity: binary_sensor.hc_z7_heat_allowed
+            name: "Z7 Heat Allowed"
+          - entity: binary_sensor.hc_z8_heat_allowed
+            name: "Z8 Heat Allowed"
+          - entity: binary_sensor.hc_z9_heat_allowed
+            name: "Z9 Heat Allowed"
+
+
+      - type: history-graph
+        title: "Zone Deltas (Setpoint − Actual) — Last 24h"
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - entity: sensor.hc_z1_delta
+            name: "Z1 Delta"
+          - entity: sensor.hc_z2_delta
+            name: "Z2 Delta"
+          - entity: sensor.hc_z3_delta
+            name: "Z3 Delta"
+          - entity: sensor.hc_z4_delta
+            name: "Z4 Delta"
+          - entity: sensor.hc_z5_delta
+            name: "Z5 Delta"
+          - entity: sensor.hc_z6_delta
+            name: "Z6 Delta"
+          - entity: sensor.hc_z7_delta
+            name: "Z7 Delta"
+          - entity: sensor.hc_z8_delta
+            name: "Z8 Delta"
+          - entity: sensor.hc_z9_delta
+            name: "Z9 Delta"
+

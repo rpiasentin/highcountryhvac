@@ -1,0 +1,100 @@
+[33m2026-01-11 15:38:40.255 WARNING (MainThread) [supervisor.api.middleware.security] /addons/icon: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.255 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/icon: true/logs[0m
+[33m2026-01-11 15:38:40.261 WARNING (MainThread) [supervisor.api.middleware.security] /addons/logo: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.261 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/logo: true/logs[0m
+[33m2026-01-11 15:38:40.267 WARNING (MainThread) [supervisor.api.middleware.security] /addons/name: File editor/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.267 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/name: File editor/logs[0m
+[33m2026-01-11 15:38:40.273 WARNING (MainThread) [supervisor.api.middleware.security] /addons/repository: core/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.273 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/repository: core/logs[0m
+[33m2026-01-11 15:38:40.279 WARNING (MainThread) [supervisor.api.middleware.security] /addons/slug: core_configurator/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.279 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/slug: core_configurator/logs[0m
+[33m2026-01-11 15:38:40.284 WARNING (MainThread) [supervisor.api.middleware.security] /addons/stage: stable/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.284 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/stage: stable/logs[0m
+[33m2026-01-11 15:38:40.289 WARNING (MainThread) [supervisor.api.middleware.security] /addons/state: started/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.289 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/state: started/logs[0m
+[33m2026-01-11 15:38:40.295 WARNING (MainThread) [supervisor.api.middleware.security] /addons/system_managed: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.295 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/system_managed: false/logs[0m
+[33m2026-01-11 15:38:40.302 WARNING (MainThread) [supervisor.api.middleware.security] /addons/update_available: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.302 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/update_available: false/logs[0m
+[33m2026-01-11 15:38:40.308 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version: 5.8.0/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.308 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version: 5.8.0/logs[0m
+[33m2026-01-11 15:38:40.314 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version_latest: 5.8.0/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.314 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version_latest: 5.8.0/logs[0m
+[33m2026-01-11 15:38:40.324 WARNING (MainThread) [supervisor.api.middleware.security] /addons/available: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.324 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/available: true/logs[0m
+[33m2026-01-11 15:38:40.329 WARNING (MainThread) [supervisor.api.middleware.security] /addons/build: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.329 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/build: false/logs[0m
+[33m2026-01-11 15:38:40.334 WARNING (MainThread) [supervisor.api.middleware.security] /addons/description: A supercharged SSH & Web Terminal access to your Home Assistant instance/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.334 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/description: A supercharged SSH & Web Terminal access to your Home Assistant instance/logs[0m
+[33m2026-01-11 15:38:40.340 WARNING (MainThread) [supervisor.api.middleware.security] /addons/detached: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.340 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/detached: false/logs[0m
+[33m2026-01-11 15:38:40.345 WARNING (MainThread) [supervisor.api.middleware.security] /addons/homeassistant: 0.92.0b2/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.345 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/homeassistant: 0.92.0b2/logs[0m
+[33m2026-01-11 15:38:40.350 WARNING (MainThread) [supervisor.api.middleware.security] /addons/icon: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.350 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/icon: true/logs[0m
+[33m2026-01-11 15:38:40.356 WARNING (MainThread) [supervisor.api.middleware.security] /addons/logo: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.357 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/logo: true/logs[0m
+[33m2026-01-11 15:38:40.363 WARNING (MainThread) [supervisor.api.middleware.security] /addons/name: Advanced SSH & Web Terminal/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.363 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/name: Advanced SSH & Web Terminal/logs[0m
+[33m2026-01-11 15:38:40.370 WARNING (MainThread) [supervisor.api.middleware.security] /addons/repository: a0d7b954/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.370 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/repository: a0d7b954/logs[0m
+[33m2026-01-11 15:38:40.404 WARNING (MainThread) [supervisor.api.middleware.security] /addons/slug: a0d7b954_ssh/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.404 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/slug: a0d7b954_ssh/logs[0m
+[33m2026-01-11 15:38:40.409 WARNING (MainThread) [supervisor.api.middleware.security] /addons/stage: stable/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.409 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/stage: stable/logs[0m
+[33m2026-01-11 15:38:40.415 WARNING (MainThread) [supervisor.api.middleware.security] /addons/state: started/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.415 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/state: started/logs[0m
+[33m2026-01-11 15:38:40.421 WARNING (MainThread) [supervisor.api.middleware.security] /addons/system_managed: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.421 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/system_managed: false/logs[0m
+[33m2026-01-11 15:38:40.427 WARNING (MainThread) [supervisor.api.middleware.security] /addons/update_available: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.427 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/update_available: false/logs[0m
+[33m2026-01-11 15:38:40.434 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version: 22.0.3/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.434 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version: 22.0.3/logs[0m
+[33m2026-01-11 15:38:40.440 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version_latest: 22.0.3/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.440 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version_latest: 22.0.3/logs[0m
+[33m2026-01-11 15:38:40.450 WARNING (MainThread) [supervisor.api.middleware.security] /addons/available: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.450 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/available: true/logs[0m
+[33m2026-01-11 15:38:40.456 WARNING (MainThread) [supervisor.api.middleware.security] /addons/build: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.456 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/build: false/logs[0m
+[33m2026-01-11 15:38:40.462 WARNING (MainThread) [supervisor.api.middleware.security] /addons/description: The easiest way to get HACS for Home Assistant/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.462 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/description: The easiest way to get HACS for Home Assistant/logs[0m
+[33m2026-01-11 15:38:40.467 WARNING (MainThread) [supervisor.api.middleware.security] /addons/detached: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.467 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/detached: false/logs[0m
+[33m2026-01-11 15:38:40.473 WARNING (MainThread) [supervisor.api.middleware.security] /addons/homeassistant: null/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.473 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/homeassistant: null/logs[0m
+[33m2026-01-11 15:38:40.478 WARNING (MainThread) [supervisor.api.middleware.security] /addons/icon: true/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.478 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/icon: true/logs[0m
+[33m2026-01-11 15:38:40.484 WARNING (MainThread) [supervisor.api.middleware.security] /addons/logo: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.484 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/logo: false/logs[0m
+[33m2026-01-11 15:38:40.490 WARNING (MainThread) [supervisor.api.middleware.security] /addons/name: Get HACS/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.490 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/name: Get HACS/logs[0m
+[33m2026-01-11 15:38:40.496 WARNING (MainThread) [supervisor.api.middleware.security] /addons/repository: cb646a50/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.496 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/repository: cb646a50/logs[0m
+[33m2026-01-11 15:38:40.502 WARNING (MainThread) [supervisor.api.middleware.security] /addons/slug: cb646a50_get/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.502 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/slug: cb646a50_get/logs[0m
+[33m2026-01-11 15:38:40.507 WARNING (MainThread) [supervisor.api.middleware.security] /addons/stage: stable/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.508 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/stage: stable/logs[0m
+[33m2026-01-11 15:38:40.513 WARNING (MainThread) [supervisor.api.middleware.security] /addons/state: unknown/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.513 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/state: unknown/logs[0m
+[33m2026-01-11 15:38:40.520 WARNING (MainThread) [supervisor.api.middleware.security] /addons/system_managed: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.520 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/system_managed: false/logs[0m
+[33m2026-01-11 15:38:40.526 WARNING (MainThread) [supervisor.api.middleware.security] /addons/update_available: false/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.526 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/update_available: false/logs[0m
+[33m2026-01-11 15:38:40.533 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version: 1.3.1/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.533 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version: 1.3.1/logs[0m
+[33m2026-01-11 15:38:40.538 WARNING (MainThread) [supervisor.api.middleware.security] /addons/version_latest: 1.3.1/logs no role for a0d7b954_ssh[0m
+[31m2026-01-11 15:38:40.538 ERROR (MainThread) [supervisor.api.middleware.security] Invalid token for access /addons/version_latest: 1.3.1/logs[0m
+[32m2026-01-11 15:45:14.029 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage home_assistant[0m
+[32m2026-01-11 15:45:14.055 INFO (MainThread) [supervisor.backups.manager] Freeze starting stage addons[0m
+[32m2026-01-11 15:45:14.437 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage home_assistant[0m
+[32m2026-01-11 15:45:14.439 INFO (MainThread) [supervisor.backups.manager] Thaw starting stage addons[0m
+[32m2026-01-11 15:46:01.358 INFO (MainThread) [supervisor.api.middleware.security] /core/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.365 INFO (MainThread) [supervisor.api.middleware.security] /supervisor/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.371 INFO (MainThread) [supervisor.api.middleware.security] /host/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.379 INFO (MainThread) [supervisor.api.middleware.security] /os/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.384 INFO (MainThread) [supervisor.api.middleware.security] /network/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.390 INFO (MainThread) [supervisor.api.middleware.security] /resolution/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.396 INFO (MainThread) [supervisor.api.middleware.security] /addons access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.402 INFO (MainThread) [supervisor.api.middleware.security] /backups/info access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.408 INFO (MainThread) [supervisor.api.middleware.security] /core/logs access from a0d7b954_ssh[0m
+[32m2026-01-11 15:46:01.430 INFO (MainThread) [supervisor.api.middleware.security] /supervisor/logs access from a0d7b954_ssh[0m

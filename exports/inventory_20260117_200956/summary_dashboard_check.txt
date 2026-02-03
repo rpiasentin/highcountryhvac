@@ -1,0 +1,12 @@
+3:  - title: Analytics Proxies
+4:    path: hc-analytics-proxies
+17:              - entity: binary_sensor.hc_boiler_firing_proxy
+19:              - entity: binary_sensor.hc_circulator_running_proxy
+30:              - entity: sensor.hc_boiler_supply_temp
+32:              - entity: sensor.hc_boiler_return_temp
+34:              - entity: input_number.hc_boiler_supply_temp_proxy_f
+36:              - entity: input_number.hc_boiler_return_temp_proxy_f
+45:          - binary_sensor.hc_boiler_firing_proxy
+46:          - binary_sensor.hc_circulator_running_proxy
+49:          - sensor.hc_boiler_supply_temp
+50:          - sensor.hc_boiler_return_temp

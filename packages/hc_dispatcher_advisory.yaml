@@ -1,0 +1,374 @@
+input_boolean:
+  hc_dispatcher_advisory_enabled:
+    name: HC Dispatcher Advisory Enabled
+    icon: mdi:radar
+
+input_select:
+  hc_dispatch_profile:
+    name: HC Dispatch Profile
+    options:
+      - None
+      - Basement (Z3+Z7+Z9)
+      - First Floor (Z1+Z5+Z8)
+      - Upper Floor (Z2+Z6)
+      - Whole House (Z1-Z9)
+    initial: Basement (Z3+Z7+Z9)
+
+input_number:
+  hc_dispatch_batch_window_sec:
+    name: HC Dispatch Batch Window
+    min: 30
+    max: 600
+    step: 10
+    unit_of_measurement: s
+    initial: 180
+    icon: mdi:timer-sand
+
+  hc_dispatch_near_call_margin_f:
+    name: HC Dispatch Near-Call Margin
+    min: 0.0
+    max: 2.0
+    step: 0.1
+    unit_of_measurement: "°F"
+    initial: 0.3
+    icon: mdi:arrow-expand-vertical
+
+input_datetime:
+  hc_dispatch_last_on_z1: { name: "HC Dispatch Last ON Z1", has_date: true, has_time: true }
+  hc_dispatch_last_on_z2: { name: "HC Dispatch Last ON Z2", has_date: true, has_time: true }
+  hc_dispatch_last_on_z3: { name: "HC Dispatch Last ON Z3", has_date: true, has_time: true }
+  hc_dispatch_last_on_z4: { name: "HC Dispatch Last ON Z4", has_date: true, has_time: true }
+  hc_dispatch_last_on_z5: { name: "HC Dispatch Last ON Z5", has_date: true, has_time: true }
+  hc_dispatch_last_on_z6: { name: "HC Dispatch Last ON Z6", has_date: true, has_time: true }
+  hc_dispatch_last_on_z7: { name: "HC Dispatch Last ON Z7", has_date: true, has_time: true }
+  hc_dispatch_last_on_z8: { name: "HC Dispatch Last ON Z8", has_date: true, has_time: true }
+  hc_dispatch_last_on_z9: { name: "HC Dispatch Last ON Z9", has_date: true, has_time: true }
+
+counter:
+  hc_dispatch_calls_z1_today: { name: "HC Z1 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z2_today: { name: "HC Z2 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z3_today: { name: "HC Z3 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z4_today: { name: "HC Z4 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z5_today: { name: "HC Z5 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z6_today: { name: "HC Z6 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z7_today: { name: "HC Z7 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z8_today: { name: "HC Z8 Call Starts Today", initial: 0, icon: mdi:counter }
+  hc_dispatch_calls_z9_today: { name: "HC Z9 Call Starts Today", initial: 0, icon: mdi:counter }
+
+  # Pair proximity counters (increment when second zone starts within window of first)
+  hc_dispatch_pair_z3_z7: { name: "HC Pair Z3↔Z7 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z3_z9: { name: "HC Pair Z3↔Z9 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z7_z9: { name: "HC Pair Z7↔Z9 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z1_z5: { name: "HC Pair Z1↔Z5 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z1_z8: { name: "HC Pair Z1↔Z8 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z5_z8: { name: "HC Pair Z5↔Z8 Within Window", initial: 0, icon: mdi:link-variant }
+  hc_dispatch_pair_z2_z6: { name: "HC Pair Z2↔Z6 Within Window", initial: 0, icon: mdi:link-variant }
+
+template:
+  - sensor:
+      - name: "HC Dispatch Active Zones"
+        unique_id: hc_dispatch_active_zones
+        icon: mdi:fire
+        state: >
+          {% set zones = [] %}
+          {% for z in range(1,10) %}
+            {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+              {% set zones = zones + ['z' ~ z] %}
+            {% endif %}
+          {% endfor %}
+          {{ zones | join(',') if zones|length else 'none' }}
+
+      - name: "HC Dispatch Near-Call Zones"
+        unique_id: hc_dispatch_near_call_zones
+        icon: mdi:thermometer-chevron-up
+        state: >
+          {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
+          {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
+          {% set zones = [] %}
+          {% for z in range(1,10) %}
+            {% set calling = is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+            {% set d = states('sensor.hc_z' ~ z ~ '_delta') %}
+            {% if (not calling) and d not in ['unknown','unavailable','none'] %}
+              {% set dv = d|float(0) %}
+              {% if dv >= (tol - m) and dv < tol %}
+                {% set zones = zones + ['z' ~ z] %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {{ zones | join(',') if zones|length else 'none' }}
+
+      - name: "HC Dispatch Suggested Batch"
+        unique_id: hc_dispatch_suggested_batch
+        icon: mdi:vector-link
+        state: >
+          {% set labels = {
+            'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
+            'z4':'Z4 Garage','z5':'Z5 1F Living','z6':'Z6 Master','z7':'Z7 Bsm Bar+TV',
+            'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
+          } %}
+          {% set profile = states('input_select.hc_dispatch_profile') %}
+          {% set groups = {
+            'Basement (Z3+Z7+Z9)': ['z3','z7','z9'],
+            'First Floor (Z1+Z5+Z8)': ['z1','z5','z8'],
+            'Upper Floor (Z2+Z6)': ['z2','z6'],
+            'Whole House (Z1-Z9)': ['z1','z2','z3','z4','z5','z6','z7','z8','z9'],
+            'None': []
+          } %}
+          {% set group = groups.get(profile, []) %}
+
+          {% set active = [] %}
+          {% for z in range(1,10) %}
+            {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+              {% set active = active + ['z' ~ z] %}
+            {% endif %}
+          {% endfor %}
+
+          {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
+          {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
+          {% set near = [] %}
+          {% for z in range(1,10) %}
+            {% set calling = is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+            {% set d = states('sensor.hc_z' ~ z ~ '_delta') %}
+            {% if (not calling) and d not in ['unknown','unavailable','none'] %}
+              {% set dv = d|float(0) %}
+              {% if dv >= (tol - m) and dv < tol %}
+                {% set near = near + ['z' ~ z] %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          {% if active|length == 0 %}
+            idle
+          {% else %}
+            {% set candidate = active %}
+            {% if group|length > 0 %}
+              {% set active_in_group = active | select('in', group) | list %}
+              {% if active_in_group|length > 0 %}
+                {% set candidate = active + (near | select('in', group) | list) %}
+              {% elif profile == 'Whole House (Z1-Z9)' %}
+                {% set candidate = active + near %}
+              {% endif %}
+            {% endif %}
+
+            {% set uniq = [] %}
+            {% for z in candidate %}
+              {% if z not in uniq %}
+                {% set uniq = uniq + [z] %}
+              {% endif %}
+            {% endfor %}
+
+            {% set out = [] %}
+            {% for z in uniq %}
+              {% set out = out + [labels.get(z, z|upper)] %}
+            {% endfor %}
+            {{ out | join(' + ') }}
+          {% endif %}
+        attributes:
+          profile: "{{ states('input_select.hc_dispatch_profile') }}"
+          batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
+          gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
+          gate_threshold_f: "{{ states('input_number.hc_cold_tolerance')|float(0) }}"
+
+      # Avg ON time today = (hours_today*60)/call_starts_today (rough proxy for cycle length)
+      - name: "HC Z1 Avg ON Minutes Today"
+        unique_id: hc_z1_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z1_first_floor_bedroom_bath_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z1_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z2 Avg ON Minutes Today"
+        unique_id: hc_z2_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z2_office_upper_guest_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z2_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z3 Avg ON Minutes Today"
+        unique_id: hc_z3_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z3_basement_bath_common_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z3_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z4 Avg ON Minutes Today"
+        unique_id: hc_z4_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z4_garage_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z4_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z5 Avg ON Minutes Today"
+        unique_id: hc_z5_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z5_first_floor_living_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z5_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z6 Avg ON Minutes Today"
+        unique_id: hc_z6_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z6_master_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z6_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z7 Avg ON Minutes Today"
+        unique_id: hc_z7_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z7_basement_bar_tv_south_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z7_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z8 Avg ON Minutes Today"
+        unique_id: hc_z8_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z8_dining_room_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z8_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+      - name: "HC Z9 Avg ON Minutes Today"
+        unique_id: hc_z9_avg_on_minutes_today
+        unit_of_measurement: "min"
+        state: >
+          {% set h = states('sensor.hc_z9_basement_bedroom_call_for_heat_hours_today')|float(0) %}
+          {% set c = states('counter.hc_dispatch_calls_z9_today')|int(0) %}
+          {{ (h*60 / c) | round(1) if c>0 else 0 }}
+
+  - binary_sensor:
+      - name: "HC Dispatch Short Cycle Risk"
+        unique_id: hc_dispatch_short_cycle_risk
+        device_class: problem
+        state: >
+          {% set active = [] %}
+          {% for z in range(1,10) %}
+            {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+              {% set active = active + ['z' ~ z] %}
+            {% endif %}
+          {% endfor %}
+          {% if active|length != 1 %}
+            false
+          {% else %}
+            {% set z = active[0] %}
+            {% set avg_map = {
+              'z1':'sensor.hc_z1_avg_on_minutes_today','z2':'sensor.hc_z2_avg_on_minutes_today',
+              'z3':'sensor.hc_z3_avg_on_minutes_today','z4':'sensor.hc_z4_avg_on_minutes_today',
+              'z5':'sensor.hc_z5_avg_on_minutes_today','z6':'sensor.hc_z6_avg_on_minutes_today',
+              'z7':'sensor.hc_z7_avg_on_minutes_today','z8':'sensor.hc_z8_avg_on_minutes_today',
+              'z9':'sensor.hc_z9_avg_on_minutes_today'
+            } %}
+            {% set cyc_map = {
+              'z1':'counter.hc_dispatch_calls_z1_today','z2':'counter.hc_dispatch_calls_z2_today',
+              'z3':'counter.hc_dispatch_calls_z3_today','z4':'counter.hc_dispatch_calls_z4_today',
+              'z5':'counter.hc_dispatch_calls_z5_today','z6':'counter.hc_dispatch_calls_z6_today',
+              'z7':'counter.hc_dispatch_calls_z7_today','z8':'counter.hc_dispatch_calls_z8_today',
+              'z9':'counter.hc_dispatch_calls_z9_today'
+            } %}
+            {% set avg = states(avg_map[z])|float(999) %}
+            {% set cycles = states(cyc_map[z])|int(0) %}
+            {{ cycles >= 4 and avg > 0 and avg < 8 }}
+          {% endif %}
+
+automation:
+  - id: hc_dispatch_advisory_track_call_starts
+    alias: "HC Dispatcher Advisory - Track Call Starts"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.hc_z1_call_for_heat
+          - binary_sensor.hc_z2_call_for_heat
+          - binary_sensor.hc_z3_call_for_heat
+          - binary_sensor.hc_z4_call_for_heat
+          - binary_sensor.hc_z5_call_for_heat
+          - binary_sensor.hc_z6_call_for_heat
+          - binary_sensor.hc_z7_call_for_heat
+          - binary_sensor.hc_z8_call_for_heat
+          - binary_sensor.hc_z9_call_for_heat
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatcher_advisory_enabled
+        state: "on"
+    action:
+      - variables:
+          z: "{{ trigger.entity_id.split('.')[-1].split('_')[1] }}"   # z1..z9
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          now_ts: "{{ as_timestamp(now()) }}"
+          window: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
+          pairs:
+            - { a: "z3", b: "z7", counter: "counter.hc_dispatch_pair_z3_z7" }
+            - { a: "z3", b: "z9", counter: "counter.hc_dispatch_pair_z3_z9" }
+            - { a: "z7", b: "z9", counter: "counter.hc_dispatch_pair_z7_z9" }
+            - { a: "z1", b: "z5", counter: "counter.hc_dispatch_pair_z1_z5" }
+            - { a: "z1", b: "z8", counter: "counter.hc_dispatch_pair_z1_z8" }
+            - { a: "z5", b: "z8", counter: "counter.hc_dispatch_pair_z5_z8" }
+            - { a: "z2", b: "z6", counter: "counter.hc_dispatch_pair_z2_z6" }
+
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: "{{ 'input_datetime.hc_dispatch_last_on_' ~ z }}"
+        data:
+          datetime: "{{ now_str }}"
+
+      - service: counter.increment
+        target:
+          entity_id: "{{ 'counter.hc_dispatch_calls_' ~ z ~ '_today' }}"
+
+      - repeat:
+          for_each: "{{ pairs }}"
+          sequence:
+            - variables:
+                a: "{{ repeat.item.a }}"
+                b: "{{ repeat.item.b }}"
+                other: "{{ b if a == z else a }}"
+                other_state: "{{ states('input_datetime.hc_dispatch_last_on_' ~ other) }}"
+                other_ts: >
+                  {% if other_state not in ['unknown','unavailable','none',''] %}
+                    {{ as_timestamp(other_state) }}
+                  {% else %}
+                    0
+                  {% endif %}
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ (a == z or b == z) and (other_ts|float(0) > 0) and ((now_ts - (other_ts|float(0))) <= window) }}
+                  sequence:
+                    - service: counter.increment
+                      target:
+                        entity_id: "{{ repeat.item.counter }}"
+
+  - id: hc_dispatch_advisory_reset_counters_daily
+    alias: "HC Dispatcher Advisory - Reset Counters Daily"
+    trigger:
+      - platform: time
+        at: "00:00:05"
+    action:
+      - service: counter.reset
+        target:
+          entity_id:
+            - counter.hc_dispatch_calls_z1_today
+            - counter.hc_dispatch_calls_z2_today
+            - counter.hc_dispatch_calls_z3_today
+            - counter.hc_dispatch_calls_z4_today
+            - counter.hc_dispatch_calls_z5_today
+            - counter.hc_dispatch_calls_z6_today
+            - counter.hc_dispatch_calls_z7_today
+            - counter.hc_dispatch_calls_z8_today
+            - counter.hc_dispatch_calls_z9_today
+            - counter.hc_dispatch_pair_z3_z7
+            - counter.hc_dispatch_pair_z3_z9
+            - counter.hc_dispatch_pair_z7_z9
+            - counter.hc_dispatch_pair_z1_z5
+            - counter.hc_dispatch_pair_z1_z8
+            - counter.hc_dispatch_pair_z5_z8
+            - counter.hc_dispatch_pair_z2_z6

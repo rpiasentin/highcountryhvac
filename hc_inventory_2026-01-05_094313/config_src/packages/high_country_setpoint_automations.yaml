@@ -1,0 +1,91 @@
+automation:
+  - id: hc_auto_broadcast_basement_setpoint
+    alias: "HC Auto Broadcast Basement Setpoint"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_basement
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_enable_setpoint_broadcast
+        state: "on"
+    action:
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_broadcast_basement_setpoint
+
+  - id: hc_auto_broadcast_first_floor_setpoint
+    alias: "HC Auto Broadcast First Floor Setpoint"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_first_floor
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_enable_setpoint_broadcast
+        state: "on"
+    action:
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_broadcast_first_floor_setpoint
+
+  - id: hc_auto_broadcast_upper_floor_setpoint
+    alias: "HC Auto Broadcast Upper Floor Setpoint"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_upper_floor
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_enable_setpoint_broadcast
+        state: "on"
+    action:
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_broadcast_upper_floor_setpoint
+
+  - id: hc_auto_broadcast_master_setpoint
+    alias: "HC Auto Broadcast Master Setpoint (Overrides Floors)"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_number.hc_setpoint_master
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_enable_setpoint_broadcast
+        state: "on"
+    action:
+      # Temporarily disable broadcasts so updating floor helpers doesn't trigger their automations
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.hc_enable_setpoint_broadcast
+
+      # Overwrite floor setpoints to match master (per your rule)
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hc_setpoint_basement
+        data:
+          value: "{{ states('input_number.hc_setpoint_master') | float }}"
+
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hc_setpoint_first_floor
+        data:
+          value: "{{ states('input_number.hc_setpoint_master') | float }}"
+
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hc_setpoint_upper_floor
+        data:
+          value: "{{ states('input_number.hc_setpoint_master') | float }}"
+
+      # Re-enable broadcasts
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.hc_enable_setpoint_broadcast
+
+      # Now do the actual master broadcast to all non-garage climates
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_broadcast_master_setpoint
+

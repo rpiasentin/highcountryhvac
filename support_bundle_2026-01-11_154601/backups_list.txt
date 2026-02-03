@@ -1,0 +1,153 @@
+backups:
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - ssl
+    homeassistant: true
+  date: "2026-01-10T12:37:02.009697+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: true
+      size_bytes: 141066240
+  locations:
+  - null
+  name: Automatic backup 2025.12.5
+  protected: true
+  size: 134.53
+  size_bytes: 141066240
+  slug: d4e09df1
+  type: partial
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - ssl
+    homeassistant: true
+  date: "2026-01-09T11:52:47.007221+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: true
+      size_bytes: 140687360
+  locations:
+  - null
+  name: Automatic backup 2025.12.5
+  protected: true
+  size: 134.17
+  size_bytes: 140687360
+  slug: 2ff5a0ef
+  type: partial
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - ssl
+    - share
+    - media
+    homeassistant: true
+  date: "2026-01-11T03:21:30.175472+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: true
+      size_bytes: 145008640
+  locations:
+  - null
+  name: beffore move
+  protected: true
+  size: 138.29
+  size_bytes: 145008640
+  slug: c945a7c0
+  type: partial
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - ssl
+    homeassistant: true
+  date: "2026-01-11T11:53:43.007018+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: true
+      size_bytes: 135659520
+  locations:
+  - null
+  name: Automatic backup 2025.12.5
+  protected: true
+  size: 129.38
+  size_bytes: 135659520
+  slug: a8a536e2
+  type: partial
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - share
+    - addons/local
+    - ssl
+    - media
+    homeassistant: true
+  date: "2026-01-11T04:34:39.036386+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: false
+      size_bytes: 146227200
+  locations:
+  - null
+  name: hc_before_hydronic_tol_fix_2026-01-10_2134
+  protected: false
+  size: 139.45
+  size_bytes: 146227200
+  slug: c22805a0
+  type: full
+- compressed: true
+  content:
+    addons:
+    - core_matter_server
+    - core_configurator
+    - a0d7b954_ssh
+    - cb646a50_get
+    folders:
+    - media
+    - ssl
+    - share
+    homeassistant: true
+  date: "2026-01-06T22:30:21.161028+00:00"
+  location: null
+  location_attributes:
+    .local:
+      protected: true
+      size_bytes: 144691200
+  locations:
+  - null
+  name: pre_hardening_2026-01-06
+  protected: true
+  size: 137.99
+  size_bytes: 144691200
+  slug: 0fdabfa4
+  type: partial
+days_until_stale: 30

@@ -1,0 +1,52 @@
+# HVAC Admin (Verify) - helper sensors (deltas)
+# Keeps templates out of Lovelace
+
+template:
+  - sensor:
+      - name: "HC Delta Upper vs Office"
+        unique_id: hc_delta_upper_vs_office
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+          {% set t  = states('sensor.2nd_floor_office_temperature_temperature')|float(none) %}
+          {% if sp is not none and t is not none %}
+            {{ (sp - t) | round(2) }}
+          {% else %}
+            {{ none }}
+          {% endif %}
+
+      - name: "HC Delta Upper vs Upper Guest"
+        unique_id: hc_delta_upper_vs_upper_guest
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+          {% set t  = states('sensor.upper_guest_temp_temperature')|float(none) %}
+          {% if sp is not none and t is not none %}
+            {{ (sp - t) | round(2) }}
+          {% else %}
+            {{ none }}
+          {% endif %}
+
+      - name: "HC Delta Upper vs Office+Guest Avg"
+        unique_id: hc_delta_upper_vs_office_guest_avg
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+          {% set t  = states('sensor.hc_office_guest_avg_temperature')|float(none) %}
+          {% if sp is not none and t is not none %}
+            {{ (sp - t) | round(2) }}
+          {% else %}
+            {{ none }}
+          {% endif %}
+
+      - name: "HC Delta First Floor vs Dining"
+        unique_id: hc_delta_first_floor_vs_dining
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = states('input_number.hc_setpoint_first_floor')|float(none) %}
+          {% set t  = states('sensor.madmen_temp_temperature')|float(none) %}
+          {% if sp is not none and t is not none %}
+            {{ (sp - t) | round(2) }}
+          {% else %}
+            {{ none }}
+          {% endif %}

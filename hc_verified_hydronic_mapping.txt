@@ -1,0 +1,34 @@
+Verified hydronic generic_thermostat mapping (8 climates / 7 unique sensors).
+Shared sensor: sensor.b1_tv_c_z_temperature used by zones 3 and 7.
+
+Z1  climate.z1_first_floor_bedroom_and_bath
+    sensor: sensor.1f_fr_n_t_fp3001_temperature
+    heater: switch.z1
+
+Z2  climate.zone_2_second_floor_office_and_upper_guest
+    sensor: sensor.hc_office_guest_avg_temperature
+    heater: switch.z2
+
+Z3  climate.zone_3_basement_bath_and_common
+    sensor: sensor.b1_tv_c_z_temperature
+    heater: switch.z3
+
+Z5  climate.zone_5_virtual_thermostat_first_floor_living
+    sensor: sensor.1f_gr_s_z_temperature
+    heater: switch.z5
+
+Z6  climate.zone_6_master_thermostat
+    sensor: sensor.2f_mb_c_z_temperature
+    heater: switch.z6
+
+Z7  climate.zone_7_basement_bar_and_tv_room_south_side
+    sensor: sensor.b1_tv_c_z_temperature
+    heater: switch.z7
+
+Z8  climate.zone_8_dining_room
+    sensor: sensor.madmen_temp_temperature
+    heater: switch.z8
+
+Z9  climate.zone_9_basement_bedroom
+    sensor: sensor.basement_kitchen_temperature_temperature
+    heater: switch.z9

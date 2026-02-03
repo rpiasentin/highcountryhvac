@@ -1,0 +1,224 @@
+title: HC Hydronic Test
+views:
+  - title: Analytics Proxies
+    path: hc-analytics-proxies
+    icon: mdi:chart-timeline-variant
+    cards:
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: entities
+            title: System Proxies
+            show_header_toggle: false
+            entities:
+              - entity: binary_sensor.hc_any_call_for_heat
+                name: Any Call For Heat
+              - entity: binary_sensor.hc_boiler_firing_proxy
+                name: Boiler Firing (Proxy, +1m)
+              - entity: binary_sensor.hc_circulator_running_proxy
+                name: Circulator Running (Proxy, +1m)
+              - entity: sensor.hc_calling_zones_count
+                name: Calling Zones Count
+              - entity: sensor.hc_open_zones_count
+                name: Open Zones Count
+
+          - type: entities
+            title: Boiler Temp Placeholders
+            show_header_toggle: false
+            entities:
+              - entity: sensor.hc_boiler_supply_temp
+                name: Boiler Supply Temp
+              - entity: sensor.hc_boiler_return_temp
+                name: Boiler Return Temp
+              - entity: input_number.hc_boiler_supply_temp_proxy_f
+                name: Supply Temp Proxy (set)
+              - entity: input_number.hc_boiler_return_temp_proxy_f
+                name: Return Temp Proxy (set)
+
+      - type: history-graph
+        title: Proxies + Temps (24h)
+        hours_to_show: 24
+        refresh_interval: 30
+        entities:
+          - binary_sensor.hc_any_call_for_heat
+          - binary_sensor.hc_boiler_firing_proxy
+          - binary_sensor.hc_circulator_running_proxy
+          - sensor.hc_calling_zones_count
+          - sensor.hc_open_zones_count
+          - sensor.hc_boiler_supply_temp
+          - sensor.hc_boiler_return_temp
+
+  - title: Follow + Setpoints
+    path: follow
+    icon: mdi:link
+    cards:
+      - type: entities
+        title: Follow Sync Master Toggle
+        entities:
+          - entity: input_boolean.hc_disp_follow_sync_enabled
+
+      - type: entities
+        title: Broadcast Setpoints (Existing System)
+        entities:
+          - entity: input_number.hc_setpoint_master
+          - entity: input_number.hc_setpoint_basement
+          - entity: input_number.hc_setpoint_first_floor
+          - entity: input_number.hc_setpoint_upper_floor
+          - entity: input_number.hc_setpoint_garage
+
+      - type: entities
+        title: Dispatcher Follow Toggles (Per Zone)
+        entities:
+          - entity: input_boolean.hc_disp_z1_follow_broadcast
+          - entity: input_boolean.hc_disp_z2_follow_broadcast
+          - entity: input_boolean.hc_disp_z3_follow_broadcast
+          - entity: input_boolean.hc_disp_z4_follow_broadcast
+          - entity: input_boolean.hc_disp_z5_follow_broadcast
+          - entity: input_boolean.hc_disp_z6_follow_broadcast
+          - entity: input_boolean.hc_disp_z7_follow_broadcast
+          - entity: input_boolean.hc_disp_z8_follow_broadcast
+          - entity: input_boolean.hc_disp_z9_follow_broadcast
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: "Dispatcher Setpoints (Basement Group: Z3, Z7, Z9)"
+            entities:
+              - entity: input_number.hc_disp_z3_setpoint_f
+              - entity: input_number.hc_disp_z7_setpoint_f
+              - entity: input_number.hc_disp_z9_setpoint_f
+
+          - type: entities
+            title: "Dispatcher Setpoints (First Floor Group: Z1, Z5, Z8)"
+            entities:
+              - entity: input_number.hc_disp_z1_setpoint_f
+              - entity: input_number.hc_disp_z5_setpoint_f
+              - entity: input_number.hc_disp_z8_setpoint_f
+
+          - type: entities
+            title: "Dispatcher Setpoints (Upper Group: Z2, Z6)"
+            entities:
+              - entity: input_number.hc_disp_z2_setpoint_f
+              - entity: input_number.hc_disp_z6_setpoint_f
+
+          - type: entities
+            title: "Dispatcher Setpoints (Garage: Z4)"
+            entities:
+              - entity: input_number.hc_disp_z4_setpoint_f
+
+      - type: entities
+        title: Dispatcher Tolerances (Quick)
+        entities:
+          - entity: input_number.hc_disp_z1_hot_tolerance_f
+          - entity: input_number.hc_disp_z1_cold_tolerance_f
+          - entity: input_number.hc_disp_z4_hot_tolerance_f
+          - entity: input_number.hc_disp_z4_cold_tolerance_f
+          - entity: input_number.hc_disp_z6_hot_tolerance_f
+          - entity: input_number.hc_disp_z6_cold_tolerance_f
+
+  - title: Coincident Test
+    path: coincident
+    icon: mdi:chart-box
+    cards:
+      - type: entities
+        title: Coincident Controls
+        entities:
+          - entity: input_number.hc_coincident_window_min
+          - entity: automation.hc_observability_coincident_heat
+
+      # --- Recommended additions (Top pairs + Matrix) ---
+      - type: markdown
+        title: Top coincident pairs
+        content: >
+          Window: {{ states('input_number.hc_coincident_window_min') }} min
+
+          {{ state_attr('sensor.hc_coincident_top_pairs','top_12_md') }}
+
+      - type: markdown
+        title: Coincident matrix
+        content: "{{ state_attr('sensor.hc_coincident_matrix','matrix_md') }}"
+      # --- end additions ---
+
+      - type: button
+        name: Reset Coincident Counters
+        icon: mdi:counter
+        entity: script.hc_coincident_reset_counters
+        tap_action:
+          action: call-service
+          service: script.turn_on
+          target:
+            entity_id: script.hc_coincident_reset_counters
+
+      - type: entities
+        title: Live Calls (Call For Heat)
+        entities:
+          - entity: binary_sensor.hc_z1_call_for_heat
+          - entity: binary_sensor.hc_z2_call_for_heat
+          - entity: binary_sensor.hc_z3_call_for_heat
+          - entity: binary_sensor.hc_z4_call_for_heat
+          - entity: binary_sensor.hc_z5_call_for_heat
+          - entity: binary_sensor.hc_z6_call_for_heat
+          - entity: binary_sensor.hc_z7_call_for_heat
+          - entity: binary_sensor.hc_z8_call_for_heat
+          - entity: binary_sensor.hc_z9_call_for_heat
+
+      - type: entities
+        title: Last On Timestamps
+        entities:
+          - entity: input_datetime.hc_coincident_last_on_z1
+          - entity: input_datetime.hc_coincident_last_on_z2
+          - entity: input_datetime.hc_coincident_last_on_z3
+          - entity: input_datetime.hc_coincident_last_on_z4
+          - entity: input_datetime.hc_coincident_last_on_z5
+          - entity: input_datetime.hc_coincident_last_on_z6
+          - entity: input_datetime.hc_coincident_last_on_z7
+          - entity: input_datetime.hc_coincident_last_on_z8
+          - entity: input_datetime.hc_coincident_last_on_z9
+
+      - type: entities
+        title: All Coincident Pair Counters (36)
+        entities:
+          - entity: counter.hc_coincident_z1_z2_total
+          - entity: counter.hc_coincident_z1_z3_total
+          - entity: counter.hc_coincident_z1_z4_total
+          - entity: counter.hc_coincident_z1_z5_total
+          - entity: counter.hc_coincident_z1_z6_total
+          - entity: counter.hc_coincident_z1_z7_total
+          - entity: counter.hc_coincident_z1_z8_total
+          - entity: counter.hc_coincident_z1_z9_total
+
+          - entity: counter.hc_coincident_z2_z3_total
+          - entity: counter.hc_coincident_z2_z4_total
+          - entity: counter.hc_coincident_z2_z5_total
+          - entity: counter.hc_coincident_z2_z6_total
+          - entity: counter.hc_coincident_z2_z7_total
+          - entity: counter.hc_coincident_z2_z8_total
+          - entity: counter.hc_coincident_z2_z9_total
+
+          - entity: counter.hc_coincident_z3_z4_total
+          - entity: counter.hc_coincident_z3_z5_total
+          - entity: counter.hc_coincident_z3_z6_total
+          - entity: counter.hc_coincident_z3_z7_total
+          - entity: counter.hc_coincident_z3_z8_total
+          - entity: counter.hc_coincident_z3_z9_total
+
+          - entity: counter.hc_coincident_z4_z5_total
+          - entity: counter.hc_coincident_z4_z6_total
+          - entity: counter.hc_coincident_z4_z7_total
+          - entity: counter.hc_coincident_z4_z8_total
+          - entity: counter.hc_coincident_z4_z9_total
+
+          - entity: counter.hc_coincident_z5_z6_total
+          - entity: counter.hc_coincident_z5_z7_total
+          - entity: counter.hc_coincident_z5_z8_total
+          - entity: counter.hc_coincident_z5_z9_total
+
+          - entity: counter.hc_coincident_z6_z7_total
+          - entity: counter.hc_coincident_z6_z8_total
+          - entity: counter.hc_coincident_z6_z9_total
+
+          - entity: counter.hc_coincident_z7_z8_total
+          - entity: counter.hc_coincident_z7_z9_total
+
+          - entity: counter.hc_coincident_z8_z9_total

@@ -1,0 +1,63 @@
+addons:
+- icon: true
+  name: Matter Server
+  repository: core
+  slug: core_matter_server
+  state: started
+  update_available: false
+  version: 8.1.2
+  version_latest: 8.1.2
+- icon: true
+  name: File editor
+  repository: core
+  slug: core_configurator
+  state: started
+  update_available: false
+  version: 5.8.0
+  version_latest: 5.8.0
+- icon: true
+  name: Advanced SSH & Web Terminal
+  repository: a0d7b954
+  slug: a0d7b954_ssh
+  state: started
+  update_available: false
+  version: 22.0.3
+  version_latest: 22.0.3
+- icon: true
+  name: Get HACS
+  repository: cb646a50
+  slug: cb646a50_get
+  state: unknown
+  update_available: false
+  version: 1.3.1
+  version_latest: 1.3.1
+addons_repositories:
+- name: Local add-ons
+  slug: local
+- name: HACS Add-ons Repository
+  slug: cb646a50
+- name: ESPHome
+  slug: 5c53de3b
+- name: Music Assistant
+  slug: d5369777
+- name: Home Assistant Community Add-ons
+  slug: a0d7b954
+- name: Official add-ons
+  slug: core
+arch: amd64
+auto_update: true
+channel: stable
+country: US
+debug: false
+debug_block: false
+detect_blocking_io: false
+diagnostics: null
+healthy: true
+ip_address: 172.30.32.2
+logging: info
+supported: true
+timezone: America/Denver
+update_available: false
+version: 2026.01.0
+version_latest: 2026.01.0
+wait_boot: 5

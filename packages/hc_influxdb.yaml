@@ -1,0 +1,80 @@
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  ssl: false
+
+  database: homeassistant
+  username: homeassistant
+  password: !secret influxdb_password
+
+  max_retries: 3
+  override_measurement: hc
+
+  tags:
+    site: 12421_high_country
+    system: hydronics
+
+  tags_attributes:
+    - friendly_name
+
+  ignore_attributes:
+    - icon
+    - friendly_name
+    - hvac_modes
+    - preset_modes
+    - fan_modes
+    - swing_modes
+    - min_temp
+    - max_temp
+    - supported_features
+
+  include:
+    entities:
+      - sensor.high_country_front_door_multi_temperature
+
+      # Thermostat “truth” sensors + avg components
+      - sensor.1f_fr_n_t_fp3001_temperature
+      - sensor.hc_office_guest_avg_temperature
+      - sensor.2nd_floor_office_temperature_temperature
+      - sensor.upper_guest_temp_temperature
+      - sensor.basement_bath_and_utility_temperature
+      - sensor.new_garage_motion_sensor_temperature
+      - sensor.1f_gr_s_z_temperature
+      - sensor.2f_mb_c_z_temperature
+      - sensor.b1_tv_c_z_temperature
+      - sensor.madmen_temp_temperature
+      - sensor.basement_kitchen_temperature_temperature
+
+      # Proxies/placeholders
+      - binary_sensor.hc_any_call_for_heat
+      - binary_sensor.hc_boiler_firing_proxy
+      - binary_sensor.hc_circulator_running_proxy
+      - sensor.hc_boiler_supply_temp
+      - sensor.hc_boiler_return_temp
+      - input_number.hc_boiler_supply_temp_proxy_f
+      - input_number.hc_boiler_return_temp_proxy_f
+      - sensor.hc_open_zones_count
+      - sensor.hc_calling_zones_count
+
+      # Hydronic climates
+      - climate.z1_first_floor_bedroom_and_bath
+      - climate.zone_2_second_floor_office_and_upper_guest
+      - climate.zone_3_basement_bath_and_common
+      - climate.zone_4_garage
+      - climate.zone_5_virtual_thermostat_first_floor_living
+      - climate.zone_6_master_thermostat
+      - climate.zone_7_basement_bar_and_tv_room_south_side
+      - climate.zone_8_dining_room
+      - climate.zone_9_basement_bedroom
+
+      # Observability essentials
+      - input_number.hc_coincident_window_min
+      - sensor.hc_coincident_matrix
+      - sensor.hc_coincident_top_pairs
+
+    entity_globs:
+      - switch.z?
+      - binary_sensor.hc_z?_call_for_heat
+      - binary_sensor.hc_z?_heat_allowed
+      - sensor.hc_z?_delta
+      - counter.hc_coincident_*

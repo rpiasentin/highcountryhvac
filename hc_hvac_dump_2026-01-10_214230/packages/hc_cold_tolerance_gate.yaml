@@ -1,0 +1,76 @@
+input_boolean:
+  hc_enable_cold_tolerance_gate:
+    name: "HC Enable Cold Tolerance Gate"
+    icon: mdi:shield-check
+
+template:
+  - binary_sensor:
+      # Allow turning ON only when delta > tolerance
+      - name: "HC Z1 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z1_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z2 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z2_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z3 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z3_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z5 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z5_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z6 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z6_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z7 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z7_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z8 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z8_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+      - name: "HC Z9 Heat Allowed"
+        state: >
+          {{ states('sensor.hc_z9_delta')|float(0) > states('input_number.hc_cold_tolerance')|float(0) }}
+
+automation:
+  - id: hc_cold_tolerance_gate_block_on
+    alias: "HC Cold Tolerance Gate - Block Zone Turn ON"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - switch.z1
+          - switch.z2
+          - switch.z3
+          - switch.z5
+          - switch.z6
+          - switch.z7
+          - switch.z8
+          - switch.z9
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_enable_cold_tolerance_gate
+        state: "on"
+    action:
+      # Small delay avoids race flicker if the switch briefly reports "on"
+      - delay:
+          seconds: 1
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >
+                  {% set m = {
+                    'switch.z1':'binary_sensor.hc_z1_heat_allowed',
+                    'switch.z2':'binary_sensor.hc_z2_heat_allowed',
+                    'switch.z3':'binary_sensor.hc_z3_heat_allowed',
+                    'switch.z5':'binary_sensor.hc_z5_heat_allowed',
+                    'switch.z6':'binary_sensor.hc_z6_heat_allowed',
+                    'switch.z7':'binary_sensor.hc_z7_heat_allowed',
+                    'switch.z8':'binary_sensor.hc_z8_heat_allowed',
+                    'switch.z9':'binary_sensor.hc_z9_heat_allowed'
+                  } %}
+                  {{ is_state(m.get(trigger.entity_id,'binary_sensor.missing'), 'off') }}
+            sequence:
+              - service: switch.turn_off
+                target:
+                  entity_id: "{{ trigger.entity_id }}"

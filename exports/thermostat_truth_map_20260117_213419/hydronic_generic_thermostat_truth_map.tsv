@@ -1,0 +1,9 @@
+climate_entity	climate_name	heater	heater_name	target_sensor	target_sensor_name	target_sensor_state	climate_current_temp	diff(climate-target)
+climate.z1_first_floor_bedroom_and_bath	z1 first floor bedroom and bath	switch.z1	Z1 - north first floor bedroom and bath and entry	sensor.1f_fr_n_t_fp3001_temperature	1F-Fr-N-T-Fp3001 Temperature	60.6	61	+0.40
+climate.zone_2_second_floor_office_and_upper_guest	zone 2 second floor office and upper guest	switch.z2	Z2 - Second floor office and upper guest	sensor.hc_office_guest_avg_temperature	HC Office+Guest Avg Temperature	59.6	60	+0.40
+climate.zone_3_basement_bath_and_common	zone 3 basement bath and common	switch.z3	Z3 - Basement bath utility common area	sensor.basement_bath_and_utility_temperature	Basement Bath And Utility Temperature	60.45	60	-0.45
+climate.zone_5_virtual_thermostat_first_floor_living	zone 5 virtual thermostat - first floor living	switch.z5	Z5 - first floor living	sensor.1f_gr_s_z_temperature	1F-Gr-S-Z Temperature	60.9	61	+0.10
+climate.zone_6_master_thermostat	zone 6 master thermostat	switch.z6	Z6 -master	sensor.2f_mb_c_z_temperature	2F-Mb-C-Z Temperature	67.1	67	-0.10
+climate.zone_7_basement_bar_and_tv_room_south_side	zone 7 basement bar and tv room south side	switch.z7	Z7 - basement kitchen and tv area	sensor.b1_tv_c_z_temperature	B1-Tv-C-Z Temperature	58.1	58	-0.10
+climate.zone_8_dining_room	zone 8 Dining room	switch.z8	Z8 - dining mad man	sensor.madmen_temp_temperature	Dining Temp Temperature	61.25	61	-0.25
+climate.zone_9_basement_bedroom	zone 9 basement bedroom	switch.z9	Z9 - basement bedroom	sensor.basement_kitchen_temperature_temperature	B1-Bguestroom Temperature	58.75	59	+0.25

@@ -1,0 +1,8 @@
+total 36
+drwxr-xr-x    2 root     root          4096 Dec 18 18:48 .
+drwxr-xr-x   12 root     root          4096 Jan  5 09:43 ..
+-rw-r--r--    1 root     root          6421 Dec 17 16:02 high_country_call_for_heat.yaml
+-rw-r--r--    1 root     root            78 Dec 17 15:23 high_country_sanity.yaml
+-rw-r--r--    1 root     root          2929 Dec 17 17:09 high_country_setpoint_automations.yaml
+-rw-r--r--    1 root     root          5783 Dec 17 17:55 high_country_setpoints.yaml
+-rw-r--r--    1 root     root           695 Dec 18 18:50 high_country_upstairs_avg_temp.yaml

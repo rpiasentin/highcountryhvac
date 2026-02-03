@@ -1,0 +1,52 @@
+# Provides ONLY the entity_ids your High Country HVAC dashboard expects.
+# Key: use "Minisplit" (one word) so entity_id slugs to "..._minisplit_..." not "..._mini_split_...".
+
+template:
+  - sensor:
+      - name: "HC Master Minisplit Reported Setpoint"
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.giovani_s_device', 'temperature') %}
+          {{ v if v is not none else none }}
+
+      - name: "HC Office Minisplit Reported Setpoint"
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.giovani_s_device_2', 'temperature') %}
+          {{ v if v is not none else none }}
+
+      - name: "HC Upper Guest Minisplit Reported Setpoint"
+        unit_of_measurement: "°F"
+        state: >
+          {% set v = state_attr('climate.upper_guest', 'temperature') %}
+          {{ v if v is not none else none }}
+
+  - binary_sensor:
+      - name: "HC Master Minisplit Setpoint Mismatch"
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_master_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Office Minisplit Setpoint Mismatch"
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_office_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Upper Guest Minisplit Setpoint Mismatch"
+        device_class: problem
+        state: >
+          {% set d = states('sensor.hc_desired_upper_setpoint')|float(none) %}
+          {% set r = states('sensor.hc_upper_guest_minisplit_reported_setpoint')|float(none) %}
+          {{ (d is not none and r is not none and (d-r)|abs > 0.25) }}
+
+      - name: "HC Any Minisplit Setpoint Mismatch"
+        device_class: problem
+        state: >
+          {{ is_state('binary_sensor.hc_master_minisplit_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_office_minisplit_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch','on')
+             or is_state('binary_sensor.hc_upper_hall_setpoint_mismatch','on') }}

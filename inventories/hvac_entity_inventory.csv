@@ -1,0 +1,226 @@
+entity_id,domain,name,original_name,platform,reason
+climate.upper_hall,climate,,,sensibo,domain:climate
+climate.main_floor_hall,climate,,,honeywell,domain:climate
+climate.giovani_s_device,climate,,,sensibo,domain:climate
+climate.giovani_s_device_2,climate,,,sensibo,domain:climate
+climate.upper_guest,climate,,,sensibo,domain:climate
+switch.z1,switch,,Z1 - north first floor bedroom and bath and entry,hubitat,switch:z1-9
+switch.z7,switch,,Z7 - basement kitchen and tv area,hubitat,switch:z1-9
+switch.z8,switch,,Z8 - dining mad man,hubitat,switch:z1-9
+switch.z9,switch,,Z9 - basement bedroom,hubitat,switch:z1-9
+switch.z4,switch,,Z4 - garage,hubitat,switch:z1-9
+switch.z5,switch,,Z5 - first floor living,hubitat,switch:z1-9
+switch.z6,switch,,Z6 -master,hubitat,switch:z1-9
+switch.z2,switch,,Z2 - Second floor office and upper guest,hubitat,switch:z1-9
+switch.z3,switch,,Z3 - Basement bath utility common area,hubitat,switch:z1-9
+climate.zone_5_virtual_thermostat_first_floor_living,climate,,zone 5 virtual thermostat - first floor living,generic_thermostat,domain:climate;extended:keyword
+climate.zone_6_master_thermostat,climate,,zone 6 master thermostat,generic_thermostat,domain:climate;extended:keyword
+climate.z1_first_floor_bedroom_and_bath,climate,,z1 first floor bedroom and bath,generic_thermostat,domain:climate
+climate.zone_2_second_floor_office_and_upper_guest,climate,,zone 2 second floor office and upper guest,generic_thermostat,domain:climate;extended:keyword
+climate.zone_3_basement_bath_and_common,climate,,zone 3 basement bath and common,generic_thermostat,domain:climate;extended:keyword
+climate.zone_7_basement_bar_and_tv_room_south_side,climate,,zone 7 basement bar and tv room south side,generic_thermostat,domain:climate;extended:keyword
+climate.zone_8_dining_room,climate,,zone 8 Dining room,generic_thermostat,domain:climate;extended:keyword
+climate.zone_9_basement_bedroom,climate,,zone 9 basement bedroom,generic_thermostat,domain:climate;extended:keyword
+climate.master_better_thermostat,climate,,,better_thermostat,domain:climate;extended:keyword
+climate.second_floor_better_thermostat,climate,,,better_thermostat,domain:climate;extended:keyword
+climate.basement_zone_7_better_thermostat,climate,,,better_thermostat,domain:climate;extended:keyword
+climate.basement_zone_9_bedroom_better_thermostat,climate,,,better_thermostat,domain:climate;extended:keyword
+climate.basement_zone_3_better_thermostat_common_and_utility,climate,,,better_thermostat,domain:climate;extended:keyword
+binary_sensor.hc_z1_call_for_heat,binary_sensor,,HC Z1 – First Floor Bedroom & Bath – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z2_call_for_heat,binary_sensor,,HC Z2 – Office & Upper Guest – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z3_call_for_heat,binary_sensor,,HC Z3 – Basement Bath & Common – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z4_call_for_heat,binary_sensor,,HC Z4 – Garage – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z5_call_for_heat,binary_sensor,,HC Z5 – First Floor Living – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z6_call_for_heat,binary_sensor,,HC Z6 – Master – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z7_call_for_heat,binary_sensor,,HC Z7 – Basement Bar & TV South – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z8_call_for_heat,binary_sensor,,HC Z8 – Dining Room – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_z9_call_for_heat,binary_sensor,,HC Z9 – Basement Bedroom – Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_basement_call_for_heat,binary_sensor,,HC Basement Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_first_floor_call_for_heat,binary_sensor,,HC First Floor Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_upper_floor_call_for_heat,binary_sensor,,HC Upper Floor Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_whole_house_call_for_heat,binary_sensor,,HC Whole House Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_garage_call_for_heat,binary_sensor,,HC Garage Call For Heat,template,contains:hc_;extended:keyword
+input_boolean.hc_enable_setpoint_broadcast,input_boolean,,HC Enable Setpoint Broadcast,input_boolean,contains:hc_;extended:keyword
+input_number.hc_setpoint_master,input_number,,HC Setpoint Master,input_number,contains:hc_;extended:keyword
+input_number.hc_setpoint_basement,input_number,,HC Setpoint Basement,input_number,contains:hc_;extended:keyword
+input_number.hc_setpoint_first_floor,input_number,,HC Setpoint First Floor,input_number,contains:hc_;extended:keyword
+input_number.hc_setpoint_upper_floor,input_number,,HC Setpoint Upper Floor,input_number,contains:hc_;extended:keyword
+script.hc_broadcast_master_setpoint,script,,HC Broadcast Master Setpoint,script,contains:hc_;extended:keyword
+script.hc_broadcast_basement_setpoint,script,,HC Broadcast Basement Setpoint,script,contains:hc_;extended:keyword
+script.hc_broadcast_first_floor_setpoint,script,,HC Broadcast First Floor Setpoint,script,contains:hc_;extended:keyword
+script.hc_broadcast_upper_floor_setpoint,script,,HC Broadcast Upper Floor Setpoint,script,contains:hc_;extended:keyword
+automation.hc_auto_broadcast_first_floor_setpoint,automation,,HC Auto Broadcast First Floor Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_auto_broadcast_basement_setpoint,automation,,HC Auto Broadcast Basement Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_auto_broadcast_upper_floor_setpoint,automation,,HC Auto Broadcast Upper Floor Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_auto_broadcast_master_setpoint_overrides_floors,automation,,HC Auto Broadcast Master Setpoint (Overrides Floors),automation,contains:hc_;extended:keyword
+script.hc_minisplits_apply_mode,script,,HC Mini-splits Apply Mode (Turn On + Mode),script,contains:hc_;extended:keyword
+input_select.hc_minisplit_preferred_mode,input_select,,HC Mini-split Preferred Mode,input_select,contains:hc_;extended:keyword
+input_boolean.hc_enable_minisplit_auto_on_setpoint,input_boolean,,HC Enable Mini-split Auto-On on Setpoint Change,input_boolean,contains:hc_;extended:keyword
+sensor.hc_office_guest_avg_temperature,sensor,,HC Office+Guest Avg Temperature,template,contains:hc_
+script.hc_retry_mismatched_minisplits,script,,"HC Retry Mismatched Mini-splits (3x, 10s)",script,contains:hc_;extended:keyword
+sensor.hc_desired_upper_setpoint,sensor,,HC Desired Upper Setpoint,template,contains:hc_;extended:keyword
+sensor.hc_upper_hall_reported_setpoint,sensor,,HC Upper Hall Reported Setpoint,template,contains:hc_;extended:keyword
+sensor.hc_master_mini_split_reported_setpoint,sensor,,HC Master Mini-split Reported Setpoint,template,contains:hc_;extended:keyword
+sensor.hc_office_mini_split_reported_setpoint,sensor,,HC Office Mini-split Reported Setpoint,template,contains:hc_;extended:keyword
+sensor.hc_upper_guest_mini_split_reported_setpoint,sensor,,HC Upper Guest Mini-split Reported Setpoint,template,contains:hc_;extended:keyword
+binary_sensor.hc_upper_hall_setpoint_mismatch,binary_sensor,,HC Upper Hall Setpoint Mismatch,template,contains:hc_;extended:keyword
+binary_sensor.hc_master_mini_split_setpoint_mismatch,binary_sensor,,HC Master Mini-split Setpoint Mismatch,template,contains:hc_;extended:keyword
+binary_sensor.hc_office_mini_split_setpoint_mismatch,binary_sensor,,HC Office Mini-split Setpoint Mismatch,template,contains:hc_;extended:keyword
+binary_sensor.hc_upper_guest_mini_split_setpoint_mismatch,binary_sensor,,HC Upper Guest Mini-split Setpoint Mismatch,template,contains:hc_;extended:keyword
+binary_sensor.hc_any_mini_split_setpoint_mismatch,binary_sensor,,HC Any Mini-split Setpoint Mismatch,template,contains:hc_;extended:keyword
+script.hc_apply_cold_tolerance_and_restart,script,,HC Apply Cold Tolerance (Patch + Restart),script,contains:hc_;extended:keyword
+input_number.hc_cold_tolerance,input_number,,HC Cold Tolerance,input_number,contains:hc_;extended:keyword
+input_boolean.hc_enable_cold_tolerance_gate,input_boolean,,HC Enable Cold Tolerance Gate,input_boolean,contains:hc_;extended:keyword
+automation.hc_cold_tolerance_gate_block_zone_turn_on,automation,,HC Cold Tolerance Gate - Block Zone Turn ON,automation,contains:hc_;extended:keyword
+script.hc_kick_hydronic_thermostats,script,,HC Kick Hydronic Thermostats,script,contains:hc_;extended:keyword
+script.hc_kick_hydronic_after_broadcast,script,,HC Kick Hydronic After Broadcast,script,contains:hc_;extended:keyword
+script.hc_broadcast_garage_setpoint,script,,HC Broadcast Garage Setpoint,script,contains:hc_;extended:keyword
+input_number.hc_setpoint_garage,input_number,,HC Setpoint Garage,input_number,contains:hc_;extended:keyword
+automation.hc_auto_broadcast_garage_setpoint,automation,,HC Auto Broadcast Garage Setpoint,automation,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z1,input_datetime,,HC Dispatch Last ON Z1,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z2,input_datetime,,HC Dispatch Last ON Z2,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z3,input_datetime,,HC Dispatch Last ON Z3,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z4,input_datetime,,HC Dispatch Last ON Z4,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z5,input_datetime,,HC Dispatch Last ON Z5,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z6,input_datetime,,HC Dispatch Last ON Z6,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z7,input_datetime,,HC Dispatch Last ON Z7,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z8,input_datetime,,HC Dispatch Last ON Z8,input_datetime,contains:hc_;extended:keyword
+input_datetime.hc_dispatch_last_on_z9,input_datetime,,HC Dispatch Last ON Z9,input_datetime,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z1_today,counter,,HC Z1 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z2_today,counter,,HC Z2 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z3_today,counter,,HC Z3 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z4_today,counter,,HC Z4 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z5_today,counter,,HC Z5 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z6_today,counter,,HC Z6 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z7_today,counter,,HC Z7 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z8_today,counter,,HC Z8 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_calls_z9_today,counter,,HC Z9 Call Starts Today,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z3_z7,counter,,HC Pair Z3↔Z7 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z3_z9,counter,,HC Pair Z3↔Z9 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z7_z9,counter,,HC Pair Z7↔Z9 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z1_z5,counter,,HC Pair Z1↔Z5 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z1_z8,counter,,HC Pair Z1↔Z8 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z5_z8,counter,,HC Pair Z5↔Z8 Within Window,counter,contains:hc_;extended:keyword
+counter.hc_dispatch_pair_z2_z6,counter,,HC Pair Z2↔Z6 Within Window,counter,contains:hc_;extended:keyword
+input_number.hc_dispatch_batch_window_sec,input_number,,HC Dispatch Batch Window,input_number,contains:hc_;extended:keyword
+input_number.hc_dispatch_near_call_margin_f,input_number,,HC Dispatch Near-Call Margin,input_number,contains:hc_;extended:keyword
+input_boolean.hc_dispatcher_advisory_enabled,input_boolean,,HC Dispatcher Advisory Enabled,input_boolean,contains:hc_;extended:keyword
+input_select.hc_dispatch_profile,input_select,,HC Dispatch Profile,input_select,contains:hc_;extended:keyword
+sensor.hc_dispatch_active_zones,sensor,,HC Dispatch Active Zones,template,contains:hc_;extended:keyword
+sensor.hc_dispatch_near_call_zones,sensor,,HC Dispatch Near-Call Zones,template,contains:hc_;extended:keyword
+sensor.hc_dispatch_suggested_batch,sensor,,HC Dispatch Suggested Batch,template,contains:hc_;extended:keyword
+sensor.hc_z1_avg_on_minutes_today,sensor,,HC Z1 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z2_avg_on_minutes_today,sensor,,HC Z2 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z3_avg_on_minutes_today,sensor,,HC Z3 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z4_avg_on_minutes_today,sensor,,HC Z4 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z5_avg_on_minutes_today,sensor,,HC Z5 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z6_avg_on_minutes_today,sensor,,HC Z6 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z7_avg_on_minutes_today,sensor,,HC Z7 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z8_avg_on_minutes_today,sensor,,HC Z8 Avg ON Minutes Today,template,contains:hc_
+sensor.hc_z9_avg_on_minutes_today,sensor,,HC Z9 Avg ON Minutes Today,template,contains:hc_
+binary_sensor.hc_dispatch_short_cycle_risk,binary_sensor,,HC Dispatch Short Cycle Risk,template,contains:hc_;extended:keyword
+automation.hc_dispatcher_advisory_track_call_starts,automation,,HC Dispatcher Advisory - Track Call Starts,automation,contains:hc_;extended:keyword
+automation.hc_dispatcher_advisory_reset_counters_daily,automation,,HC Dispatcher Advisory - Reset Counters Daily,automation,contains:hc_;extended:keyword
+sensor.hc_indoor_outdoor_delta,sensor,,HC Indoor–Outdoor Delta,template,contains:hc_
+input_number.hc_coincident_window_min,input_number,,HC Coincident Window (min),input_number,contains:hc_
+input_number.hc_disp_z1_setpoint_f,input_number,,HC DISP Z1 Setpoint (First Floor Bedroom & Bath),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z1_hot_tolerance_f,input_number,,HC DISP Z1 Hot Tolerance (First Floor Bedroom & Bath),input_number,contains:hc_
+input_number.hc_disp_z1_cold_tolerance_f,input_number,,HC DISP Z1 Cold Tolerance (First Floor Bedroom & Bath),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z2_setpoint_f,input_number,,HC DISP Z2 Setpoint (Office & Upper Guest),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z2_hot_tolerance_f,input_number,,HC DISP Z2 Hot Tolerance (Office & Upper Guest),input_number,contains:hc_
+input_number.hc_disp_z2_cold_tolerance_f,input_number,,HC DISP Z2 Cold Tolerance (Office & Upper Guest),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z3_setpoint_f,input_number,,HC DISP Z3 Setpoint (Basement Bath & Common),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z3_hot_tolerance_f,input_number,,HC DISP Z3 Hot Tolerance (Basement Bath & Common),input_number,contains:hc_
+input_number.hc_disp_z3_cold_tolerance_f,input_number,,HC DISP Z3 Cold Tolerance (Basement Bath & Common),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z4_setpoint_f,input_number,,HC DISP Z4 Setpoint (Garage),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z4_hot_tolerance_f,input_number,,HC DISP Z4 Hot Tolerance (Garage),input_number,contains:hc_
+input_number.hc_disp_z4_cold_tolerance_f,input_number,,HC DISP Z4 Cold Tolerance (Garage),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z5_setpoint_f,input_number,,HC DISP Z5 Setpoint (First Floor Living),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z5_hot_tolerance_f,input_number,,HC DISP Z5 Hot Tolerance (First Floor Living),input_number,contains:hc_
+input_number.hc_disp_z5_cold_tolerance_f,input_number,,HC DISP Z5 Cold Tolerance (First Floor Living),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z6_setpoint_f,input_number,,HC DISP Z6 Setpoint (Master),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z6_hot_tolerance_f,input_number,,HC DISP Z6 Hot Tolerance (Master),input_number,contains:hc_
+input_number.hc_disp_z6_cold_tolerance_f,input_number,,HC DISP Z6 Cold Tolerance (Master),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z7_setpoint_f,input_number,,HC DISP Z7 Setpoint (Basement Bar & TV South),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z7_hot_tolerance_f,input_number,,HC DISP Z7 Hot Tolerance (Basement Bar & TV South),input_number,contains:hc_
+input_number.hc_disp_z7_cold_tolerance_f,input_number,,HC DISP Z7 Cold Tolerance (Basement Bar & TV South),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z8_setpoint_f,input_number,,HC DISP Z8 Setpoint (Dining Room),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z8_hot_tolerance_f,input_number,,HC DISP Z8 Hot Tolerance (Dining Room),input_number,contains:hc_
+input_number.hc_disp_z8_cold_tolerance_f,input_number,,HC DISP Z8 Cold Tolerance (Dining Room),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z9_setpoint_f,input_number,,HC DISP Z9 Setpoint (Basement Bedroom),input_number,contains:hc_;extended:keyword
+input_number.hc_disp_z9_hot_tolerance_f,input_number,,HC DISP Z9 Hot Tolerance (Basement Bedroom),input_number,contains:hc_
+input_number.hc_disp_z9_cold_tolerance_f,input_number,,HC DISP Z9 Cold Tolerance (Basement Bedroom),input_number,contains:hc_;extended:keyword
+input_boolean.hc_dispatcher_mode_enabled,input_boolean,,HC Dispatcher Mode Enabled (Stage 3),input_boolean,contains:hc_;extended:keyword
+input_boolean.hc_disp_follow_sync_enabled,input_boolean,,HC DISP Follow Sync Enabled,input_boolean,contains:hc_
+input_boolean.hc_disp_z1_follow_broadcast,input_boolean,,HC DISP Z1 Follow Broadcast (First Floor Bedroom & Bath),input_boolean,contains:hc_
+input_boolean.hc_disp_z2_follow_broadcast,input_boolean,,HC DISP Z2 Follow Broadcast (Office & Upper Guest),input_boolean,contains:hc_
+input_boolean.hc_disp_z3_follow_broadcast,input_boolean,,HC DISP Z3 Follow Broadcast (Basement Bath & Common),input_boolean,contains:hc_
+input_boolean.hc_disp_z4_follow_broadcast,input_boolean,,HC DISP Z4 Follow Broadcast (Garage),input_boolean,contains:hc_
+input_boolean.hc_disp_z5_follow_broadcast,input_boolean,,HC DISP Z5 Follow Broadcast (First Floor Living),input_boolean,contains:hc_
+input_boolean.hc_disp_z6_follow_broadcast,input_boolean,,HC DISP Z6 Follow Broadcast (Master),input_boolean,contains:hc_
+input_boolean.hc_disp_z7_follow_broadcast,input_boolean,,HC DISP Z7 Follow Broadcast (Basement Bar & TV South),input_boolean,contains:hc_
+input_boolean.hc_disp_z8_follow_broadcast,input_boolean,,HC DISP Z8 Follow Broadcast (Dining Room),input_boolean,contains:hc_
+input_boolean.hc_disp_z9_follow_broadcast,input_boolean,,HC DISP Z9 Follow Broadcast (Basement Bedroom),input_boolean,contains:hc_
+script.hc_coincident_reset_counters,script,,HC Coincident Reset Counters,script,contains:hc_
+counter.hc_coincident_z1_z2_total,counter,,HC Coincident Z1+Z2 Total,counter,contains:hc_
+counter.hc_coincident_z1_z3_total,counter,,HC Coincident Z1+Z3 Total,counter,contains:hc_
+counter.hc_coincident_z1_z4_total,counter,,HC Coincident Z1+Z4 Total,counter,contains:hc_
+counter.hc_coincident_z1_z5_total,counter,,HC Coincident Z1+Z5 Total,counter,contains:hc_
+counter.hc_coincident_z1_z6_total,counter,,HC Coincident Z1+Z6 Total,counter,contains:hc_
+counter.hc_coincident_z1_z7_total,counter,,HC Coincident Z1+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z1_z8_total,counter,,HC Coincident Z1+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z1_z9_total,counter,,HC Coincident Z1+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z2_z3_total,counter,,HC Coincident Z2+Z3 Total,counter,contains:hc_
+counter.hc_coincident_z2_z4_total,counter,,HC Coincident Z2+Z4 Total,counter,contains:hc_
+counter.hc_coincident_z2_z5_total,counter,,HC Coincident Z2+Z5 Total,counter,contains:hc_
+counter.hc_coincident_z2_z6_total,counter,,HC Coincident Z2+Z6 Total,counter,contains:hc_
+counter.hc_coincident_z2_z7_total,counter,,HC Coincident Z2+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z2_z8_total,counter,,HC Coincident Z2+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z2_z9_total,counter,,HC Coincident Z2+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z3_z4_total,counter,,HC Coincident Z3+Z4 Total,counter,contains:hc_
+counter.hc_coincident_z3_z5_total,counter,,HC Coincident Z3+Z5 Total,counter,contains:hc_
+counter.hc_coincident_z3_z6_total,counter,,HC Coincident Z3+Z6 Total,counter,contains:hc_
+counter.hc_coincident_z3_z7_total,counter,,HC Coincident Z3+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z3_z8_total,counter,,HC Coincident Z3+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z3_z9_total,counter,,HC Coincident Z3+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z4_z5_total,counter,,HC Coincident Z4+Z5 Total,counter,contains:hc_
+counter.hc_coincident_z4_z6_total,counter,,HC Coincident Z4+Z6 Total,counter,contains:hc_
+counter.hc_coincident_z4_z7_total,counter,,HC Coincident Z4+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z4_z8_total,counter,,HC Coincident Z4+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z4_z9_total,counter,,HC Coincident Z4+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z5_z6_total,counter,,HC Coincident Z5+Z6 Total,counter,contains:hc_
+counter.hc_coincident_z5_z7_total,counter,,HC Coincident Z5+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z5_z8_total,counter,,HC Coincident Z5+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z5_z9_total,counter,,HC Coincident Z5+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z6_z7_total,counter,,HC Coincident Z6+Z7 Total,counter,contains:hc_
+counter.hc_coincident_z6_z8_total,counter,,HC Coincident Z6+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z6_z9_total,counter,,HC Coincident Z6+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z7_z8_total,counter,,HC Coincident Z7+Z8 Total,counter,contains:hc_
+counter.hc_coincident_z7_z9_total,counter,,HC Coincident Z7+Z9 Total,counter,contains:hc_
+counter.hc_coincident_z8_z9_total,counter,,HC Coincident Z8+Z9 Total,counter,contains:hc_
+input_datetime.hc_coincident_last_on_z1,input_datetime,,HC Coincident Last On Z1,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z2,input_datetime,,HC Coincident Last On Z2,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z3,input_datetime,,HC Coincident Last On Z3,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z4,input_datetime,,HC Coincident Last On Z4,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z5,input_datetime,,HC Coincident Last On Z5,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z6,input_datetime,,HC Coincident Last On Z6,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z7,input_datetime,,HC Coincident Last On Z7,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z8,input_datetime,,HC Coincident Last On Z8,input_datetime,contains:hc_
+input_datetime.hc_coincident_last_on_z9,input_datetime,,HC Coincident Last On Z9,input_datetime,contains:hc_
+automation.hc_disp_follow_master_setpoint,automation,,HC DISP Follow Master Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_disp_follow_basement_setpoint,automation,,HC DISP Follow Basement Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_disp_follow_first_floor_setpoint,automation,,HC DISP Follow First Floor Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_disp_follow_upper_floor_setpoint,automation,,HC DISP Follow Upper Floor Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_disp_follow_garage_setpoint,automation,,HC DISP Follow Garage Setpoint,automation,contains:hc_;extended:keyword
+automation.hc_observability_coincident_heat_all_pairs,automation,,HC Observability - Coincident Heat (All Pairs),automation,contains:hc_;extended:keyword
+sensor.hc_coincident_top_pairs,sensor,,HC Coincident Top Pairs,template,contains:hc_
+sensor.hc_coincident_matrix,sensor,,HC Coincident Matrix,template,contains:hc_
+binary_sensor.hc_any_call_for_heat,binary_sensor,,HC Any Call For Heat,template,contains:hc_;extended:keyword
+binary_sensor.hc_boiler_firing_proxy,binary_sensor,,HC Boiler Firing Proxy,template,contains:hc_;extended:keyword
+binary_sensor.hc_circulator_running_proxy,binary_sensor,,HC Circulator Running Proxy,template,contains:hc_
+sensor.hc_boiler_supply_temp,sensor,,HC Boiler Supply Temp,template,contains:hc_;extended:keyword
+sensor.hc_boiler_return_temp,sensor,,HC Boiler Return Temp,template,contains:hc_;extended:keyword
+sensor.hc_open_zones_count,sensor,,HC Open Zones Count,template,contains:hc_
+sensor.hc_calling_zones_count,sensor,,HC Calling Zones Count,template,contains:hc_
+input_number.hc_boiler_supply_temp_proxy_f,input_number,,HC Boiler Supply Temp Proxy (°F),input_number,contains:hc_;extended:keyword
+input_number.hc_boiler_return_temp_proxy_f,input_number,,HC Boiler Return Temp Proxy (°F),input_number,contains:hc_;extended:keyword

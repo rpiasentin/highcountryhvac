@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_dashboards",
+  "data": {
+    "items": [
+      {
+        "id": "map",
+        "icon": "mdi:map",
+        "title": "Map",
+        "url_path": "map",
+        "mode": "storage",
+        "show_in_sidebar": true,
+        "require_admin": false
+      },
+      {
+        "id": "test_of_area",
+        "show_in_sidebar": true,
+        "title": "Test of area",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "test-of-area",
+        "icon": "mdi:alarm-light-outline"
+      },
+      {
+        "id": "dashboard_temps",
+        "show_in_sidebar": true,
+        "icon": "mdi:home-thermometer-outline",
+        "title": "Temps",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "dashboard-temps"
+      },
+      {
+        "id": "pi_touch",
+        "show_in_sidebar": true,
+        "title": "Pi Touch",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "pi-touch"
+      },
+      {
+        "id": "zone_control",
+        "show_in_sidebar": true,
+        "title": "Zone control ",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "zone-control"
+      }
+    ]
+  }
+}

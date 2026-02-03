@@ -1,0 +1,627 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"update.home_assistant_supervisor_update","state":"off","attributes":{"auto_update":true,"display_precision":0,"installed_version":"2025.12.3","in_progress":false,"latest_version":"2025.12.3","release_summary":null,"release_url":"https://github.com/home-assistant/supervisor/releases/tag/2025.12.3","skipped_version":null,"title":"Home Assistant Supervisor","update_percentage":null,"entity_picture":"https://brands.home-assistant.io/hassio/icon.png","friendly_name":"Home Assistant Supervisor Update","supported_features":1},"last_changed":"2025-12-29T20:16:15.482395+00:00","last_reported":"2025-12-29T20:16:15.482395+00:00","last_updated":"2025-12-29T20:16:15.482395+00:00","context":{"id":"01KDNW263TZSK3YKX6Y7Q18FWV","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.home_assistant_core_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"2025.12.5","in_progress":false,"latest_version":"2025.12.5","release_summary":null,"release_url":"https://www.home-assistant.io/latest-release-notes/","skipped_version":null,"title":"Home Assistant Core","update_percentage":null,"entity_picture":"https://brands.home-assistant.io/homeassistant/icon.png","friendly_name":"Home Assistant Core Update","supported_features":15},"last_changed":"2025-12-29T20:16:15.482609+00:00","last_reported":"2025-12-29T20:16:32.614117+00:00","last_updated":"2025-12-29T20:16:32.614117+00:00","context":{"id":"01KDNW2PV6FMYCC50QX8EMDVE7","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.matter_server_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"8.1.2","in_progress":false,"latest_version":"8.1.2","release_summary":null,"release_url":null,"skipped_version":null,"title":"Matter Server","update_percentage":null,"entity_picture":"/api/hassio/addons/core_matter_server/icon","friendly_name":"Matter Server Update","supported_features":29},"last_changed":"2025-12-29T20:16:15.482755+00:00","last_reported":"2025-12-29T20:16:15.482755+00:00","last_updated":"2025-12-29T20:16:15.482755+00:00","context":{"id":"01KDNW263TGPBNV6MDJ5TGRQX4","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.get_hacs_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"1.3.1","in_progress":false,"latest_version":"1.3.1","release_summary":null,"release_url":null,"skipped_version":null,"title":"Get HACS","update_percentage":null,"entity_picture":"/api/hassio/addons/cb646a50_get/icon","friendly_name":"Get HACS Update","supported_features":29},"last_changed":"2025-12-29T20:16:15.482868+00:00","last_reported":"2025-12-29T20:16:15.482868+00:00","last_updated":"2025-12-29T20:16:15.482868+00:00","context":{"id":"01KDNW263TGAYGR487YNBJ6T31","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.advanced_ssh_web_terminal_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"22.0.3","in_progress":false,"latest_version":"22.0.3","release_summary":null,"release_url":null,"skipped_version":null,"title":"Advanced SSH & Web Terminal","update_percentage":null,"entity_picture":"/api/hassio/addons/a0d7b954_ssh/icon","friendly_name":"Advanced SSH & Web Terminal Update","supported_features":29},"last_changed":"2025-12-29T20:16:15.482956+00:00","last_reported":"2025-12-29T20:16:15.482956+00:00","last_updated":"2025-12-29T20:16:15.482956+00:00","context":{"id":"01KDNW263TEK8ZF63SYRJ67SVX","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.file_editor_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"5.8.0","in_progress":false,"latest_version":"5.8.0","release_summary":null,"release_url":null,"skipped_version":null,"title":"File editor","update_percentage":null,"entity_picture":"/api/hassio/addons/core_configurator/icon","friendly_name":"File editor Update","supported_features":29},"last_changed":"2025-12-29T20:16:15.483038+00:00","last_reported":"2025-12-29T20:16:15.483038+00:00","last_updated":"2025-12-29T20:16:15.483038+00:00","context":{"id":"01KDNW263VF0KVF67WW0GRQ3C0","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.home_assistant_operating_system_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"16.3","in_progress":false,"latest_version":"16.3","release_summary":null,"release_url":"https://github.com/home-assistant/operating-system/releases/tag/16.3","skipped_version":null,"title":"Home Assistant Operating System","update_percentage":null,"entity_picture":"https://brands.home-assistant.io/homeassistant/icon.png","friendly_name":"Home Assistant Operating System Update","supported_features":11},"last_changed":"2025-12-29T20:16:15.483152+00:00","last_reported":"2025-12-29T20:16:15.483152+00:00","last_updated":"2025-12-29T20:16:15.483152+00:00","context":{"id":"01KDNW263VSWZ3WK3JSRYYG2B9","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2025-12-29T20:16:15.805416+00:00","last_reported":"2025-12-29T20:16:15.805416+00:00","last_updated":"2025-12-29T20:16:15.805416+00:00","context":{"id":"01KDNW26DX6B5757R0SJPNGB1S","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"event.backup_automatic_backup","state":"2025-12-08T14:34:55.206+00:00","attributes":{"event_types":["completed","failed","in_progress"],"event_type":"completed","backup_stage":null,"failed_reason":null,"friendly_name":"Backup Automatic backup"},"last_changed":"2025-12-29T20:16:16.107600+00:00","last_reported":"2025-12-29T20:16:16.107600+00:00","last_updated":"2025-12-29T20:16:16.107600+00:00","context":{"id":"01KDNW26QB584RT2EW76RKK7DH","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "last_event_type": "completed",
+        "last_event_attributes": {
+          "backup_stage": null,
+          "failed_reason": null
+        }
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"script.hc_minisplits_apply_mode","state":"off","attributes":{"last_triggered":"2026-01-04T06:38:17.682702+00:00","mode":"single","current":0,"friendly_name":"HC Mini-splits Apply Mode (Turn On + Mode)"},"last_changed":"2026-01-04T06:38:23.461792+00:00","last_reported":"2026-01-04T06:38:23.461792+00:00","last_updated":"2026-01-04T06:38:23.461792+00:00","context":{"id":"01KE3VMY75Y658VNCKQQJ8Q2QB","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"script.hc_broadcast_master_setpoint","state":"off","attributes":{"last_triggered":"2026-01-04T06:38:17.681002+00:00","mode":"single","current":0,"friendly_name":"HC Broadcast Master Setpoint"},"last_changed":"2026-01-04T06:38:19.610204+00:00","last_reported":"2026-01-04T06:38:19.610204+00:00","last_updated":"2026-01-04T06:38:19.610204+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"script.hc_broadcast_basement_setpoint","state":"off","attributes":{"last_triggered":"2026-01-04T06:38:17.685420+00:00","mode":"single","current":0,"friendly_name":"HC Broadcast Basement Setpoint"},"last_changed":"2026-01-04T06:38:17.698445+00:00","last_reported":"2026-01-04T06:38:17.698445+00:00","last_updated":"2026-01-04T06:38:17.698445+00:00","context":{"id":"01KE3VMRJNY1SZSEX867MCHF9X","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"script.hc_broadcast_first_floor_setpoint","state":"off","attributes":{"last_triggered":"2026-01-04T06:38:17.686086+00:00","mode":"single","current":0,"friendly_name":"HC Broadcast First Floor Setpoint"},"last_changed":"2026-01-04T06:38:17.698537+00:00","last_reported":"2026-01-04T06:38:17.698537+00:00","last_updated":"2026-01-04T06:38:17.698537+00:00","context":{"id":"01KE3VMRJN8CS5T46MWFNXG7K0","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"script.hc_broadcast_upper_floor_setpoint","state":"off","attributes":{"last_triggered":"2026-01-04T06:38:17.686684+00:00","mode":"single","current":0,"friendly_name":"HC Broadcast Upper Floor Setpoint"},"last_changed":"2026-01-04T06:38:19.999380+00:00","last_reported":"2026-01-04T06:38:19.999380+00:00","last_updated":"2026-01-04T06:38:19.999380+00:00","context":{"id":"01KE3VMRJP41DDV3JWACHQE64S","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"person.giovani_piasentin","state":"not_home","attributes":{"editable":true,"id":"giovani_piasentin","device_trackers":["device_tracker.giovani_iphone_16pro","device_tracker.giovani_iphone"],"latitude":39.0951764435166,"longitude":-104.81907618901289,"gps_accuracy":5,"source":"device_tracker.giovani_iphone","user_id":"355e30d0e16e4c6f94ec1fb0bfcee936","friendly_name":"Giovani Piasentin"},"last_changed":"2026-01-03T19:27:10.648258+00:00","last_reported":"2026-01-05T16:21:01.333263+00:00","last_updated":"2026-01-05T16:21:01.333263+00:00","context":{"id":"01KE7FCFRN9JV02NC91NV0PN72","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"person.samsung","state":"unknown","attributes":{"editable":true,"id":"samsung","device_trackers":[],"user_id":"1581e159cf334d4899b01c54efa4a511","friendly_name":"samsung"},"last_changed":"2025-12-29T20:16:16.348860+00:00","last_reported":"2025-12-29T20:16:27.981911+00:00","last_updated":"2025-12-29T20:16:27.981911+00:00","context":{"id":"01KDNW2JAD9B3DQ61NE97FFKBB","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_boolean.high_country_sanity_flag","state":"on","attributes":{"editable":false,"friendly_name":"High Country Sanity Flag"},"last_changed":"2025-12-29T20:16:16.349010+00:00","last_reported":"2025-12-29T20:16:16.349010+00:00","last_updated":"2025-12-29T20:16:16.349010+00:00","context":{"id":"01KDNW26YXVFY4T9TNSNZSBMWA","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_boolean.hc_enable_setpoint_broadcast","state":"on","attributes":{"editable":false,"friendly_name":"HC Enable Setpoint Broadcast"},"last_changed":"2026-01-04T06:38:17.680780+00:00","last_reported":"2026-01-04T06:38:17.680780+00:00","last_updated":"2026-01-04T06:38:17.680780+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_boolean.hc_enable_minisplit_auto_on_setpoint","state":"on","attributes":{"editable":false,"friendly_name":"HC Enable Mini-split Auto-On on Setpoint Change"},"last_changed":"2025-12-29T20:16:16.349122+00:00","last_reported":"2025-12-29T20:16:16.349122+00:00","last_updated":"2025-12-29T20:16:16.349122+00:00","context":{"id":"01KDNW26YXKMEAST2Z3RV4X4R5","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z1_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z1 Call For Heat"},"last_changed":"2026-01-05T14:55:21.973131+00:00","last_reported":"2026-01-05T14:55:21.973131+00:00","last_updated":"2026-01-05T14:55:21.973131+00:00","context":{"id":"01KE7AFMBX6Z870KHCRK3ARYBZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z2_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z2 Call For Heat"},"last_changed":"2025-12-30T15:39:12.774259+00:00","last_reported":"2025-12-30T15:39:12.774259+00:00","last_updated":"2025-12-30T15:39:12.774259+00:00","context":{"id":"01KDQYKK6ETN6PDTBM7P6H69PD","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z3_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z3 Call For Heat"},"last_changed":"2026-01-05T14:44:21.366522+00:00","last_reported":"2026-01-05T14:44:21.366522+00:00","last_updated":"2026-01-05T14:44:21.366522+00:00","context":{"id":"01KE79VF4FZZ28KTQAADCTSE1R","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z4_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z4 Call For Heat"},"last_changed":"2025-12-29T20:16:27.982731+00:00","last_reported":"2025-12-29T20:16:27.982731+00:00","last_updated":"2025-12-29T20:16:27.982731+00:00","context":{"id":"01KDNW2JAEFCMPZEX86C8RWVC3","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z5_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z5 Call For Heat"},"last_changed":"2026-01-04T14:40:47.268123+00:00","last_reported":"2026-01-04T14:40:47.268123+00:00","last_updated":"2026-01-04T14:40:47.268123+00:00","context":{"id":"01KE4Q871P1VBGHVQK1F4GVT6N","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z6_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z6 Call For Heat"},"last_changed":"2026-01-05T14:28:12.338204+00:00","last_reported":"2026-01-05T14:28:12.338204+00:00","last_updated":"2026-01-05T14:28:12.338204+00:00","context":{"id":"01KE78XWYPF476PFSYPZT7YD39","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z7_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z7 Call For Heat"},"last_changed":"2026-01-05T14:44:21.393417+00:00","last_reported":"2026-01-05T14:44:21.393417+00:00","last_updated":"2026-01-05T14:44:21.393417+00:00","context":{"id":"01KE79VF4F39SAZZ07MN7F8564","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z8_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z8 Call For Heat"},"last_changed":"2026-01-05T14:18:34.663028+00:00","last_reported":"2026-01-05T14:18:34.663028+00:00","last_updated":"2026-01-05T14:18:34.663028+00:00","context":{"id":"01KE78C8NCQ1T9D6KG7243SZEF","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_z9_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z9 Call For Heat"},"last_changed":"2026-01-05T11:49:42.323727+00:00","last_reported":"2026-01-05T11:49:42.323727+00:00","last_updated":"2026-01-05T11:49:42.323727+00:00","context":{"id":"01KE6ZVNPCG4PVRXXZ1B3E0TST","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_basement_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Basement Call For Heat"},"last_changed":"2026-01-05T14:44:21.393914+00:00","last_reported":"2026-01-05T14:44:21.393914+00:00","last_updated":"2026-01-05T14:44:21.393914+00:00","context":{"id":"01KE79VF4F39SAZZ07MN7F8564","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_garage_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Garage Call For Heat"},"last_changed":"2025-12-29T20:16:27.983742+00:00","last_reported":"2025-12-29T20:16:27.983742+00:00","last_updated":"2025-12-29T20:16:27.983742+00:00","context":{"id":"01KDNW2JAFJX85ZP74VKB6SGFW","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_first_floor_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC First Floor Call For Heat"},"last_changed":"2026-01-05T14:55:21.973691+00:00","last_reported":"2026-01-05T14:55:21.973691+00:00","last_updated":"2026-01-05T14:55:21.973691+00:00","context":{"id":"01KE7AFMBX6Z870KHCRK3ARYBZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_upper_floor_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Upper Floor Call For Heat"},"last_changed":"2026-01-05T14:28:12.338751+00:00","last_reported":"2026-01-05T14:28:12.338751+00:00","last_updated":"2026-01-05T14:28:12.338751+00:00","context":{"id":"01KE78XWYPF476PFSYPZT7YD39","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.hc_whole_house_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Whole House Call For Heat"},"last_changed":"2026-01-05T14:55:21.974002+00:00","last_reported":"2026-01-05T14:55:21.974002+00:00","last_updated":"2026-01-05T14:55:21.974002+00:00","context":{"id":"01KE7AFMBX6Z870KHCRK3ARYBZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.hc_office_guest_avg_temperature","state":"63.4","attributes":{"state_class":"measurement","unit_of_measurement":"°F","device_class":"temperature","friendly_name":"HC Office+Guest Avg Temperature"},"last_changed":"2026-01-05T16:44:24.529622+00:00","last_reported":"2026-01-05T16:44:24.529622+00:00","last_updated":"2026-01-05T16:44:24.529622+00:00","context":{"id":"01KE7GQA2H41BV5E8K9HXTSYJV","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 63.4,
+        "native_unit_of_measurement": "°F"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_number.hc_setpoint_master","state":"63.0","attributes":{"initial":null,"editable":false,"min":55.0,"max":80.0,"step":0.5,"mode":"box","unit_of_measurement":"°F","friendly_name":"HC Setpoint Master"},"last_changed":"2026-01-04T06:38:17.679209+00:00","last_reported":"2026-01-04T06:38:17.679209+00:00","last_updated":"2026-01-04T06:38:17.679209+00:00","context":{"id":"01KE3VMRJE0PJKKKT2XC8BBQA9","parent_id":null,"user_id":"355e30d0e16e4c6f94ec1fb0bfcee936"}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_number.hc_setpoint_basement","state":"63.0","attributes":{"initial":null,"editable":false,"min":55.0,"max":80.0,"step":0.5,"mode":"box","unit_of_measurement":"°F","friendly_name":"HC Setpoint Basement"},"last_changed":"2026-01-04T06:38:17.680163+00:00","last_reported":"2026-01-04T06:38:17.680163+00:00","last_updated":"2026-01-04T06:38:17.680163+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_number.hc_setpoint_first_floor","state":"63.0","attributes":{"initial":null,"editable":false,"min":55.0,"max":80.0,"step":0.5,"mode":"box","unit_of_measurement":"°F","friendly_name":"HC Setpoint First Floor"},"last_changed":"2026-01-04T06:38:17.680379+00:00","last_reported":"2026-01-04T06:38:17.680379+00:00","last_updated":"2026-01-04T06:38:17.680379+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_number.hc_setpoint_upper_floor","state":"63.0","attributes":{"initial":null,"editable":false,"min":55.0,"max":80.0,"step":0.5,"mode":"box","unit_of_measurement":"°F","friendly_name":"HC Setpoint Upper Floor"},"last_changed":"2026-01-04T06:38:17.680597+00:00","last_reported":"2026-01-04T06:38:17.680597+00:00","last_updated":"2026-01-04T06:38:17.680597+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"input_select.hc_minisplit_preferred_mode","state":"heat","attributes":{"options":["auto","heat","cool"],"editable":false,"friendly_name":"HC Mini-split Preferred Mode"},"last_changed":"2026-01-04T02:26:00.403776+00:00","last_reported":"2026-01-04T02:26:00.403776+00:00","last_updated":"2026-01-04T02:26:00.403776+00:00","context":{"id":"01KE3D6T2K9FKEWMP77Q03YSWY","parent_id":null,"user_id":"355e30d0e16e4c6f94ec1fb0bfcee936"}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_5_virtual_thermostat_first_floor_living","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":52,"max_temp":80,"target_temp_step":1,"preset_modes":["none","away","comfort","eco","home","sleep","activity"],"current_temperature":73,"temperature":63,"hvac_action":"idle","preset_mode":"none","friendly_name":"zone 5 virtual thermostat - first floor living","supported_features":401},"last_changed":"2025-12-29T20:16:19.415901+00:00","last_reported":"2026-01-05T16:44:50.413514+00:00","last_updated":"2026-01-05T16:44:50.413514+00:00","context":{"id":"01KE7GR3BDK5H4YQ7GA5RXS6P8","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_6_master_thermostat","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":68,"temperature":63,"hvac_action":"idle","friendly_name":"zone 6 master thermostat","supported_features":385},"last_changed":"2025-12-29T20:16:19.416570+00:00","last_reported":"2026-01-05T16:45:59.197457+00:00","last_updated":"2026-01-05T16:45:59.197457+00:00","context":{"id":"01KE7GT6GX94934SK30BC0JCTW","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.z1_first_floor_bedroom_and_bath","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":63,"temperature":63,"hvac_action":"idle","friendly_name":"z1 first floor bedroom and bath","supported_features":385},"last_changed":"2025-12-29T20:16:19.416928+00:00","last_reported":"2026-01-05T14:55:21.972879+00:00","last_updated":"2026-01-05T14:55:21.972879+00:00","context":{"id":"01KE7AFMVM4ATKXPXB4CQ8AHPS","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_3_basement_bath_and_common","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":66,"temperature":63,"hvac_action":"idle","friendly_name":"zone 3 basement bath and common","supported_features":385},"last_changed":"2025-12-29T20:16:19.417572+00:00","last_reported":"2026-01-05T16:31:15.530658+00:00","last_updated":"2026-01-05T16:31:15.530658+00:00","context":{"id":"01KE7FZ7JA4E27D5S710HNDSHS","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_7_basement_bar_and_tv_room_south_side","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":66,"temperature":63,"hvac_action":"idle","friendly_name":"zone 7 basement bar and tv room south side","supported_features":385},"last_changed":"2025-12-29T20:16:19.417894+00:00","last_reported":"2026-01-05T16:31:15.530779+00:00","last_updated":"2026-01-05T16:31:15.530779+00:00","context":{"id":"01KE7FZ7JASXBBZ6QACWNBFGPQ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_8_dining_room","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":62,"temperature":63,"hvac_action":"idle","friendly_name":"zone 8 Dining room","supported_features":385},"last_changed":"2025-12-29T20:16:19.418190+00:00","last_reported":"2026-01-05T16:18:27.391239+00:00","last_updated":"2026-01-05T16:18:27.391239+00:00","context":{"id":"01KE7F7SDZZZ60DD5QYXYKFW71","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_9_basement_bedroom","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":61,"temperature":63,"hvac_action":"idle","friendly_name":"zone 9 basement bedroom","supported_features":385},"last_changed":"2025-12-29T20:16:19.418527+00:00","last_reported":"2026-01-05T13:06:34.673511+00:00","last_updated":"2026-01-05T13:06:34.673511+00:00","context":{"id":"01KE748EHHKX70D2MSBRAXYJHV","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.giovani_iphone_16pro_focus","state":"on","attributes":{"icon":"mdi:moon-waning-crescent","friendly_name":"Giovani  iphone 16pro Focus"},"last_changed":"2025-12-29T20:16:19.465544+00:00","last_reported":"2025-12-29T20:16:19.465544+00:00","last_updated":"2025-12-29T20:16:19.465544+00:00","context":{"id":"01KDNW2A09AZR0JA7PREKQBHMY","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"device_tracker.giovani_iphone_16pro","state":"not_home","attributes":{"source_type":"gps","battery_level":60,"latitude":39.09512347160695,"longitude":-104.81931125516603,"gps_accuracy":18,"altitude":2287.8087977013483,"vertical_accuracy":8,"friendly_name":"Giovani  iphone 16pro"},"last_changed":"2025-12-29T20:16:19.466211+00:00","last_reported":"2025-12-29T20:16:19.466211+00:00","last_updated":"2025-12-29T20:16:19.466211+00:00","context":{"id":"01KDNW2A0A09N0AQ92EZPM4V1B","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_activity","state":"Unknown","attributes":{"Confidence":"High","Types":["Unknown"],"icon":"mdi:help-circle","friendly_name":"Giovani  iphone 16pro Activity"},"last_changed":"2025-12-29T20:16:19.466669+00:00","last_reported":"2025-12-29T20:16:19.466669+00:00","last_updated":"2025-12-29T20:16:19.466669+00:00","context":{"id":"01KDNW2A0AV1TTGRVA7XPEAEXQ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Unknown",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_distance","state":"3703","attributes":{"unit_of_measurement":"m","icon":"mdi:hiking","friendly_name":"Giovani  iphone 16pro Distance"},"last_changed":"2025-12-29T20:16:19.466810+00:00","last_reported":"2025-12-29T20:16:19.466810+00:00","last_updated":"2025-12-29T20:16:19.466810+00:00","context":{"id":"01KDNW2A0A7CQ3S1K9TSPG9HDZ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 3703,
+        "native_unit_of_measurement": "m"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_battery_level","state":"60","attributes":{"unit_of_measurement":"%","device_class":"battery","icon":"mdi:battery-60","friendly_name":"Giovani  iphone 16pro Battery Level"},"last_changed":"2025-12-29T20:16:19.466943+00:00","last_reported":"2025-12-29T20:16:19.466943+00:00","last_updated":"2025-12-29T20:16:19.466943+00:00","context":{"id":"01KDNW2A0ARR6FA8ND2NYWS2PM","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 60,
+        "native_unit_of_measurement": "%"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_battery_state","state":"Not Charging","attributes":{"Low Power Mode":false,"icon":"mdi:battery-60","friendly_name":"Giovani  iphone 16pro Battery State"},"last_changed":"2025-12-29T20:16:19.467046+00:00","last_reported":"2025-12-29T20:16:19.467046+00:00","last_updated":"2025-12-29T20:16:19.467046+00:00","context":{"id":"01KDNW2A0BBR6YNPS5Q0BAE532","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Not Charging",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_floors_ascended","state":"13","attributes":{"unit_of_measurement":"floors","icon":"mdi:stairs-up","friendly_name":"Giovani  iphone 16pro Floors Ascended"},"last_changed":"2025-12-29T20:16:19.467141+00:00","last_reported":"2025-12-29T20:16:19.467141+00:00","last_updated":"2025-12-29T20:16:19.467141+00:00","context":{"id":"01KDNW2A0BRYNZ8FDZVBB1DP5Y","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 13,
+        "native_unit_of_measurement": "floors"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_floors_descended","state":"14","attributes":{"unit_of_measurement":"floors","icon":"mdi:stairs-down","friendly_name":"Giovani  iphone 16pro Floors Descended"},"last_changed":"2025-12-29T20:16:19.467231+00:00","last_reported":"2025-12-29T20:16:19.467231+00:00","last_updated":"2025-12-29T20:16:19.467231+00:00","context":{"id":"01KDNW2A0BQG9KK0YXEWJA9GY9","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 14,
+        "native_unit_of_measurement": "floors"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_storage","state":"15.12","attributes":{"Available":"26.23 GB","Available (Important)":"100.11 GB","Available (Opportunistic)":"77.34 GB","Total":"511.42 GB","unit_of_measurement":"% available","icon":"mdi:database","friendly_name":"Giovani  iphone 16pro Storage"},"last_changed":"2025-12-29T20:16:19.467323+00:00","last_reported":"2025-12-29T20:16:19.467323+00:00","last_updated":"2025-12-29T20:16:19.467323+00:00","context":{"id":"01KDNW2A0BXQYFPD4J5WMN6228","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "15.12",
+        "native_unit_of_measurement": "% available"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_steps","state":"5841","attributes":{"unit_of_measurement":"steps","icon":"mdi:walk","friendly_name":"Giovani  iphone 16pro Steps"},"last_changed":"2025-12-29T20:16:19.467412+00:00","last_reported":"2025-12-29T20:16:19.467412+00:00","last_updated":"2025-12-29T20:16:19.467412+00:00","context":{"id":"01KDNW2A0BCRW0REZFRYRRH178","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 5841,
+        "native_unit_of_measurement": "steps"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_average_active_pace","state":"1","attributes":{"unit_of_measurement":"m/s","icon":"mdi:speedometer","friendly_name":"Giovani  iphone 16pro Average Active Pace"},"last_changed":"2025-12-29T20:16:19.467523+00:00","last_reported":"2025-12-29T20:16:19.467523+00:00","last_updated":"2025-12-29T20:16:19.467523+00:00","context":{"id":"01KDNW2A0BA14M29ZE5TA66ED3","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 1,
+        "native_unit_of_measurement": "m/s"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_ssid","state":"Piahas","attributes":{"icon":"mdi:wifi","friendly_name":"Giovani  iphone 16pro SSID"},"last_changed":"2025-12-29T20:16:19.467629+00:00","last_reported":"2025-12-29T20:16:19.467629+00:00","last_updated":"2025-12-29T20:16:19.467629+00:00","context":{"id":"01KDNW2A0B5W98Y3XKD4EGRGH5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Piahas",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_bssid","state":"84:78:48:1a:a8:23","attributes":{"icon":"mdi:wifi-star","friendly_name":"Giovani  iphone 16pro BSSID"},"last_changed":"2025-12-29T20:16:19.467720+00:00","last_reported":"2025-12-29T20:16:19.467720+00:00","last_updated":"2025-12-29T20:16:19.467720+00:00","context":{"id":"01KDNW2A0BW4ZF4E331TKVNC55","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "84:78:48:1a:a8:23",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_connection_type","state":"Wi-Fi","attributes":{"icon":"mdi:wifi","friendly_name":"Giovani  iphone 16pro Connection Type"},"last_changed":"2025-12-29T20:16:19.467830+00:00","last_reported":"2025-12-29T20:16:19.467830+00:00","last_updated":"2025-12-29T20:16:19.467830+00:00","context":{"id":"01KDNW2A0B2B284XHD361FSDX9","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Wi-Fi",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_sim_2","state":"--","attributes":{"Allows VoIP":true,"Carrier ID":"0000000100000002","Carrier Name":"--","ISO Country Code":"--","Mobile Country Code":"65535","Mobile Network Code":"65535","icon":"mdi:sim","friendly_name":"Giovani  iphone 16pro SIM 2"},"last_changed":"2025-12-29T20:16:19.467923+00:00","last_reported":"2025-12-29T20:16:19.467923+00:00","last_updated":"2025-12-29T20:16:19.467923+00:00","context":{"id":"01KDNW2A0BJ5T28V3TZ67FBGPM","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "--",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_sim_1","state":"--","attributes":{"Allows VoIP":true,"Carrier ID":"0000000100000001","Carrier Name":"--","Current Radio Technology":"5G","ISO Country Code":"--","Mobile Country Code":"65535","Mobile Network Code":"65535","icon":"mdi:sim","friendly_name":"Giovani  iphone 16pro SIM 1"},"last_changed":"2025-12-29T20:16:19.468014+00:00","last_reported":"2025-12-29T20:16:19.468014+00:00","last_updated":"2025-12-29T20:16:19.468014+00:00","context":{"id":"01KDNW2A0CNH3GQ285CJ7KHMR1","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "--",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_geocoded_location","state":"450 Lariat Loop\nMonument CO 80132\nUnited States","attributes":{"Administrative Area":"CO","Areas Of Interest":"N/A","Country":"United States","Inland Water":"N/A","ISO Country Code":"US","Locality":"Monument","Location":[39.09512347160695,-104.81931125516603],"Name":"450 Lariat Loop","Ocean":"N/A","Postal Code":"80132","Sub Administrative Area":"El Paso County","Sub Locality":"N/A","Sub Thoroughfare":"450","Thoroughfare":"Lariat Loop","Time Zone":"America/Denver","Zones":[],"icon":"mdi:map","friendly_name":"Giovani  iphone 16pro Geocoded Location"},"last_changed":"2025-12-29T20:16:19.468102+00:00","last_reported":"2025-12-29T20:16:19.468102+00:00","last_updated":"2025-12-29T20:16:19.468102+00:00","context":{"id":"01KDNW2A0C6YTQ6C91VMGTH4DD","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "450 Lariat Loop\nMonument CO 80132\nUnited States",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_last_update_trigger","state":"Launch","attributes":{"icon":"mdi:cellphone-wireless","friendly_name":"Giovani  iphone 16pro Last Update Trigger"},"last_changed":"2025-12-29T20:16:19.468192+00:00","last_reported":"2025-12-29T20:16:19.468192+00:00","last_updated":"2025-12-29T20:16:19.468192+00:00","context":{"id":"01KDNW2A0C7Q6PPG4XC08BV92W","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Launch",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_app_version","state":"2025.10.0","attributes":{"icon":"mdi:cellphone","friendly_name":"Giovani  iphone 16pro App Version"},"last_changed":"2025-12-29T20:16:19.468279+00:00","last_reported":"2025-12-29T20:16:19.468279+00:00","last_updated":"2025-12-29T20:16:19.468279+00:00","context":{"id":"01KDNW2A0CGNN9C78JYFY2N027","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "2025.10.0",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_location_permission","state":"Authorized Always","attributes":{"icon":"mdi:map","friendly_name":"Giovani  iphone 16pro Location permission"},"last_changed":"2025-12-29T20:16:19.468366+00:00","last_reported":"2025-12-29T20:16:19.468366+00:00","last_updated":"2025-12-29T20:16:19.468366+00:00","context":{"id":"01KDNW2A0C68HCXN5767N79M1B","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Authorized Always",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_16pro_audio_output","state":"Built-in Speaker","attributes":{"icon":"mdi:volume-high","friendly_name":"Giovani  iphone 16pro Audio Output"},"last_changed":"2025-12-29T20:16:19.468451+00:00","last_reported":"2025-12-29T20:16:19.468451+00:00","last_updated":"2025-12-29T20:16:19.468451+00:00","context":{"id":"01KDNW2A0CBDWBTZMP6D6Z9KS9","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Built-in Speaker",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"device_tracker.giovani_iphone","state":"not_home","attributes":{"source_type":"gps","battery_level":90,"latitude":39.0951764435166,"longitude":-104.81907618901289,"gps_accuracy":5,"altitude":2263.1999858206323,"vertical_accuracy":30,"friendly_name":"Giovani iPhone "},"last_changed":"2026-01-05T16:21:01.331811+00:00","last_reported":"2026-01-05T16:21:01.331811+00:00","last_updated":"2026-01-05T16:21:01.331811+00:00","context":{"id":"01KE7FCFRKTKAY8VHY7H44SX4X","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_battery_level","state":"90","attributes":{"unit_of_measurement":"%","device_class":"battery","icon":"mdi:battery-90","friendly_name":"Giovani iPhone  Battery Level"},"last_changed":"2026-01-05T16:21:01.332121+00:00","last_reported":"2026-01-05T16:21:01.886444+00:00","last_updated":"2026-01-05T16:21:01.332121+00:00","context":{"id":"01KE7FCFRMRESBDAHYQS4VH839","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 90,
+        "native_unit_of_measurement": "%"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_sim_2","state":"--","attributes":{"Allows VoIP":true,"Carrier ID":"0000000100000002","Carrier Name":"--","ISO Country Code":"--","Mobile Country Code":"65535","Mobile Network Code":"65535","icon":"mdi:sim","friendly_name":"Giovani iPhone  SIM 2"},"last_changed":"2025-12-29T20:16:19.469437+00:00","last_reported":"2025-12-29T20:16:19.469437+00:00","last_updated":"2025-12-29T20:16:19.469437+00:00","context":{"id":"01KDNW2A0D9VMPJ2R11NH8S8N1","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "--",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_sim_1","state":"--","attributes":{"Allows VoIP":true,"Carrier ID":"0000000100000001","Carrier Name":"--","Current Radio Technology":"5G","ISO Country Code":"--","Mobile Country Code":"65535","Mobile Network Code":"65535","icon":"mdi:sim","friendly_name":"Giovani iPhone  SIM 1"},"last_changed":"2025-12-29T20:16:19.469733+00:00","last_reported":"2026-01-05T01:22:19.466501+00:00","last_updated":"2026-01-05T01:22:19.272278+00:00","context":{"id":"01KE5VYXG8ZW2833CD7R7DR330","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "--",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_geocoded_location","state":"450 Lariat Loop\nMonument CO 80132\nUnited States","attributes":{"Administrative Area":"CO","Areas Of Interest":"N/A","Country":"United States","Inland Water":"N/A","ISO Country Code":"US","Locality":"Monument","Location":[39.0951764435166,-104.81907618901289],"Name":"450 Lariat Loop","Ocean":"N/A","Postal Code":"80132","Sub Administrative Area":"El Paso County","Sub Locality":"N/A","Sub Thoroughfare":"450","Thoroughfare":"Lariat Loop","Time Zone":"America/Denver","Zones":[],"icon":"mdi:map","friendly_name":"Giovani iPhone  Geocoded Location"},"last_changed":"2026-01-05T01:22:19.466558+00:00","last_reported":"2026-01-05T16:21:01.886826+00:00","last_updated":"2026-01-05T16:21:01.886826+00:00","context":{"id":"01KE7FCG9YGV49MJQFYSB1NGT3","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "450 Lariat Loop\nMonument CO 80132\nUnited States",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_battery_state","state":"Not Charging","attributes":{"Low Power Mode":false,"icon":"mdi:battery-90","friendly_name":"Giovani iPhone  Battery State"},"last_changed":"2026-01-05T16:21:01.332204+00:00","last_reported":"2026-01-05T16:21:01.886524+00:00","last_updated":"2026-01-05T16:21:01.332204+00:00","context":{"id":"01KE7FCFRMRNZEEW57MGHRFPSG","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Not Charging",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_last_update_trigger","state":"Background Fetch","attributes":{"icon":"mdi:cellphone-wireless","friendly_name":"Giovani iPhone  Last Update Trigger"},"last_changed":"2026-01-05T16:21:01.886980+00:00","last_reported":"2026-01-05T16:21:01.886980+00:00","last_updated":"2026-01-05T16:21:01.886980+00:00","context":{"id":"01KE7FCG9YQAJC0TW7XB5TWY3H","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Background Fetch",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_storage","state":"14.42","attributes":{"Available":"20.76 GB","Available (Important)":"102.26 GB","Available (Opportunistic)":"73.76 GB","Total":"511.42 GB","unit_of_measurement":"% available","icon":"mdi:database","friendly_name":"Giovani iPhone  Storage"},"last_changed":"2026-01-05T16:21:01.332275+00:00","last_reported":"2026-01-05T16:21:01.886573+00:00","last_updated":"2026-01-05T16:21:01.332275+00:00","context":{"id":"01KE7FCFRMMFE6SK2RYZA0HGRZ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "14.42",
+        "native_unit_of_measurement": "% available"
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_app_version","state":"2025.12.1","attributes":{"icon":"mdi:cellphone","friendly_name":"Giovani iPhone  App Version"},"last_changed":"2025-12-29T20:16:19.470224+00:00","last_reported":"2025-12-29T20:16:19.470224+00:00","last_updated":"2025-12-29T20:16:19.470224+00:00","context":{"id":"01KDNW2A0EAW475KZQZP2MYNEF","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "2025.12.1",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_ssid","state":"xtool network","attributes":{"icon":"mdi:wifi","friendly_name":"Giovani iPhone  SSID"},"last_changed":"2026-01-05T01:22:19.465568+00:00","last_reported":"2026-01-05T01:22:19.465568+00:00","last_updated":"2026-01-05T01:22:19.465568+00:00","context":{"id":"01KE5VYXP9VJZK9P2F5E4R208Z","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "xtool network",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_location_permission","state":"Authorized Always","attributes":{"icon":"mdi:map","friendly_name":"Giovani iPhone  Location permission"},"last_changed":"2025-12-29T20:16:19.470407+00:00","last_reported":"2025-12-29T20:16:19.470407+00:00","last_updated":"2025-12-29T20:16:19.470407+00:00","context":{"id":"01KDNW2A0ESN5SAXA16NFEN9AS","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Authorized Always",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_audio_output","state":"Built-in Speaker","attributes":{"icon":"mdi:volume-high","friendly_name":"Giovani iPhone  Audio Output"},"last_changed":"2026-01-05T14:40:50.375589+00:00","last_reported":"2026-01-05T14:40:50.570081+00:00","last_updated":"2026-01-05T14:40:50.375589+00:00","context":{"id":"01KE79N1P7PBRCFK0PTND9GFH3","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Built-in Speaker",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_connection_type","state":"Wi-Fi","attributes":{"icon":"mdi:wifi","friendly_name":"Giovani iPhone  Connection Type"},"last_changed":"2026-01-05T01:22:19.298643+00:00","last_reported":"2026-01-05T01:22:19.466402+00:00","last_updated":"2026-01-05T01:22:19.298643+00:00","context":{"id":"01KE5VYXH2MA7VVG3PQAJT98J5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Wi-Fi",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.giovani_iphone_bssid","state":"4e:d9:e7:91:fc:2c","attributes":{"icon":"mdi:wifi-star","friendly_name":"Giovani iPhone  BSSID"},"last_changed":"2026-01-05T16:12:33.708362+00:00","last_reported":"2026-01-05T16:12:33.708362+00:00","last_updated":"2026-01-05T16:12:33.708362+00:00","context":{"id":"01KE7EX01CTKB4FJQNH2FMWP63","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "4e:d9:e7:91:fc:2c",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2025-12-29T20:16:19.493570+00:00","last_reported":"2025-12-29T20:16:19.493570+00:00","last_updated":"2025-12-29T20:16:19.493570+00:00","context":{"id":"01KDNW2A15E1SBAK7MJ5B7RJ6Z","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"button.upper_hall_reset_filter","state":"unknown","attributes":{"friendly_name":"upper hall Reset filter"},"last_changed":"2025-12-30T23:50:26.509684+00:00","last_reported":"2025-12-30T23:50:26.509684+00:00","last_updated":"2025-12-30T23:50:26.509684+00:00","context":{"id":"01KDRTQ2YD6VMWFVEEQ5NS7FS3","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"button.giovani_s_device_reset_filter","state":"unknown","attributes":{"friendly_name":"master Reset filter"},"last_changed":"2026-01-04T00:16:05.551805+00:00","last_reported":"2026-01-04T00:16:05.551805+00:00","last_updated":"2026-01-04T00:16:05.551805+00:00","context":{"id":"01KE35RXXF97ZY9TFRRBPAB0M0","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"button.giovani_s_device_reset_filter_2","state":"unknown","attributes":{"friendly_name":"office Reset filter"},"last_changed":"2025-12-29T20:16:19.510930+00:00","last_reported":"2025-12-29T20:16:19.510930+00:00","last_updated":"2025-12-29T20:16:19.510930+00:00","context":{"id":"01KDNW2A1P08DVB927G0DTYF62","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"button.upper_guest_reset_filter","state":"unknown","attributes":{"friendly_name":"upper guest Reset filter"},"last_changed":"2026-01-03T20:49:23.264388+00:00","last_reported":"2026-01-03T20:49:23.264388+00:00","last_updated":"2026-01-03T20:49:23.264388+00:00","context":{"id":"01KE2SYEA0KPCMTAB86R9KRN4M","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.upper_hall_firmware","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"SKY40148","in_progress":false,"latest_version":"SKY40148","release_summary":null,"release_url":null,"skipped_version":null,"title":"skyplus","update_percentage":null,"device_class":"firmware","entity_picture":"https://brands.home-assistant.io/_/sensibo/icon.png","friendly_name":"upper hall Firmware","supported_features":0},"last_changed":"2026-01-01T17:02:09.547598+00:00","last_reported":"2026-01-01T17:02:09.547598+00:00","last_updated":"2026-01-01T17:02:09.547598+00:00","context":{"id":"01KDX84Y4B2GX7M0Q2FBRAS530","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.giovani_s_device_firmware","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"SKY40148","in_progress":false,"latest_version":"SKY40148","release_summary":null,"release_url":null,"skipped_version":null,"title":"airq","update_percentage":null,"device_class":"firmware","entity_picture":"https://brands.home-assistant.io/_/sensibo/icon.png","friendly_name":"master Firmware","supported_features":0},"last_changed":"2026-01-04T00:16:05.552896+00:00","last_reported":"2026-01-04T00:16:05.552896+00:00","last_updated":"2026-01-04T00:16:05.552896+00:00","context":{"id":"01KE35RXXGPS6SK9TRJ5EPE046","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.giovani_s_device_firmware_2","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"SKY40148","in_progress":false,"latest_version":"SKY40148","release_summary":null,"release_url":null,"skipped_version":null,"title":"airq","update_percentage":null,"device_class":"firmware","entity_picture":"https://brands.home-assistant.io/_/sensibo/icon.png","friendly_name":"office Firmware","supported_features":0},"last_changed":"2025-12-29T20:16:19.516884+00:00","last_reported":"2025-12-29T20:16:19.516884+00:00","last_updated":"2025-12-29T20:16:19.516884+00:00","context":{"id":"01KDNW2A1WPYTAFQ0FE4P85RFA","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.upper_guest_firmware","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"SKY40148","in_progress":false,"latest_version":"SKY40148","release_summary":null,"release_url":null,"skipped_version":null,"title":"airq","update_percentage":null,"device_class":"firmware","entity_picture":"https://brands.home-assistant.io/_/sensibo/icon.png","friendly_name":"upper guest Firmware","supported_features":0},"last_changed":"2026-01-03T20:49:23.265470+00:00","last_reported":"2026-01-03T20:49:23.265470+00:00","last_updated":"2026-01-03T20:49:23.265470+00:00","context":{"id":"01KE2SYEA1R2X0TCRDGXEB11AP","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.better_thermostat_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"1.7.0","in_progress":false,"latest_version":"1.7.0","release_summary":null,"release_url":"https://github.com/KartoffelToby/better_thermostat/releases/1.7.0","skipped_version":null,"title":null,"update_percentage":null,"entity_picture":"https://brands.home-assistant.io/_/better_thermostat/icon.png","friendly_name":"Better Thermostat update","supported_features":23},"last_changed":"2025-12-29T20:16:19.526218+00:00","last_reported":"2025-12-29T20:16:19.526218+00:00","last_updated":"2025-12-29T20:16:19.526218+00:00","context":{"id":"01KDNW2A268F186S0555CXQ4YZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.hubitat_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"v0.9.43","in_progress":false,"latest_version":"v0.9.43","release_summary":null,"release_url":"https://github.com/jason0x43/hacs-hubitat/releases/v0.9.43","skipped_version":null,"title":null,"update_percentage":null,"entity_picture":"https://brands.home-assistant.io/_/hubitat/icon.png","friendly_name":"Hubitat update","supported_features":23},"last_changed":"2025-12-29T20:16:19.526344+00:00","last_reported":"2025-12-29T20:16:19.526344+00:00","last_updated":"2025-12-29T20:16:19.526344+00:00","context":{"id":"01KDNW2A26KDP04477RJCMJFK9","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.better_thermostat_ui_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"2.2.1","in_progress":false,"latest_version":"2.2.1","release_summary":null,"release_url":"https://github.com/KartoffelToby/better-thermostat-ui-card/releases/2.2.1","skipped_version":null,"title":null,"update_percentage":null,"friendly_name":"Better Thermostat UI update","supported_features":23},"last_changed":"2025-12-29T20:16:19.526445+00:00","last_reported":"2025-12-29T20:16:19.526445+00:00","last_updated":"2025-12-29T20:16:19.526445+00:00","context":{"id":"01KDNW2A26V3S9S6ZZVMNBC4JH","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"update.hacs_update","state":"off","attributes":{"auto_update":false,"display_precision":0,"installed_version":"2.0.5","in_progress":false,"latest_version":"2.0.5","release_summary":null,"release_url":"https://github.com/hacs/integration/releases/2.0.5","skipped_version":null,"title":null,"update_percentage":null,"entity_picture":"https://brands.home-assistant.io/_/hacs/icon.png","friendly_name":"HACS update","supported_features":23},"last_changed":"2025-12-29T20:16:19.526552+00:00","last_reported":"2025-12-29T20:16:19.526552+00:00","last_updated":"2025-12-29T20:16:19.526552+00:00","context":{"id":"01KDNW2A268W8VFEEW0XN0QZWZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.reboot_hubitat_integration","state":"on","attributes":{"id":"1762466176853","last_triggered":"2026-01-05T07:05:00.338215+00:00","mode":"single","current":0,"friendly_name":"reboot hubitat integration"},"last_changed":"2025-12-29T20:16:19.529946+00:00","last_reported":"2026-01-05T07:05:00.338377+00:00","last_updated":"2026-01-05T07:05:00.338377+00:00","context":{"id":"01KE6FJCNHXQGQWGX39TYP38HM","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.master_heat_on","state":"off","attributes":{"id":"1764736926515","last_triggered":null,"mode":"single","current":0,"friendly_name":"Master heat on"},"last_changed":"2025-12-29T20:16:19.530038+00:00","last_reported":"2025-12-29T20:16:19.530038+00:00","last_updated":"2025-12-29T20:16:19.530038+00:00","context":{"id":"01KDNW2A2AX8KMNG560ER9ZE1T","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.master_heat_off","state":"off","attributes":{"id":"1764737341675","last_triggered":"2025-12-03T18:16:26.069486+00:00","mode":"single","current":0,"friendly_name":"Master heat on off"},"last_changed":"2025-12-29T20:16:19.530110+00:00","last_reported":"2025-12-29T20:16:19.530110+00:00","last_updated":"2025-12-29T20:16:19.530110+00:00","context":{"id":"01KDNW2A2AWX8E9HT86NS0P3ZZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.basement_heat_on_and_off","state":"off","attributes":{"id":"1764739945517","last_triggered":"2025-12-03T18:34:15.314711+00:00","mode":"single","current":0,"friendly_name":" Basement heat on and off"},"last_changed":"2025-12-29T20:16:19.530175+00:00","last_reported":"2025-12-29T20:16:19.530175+00:00","last_updated":"2025-12-29T20:16:19.530175+00:00","context":{"id":"01KDNW2A2AK14PZJKJWKBQWS67","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.hc_auto_broadcast_basement_setpoint","state":"on","attributes":{"id":"hc_auto_broadcast_basement_setpoint","last_triggered":"2026-01-04T06:38:17.685192+00:00","mode":"single","current":0,"friendly_name":"HC Auto Broadcast Basement Setpoint"},"last_changed":"2025-12-29T20:16:19.530250+00:00","last_reported":"2026-01-04T06:38:17.685764+00:00","last_updated":"2026-01-04T06:38:17.685764+00:00","context":{"id":"01KE3VMRJNY1SZSEX867MCHF9X","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.hc_auto_broadcast_first_floor_setpoint","state":"on","attributes":{"id":"hc_auto_broadcast_first_floor_setpoint","last_triggered":"2026-01-04T06:38:17.685900+00:00","mode":"single","current":0,"friendly_name":"HC Auto Broadcast First Floor Setpoint"},"last_changed":"2025-12-29T20:16:19.530329+00:00","last_reported":"2026-01-04T06:38:17.686346+00:00","last_updated":"2026-01-04T06:38:17.686346+00:00","context":{"id":"01KE3VMRJN8CS5T46MWFNXG7K0","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.hc_auto_broadcast_upper_floor_setpoint","state":"on","attributes":{"id":"hc_auto_broadcast_upper_floor_setpoint","last_triggered":"2026-01-04T06:38:17.686475+00:00","mode":"single","current":0,"friendly_name":"HC Auto Broadcast Upper Floor Setpoint"},"last_changed":"2025-12-29T20:16:19.530396+00:00","last_reported":"2026-01-04T06:38:17.687658+00:00","last_updated":"2026-01-04T06:38:17.687658+00:00","context":{"id":"01KE3VMRJP41DDV3JWACHQE64S","parent_id":"01KE3VMRJFFBABV3YNED2HA3P2","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.hc_auto_broadcast_master_setpoint_overrides_floors","state":"on","attributes":{"id":"hc_auto_broadcast_master_setpoint","last_triggered":"2026-01-04T06:38:17.679599+00:00","mode":"single","current":0,"friendly_name":"HC Auto Broadcast Master Setpoint (Overrides Floors)"},"last_changed":"2025-12-29T20:16:19.530475+00:00","last_reported":"2026-01-04T06:38:17.685012+00:00","last_updated":"2026-01-04T06:38:17.685012+00:00","context":{"id":"01KE3VMRJFFBABV3YNED2HA3P2","parent_id":"01KE3VMRJE0PJKKKT2XC8BBQA9","user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    },
+    {
+      "state": {"entity_id":"climate.zone_2_second_floor_office_and_upper_guest","state":"heat","attributes":{"hvac_modes":["heat","off"],"min_temp":50,"max_temp":80,"target_temp_step":1,"current_temperature":63,"temperature":63,"hvac_action":"idle","friendly_name":"zone 2 second floor office and upper guest","supported_features":385},"last_changed":"2025-12-30T16:13:20.623550+00:00","last_reported":"2026-01-05T16:32:23.959342+00:00","last_updated":"2026-01-05T16:32:23.959342+00:00","context":{"id":"01KE7G1ACQ91048AE2K33D4R5Y","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-01-05T16:46:28.953397+00:00"
+    }
+  ]
+}

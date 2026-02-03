@@ -1,0 +1,35 @@
+agent_version: 1.7.2
+apparmor_version: 3.1.7
+boot_timestamp: 1768156402656505
+broadcast_llmnr: true
+broadcast_mdns: true
+chassis: vm
+cpe: cpe:2.3:o:home-assistant:haos:16.3:*:production:*:*:*:ova:*
+deployment: production
+disk_free: 21.8
+disk_life_time: null
+disk_total: 30.8
+disk_used: 7.7
+dt_synchronized: true
+dt_utc: "2026-01-11T20:41:08.788307+00:00"
+features:
+- reboot
+- shutdown
+- services
+- network
+- hostname
+- timedate
+- os_agent
+- haos
+- resolved
+- journal
+- disk
+- mount
+hostname: homeassistant
+kernel: 6.12.51-haos
+llmnr_hostname: homeassistant3
+operating_system: Home Assistant OS 16.3
+startup_time: 2.053566
+timezone: America/Denver
+use_ntp: true
+virtualization: kvm

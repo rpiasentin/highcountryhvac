@@ -1,0 +1,35 @@
+checks:
+- enabled: true
+  slug: backups
+- enabled: true
+  slug: multiple_data_disks
+- enabled: true
+  slug: network_interface_ipv4
+- enabled: true
+  slug: duplicate_os_installation
+- enabled: true
+  slug: disk_lifetime
+- enabled: true
+  slug: disabled_data_disk
+- enabled: true
+  slug: detached_addon_missing
+- enabled: true
+  slug: addon_pwned
+- enabled: true
+  slug: core_security
+- enabled: true
+  slug: dns_server_ipv6
+- enabled: true
+  slug: dns_server
+- enabled: true
+  slug: deprecated_addon
+- enabled: true
+  slug: detached_addon_removed
+- enabled: true
+  slug: docker_config
+- enabled: true
+  slug: free_space
+issues: []
+suggestions: []
+unhealthy: []
+unsupported: []

@@ -1,0 +1,73 @@
+addons:
+- advanced: false
+  available: true
+  build: false
+  description: Matter WebSocket Server for Home Assistant Matter support.
+  detached: false
+  homeassistant: 2024.6.0
+  icon: true
+  logo: true
+  name: Matter Server
+  repository: core
+  slug: core_matter_server
+  stage: stable
+  state: started
+  system_managed: false
+  update_available: false
+  url: https://github.com/home-assistant/addons/tree/master/matter_server
+  version: 8.1.2
+  version_latest: 8.1.2
+- advanced: false
+  available: true
+  build: false
+  description: Simple browser-based file editor for Home Assistant
+  detached: false
+  homeassistant: 0.91.1
+  icon: true
+  logo: true
+  name: File editor
+  repository: core
+  slug: core_configurator
+  stage: stable
+  state: started
+  system_managed: false
+  update_available: false
+  url: https://github.com/home-assistant/addons/tree/master/configurator
+  version: 5.8.0
+  version_latest: 5.8.0
+- advanced: false
+  available: true
+  build: false
+  description: A supercharged SSH & Web Terminal access to your Home Assistant instance
+  detached: false
+  homeassistant: 0.92.0b2
+  icon: true
+  logo: true
+  name: Advanced SSH & Web Terminal
+  repository: a0d7b954
+  slug: a0d7b954_ssh
+  stage: stable
+  state: started
+  system_managed: false
+  update_available: false
+  url: https://github.com/hassio-addons/addon-ssh
+  version: 22.0.3
+  version_latest: 22.0.3
+- advanced: false
+  available: true
+  build: false
+  description: The easiest way to get HACS for Home Assistant
+  detached: false
+  homeassistant: null
+  icon: true
+  logo: false
+  name: Get HACS
+  repository: cb646a50
+  slug: cb646a50_get
+  stage: stable
+  state: unknown
+  system_managed: false
+  update_available: false
+  url: https://github.com/hacs/addons/tree/main/get
+  version: 1.3.1
+  version_latest: 1.3.1

@@ -1,0 +1,790 @@
+entity_id,domain,name,original_name,platform,area,device_name,device_manufacturer,device_model,integration_domain,integration_title,integration_source,disabled_by,hidden_by,entity_category,unique_id
+binary_sensor.sun_solar_rising,binary_sensor,,Solar rising,sun,,Sun,,,sun,Sun,import,integration,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-solar_rising
+sensor.sun_next_dawn,sensor,,Next dawn,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_dawn
+sensor.sun_next_dusk,sensor,,Next dusk,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_dusk
+sensor.sun_next_midnight,sensor,,Next midnight,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_midnight
+sensor.sun_next_noon,sensor,,Next noon,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_noon
+sensor.sun_next_rising,sensor,,Next rising,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_rising
+sensor.sun_next_setting,sensor,,Next setting,sun,,Sun,,,sun,Sun,import,,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-next_setting
+sensor.sun_solar_elevation,sensor,,Solar elevation,sun,,Sun,,,sun,Sun,import,integration,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-solar_elevation
+sensor.sun_solar_azimuth,sensor,,Solar azimuth,sun,,Sun,,,sun,Sun,import,integration,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-solar_azimuth
+sensor.sun_solar_rising,sensor,,Solar rising,sun,,Sun,,,sun,Sun,import,integration,,diagnostic,01K93B37HAFZYNWRMJ2XEQEKNN-solar_rising
+sensor.home_assistant_core_cpu_percent,sensor,,CPU percent,hassio,,Home Assistant Core,Home Assistant,Home Assistant Core,hassio,Supervisor,system,integration,,,home_assistant_core_cpu_percent
+sensor.home_assistant_core_memory_percent,sensor,,Memory percent,hassio,,Home Assistant Core,Home Assistant,Home Assistant Core,hassio,Supervisor,system,integration,,,home_assistant_core_memory_percent
+sensor.home_assistant_supervisor_cpu_percent,sensor,,CPU percent,hassio,,Home Assistant Supervisor,Home Assistant,Home Assistant Supervisor,hassio,Supervisor,system,integration,,,home_assistant_supervisor_cpu_percent
+sensor.home_assistant_supervisor_memory_percent,sensor,,Memory percent,hassio,,Home Assistant Supervisor,Home Assistant,Home Assistant Supervisor,hassio,Supervisor,system,integration,,,home_assistant_supervisor_memory_percent
+sensor.home_assistant_host_os_agent_version,sensor,,OS Agent version,hassio,,Home Assistant Host,Home Assistant,Home Assistant Host,hassio,Supervisor,system,integration,,diagnostic,home_assistant_host_agent_version
+sensor.home_assistant_host_apparmor_version,sensor,,AppArmor version,hassio,,Home Assistant Host,Home Assistant,Home Assistant Host,hassio,Supervisor,system,integration,,diagnostic,home_assistant_host_apparmor_version
+sensor.home_assistant_host_disk_total,sensor,,Disk total,hassio,,Home Assistant Host,Home Assistant,Home Assistant Host,hassio,Supervisor,system,integration,,diagnostic,home_assistant_host_disk_total
+sensor.home_assistant_host_disk_used,sensor,,Disk used,hassio,,Home Assistant Host,Home Assistant,Home Assistant Host,hassio,Supervisor,system,integration,,diagnostic,home_assistant_host_disk_used
+sensor.home_assistant_host_disk_free,sensor,,Disk free,hassio,,Home Assistant Host,Home Assistant,Home Assistant Host,hassio,Supervisor,system,integration,,diagnostic,home_assistant_host_disk_free
+sensor.home_assistant_operating_system_version,sensor,,Version,hassio,,Home Assistant Operating System,Home Assistant,Home Assistant Operating System,hassio,Supervisor,system,integration,,,home_assistant_os_version
+sensor.home_assistant_operating_system_newest_version,sensor,,Newest version,hassio,,Home Assistant Operating System,Home Assistant,Home Assistant Operating System,hassio,Supervisor,system,integration,,,home_assistant_os_version_latest
+update.home_assistant_supervisor_update,update,,Update,hassio,,Home Assistant Supervisor,Home Assistant,Home Assistant Supervisor,hassio,Supervisor,system,,,config,home_assistant_supervisor_version_latest
+update.home_assistant_core_update,update,,Update,hassio,,Home Assistant Core,Home Assistant,Home Assistant Core,hassio,Supervisor,system,,,config,home_assistant_core_version_latest
+update.home_assistant_operating_system_update,update,,Update,hassio,,Home Assistant Operating System,Home Assistant,Home Assistant Operating System,hassio,Supervisor,system,,,config,home_assistant_os_version_latest
+event.backup_automatic_backup,event,,Automatic backup,backup,,Backup,Home Assistant,Home Assistant Backup,backup,Backup,system,,,,automatic_backup_event
+sensor.backup_backup_manager_state,sensor,,Backup Manager state,backup,,Backup,Home Assistant,Home Assistant Backup,backup,Backup,system,,,,backup_manager_state
+sensor.backup_next_scheduled_automatic_backup,sensor,,Next scheduled automatic backup,backup,,Backup,Home Assistant,Home Assistant Backup,backup,Backup,system,,,,next_scheduled_automatic_backup
+sensor.backup_last_successful_automatic_backup,sensor,,Last successful automatic backup,backup,,Backup,Home Assistant,Home Assistant Backup,backup,Backup,system,,,,last_successful_automatic_backup
+sensor.backup_last_attempted_automatic_backup,sensor,,Last attempted automatic backup,backup,,Backup,Home Assistant,Home Assistant Backup,backup,Backup,system,,,,last_attempted_automatic_backup
+binary_sensor.matter_server_running,binary_sensor,,Running,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_state
+sensor.matter_server_version,sensor,,Version,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_version
+sensor.matter_server_newest_version,sensor,,Newest version,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_version_latest
+sensor.matter_server_cpu_percent,sensor,,CPU percent,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_cpu_percent
+sensor.matter_server_memory_percent,sensor,,Memory percent,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_memory_percent
+switch.matter_server,switch,,,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_matter_server_state
+update.matter_server_update,update,,Update,hassio,,Matter Server,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,,,config,core_matter_server_version_latest
+person.giovani_piasentin,person,,Giovani Piasentin,person,,,,,,,,,,,giovani_piasentin
+todo.shopping_list,todo,,Shopping List,shopping_list,,,,,shopping_list,Shopping list,onboarding,,,,01K93BKGJGKM8ES5MZ8EJ3RAEC
+tts.google_translate_en_com,tts,,Google Translate en com,google_translate,,,,,google_translate,Google Translate text-to-speech,onboarding,,,,01K93BKGK2D3T68P39TQZJ27MB
+weather.forecast_home,weather,,Home,met,,Forecast,Met.no,Forecast,met,Home,onboarding,,,,home
+binary_sensor.giovanis_macbook_air_client,binary_sensor,,Client,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_update_available
+binary_sensor.giovanis_macbook_air_key_expiry_disabled,binary_sensor,,Key expiry disabled,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_key_expiry_disabled
+binary_sensor.giovanis_macbook_air_supports_hairpinning,binary_sensor,,Supports hairpinning,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_hair_pinning
+binary_sensor.giovanis_macbook_air_supports_ipv6,binary_sensor,,Supports IPv6,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_ipv6
+binary_sensor.giovanis_macbook_air_supports_pcp,binary_sensor,,Supports PCP,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_pcp
+binary_sensor.giovanis_macbook_air_supports_nat_pmp,binary_sensor,,Supports NAT-PMP,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_pmp
+binary_sensor.giovanis_macbook_air_supports_udp,binary_sensor,,Supports UDP,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_udp
+binary_sensor.giovanis_macbook_air_supports_upnp,binary_sensor,,Supports UPnP,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_client_supports_upnp
+binary_sensor.iphone171_client,binary_sensor,,Client,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_update_available
+binary_sensor.iphone171_key_expiry_disabled,binary_sensor,,Key expiry disabled,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_key_expiry_disabled
+binary_sensor.iphone171_supports_hairpinning,binary_sensor,,Supports hairpinning,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_hair_pinning
+binary_sensor.iphone171_supports_ipv6,binary_sensor,,Supports IPv6,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_ipv6
+binary_sensor.iphone171_supports_pcp,binary_sensor,,Supports PCP,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_pcp
+binary_sensor.iphone171_supports_nat_pmp,binary_sensor,,Supports NAT-PMP,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_pmp
+binary_sensor.iphone171_supports_udp,binary_sensor,,Supports UDP,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_udp
+binary_sensor.iphone171_supports_upnp,binary_sensor,,Supports UPnP,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_client_supports_upnp
+binary_sensor.raspberrypi_client,binary_sensor,,Client,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_update_available
+binary_sensor.raspberrypi_key_expiry_disabled,binary_sensor,,Key expiry disabled,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_key_expiry_disabled
+binary_sensor.raspberrypi_supports_hairpinning,binary_sensor,,Supports hairpinning,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_hair_pinning
+binary_sensor.raspberrypi_supports_ipv6,binary_sensor,,Supports IPv6,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_ipv6
+binary_sensor.raspberrypi_supports_pcp,binary_sensor,,Supports PCP,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_pcp
+binary_sensor.raspberrypi_supports_nat_pmp,binary_sensor,,Supports NAT-PMP,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_pmp
+binary_sensor.raspberrypi_supports_udp,binary_sensor,,Supports UDP,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_udp
+binary_sensor.raspberrypi_supports_upnp,binary_sensor,,Supports UPnP,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_client_supports_upnp
+sensor.giovanis_macbook_air_expires,sensor,,Expires,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_expires
+sensor.giovanis_macbook_air_ip_address,sensor,,IP address,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2068053851776627_ip
+sensor.giovanis_macbook_air_last_seen,sensor,,Last seen,tailscale,,giovanis-macbook-air,Tailscale Inc.,macOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,,2068053851776627_last_seen
+sensor.iphone171_expires,sensor,,Expires,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_expires
+sensor.iphone171_ip_address,sensor,,IP address,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,3270574746999596_ip
+sensor.iphone171_last_seen,sensor,,Last seen,tailscale,,iphone171,Tailscale Inc.,iOS,tailscale,richardpiasentin@gmail.com,user,config_entry,,,3270574746999596_last_seen
+sensor.raspberrypi_expires,sensor,,Expires,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_expires
+sensor.raspberrypi_ip_address,sensor,,IP address,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2164986700281123_ip
+sensor.raspberrypi_last_seen,sensor,,Last seen,tailscale,,raspberrypi,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,,2164986700281123_last_seen
+binary_sensor.get_hacs_running,binary_sensor,,Running,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_state
+sensor.get_hacs_version,sensor,,Version,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_version
+sensor.get_hacs_newest_version,sensor,,Newest version,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_version_latest
+sensor.get_hacs_cpu_percent,sensor,,CPU percent,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_cpu_percent
+sensor.get_hacs_memory_percent,sensor,,Memory percent,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_memory_percent
+switch.get_hacs,switch,,,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,integration,,,cb646a50_get_state
+update.get_hacs_update,update,,Update,hassio,,Get HACS,HACS Add-ons Repository,Home Assistant Add-on,hassio,Supervisor,system,,,config,cb646a50_get_version_latest
+update.hacs_update,update,,HACS update,hacs,,HACS,hacs.xyz,,hacs,,user,,,config,172733314
+update.hubitat_update,update,,Hubitat update,hacs,,Hubitat,jason0x43,integration,hacs,,user,,,config,235943258
+switch.hacs_pre_release,switch,,Pre-release,hacs,,HACS,hacs.xyz,,hacs,,user,integration,,diagnostic,172733314
+switch.hubitat_pre_release,switch,,Pre-release,hacs,,Hubitat,jason0x43,integration,hacs,,user,integration,,diagnostic,235943258
+binary_sensor.homeassistant_client,binary_sensor,,Client,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_update_available
+binary_sensor.homeassistant_key_expiry_disabled,binary_sensor,,Key expiry disabled,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_key_expiry_disabled
+binary_sensor.homeassistant_supports_hairpinning,binary_sensor,,Supports hairpinning,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_hair_pinning
+binary_sensor.homeassistant_supports_ipv6,binary_sensor,,Supports IPv6,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_ipv6
+binary_sensor.homeassistant_supports_pcp,binary_sensor,,Supports PCP,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_pcp
+binary_sensor.homeassistant_supports_nat_pmp,binary_sensor,,Supports NAT-PMP,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_pmp
+binary_sensor.homeassistant_supports_udp,binary_sensor,,Supports UDP,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_udp
+binary_sensor.homeassistant_supports_upnp,binary_sensor,,Supports UPnP,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_client_supports_upnp
+sensor.homeassistant_expires,sensor,,Expires,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_expires
+sensor.homeassistant_ip_address,sensor,,IP address,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,5819076407853645_ip
+sensor.homeassistant_last_seen,sensor,,Last seen,tailscale,,homeassistant,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,,5819076407853645_last_seen
+binary_sensor.advanced_ssh_web_terminal_running,binary_sensor,,Running,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_state
+sensor.advanced_ssh_web_terminal_version,sensor,,Version,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_version
+sensor.advanced_ssh_web_terminal_newest_version,sensor,,Newest version,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_version_latest
+sensor.advanced_ssh_web_terminal_cpu_percent,sensor,,CPU percent,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_cpu_percent
+sensor.advanced_ssh_web_terminal_memory_percent,sensor,,Memory percent,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_memory_percent
+switch.advanced_ssh_web_terminal,switch,,,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_ssh_state
+update.advanced_ssh_web_terminal_update,update,,Update,hassio,,Advanced SSH & Web Terminal,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,,,config,a0d7b954_ssh_version_latest
+binary_sensor.kitchen_motion_nightlight_motion,binary_sensor,,Kitchen Motion Nightlight Motion,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::35::binary_sensor::motion
+binary_sensor.front_room_motion_night_light_motion,binary_sensor,,Front Room Motion Night Light Motion,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::36::binary_sensor::motion
+binary_sensor.master_motion_night_light_motion,binary_sensor,,Master Motion Night Light Motion,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::37::binary_sensor::motion
+binary_sensor.basement_motion_night_light_motion,binary_sensor,,Basement Motion Night Light Motion,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::38::binary_sensor::motion
+binary_sensor.grp_iphone_presence,binary_sensor,,Grp Iphone  Presence,hubitat,,grp iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::1::binary_sensor::presence
+binary_sensor.alisons_iphone_presence,binary_sensor,,Alison’S Iphone  Presence,hubitat,,Alison’s iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::57::binary_sensor::presence
+binary_sensor.main_water_cutoff_valve,binary_sensor,,Main Water Cutoff Valve,hubitat,,Main water cutoff,Hubitat,Zooz ZAC36 Ball Valve Controller,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::39::binary_sensor::valve
+binary_sensor.main_water_cutoff_water,binary_sensor,,Main Water Cutoff Water,hubitat,,Main water cutoff,Hubitat,Zooz ZAC36 Ball Valve Controller,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::39::binary_sensor::water
+binary_sensor.boiler_room_water_sensor_water,binary_sensor,,Boiler Room Water Sensor Water,hubitat,,Boiler room water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::40::binary_sensor::water
+binary_sensor.basement_kitchen_sink_water_sensor_water,binary_sensor,,Basement Kitchen Sink Water Sensor Water,hubitat,,Basement kitchen sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::41::binary_sensor::water
+binary_sensor.half_bath_water_sensor_water,binary_sensor,,Half Bath Water Sensor Water,hubitat,,Half bath water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::42::binary_sensor::water
+binary_sensor.kitchen_island_sink_water,binary_sensor,,Kitchen Island Sink Water,hubitat,,Kitchen island sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::43::binary_sensor::water
+binary_sensor.kitchen_sink_water,binary_sensor,,Kitchen Sink Water,hubitat,,Kitchen sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::44::binary_sensor::water
+binary_sensor.alison_sink_water,binary_sensor,,Alison Sink Water,hubitat,,Alison sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::45::binary_sensor::water
+binary_sensor.giovani_sink_water,binary_sensor,,Giovani Sink Water,hubitat,,GIOVANI sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::46::binary_sensor::water
+binary_sensor.master_toilet_water,binary_sensor,,Master Toilet Water,hubitat,,Master toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::47::binary_sensor::water
+binary_sensor.kid_room_sink_water,binary_sensor,,Kid Room Sink Water,hubitat,,Kid room sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::48::binary_sensor::water
+binary_sensor.upstairs_bath_toilet_water,binary_sensor,,Upstairs Bath Toilet Water,hubitat,,Upstairs bath toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::49::binary_sensor::water
+binary_sensor.office_sink_upstairs_water,binary_sensor,,Office Sink Upstairs Water,hubitat,,Office sink upstairs,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::50::binary_sensor::water
+binary_sensor.kitchen_fridge_water_sensor_water,binary_sensor,,Kitchen Fridge Water Sensor Water,hubitat,,Kitchen fridge water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::51::binary_sensor::water
+binary_sensor.laundry_room_sink_and_washer_water,binary_sensor,,"Laundry Room, Sink And Washer Water",hubitat,,"Laundry room, sink and washer",Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::52::binary_sensor::water
+light.kitchen_motion_nightlight,light,,Kitchen motion nightlight,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::35::light
+light.front_room_motion_night_light,light,,Front room motion night light,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::36::light
+light.master_motion_night_light,light,,Master motion night light,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::37::light
+light.basement_motion_night_light,light,,Basement motion night light,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::38::light
+lock.front_door_lock,lock,,Front door lock,hubitat,,Front door lock,Hubitat,Generic Z-Wave Lock,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::56::lock
+select.hub_mode,select,,Hub Mode,hubitat,,Hubitat Elevation,Hubitat,,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::3f7f484d::sensor::mode
+sensor.hub_hsm_status,sensor,,Hub Hsm Status,hubitat,,Hubitat Elevation,Hubitat,,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::3f7f484d::sensor::hsm_status
+sensor.hub_mode,sensor,,Hub Mode,hubitat,,Hubitat Elevation,Hubitat,,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::3f7f484d::sensor::mode
+sensor.grp_iphone_last_update_time,sensor,,Grp Iphone  Last Update Time,hubitat,,grp iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::1::sensor::last_update
+sensor.upstairs_zwave_repeater_plug_last_update_time,sensor,,Upstairs Zwave Repeater Plug Last Update Time,hubitat,,Upstairs zwave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::33::sensor::last_update
+sensor.downstairs_z_wave_repeater_plug_last_update_time,sensor,,Downstairs Z Wave Repeater Plug Last Update Time,hubitat,,Downstairs Z wave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::34::sensor::last_update
+sensor.kitchen_motion_nightlight_last_update_time,sensor,,Kitchen Motion Nightlight Last Update Time,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::35::sensor::last_update
+sensor.front_room_motion_night_light_last_update_time,sensor,,Front Room Motion Night Light Last Update Time,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::36::sensor::last_update
+sensor.master_motion_night_light_last_update_time,sensor,,Master Motion Night Light Last Update Time,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::37::sensor::last_update
+sensor.basement_motion_night_light_last_update_time,sensor,,Basement Motion Night Light Last Update Time,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::38::sensor::last_update
+sensor.main_water_cutoff_last_update_time,sensor,,Main Water Cutoff Last Update Time,hubitat,,Main water cutoff,Hubitat,Zooz ZAC36 Ball Valve Controller,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::39::sensor::last_update
+sensor.boiler_room_water_sensor_last_update_time,sensor,,Boiler Room Water Sensor Last Update Time,hubitat,,Boiler room water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::40::sensor::last_update
+sensor.basement_kitchen_sink_water_sensor_last_update_time,sensor,,Basement Kitchen Sink Water Sensor Last Update Time,hubitat,,Basement kitchen sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::41::sensor::last_update
+sensor.half_bath_water_sensor_last_update_time,sensor,,Half Bath Water Sensor Last Update Time,hubitat,,Half bath water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::42::sensor::last_update
+sensor.kitchen_island_sink_last_update_time,sensor,,Kitchen Island Sink Last Update Time,hubitat,,Kitchen island sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::43::sensor::last_update
+sensor.kitchen_sink_last_update_time,sensor,,Kitchen Sink Last Update Time,hubitat,,Kitchen sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::44::sensor::last_update
+sensor.alison_sink_last_update_time,sensor,,Alison Sink Last Update Time,hubitat,,Alison sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::45::sensor::last_update
+sensor.giovani_sink_last_update_time,sensor,,Giovani Sink Last Update Time,hubitat,,GIOVANI sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::46::sensor::last_update
+sensor.master_toilet_last_update_time,sensor,,Master Toilet Last Update Time,hubitat,,Master toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::47::sensor::last_update
+sensor.kid_room_sink_last_update_time,sensor,,Kid Room Sink Last Update Time,hubitat,,Kid room sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::48::sensor::last_update
+sensor.upstairs_bath_toilet_last_update_time,sensor,,Upstairs Bath Toilet Last Update Time,hubitat,,Upstairs bath toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::49::sensor::last_update
+sensor.office_sink_upstairs_last_update_time,sensor,,Office Sink Upstairs Last Update Time,hubitat,,Office sink upstairs,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::50::sensor::last_update
+sensor.kitchen_fridge_water_sensor_last_update_time,sensor,,Kitchen Fridge Water Sensor Last Update Time,hubitat,,Kitchen fridge water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::51::sensor::last_update
+sensor.laundry_room_sink_and_washer_last_update_time,sensor,,"Laundry Room, Sink And Washer Last Update Time",hubitat,,"Laundry room, sink and washer",Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::52::sensor::last_update
+sensor.upstairs_mantle_temperature_last_update_time,sensor,,2F-Fb-C-T Last Update Time,hubitat,,2F-FB-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::53::sensor::last_update
+sensor.main_floor_temperature_sensor_last_update_time,sensor,,1F-Kit-C-T Last Update Time,hubitat,,1F-KIT-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::54::sensor::last_update
+sensor.basement_kitchen_temperature_last_update_time,sensor,,B1-Bguestroom Last Update Time,hubitat,,B1-Bguestroom,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::55::sensor::last_update
+sensor.front_door_lock_last_update_time,sensor,,Front Door Lock Last Update Time,hubitat,,Front door lock,Hubitat,Generic Z-Wave Lock,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::56::sensor::last_update
+sensor.alisons_iphone_last_update_time,sensor,,Alison’S Iphone  Last Update Time,hubitat,,Alison’s iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::57::sensor::last_update
+sensor.boiler_room_water_sensor_battery,sensor,,Boiler Room Water Sensor Battery,hubitat,,Boiler room water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::40::sensor::battery
+sensor.basement_kitchen_sink_water_sensor_battery,sensor,,Basement Kitchen Sink Water Sensor Battery,hubitat,,Basement kitchen sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::41::sensor::battery
+sensor.half_bath_water_sensor_battery,sensor,,Half Bath Water Sensor Battery,hubitat,,Half bath water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::42::sensor::battery
+sensor.kitchen_island_sink_battery,sensor,,Kitchen Island Sink Battery,hubitat,,Kitchen island sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::43::sensor::battery
+sensor.kitchen_sink_battery,sensor,,Kitchen Sink Battery,hubitat,,Kitchen sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::44::sensor::battery
+sensor.alison_sink_battery,sensor,,Alison Sink Battery,hubitat,,Alison sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::45::sensor::battery
+sensor.giovani_sink_battery,sensor,,Giovani Sink Battery,hubitat,,GIOVANI sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::46::sensor::battery
+sensor.master_toilet_battery,sensor,,Master Toilet Battery,hubitat,,Master toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::47::sensor::battery
+sensor.kid_room_sink_battery,sensor,,Kid Room Sink Battery,hubitat,,Kid room sink,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::48::sensor::battery
+sensor.upstairs_bath_toilet_battery,sensor,,Upstairs Bath Toilet Battery,hubitat,,Upstairs bath toilet,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::49::sensor::battery
+sensor.office_sink_upstairs_battery,sensor,,Office Sink Upstairs Battery,hubitat,,Office sink upstairs,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::50::sensor::battery
+sensor.kitchen_fridge_water_sensor_battery,sensor,,Kitchen Fridge Water Sensor Battery,hubitat,,Kitchen fridge water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::51::sensor::battery
+sensor.laundry_room_sink_and_washer_battery,sensor,,"Laundry Room, Sink And Washer Battery",hubitat,,"Laundry room, sink and washer",Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::52::sensor::battery
+sensor.upstairs_mantle_temperature_battery,sensor,,2F-Fb-C-T Battery,hubitat,,2F-FB-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::53::sensor::battery
+sensor.main_floor_temperature_sensor_battery,sensor,,1F-Kit-C-T Battery,hubitat,,1F-KIT-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::54::sensor::battery
+sensor.basement_kitchen_temperature_battery,sensor,,B1-Bguestroom Battery,hubitat,,B1-Bguestroom,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::55::sensor::battery
+sensor.front_door_lock_battery,sensor,,Front Door Lock Battery,hubitat,,Front door lock,Hubitat,Generic Z-Wave Lock,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::56::sensor::battery
+sensor.upstairs_mantle_temperature_humidity,sensor,,2F-Fb-C-T Humidity,hubitat,,2F-FB-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::53::sensor::humidity
+sensor.main_floor_temperature_sensor_humidity,sensor,,1F-Kit-C-T Humidity,hubitat,,1F-KIT-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::54::sensor::humidity
+sensor.basement_kitchen_temperature_humidity,sensor,,B1-Bguestroom Humidity,hubitat,,B1-Bguestroom,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::55::sensor::humidity
+sensor.kitchen_motion_nightlight_illuminance,sensor,,Kitchen Motion Nightlight Illuminance,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::35::sensor::illuminance
+sensor.front_room_motion_night_light_illuminance,sensor,,Front Room Motion Night Light Illuminance,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::36::sensor::illuminance
+sensor.master_motion_night_light_illuminance,sensor,,Master Motion Night Light Illuminance,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::37::sensor::illuminance
+sensor.basement_motion_night_light_illuminance,sensor,,Basement Motion Night Light Illuminance,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::38::sensor::illuminance
+sensor.main_water_cutoff_temperature,sensor,,Main Water Cutoff Temperature,hubitat,,Main water cutoff,Hubitat,Zooz ZAC36 Ball Valve Controller,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::39::sensor::temperature
+sensor.upstairs_mantle_temperature_temperature,sensor,,2F-Fb-C-T Temperature,hubitat,,2F-FB-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::53::sensor::temperature
+sensor.main_floor_temperature_sensor_temperature,sensor,,1F-Kit-C-T Temperature,hubitat,,1F-KIT-C-T,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::54::sensor::temperature
+sensor.basement_kitchen_temperature_temperature,sensor,,B1-Bguestroom Temperature,hubitat,,B1-Bguestroom,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::55::sensor::temperature
+sensor.grp_iphone_notification_text,sensor,,Grp Iphone  Notification Text,hubitat,,grp iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::1::sensor::notificationText
+sensor.grp_iphone_used_by,sensor,,Grp Iphone  Used By,hubitat,,grp iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::1::sensor::usedBy
+sensor.upstairs_zwave_repeater_plug_switch,sensor,,Upstairs Zwave Repeater Plug Switch,hubitat,,Upstairs zwave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::33::sensor::switch
+sensor.downstairs_z_wave_repeater_plug_switch,sensor,,Downstairs Z Wave Repeater Plug Switch,hubitat,,Downstairs Z wave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::34::sensor::switch
+sensor.kitchen_motion_nightlight_color,sensor,,Kitchen Motion Nightlight Color,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::35::sensor::color
+sensor.kitchen_motion_nightlight_rgb,sensor,,Kitchen Motion Nightlight Rgb,hubitat,,Kitchen motion nightlight,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::35::sensor::RGB
+sensor.front_room_motion_night_light_color,sensor,,Front Room Motion Night Light Color,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::36::sensor::color
+sensor.front_room_motion_night_light_rgb,sensor,,Front Room Motion Night Light Rgb,hubitat,,Front room motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::36::sensor::RGB
+sensor.master_motion_night_light_color,sensor,,Master Motion Night Light Color,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::37::sensor::color
+sensor.master_motion_night_light_rgb,sensor,,Master Motion Night Light Rgb,hubitat,,Master motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::37::sensor::RGB
+sensor.basement_motion_night_light_color,sensor,,Basement Motion Night Light Color,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::38::sensor::color
+sensor.basement_motion_night_light_rgb,sensor,,Basement Motion Night Light Rgb,hubitat,,Basement motion night light,Hubitat,Third Reality Multi-Function Night Light,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::38::sensor::RGB
+sensor.front_door_lock_code_changed,sensor,,Front Door Lock Code Changed,hubitat,,Front door lock,Hubitat,Generic Z-Wave Lock,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::56::sensor::codeChanged
+sensor.alisons_iphone_notification_text,sensor,,Alison’S Iphone  Notification Text,hubitat,,Alison’s iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::57::sensor::notificationText
+sensor.alisons_iphone_used_by,sensor,,Alison’S Iphone  Used By,hubitat,,Alison’s iPhone ,Hubitat,Mobile App Device,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::57::sensor::usedBy
+switch.upstairs_zwave_repeater_plug,switch,,Upstairs zwave repeater plug,hubitat,,Upstairs zwave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::33::switch
+switch.downstairs_z_wave_repeater_plug,switch,,Downstairs Z wave repeater plug,hubitat,,Downstairs Z wave repeater plug,Hubitat,Generic Z-Wave Outlet,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::34::switch
+valve.main_water_cutoff,valve,,Main water cutoff,hubitat,,Main water cutoff,Hubitat,Zooz ZAC36 Ball Valve Controller,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::39::valve
+device_tracker.giovani_iphone_16pro,device_tracker,,Giovani  iphone 16pro,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,diagnostic,6C70C9CD-9387-4270-ACF6-E60354B08C8D
+sensor.giovani_iphone_16pro_activity,sensor,,Giovani  iphone 16pro Activity,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_activity
+sensor.giovani_iphone_16pro_distance,sensor,,Giovani  iphone 16pro Distance,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_pedometer_distance
+sensor.giovani_iphone_16pro_battery_level,sensor,,Giovani  iphone 16pro Battery Level,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_battery_level
+sensor.giovani_iphone_16pro_battery_state,sensor,,Giovani  iphone 16pro Battery State,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_battery_state
+sensor.giovani_iphone_16pro_floors_ascended,sensor,,Giovani  iphone 16pro Floors Ascended,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_pedometer_floors_ascended
+sensor.giovani_iphone_16pro_floors_descended,sensor,,Giovani  iphone 16pro Floors Descended,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_pedometer_floors_descended
+sensor.giovani_iphone_16pro_storage,sensor,,Giovani  iphone 16pro Storage,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_storage
+sensor.giovani_iphone_16pro_steps,sensor,,Giovani  iphone 16pro Steps,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_pedometer_steps
+sensor.giovani_iphone_16pro_average_active_pace,sensor,,Giovani  iphone 16pro Average Active Pace,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_pedometer_avg_active_pace
+sensor.giovani_iphone_16pro_ssid,sensor,,Giovani  iphone 16pro SSID,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_connectivity_ssid
+sensor.giovani_iphone_16pro_bssid,sensor,,Giovani  iphone 16pro BSSID,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_connectivity_bssid
+sensor.giovani_iphone_16pro_connection_type,sensor,,Giovani  iphone 16pro Connection Type,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_connectivity_connection_type
+sensor.giovani_iphone_16pro_sim_2,sensor,,Giovani  iphone 16pro SIM 2,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_connectivity_sim_2
+sensor.giovani_iphone_16pro_sim_1,sensor,,Giovani  iphone 16pro SIM 1,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_connectivity_sim_1
+sensor.giovani_iphone_16pro_geocoded_location,sensor,,Giovani  iphone 16pro Geocoded Location,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_geocoded_location
+binary_sensor.giovani_iphone_16pro_focus,binary_sensor,,Giovani  iphone 16pro Focus,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_focus
+sensor.giovani_iphone_16pro_last_update_trigger,sensor,,Giovani  iphone 16pro Last Update Trigger,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_last_update_trigger
+sensor.giovani_iphone_16pro_app_version,sensor,,Giovani  iphone 16pro App Version,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,diagnostic,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_app-version
+sensor.giovani_iphone_16pro_location_permission,sensor,,Giovani  iphone 16pro Location permission,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_location-permission
+sensor.giovani_iphone_16pro_audio_output,sensor,,Giovani  iphone 16pro Audio Output,mobile_app,,Giovani  iphone 16pro,Apple,"iPhone17,1",mobile_app,Giovani  iphone 16pro,registration,,,,4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5_iphone-audio-output
+cover.shades,cover,,Shades,bond,,Shades,Olibra,RMS53,bond,My Bridgehigh trail main,user,,,,ZZIA38003_f130674d3d900f96
+cover.high_country_kitchen,cover,,high country kitchen,bond,,high country kitchen,Olibra,RMS53,bond,My Bridgehigh trail main,user,,,,ZZIA38003_6631e11754d37a3a
+binary_sensor.high_country_front_door_multi_acceleration,binary_sensor,,Out-N-T Acceleration,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::58::binary_sensor::acceleration
+binary_sensor.high_country_front_door_multi_contact,binary_sensor,,Out-N-T Contact,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::58::binary_sensor::contact
+sensor.high_country_front_door_multi_last_update_time,sensor,,Out-N-T Last Update Time,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::58::sensor::last_update
+sensor.high_country_front_door_multi_battery,sensor,,Out-N-T Battery,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::58::sensor::battery
+sensor.high_country_front_door_multi_temperature,sensor,,Out-N-T Temperature,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::58::sensor::temperature
+sensor.high_country_front_door_multi_three_axis,sensor,,Out-N-T Three Axis,hubitat,,OUT-N-T,Hubitat,SmartThings Multipurpose Sensor V5,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::58::sensor::threeAxis
+binary_sensor.upper_hall_filter_clean_required,binary_sensor,,Filter clean required,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-filter_clean
+button.upper_hall_reset_filter,button,,Reset filter,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,config,YozS6usf-reset_filter
+climate.upper_hall,climate,,,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf
+number.upper_hall_temperature_calibration,number,,Temperature calibration,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,config,YozS6usf-calibration_temp
+number.upper_hall_humidity_calibration,number,,Humidity calibration,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,config,YozS6usf-calibration_hum
+select.upper_hall_light,select,,Light,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-light
+sensor.upper_hall_timer_end_time,sensor,,Timer end time,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-timer_time
+sensor.upper_hall_temperature_feels_like,sensor,,Temperature feels like,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,,YozS6usf-feels_like
+sensor.upper_hall_climate_react_low_temperature_threshold,sensor,,Climate React low temperature threshold,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,,YozS6usf-climate_react_low
+sensor.upper_hall_climate_react_high_temperature_threshold,sensor,,Climate React high temperature threshold,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,,YozS6usf-climate_react_high
+sensor.upper_hall_climate_react_type,sensor,,Climate React type,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,integration,,,YozS6usf-climate_react_type
+sensor.upper_hall_filter_last_reset,sensor,,Filter last reset,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-filter_last_reset
+switch.upper_hall_timer,switch,,Timer,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-timer_on_switch
+switch.upper_hall_climate_react,switch,,Climate React,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,,YozS6usf-climate_react_switch
+update.upper_hall_firmware,update,,Firmware,sensibo,,upper hall,Sensibo,skyplus,sensibo,agpiasentin,user,,,diagnostic,YozS6usf-fw_ver_available
+binary_sensor.laundry_sink_water_sensor_water,binary_sensor,,Laundry Sink Water Sensor Water,hubitat,,Laundry sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::59::binary_sensor::water
+sensor.laundry_sink_water_sensor_last_update_time,sensor,,Laundry Sink Water Sensor Last Update Time,hubitat,,Laundry sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::59::sensor::last_update
+sensor.laundry_sink_water_sensor_battery,sensor,,Laundry Sink Water Sensor Battery,hubitat,,Laundry sink water sensor,Hubitat,Generic Zigbee Moisture Sensor (no temp),hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::59::sensor::battery
+binary_sensor.lariattail_client,binary_sensor,,Client,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_update_available
+binary_sensor.lariattail_key_expiry_disabled,binary_sensor,,Key expiry disabled,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_key_expiry_disabled
+binary_sensor.lariattail_supports_hairpinning,binary_sensor,,Supports hairpinning,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_hair_pinning
+binary_sensor.lariattail_supports_ipv6,binary_sensor,,Supports IPv6,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_ipv6
+binary_sensor.lariattail_supports_pcp,binary_sensor,,Supports PCP,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_pcp
+binary_sensor.lariattail_supports_nat_pmp,binary_sensor,,Supports NAT-PMP,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_pmp
+binary_sensor.lariattail_supports_udp,binary_sensor,,Supports UDP,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_udp
+binary_sensor.lariattail_supports_upnp,binary_sensor,,Supports UPnP,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_client_supports_upnp
+sensor.lariattail_expires,sensor,,Expires,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_expires
+sensor.lariattail_ip_address,sensor,,IP address,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,diagnostic,2884555219812073_ip
+sensor.lariattail_last_seen,sensor,,Last seen,tailscale,,lariattail,Tailscale Inc.,linux,tailscale,richardpiasentin@gmail.com,user,config_entry,,,2884555219812073_last_seen
+automation.reboot_hubitat_integration,automation,,reboot hubitat integration,automation,,,,,,,,,,,1762466176853
+binary_sensor.file_editor_running,binary_sensor,,Running,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_state
+sensor.file_editor_version,sensor,,Version,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_version
+sensor.file_editor_newest_version,sensor,,Newest version,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_version_latest
+sensor.file_editor_cpu_percent,sensor,,CPU percent,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_cpu_percent
+sensor.file_editor_memory_percent,sensor,,Memory percent,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_memory_percent
+switch.file_editor,switch,,,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,core_configurator_state
+update.file_editor_update,update,,Update,hassio,,File editor,Official add-ons,Home Assistant Add-on,hassio,Supervisor,system,,,config,core_configurator_version_latest
+remote.master_broad_link_pro,remote,,,broadlink,,Master broad link pro,Broadlink,RM4 pro,broadlink,Master broad link pro,user,,,,348e892df6aa
+binary_sensor.1f_fr_n_t_fp3001_motion,binary_sensor,,1F-Fr-N-T-Fp3001 Motion,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::binary_sensor::motion
+binary_sensor.1f_ha_c_afp3002_motion,binary_sensor,,1F-Ha-C-Afp3002 Motion,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::binary_sensor::motion
+binary_sensor.1f_gr_s_z_motion,binary_sensor,,1F-Gr-S-Z Motion,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::binary_sensor::motion
+binary_sensor.2f_h_c_z_motion,binary_sensor,,2F-H-C-Z Motion,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::binary_sensor::motion
+binary_sensor.b1_tv_c_z_motion,binary_sensor,,B1-Tv-C-Z Motion,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::binary_sensor::motion
+binary_sensor.2f_mb_c_z_motion,binary_sensor,,2F-Mb-C-Z Motion,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::binary_sensor::motion
+binary_sensor.1f_gr_s_z_tamper,binary_sensor,,1F-Gr-S-Z Tamper,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::binary_sensor::tamper
+binary_sensor.2f_h_c_z_tamper,binary_sensor,,2F-H-C-Z Tamper,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::binary_sensor::tamper
+binary_sensor.b1_tv_c_z_tamper,binary_sensor,,B1-Tv-C-Z Tamper,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::binary_sensor::tamper
+binary_sensor.2f_mb_c_z_tamper,binary_sensor,,2F-Mb-C-Z Tamper,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::binary_sensor::tamper
+sensor.1f_fr_n_t_fp3001_last_update_time,sensor,,1F-Fr-N-T-Fp3001 Last Update Time,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::last_update
+sensor.1f_ha_c_afp3002_last_update_time,sensor,,1F-Ha-C-Afp3002 Last Update Time,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::last_update
+sensor.1f_gr_s_z_last_update_time,sensor,,1F-Gr-S-Z Last Update Time,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::60::sensor::last_update
+sensor.2f_h_c_z_last_update_time,sensor,,2F-H-C-Z Last Update Time,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::61::sensor::last_update
+sensor.b1_tv_c_z_last_update_time,sensor,,B1-Tv-C-Z Last Update Time,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::62::sensor::last_update
+sensor.2f_mb_c_z_last_update_time,sensor,,2F-Mb-C-Z Last Update Time,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::63::sensor::last_update
+sensor.1f_fr_n_t_fp3001_battery,sensor,,1F-Fr-N-T-Fp3001 Battery,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::sensor::battery
+sensor.1f_ha_c_afp3002_battery,sensor,,1F-Ha-C-Afp3002 Battery,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::sensor::battery
+sensor.1f_gr_s_z_battery,sensor,,1F-Gr-S-Z Battery,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::sensor::battery
+sensor.2f_h_c_z_battery,sensor,,2F-H-C-Z Battery,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::sensor::battery
+sensor.b1_tv_c_z_battery,sensor,,B1-Tv-C-Z Battery,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::sensor::battery
+sensor.2f_mb_c_z_battery,sensor,,2F-Mb-C-Z Battery,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::sensor::battery
+sensor.1f_fr_n_t_fp3001_humidity,sensor,,1F-Fr-N-T-Fp3001 Humidity,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::sensor::humidity
+sensor.1f_ha_c_afp3002_humidity,sensor,,1F-Ha-C-Afp3002 Humidity,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::sensor::humidity
+sensor.1f_gr_s_z_humidity,sensor,,1F-Gr-S-Z Humidity,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::sensor::humidity
+sensor.2f_h_c_z_humidity,sensor,,2F-H-C-Z Humidity,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::sensor::humidity
+sensor.b1_tv_c_z_humidity,sensor,,B1-Tv-C-Z Humidity,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::sensor::humidity
+sensor.2f_mb_c_z_humidity,sensor,,2F-Mb-C-Z Humidity,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::sensor::humidity
+sensor.1f_fr_n_t_fp3001_illuminance,sensor,,1F-Fr-N-T-Fp3001 Illuminance,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::sensor::illuminance
+sensor.1f_ha_c_afp3002_illuminance,sensor,,1F-Ha-C-Afp3002 Illuminance,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::sensor::illuminance
+sensor.1f_gr_s_z_illuminance,sensor,,1F-Gr-S-Z Illuminance,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::sensor::illuminance
+sensor.2f_h_c_z_illuminance,sensor,,2F-H-C-Z Illuminance,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::sensor::illuminance
+sensor.b1_tv_c_z_illuminance,sensor,,B1-Tv-C-Z Illuminance,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::sensor::illuminance
+sensor.2f_mb_c_z_illuminance,sensor,,2F-Mb-C-Z Illuminance,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::sensor::illuminance
+sensor.1f_fr_n_t_fp3001_powersource,sensor,,1F-Fr-N-T-Fp3001 Powersource,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::sensor::powerSource
+sensor.1f_ha_c_afp3002_powersource,sensor,,1F-Ha-C-Afp3002 Powersource,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::sensor::powerSource
+sensor.1f_fr_n_t_fp3001_temperature,sensor,,1F-Fr-N-T-Fp3001 Temperature,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::64::sensor::temperature
+sensor.1f_ha_c_afp3002_temperature,sensor,,1F-Ha-C-Afp3002 Temperature,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::65::sensor::temperature
+sensor.1f_gr_s_z_temperature,sensor,,1F-Gr-S-Z Temperature,hubitat,,1F-GR-S-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::60::sensor::temperature
+sensor.2f_h_c_z_temperature,sensor,,2F-H-C-Z Temperature,hubitat,,2F-H-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::61::sensor::temperature
+sensor.b1_tv_c_z_temperature,sensor,,B1-Tv-C-Z Temperature,hubitat,,B1-TV-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::62::sensor::temperature
+sensor.2f_mb_c_z_temperature,sensor,,2F-Mb-C-Z Temperature,hubitat,,2F-MB-C-Z,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::63::sensor::temperature
+sensor.1f_fr_n_t_fp3001_ai_interference_identification,sensor,,1F-Fr-N-T-Fp3001 Ai Interference Identification,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::aiInterferenceIdentification
+sensor.1f_fr_n_t_fp3001_room_state,sensor,,1F-Fr-N-T-Fp3001 Room State,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::roomState
+sensor.1f_fr_n_t_fp3001_rtt,sensor,,1F-Fr-N-T-Fp3001 Rtt,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::rtt
+sensor.1f_fr_n_t_fp3001_target_distance,sensor,,1F-Fr-N-T-Fp3001 Target Distance,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::targetDistance
+sensor.1f_fr_n_t_fp3001_check_interval,sensor,,1F-Fr-N-T-Fp3001 Check Interval,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::checkInterval
+sensor.1f_fr_n_t_fp3001_pir_detection_interval,sensor,,1F-Fr-N-T-Fp3001 Pir Detection Interval,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::pirDetectionInterval
+sensor.1f_fr_n_t_fp3001_absence_delay_timer,sensor,,1F-Fr-N-T-Fp3001 Absence Delay Timer,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::absenceDelayTimer
+sensor.1f_fr_n_t_fp3001_ai_sensitivity_adaptive,sensor,,1F-Fr-N-T-Fp3001 Ai Sensitivity Adaptive,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::aiSensitivityAdaptive
+sensor.1f_fr_n_t_fp3001_health_status,sensor,,1F-Fr-N-T-Fp3001 Health Status,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::healthStatus
+sensor.1f_fr_n_t_fp3001_battery_voltage,sensor,,1F-Fr-N-T-Fp3001 Battery Voltage,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::batteryVoltage
+sensor.1f_fr_n_t_fp3001_presence_detection_mode,sensor,,1F-Fr-N-T-Fp3001 Presence Detection Mode,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::presenceDetectionMode
+sensor.1f_fr_n_t_fp3001_detection_range,sensor,,1F-Fr-N-T-Fp3001 Detection Range,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::detectionRange
+sensor.1f_fr_n_t_fp3001_room_activity,sensor,,1F-Fr-N-T-Fp3001 Room Activity,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::roomActivity
+sensor.1f_fr_n_t_fp3001_parent_nwk,sensor,,1F-Fr-N-T-Fp3001 Parent Nwk,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::parentNWK
+sensor.1f_fr_n_t_fp3001_spatial_learning,sensor,,1F-Fr-N-T-Fp3001 Spatial Learning,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::spatialLearning
+sensor.1f_fr_n_t_fp3001_motion_sensitivity,sensor,,1F-Fr-N-T-Fp3001 Motion Sensitivity,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::motionSensitivity
+sensor.1f_fr_n_t_fp3001_pir_detection,sensor,,1F-Fr-N-T-Fp3001 Pir Detection,hubitat,,1F-FR-N-T-fp3001,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::64::sensor::pirDetection
+sensor.1f_ha_c_afp3002_ai_interference_identification,sensor,,1F-Ha-C-Afp3002 Ai Interference Identification,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::aiInterferenceIdentification
+sensor.1f_ha_c_afp3002_room_state,sensor,,1F-Ha-C-Afp3002 Room State,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::roomState
+sensor.1f_ha_c_afp3002_rtt,sensor,,1F-Ha-C-Afp3002 Rtt,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::rtt
+sensor.1f_ha_c_afp3002_target_distance,sensor,,1F-Ha-C-Afp3002 Target Distance,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::targetDistance
+sensor.1f_ha_c_afp3002_check_interval,sensor,,1F-Ha-C-Afp3002 Check Interval,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::checkInterval
+sensor.1f_ha_c_afp3002_pir_detection_interval,sensor,,1F-Ha-C-Afp3002 Pir Detection Interval,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::pirDetectionInterval
+sensor.1f_ha_c_afp3002_absence_delay_timer,sensor,,1F-Ha-C-Afp3002 Absence Delay Timer,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::absenceDelayTimer
+sensor.1f_ha_c_afp3002_ai_sensitivity_adaptive,sensor,,1F-Ha-C-Afp3002 Ai Sensitivity Adaptive,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::aiSensitivityAdaptive
+sensor.1f_ha_c_afp3002_health_status,sensor,,1F-Ha-C-Afp3002 Health Status,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::healthStatus
+sensor.1f_ha_c_afp3002_battery_voltage,sensor,,1F-Ha-C-Afp3002 Battery Voltage,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::batteryVoltage
+sensor.1f_ha_c_afp3002_presence_detection_mode,sensor,,1F-Ha-C-Afp3002 Presence Detection Mode,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::presenceDetectionMode
+sensor.1f_ha_c_afp3002_detection_range,sensor,,1F-Ha-C-Afp3002 Detection Range,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::detectionRange
+sensor.1f_ha_c_afp3002_room_activity,sensor,,1F-Ha-C-Afp3002 Room Activity,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::roomActivity
+sensor.1f_ha_c_afp3002_parent_nwk,sensor,,1F-Ha-C-Afp3002 Parent Nwk,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::parentNWK
+sensor.1f_ha_c_afp3002_spatial_learning,sensor,,1F-Ha-C-Afp3002 Spatial Learning,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::spatialLearning
+sensor.1f_ha_c_afp3002_motion_sensitivity,sensor,,1F-Ha-C-Afp3002 Motion Sensitivity,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::motionSensitivity
+sensor.1f_ha_c_afp3002_pir_detection,sensor,,1F-Ha-C-Afp3002 Pir Detection,hubitat,,1F-HA-C-Afp3002,Hubitat,Aqara P1 Motion Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::65::sensor::pirDetection
+climate.main_floor_hall,climate,,,honeywell,,main floor hall,Honeywell,,honeywell,honeywell,user,config_entry,,,282882
+sensor.main_floor_hall_temperature,sensor,,Temperature,honeywell,,main floor hall,Honeywell,,honeywell,honeywell,user,config_entry,,,282882_current_temperature
+binary_sensor.piasentin_status,binary_sensor,,Status,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_running
+binary_sensor.piasentin_grid_services_active,binary_sensor,,Grid services active,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_grid_services_active
+binary_sensor.piasentin_grid_status,binary_sensor,,Grid status,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_grid_status
+binary_sensor.piasentin_connected_to_tesla,binary_sensor,,Connected to Tesla,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_connected_to_tesla
+binary_sensor.piasentin_charging,binary_sensor,,Charging,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_powerwall_charging
+sensor.piasentin_charge,sensor,,Charge,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_charge
+sensor.piasentin_backup_reserve,sensor,,Backup reserve,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_backup_reserve
+sensor.piasentin_site_export,sensor,,Site export,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_site_export
+sensor.piasentin_site_import,sensor,,Site import,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_site_import
+sensor.piasentin_site_power,sensor,,Site power,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_site_instant_power
+sensor.piasentin_site_frequency,sensor,,Site frequency,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_site_instant_frequency
+sensor.piasentin_site_current,sensor,,Site current,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_site_instant_current
+sensor.piasentin_site_voltage,sensor,,Site voltage,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_site_instant_voltage
+sensor.piasentin_battery_export,sensor,,Battery export,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_battery_export
+sensor.piasentin_battery_import,sensor,,Battery import,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_battery_import
+sensor.piasentin_battery_power,sensor,,Battery power,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_battery_instant_power
+sensor.piasentin_battery_frequency,sensor,,Battery frequency,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_battery_instant_frequency
+sensor.piasentin_battery_current,sensor,,Battery current,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_battery_instant_current
+sensor.piasentin_battery_voltage,sensor,,Battery voltage,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_battery_instant_voltage
+sensor.piasentin_load_export,sensor,,Load export,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_load_export
+sensor.piasentin_load_import,sensor,,Load import,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_load_import
+sensor.piasentin_load_power,sensor,,Load power,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_load_instant_power
+sensor.piasentin_load_frequency,sensor,,Load frequency,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_load_instant_frequency
+sensor.piasentin_load_current,sensor,,Load current,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_load_instant_current
+sensor.piasentin_load_voltage,sensor,,Load voltage,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_load_instant_voltage
+sensor.piasentin_solar_export,sensor,,Solar export,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_solar_export
+sensor.piasentin_solar_import,sensor,,Solar import,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_solar_import
+sensor.piasentin_solar_power,sensor,,Solar power,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,,1232100-00-H--GF2220690001PZ_solar_instant_power
+sensor.piasentin_solar_frequency,sensor,,Solar frequency,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_solar_instant_frequency
+sensor.piasentin_solar_current,sensor,,Solar current,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_solar_instant_current
+sensor.piasentin_solar_voltage,sensor,,Solar voltage,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,integration,,,1232100-00-H--GF2220690001PZ_solar_instant_voltage
+sensor.piasentin_tg1220250002mn_battery_capacity,sensor,,Battery capacity,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_battery_capacity
+sensor.piasentin_tg1220250002mn_battery_voltage,sensor,,Battery voltage,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_battery_instant_voltage
+sensor.piasentin_tg1220250002mn_frequency,sensor,,Frequency,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,integration,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_instant_frequency
+sensor.piasentin_tg1220250002mn_current,sensor,,Current,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,integration,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_instant_current
+sensor.piasentin_tg1220250002mn_power,sensor,,Power,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_instant_power
+sensor.piasentin_tg1220250002mn_battery_export,sensor,,Battery export,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_battery_export
+sensor.piasentin_tg1220250002mn_battery_import,sensor,,Battery import,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_battery_import
+sensor.piasentin_tg1220250002mn_battery_remaining,sensor,,Battery remaining,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_battery_remaining
+sensor.piasentin_tg1220250002mn_grid_state,sensor,,Grid state,powerwall,,Piasentin  TG1220250002MN,Tesla,PowerWall 2 (3012170-30-B),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG1220250002MN_grid_state
+sensor.piasentin_tg12206600080s_battery_capacity,sensor,,Battery capacity,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_battery_capacity
+sensor.piasentin_tg12206600080s_battery_voltage,sensor,,Battery voltage,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_battery_instant_voltage
+sensor.piasentin_tg12206600080s_frequency,sensor,,Frequency,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,integration,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_instant_frequency
+sensor.piasentin_tg12206600080s_current,sensor,,Current,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,integration,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_instant_current
+sensor.piasentin_tg12206600080s_power,sensor,,Power,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_instant_power
+sensor.piasentin_tg12206600080s_battery_export,sensor,,Battery export,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_battery_export
+sensor.piasentin_tg12206600080s_battery_import,sensor,,Battery import,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_battery_import
+sensor.piasentin_tg12206600080s_battery_remaining,sensor,,Battery remaining,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_battery_remaining
+sensor.piasentin_tg12206600080s_grid_state,sensor,,Grid state,powerwall,,Piasentin  TG12206600080S,Tesla,PowerWall 2 (3012170-05-C),powerwall,Piasentin ,user,,,diagnostic,1232100-00-H--GF2220690001PZ_TG12206600080S_grid_state
+switch.piasentin_off_grid_operation,switch,,Off-grid operation,powerwall,,Piasentin ,Tesla,PowerWall 2 (GW2),powerwall,Piasentin ,user,,,config,1232100-00-H--GF2220690001PZ_off_grid_operation
+device_tracker.giovani_iphone,device_tracker,,Giovani iPhone ,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,diagnostic,123BDAAC-B54A-4370-B358-F9E319470438
+sensor.giovani_iphone_battery_level,sensor,,Giovani iPhone  Battery Level,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_battery_level
+sensor.giovani_iphone_sim_2,sensor,,Giovani iPhone  SIM 2,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_connectivity_sim_2
+sensor.giovani_iphone_sim_1,sensor,,Giovani iPhone  SIM 1,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_connectivity_sim_1
+sensor.giovani_iphone_geocoded_location,sensor,,Giovani iPhone  Geocoded Location,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_geocoded_location
+sensor.giovani_iphone_battery_state,sensor,,Giovani iPhone  Battery State,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_battery_state
+sensor.giovani_iphone_last_update_trigger,sensor,,Giovani iPhone  Last Update Trigger,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_last_update_trigger
+sensor.giovani_iphone_storage,sensor,,Giovani iPhone  Storage,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_storage
+sensor.giovani_iphone_app_version,sensor,,Giovani iPhone  App Version,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,diagnostic,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_app-version
+sensor.giovani_iphone_ssid,sensor,,Giovani iPhone  SSID,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_connectivity_ssid
+sensor.giovani_iphone_location_permission,sensor,,Giovani iPhone  Location permission,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_location-permission
+sensor.giovani_iphone_audio_output,sensor,,Giovani iPhone  Audio Output,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_iphone-audio-output
+sensor.giovani_iphone_connection_type,sensor,,Giovani iPhone  Connection Type,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_connectivity_connection_type
+sensor.giovani_iphone_bssid,sensor,,Giovani iPhone  BSSID,mobile_app,,Giovani iPhone ,Apple,"iPhone17,1",mobile_app,Giovani iPhone ,registration,,,,15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5_connectivity_bssid
+person.samsung,person,,samsung,person,,,,,,,,,,,samsung
+binary_sensor.giovani_s_device_filter_clean_required,binary_sensor,,Filter clean required,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-filter_clean
+button.giovani_s_device_reset_filter,button,,Reset filter,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,config,dYs3oJtV-reset_filter
+climate.giovani_s_device,climate,,,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV
+number.giovani_s_device_temperature_calibration,number,,Temperature calibration,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,dYs3oJtV-calibration_temp
+number.giovani_s_device_humidity_calibration,number,,Humidity calibration,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,dYs3oJtV-calibration_hum
+sensor.giovani_s_device_airq_tvoc,sensor,,AirQ TVOC,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-airq_tvoc
+sensor.giovani_s_device_airq_co2,sensor,,AirQ CO2,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-airq_co2
+sensor.giovani_s_device_timer_end_time,sensor,,Timer end time,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-timer_time
+sensor.giovani_s_device_temperature_feels_like,sensor,,Temperature feels like,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,,dYs3oJtV-feels_like
+sensor.giovani_s_device_climate_react_low_temperature_threshold,sensor,,Climate React low temperature threshold,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,,dYs3oJtV-climate_react_low
+sensor.giovani_s_device_climate_react_high_temperature_threshold,sensor,,Climate React high temperature threshold,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,,dYs3oJtV-climate_react_high
+sensor.giovani_s_device_climate_react_type,sensor,,Climate React type,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,integration,,,dYs3oJtV-climate_react_type
+sensor.giovani_s_device_filter_last_reset,sensor,,Filter last reset,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-filter_last_reset
+switch.giovani_s_device_timer,switch,,Timer,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-timer_on_switch
+switch.giovani_s_device_climate_react,switch,,Climate React,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-climate_react_switch
+update.giovani_s_device_firmware,update,,Firmware,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,diagnostic,dYs3oJtV-fw_ver_available
+binary_sensor.giovani_s_device_filter_clean_required_2,binary_sensor,,Filter clean required,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-filter_clean
+button.giovani_s_device_reset_filter_2,button,,Reset filter,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,config,WjEyr8t6-reset_filter
+climate.giovani_s_device_2,climate,,,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6
+number.giovani_s_device_temperature_calibration_2,number,,Temperature calibration,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,WjEyr8t6-calibration_temp
+number.giovani_s_device_humidity_calibration_2,number,,Humidity calibration,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,WjEyr8t6-calibration_hum
+sensor.giovani_s_device_airq_tvoc_2,sensor,,AirQ TVOC,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-airq_tvoc
+sensor.giovani_s_device_airq_co2_2,sensor,,AirQ CO2,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-airq_co2
+sensor.giovani_s_device_timer_end_time_2,sensor,,Timer end time,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-timer_time
+sensor.giovani_s_device_temperature_feels_like_2,sensor,,Temperature feels like,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,,WjEyr8t6-feels_like
+sensor.giovani_s_device_climate_react_low_temperature_threshold_2,sensor,,Climate React low temperature threshold,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,,WjEyr8t6-climate_react_low
+sensor.giovani_s_device_climate_react_high_temperature_threshold_2,sensor,,Climate React high temperature threshold,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,,WjEyr8t6-climate_react_high
+sensor.giovani_s_device_climate_react_type_2,sensor,,Climate React type,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,integration,,,WjEyr8t6-climate_react_type
+sensor.giovani_s_device_filter_last_reset_2,sensor,,Filter last reset,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-filter_last_reset
+switch.giovani_s_device_timer_2,switch,,Timer,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-timer_on_switch
+switch.giovani_s_device_climate_react_2,switch,,Climate React,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-climate_react_switch
+update.giovani_s_device_firmware_2,update,,Firmware,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,diagnostic,WjEyr8t6-fw_ver_available
+binary_sensor.upper_guest_filter_clean_required,binary_sensor,,Filter clean required,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-filter_clean
+button.upper_guest_reset_filter,button,,Reset filter,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,config,5r7nggVe-reset_filter
+climate.upper_guest,climate,,,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe
+number.upper_guest_temperature_calibration,number,,Temperature calibration,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,5r7nggVe-calibration_temp
+number.upper_guest_humidity_calibration,number,,Humidity calibration,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,config,5r7nggVe-calibration_hum
+sensor.upper_guest_airq_tvoc,sensor,,AirQ TVOC,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-airq_tvoc
+sensor.upper_guest_airq_co2,sensor,,AirQ CO2,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-airq_co2
+sensor.upper_guest_timer_end_time,sensor,,Timer end time,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-timer_time
+sensor.upper_guest_temperature_feels_like,sensor,,Temperature feels like,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,,5r7nggVe-feels_like
+sensor.upper_guest_climate_react_low_temperature_threshold,sensor,,Climate React low temperature threshold,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,,5r7nggVe-climate_react_low
+sensor.upper_guest_climate_react_high_temperature_threshold,sensor,,Climate React high temperature threshold,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,,5r7nggVe-climate_react_high
+sensor.upper_guest_climate_react_type,sensor,,Climate React type,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,integration,,,5r7nggVe-climate_react_type
+sensor.upper_guest_filter_last_reset,sensor,,Filter last reset,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-filter_last_reset
+switch.upper_guest_timer,switch,,Timer,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-timer_on_switch
+switch.upper_guest_climate_react,switch,,Climate React,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-climate_react_switch
+update.upper_guest_firmware,update,,Firmware,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,diagnostic,5r7nggVe-fw_ver_available
+sensor.z1_last_update_time,sensor,,Z1 - North First Floor Bedroom And Bath And Entry Last Update Time,hubitat,,Z1 - north first floor bedroom and bath and entry,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::78::sensor::last_update
+sensor.z1_switch,sensor,,Z1 - North First Floor Bedroom And Bath And Entry Switch,hubitat,,Z1 - north first floor bedroom and bath and entry,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::78::sensor::switch
+switch.z1,switch,,Z1 - north first floor bedroom and bath and entry,hubitat,,Z1 - north first floor bedroom and bath and entry,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::78::switch
+sensor.garage_zooz_plug_last_update_time,sensor,,Garage Zooz Plug Last Update Time,hubitat,,Garage Zooz plug,Hubitat,Zooz ZEN14 Double Outdoor Plug,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::66::sensor::last_update
+sensor.switch_binary_da6cf451000e00_switch_1_last_update_time,sensor,,Switch Binary [Da6Cf451000E00] - Switch 1 Last Update Time,hubitat,,Switch Binary [da6cf451000e00] - Switch 1,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::67::sensor::last_update
+sensor.switch_binary_da6cf451000e00_switch_2_last_update_time,sensor,,Switch Binary [Da6Cf451000E00] - Switch 2 Last Update Time,hubitat,,Switch Binary [da6cf451000e00] - Switch 2,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::68::sensor::last_update
+sensor.zonev789_last_update_time,sensor,,Zonev789 Last Update Time,hubitat,,ZoneV789,Hubitat,Shelly Wave PRO 3,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::69::sensor::last_update
+sensor.z7_last_update_time,sensor,,Z7 - Basement Kitchen And Tv Area Last Update Time,hubitat,,Z7 - basement kitchen and tv area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::70::sensor::last_update
+sensor.z8_last_update_time,sensor,,Z8 - Dining Mad Man Last Update Time,hubitat,,Z8 - dining mad man,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::71::sensor::last_update
+sensor.z9_last_update_time,sensor,,Z9 - Basement Bedroom Last Update Time,hubitat,,Z9 - basement bedroom,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::72::sensor::last_update
+sensor.zone456_last_update_time,sensor,,Zone456 Last Update Time,hubitat,,Zone456,Hubitat,Shelly Wave PRO 3,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::73::sensor::last_update
+sensor.z4_last_update_time,sensor,,Z4 - Garage Last Update Time,hubitat,,Z4 - garage,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::74::sensor::last_update
+sensor.z5_last_update_time,sensor,,Z5 - First Floor Living Last Update Time,hubitat,,Z5 - first floor living,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::75::sensor::last_update
+sensor.z6_last_update_time,sensor,,Z6 -Master Last Update Time,hubitat,,Z6 -master,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::76::sensor::last_update
+sensor.zonev123_last_update_time,sensor,,Zonev123 Last Update Time,hubitat,,ZoneV123,Hubitat,Shelly Wave PRO 3,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::77::sensor::last_update
+sensor.z2_last_update_time,sensor,,Z2 - Second Floor Office And Upper Guest Last Update Time,hubitat,,Z2 - Second floor office and upper guest,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::79::sensor::last_update
+sensor.z3_last_update_time,sensor,,Z3 - Basement Bath Utility Common Area Last Update Time,hubitat,,Z3 - Basement bath utility common area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::80::sensor::last_update
+sensor.switch_binary_da6cf451000e00_switch_1_switch,sensor,,Switch Binary [Da6Cf451000E00] - Switch 1 Switch,hubitat,,Switch Binary [da6cf451000e00] - Switch 1,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::67::sensor::switch
+sensor.switch_binary_da6cf451000e00_switch_2_switch,sensor,,Switch Binary [Da6Cf451000E00] - Switch 2 Switch,hubitat,,Switch Binary [da6cf451000e00] - Switch 2,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::68::sensor::switch
+sensor.z7_switch,sensor,,Z7 - Basement Kitchen And Tv Area Switch,hubitat,,Z7 - basement kitchen and tv area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::70::sensor::switch
+sensor.z8_switch,sensor,,Z8 - Dining Mad Man Switch,hubitat,,Z8 - dining mad man,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::71::sensor::switch
+sensor.z9_switch,sensor,,Z9 - Basement Bedroom Switch,hubitat,,Z9 - basement bedroom,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::72::sensor::switch
+sensor.z4_switch,sensor,,Z4 - Garage Switch,hubitat,,Z4 - garage,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::74::sensor::switch
+sensor.z5_switch,sensor,,Z5 - First Floor Living Switch,hubitat,,Z5 - first floor living,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::75::sensor::switch
+sensor.z6_switch,sensor,,Z6 -Master Switch,hubitat,,Z6 -master,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::76::sensor::switch
+sensor.z2_switch,sensor,,Z2 - Second Floor Office And Upper Guest Switch,hubitat,,Z2 - Second floor office and upper guest,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::79::sensor::switch
+sensor.z3_switch,sensor,,Z3 - Basement Bath Utility Common Area Switch,hubitat,,Z3 - Basement bath utility common area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::80::sensor::switch
+switch.switch_binary_da6cf451000e00_switch_1,switch,,Switch Binary [da6cf451000e00] - Switch 1,hubitat,,Switch Binary [da6cf451000e00] - Switch 1,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::67::switch
+switch.switch_binary_da6cf451000e00_switch_2,switch,,Switch Binary [da6cf451000e00] - Switch 2,hubitat,,Switch Binary [da6cf451000e00] - Switch 2,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::68::switch
+switch.z7,switch,,Z7 - basement kitchen and tv area,hubitat,,Z7 - basement kitchen and tv area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::70::switch
+switch.z8,switch,,Z8 - dining mad man,hubitat,,Z8 - dining mad man,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::71::switch
+switch.z9,switch,,Z9 - basement bedroom,hubitat,,Z9 - basement bedroom,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::72::switch
+switch.z4,switch,,Z4 - garage,hubitat,,Z4 - garage,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::74::switch
+switch.z5,switch,,Z5 - first floor living,hubitat,,Z5 - first floor living,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::75::switch
+switch.z6,switch,,Z6 -master,hubitat,,Z6 -master,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::76::switch
+switch.z2,switch,,Z2 - Second floor office and upper guest,hubitat,,Z2 - Second floor office and upper guest,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::79::switch
+switch.z3,switch,,Z3 - Basement bath utility common area,hubitat,,Z3 - Basement bath utility common area,Hubitat,Generic Component Switch,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::80::switch
+select.master_light,select,,Light,sensibo,,master,Sensibo,airq,sensibo,agpiasentin,user,,,,dYs3oJtV-light
+select.office_light,select,,Light,sensibo,,office,Sensibo,airq,sensibo,agpiasentin,user,,,,WjEyr8t6-light
+select.upper_guest_light,select,,Light,sensibo,,upper guest,Sensibo,airq,sensibo,agpiasentin,user,,,,5r7nggVe-light
+climate.zone_5_virtual_thermostat_first_floor_living,climate,,zone 5 virtual thermostat - first floor living,generic_thermostat,,Z5 - first floor living,Hubitat,Generic Component Switch,generic_thermostat,zone 5 virtual thermostat - first floor living,user,,,,01KBGNR1DBEPJYDA3F021J55H8
+automation.master_heat_on,automation,,Master heat on,automation,,,,,,,,,,,1764736926515
+automation.master_heat_off,automation,,Master heat on off,automation,,,,,,,,,,,1764737341675
+automation.basement_heat_on_and_off,automation,, Basement heat on and off,automation,,,,,,,,,,,1764739945517
+climate.zone_6_master_thermostat,climate,,zone 6 master thermostat,generic_thermostat,,Z6 -master,Hubitat,Generic Component Switch,generic_thermostat,zone 6 master thermostat,user,,,,01KBK90A84SSJPNEC25F9QMP93
+climate.z1_first_floor_bedroom_and_bath,climate,,z1 first floor bedroom and bath,generic_thermostat,,Z1 - north first floor bedroom and bath and entry,Hubitat,Generic Component Switch,generic_thermostat,z1 first floor bedroom and bath,user,,,,01KBK94TH7WZE9W28V9R8EX2G7
+climate.zone_2_second_floor_office_and_upper_guest,climate,,zone 2 second floor office and upper guest,generic_thermostat,,Z2 - Second floor office and upper guest,Hubitat,Generic Component Switch,generic_thermostat,zone 2 second floor office and upper guest,user,,,,01KBK9822M4A4EJWWS4K2QCCQ9
+climate.zone_3_basement_bath_and_common,climate,,zone 3 basement bath and common,generic_thermostat,,Z3 - Basement bath utility common area,Hubitat,Generic Component Switch,generic_thermostat,zone 3 basement bath and common,user,,,,01KBK9AJFQ4P1WHGJFZT3DD8GR
+climate.zone_7_basement_bar_and_tv_room_south_side,climate,,zone 7 basement bar and tv room south side,generic_thermostat,,Z7 - basement kitchen and tv area,Hubitat,Generic Component Switch,generic_thermostat,zone 7 basement bar and tv room south side,user,,,,01KBK9HHYW9KJF0DG6NBDSQYDG
+climate.zone_8_dining_room,climate,,zone 8 Dining room,generic_thermostat,,Z8 - dining mad man,Hubitat,Generic Component Switch,generic_thermostat,zone 8 Dining room,user,,,,01KBK9MZ5EQC4G177KFJWBAZWP
+climate.zone_9_basement_bedroom,climate,,zone 9 basement bedroom,generic_thermostat,,Z9 - basement bedroom,Hubitat,Generic Component Switch,generic_thermostat,zone 9 basement bedroom,user,,,,01KBK9Q3V9GKMFQKM4F6JK3GHS
+climate.master_better_thermostat,climate,,,better_thermostat,,master better thermostat,Better Thermostat,Generic Component Switch,better_thermostat,master better thermostat,user,config_entry,,,01KBK9TRKAVQJH08Q741T6S0VN
+climate.second_floor_better_thermostat,climate,,,better_thermostat,,second floor better thermostat,Better Thermostat,Generic Component Switch,better_thermostat,second floor better thermostat,user,config_entry,,,01KBKC3SHV6XN856899JZ572HT
+climate.basement_zone_7_better_thermostat,climate,,,better_thermostat,,basement zone 7 better thermostat,Better Thermostat,Generic Component Switch,better_thermostat,basement zone 7 better thermostat,user,config_entry,,,01KBKFKMVAXGZX6RFVGFM28ADS
+climate.basement_zone_9_bedroom_better_thermostat,climate,,,better_thermostat,,basement zone 9 bedroom better thermostat,Better Thermostat,Generic Component Switch,better_thermostat,basement zone 9 bedroom better thermostat,user,config_entry,,,01KBKFXD6ARX4Y8X4H9VZA3KX8
+climate.basement_zone_3_better_thermostat_common_and_utility,climate,,,better_thermostat,,basement zone 3 better thermostat common and utility,Better Thermostat,Generic Component Switch,better_thermostat,basement zone 3 better thermostat common and utility,user,config_entry,,,01KBKG6BDC4G8XCE3KFAVGTGFB
+sensor.2nd_floor_office_temperature_last_update_time,sensor,,2Nd Floor Office Temperature Last Update Time,hubitat,,2nd floor office temperature,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::81::sensor::last_update
+sensor.2nd_floor_office_temperature_battery,sensor,,2Nd Floor Office Temperature Battery,hubitat,,2nd floor office temperature,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::81::sensor::battery
+sensor.2nd_floor_office_temperature_humidity,sensor,,2Nd Floor Office Temperature Humidity,hubitat,,2nd floor office temperature,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::81::sensor::humidity
+sensor.2nd_floor_office_temperature_temperature,sensor,,2Nd Floor Office Temperature Temperature,hubitat,,2nd floor office temperature,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::81::sensor::temperature
+binary_sensor.madmen_temp_contact,binary_sensor,,Madmen Temp Contact,hubitat,,Dining temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::83::binary_sensor::contact
+event.high_country_water_cutoff_button_1,event,,High Country Water Cutoff Button 1,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::82::button_event::1
+sensor.high_country_water_cutoff_last_update_time,sensor,,High Country Water Cutoff Last Update Time,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::last_update
+sensor.madmen_temp_last_update_time,sensor,,Dining Temp Last Update Time,hubitat,,Dining temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::83::sensor::last_update
+sensor.madmen_temp_battery,sensor,,Dining Temp Battery,hubitat,,Dining temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::83::sensor::battery
+sensor.high_country_water_cutoff_number_of_buttons,sensor,,High Country Water Cutoff Number Of Buttons,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::numberOfButtons
+sensor.high_country_water_cutoff_switch,sensor,,High Country Water Cutoff Switch,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::switch
+sensor.high_country_water_cutoff_held,sensor,,High Country Water Cutoff Held,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::held
+sensor.high_country_water_cutoff_pushed,sensor,,High Country Water Cutoff Pushed,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::pushed
+sensor.high_country_water_cutoff_double_tapped,sensor,,High Country Water Cutoff Double Tapped,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::doubleTapped
+sensor.high_country_water_cutoff_released,sensor,,High Country Water Cutoff Released,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::82::sensor::released
+switch.high_country_water_cutoff,switch,,High country water cutoff,hubitat,,High country water cutoff,Hubitat,Zooz Zen51 Dry Contact Relay,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::82::switch
+sensor.madmen_temp_humidity,sensor,,Dining Temp Humidity,hubitat,,Dining temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::83::sensor::humidity
+sensor.madmen_temp_temperature,sensor,,Dining Temp Temperature,hubitat,,Dining temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::83::sensor::temperature
+input_boolean.high_country_sanity_flag,input_boolean,,High Country Sanity Flag,input_boolean,,,,,,,,,,,high_country_sanity_flag
+binary_sensor.hc_z1_call_for_heat,binary_sensor,,HC Z1 – First Floor Bedroom & Bath – Call For Heat,template,,,,,,,,,,,hc_z1_call_for_heat
+binary_sensor.hc_z2_call_for_heat,binary_sensor,,HC Z2 – Office & Upper Guest – Call For Heat,template,,,,,,,,,,,hc_z2_call_for_heat
+binary_sensor.hc_z3_call_for_heat,binary_sensor,,HC Z3 – Basement Bath & Common – Call For Heat,template,,,,,,,,,,,hc_z3_call_for_heat
+binary_sensor.hc_z4_call_for_heat,binary_sensor,,HC Z4 – Garage – Call For Heat,template,,,,,,,,,,,hc_z4_call_for_heat
+binary_sensor.hc_z5_call_for_heat,binary_sensor,,HC Z5 – First Floor Living – Call For Heat,template,,,,,,,,,,,hc_z5_call_for_heat
+binary_sensor.hc_z6_call_for_heat,binary_sensor,,HC Z6 – Master – Call For Heat,template,,,,,,,,,,,hc_z6_call_for_heat
+binary_sensor.hc_z7_call_for_heat,binary_sensor,,HC Z7 – Basement Bar & TV South – Call For Heat,template,,,,,,,,,,,hc_z7_call_for_heat
+binary_sensor.hc_z8_call_for_heat,binary_sensor,,HC Z8 – Dining Room – Call For Heat,template,,,,,,,,,,,hc_z8_call_for_heat
+binary_sensor.hc_z9_call_for_heat,binary_sensor,,HC Z9 – Basement Bedroom – Call For Heat,template,,,,,,,,,,,hc_z9_call_for_heat
+binary_sensor.hc_basement_call_for_heat,binary_sensor,,HC Basement Call For Heat,template,,,,,,,,,,,hc_basement_call_for_heat
+binary_sensor.hc_first_floor_call_for_heat,binary_sensor,,HC First Floor Call For Heat,template,,,,,,,,,,,hc_first_floor_call_for_heat
+binary_sensor.hc_upper_floor_call_for_heat,binary_sensor,,HC Upper Floor Call For Heat,template,,,,,,,,,,,hc_upper_floor_call_for_heat
+binary_sensor.hc_whole_house_call_for_heat,binary_sensor,,HC Whole House Call For Heat,template,,,,,,,,,,,hc_whole_house_call_for_heat
+binary_sensor.hc_garage_call_for_heat,binary_sensor,,HC Garage Call For Heat,template,,,,,,,,,,,hc_garage_call_for_heat
+input_boolean.hc_enable_setpoint_broadcast,input_boolean,,HC Enable Setpoint Broadcast,input_boolean,,,,,,,,,,,hc_enable_setpoint_broadcast
+input_number.hc_setpoint_master,input_number,,HC Setpoint Master,input_number,,,,,,,,,,,hc_setpoint_master
+input_number.hc_setpoint_basement,input_number,,HC Setpoint Basement,input_number,,,,,,,,,,,hc_setpoint_basement
+input_number.hc_setpoint_first_floor,input_number,,HC Setpoint First Floor,input_number,,,,,,,,,,,hc_setpoint_first_floor
+input_number.hc_setpoint_upper_floor,input_number,,HC Setpoint Upper Floor,input_number,,,,,,,,,,,hc_setpoint_upper_floor
+script.hc_broadcast_master_setpoint,script,,HC Broadcast Master Setpoint,script,,,,,,,,,,,hc_broadcast_master_setpoint
+script.hc_broadcast_basement_setpoint,script,,HC Broadcast Basement Setpoint,script,,,,,,,,,,,hc_broadcast_basement_setpoint
+script.hc_broadcast_first_floor_setpoint,script,,HC Broadcast First Floor Setpoint,script,,,,,,,,,,,hc_broadcast_first_floor_setpoint
+script.hc_broadcast_upper_floor_setpoint,script,,HC Broadcast Upper Floor Setpoint,script,,,,,,,,,,,hc_broadcast_upper_floor_setpoint
+automation.hc_auto_broadcast_first_floor_setpoint,automation,,HC Auto Broadcast First Floor Setpoint,automation,,,,,,,,,,,hc_auto_broadcast_first_floor_setpoint
+automation.hc_auto_broadcast_basement_setpoint,automation,,HC Auto Broadcast Basement Setpoint,automation,,,,,,,,,,,hc_auto_broadcast_basement_setpoint
+automation.hc_auto_broadcast_upper_floor_setpoint,automation,,HC Auto Broadcast Upper Floor Setpoint,automation,,,,,,,,,,,hc_auto_broadcast_upper_floor_setpoint
+automation.hc_auto_broadcast_master_setpoint_overrides_floors,automation,,HC Auto Broadcast Master Setpoint (Overrides Floors),automation,,,,,,,,,,,hc_auto_broadcast_master_setpoint
+script.hc_minisplits_apply_mode,script,,HC Mini-splits Apply Mode (Turn On + Mode),script,,,,,,,,,,,hc_minisplits_apply_mode
+input_select.hc_minisplit_preferred_mode,input_select,,HC Mini-split Preferred Mode,input_select,,,,,,,,,,,hc_minisplit_preferred_mode
+input_boolean.hc_enable_minisplit_auto_on_setpoint,input_boolean,,HC Enable Mini-split Auto-On on Setpoint Change,input_boolean,,,,,,,,,,,hc_enable_minisplit_auto_on_setpoint
+sensor.upper_guest_temp_last_update_time,sensor,,Upper Guest Temp Last Update Time,hubitat,,Upper guest temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::85::sensor::last_update
+sensor.upper_guest_temp_battery,sensor,,Upper Guest Temp Battery,hubitat,,Upper guest temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::85::sensor::battery
+sensor.upper_guest_temp_humidity,sensor,,Upper Guest Temp Humidity,hubitat,,Upper guest temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::85::sensor::humidity
+sensor.upper_guest_temp_temperature,sensor,,Upper Guest Temp Temperature,hubitat,,Upper guest temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::85::sensor::temperature
+sensor.hc_office_guest_avg_temperature,sensor,,HC Office+Guest Avg Temperature,template,,,,,,,,,,,hc_office_guest_avg_temperature
+script.hc_retry_mismatched_minisplits,script,,"HC Retry Mismatched Mini-splits (3x, 10s)",script,,,,,,,,,,,hc_retry_mismatched_minisplits
+sensor.hc_desired_upper_setpoint,sensor,,HC Desired Upper Setpoint,template,,,,,,,,,,,hc_desired_upper_setpoint
+sensor.hc_upper_hall_reported_setpoint,sensor,,HC Upper Hall Reported Setpoint,template,,,,,,,,,,,hc_upper_hall_reported_setpoint
+sensor.hc_master_mini_split_reported_setpoint,sensor,,HC Master Mini-split Reported Setpoint,template,,,,,,,,,,,hc_master_minisplit_reported_setpoint
+sensor.hc_office_mini_split_reported_setpoint,sensor,,HC Office Mini-split Reported Setpoint,template,,,,,,,,,,,hc_office_minisplit_reported_setpoint
+sensor.hc_upper_guest_mini_split_reported_setpoint,sensor,,HC Upper Guest Mini-split Reported Setpoint,template,,,,,,,,,,,hc_upper_guest_minisplit_reported_setpoint
+binary_sensor.hc_upper_hall_setpoint_mismatch,binary_sensor,,HC Upper Hall Setpoint Mismatch,template,,,,,,,,,,,hc_upper_hall_setpoint_mismatch
+binary_sensor.hc_master_mini_split_setpoint_mismatch,binary_sensor,,HC Master Mini-split Setpoint Mismatch,template,,,,,,,,,,,hc_master_minisplit_setpoint_mismatch
+binary_sensor.hc_office_mini_split_setpoint_mismatch,binary_sensor,,HC Office Mini-split Setpoint Mismatch,template,,,,,,,,,,,hc_office_minisplit_setpoint_mismatch
+binary_sensor.hc_upper_guest_mini_split_setpoint_mismatch,binary_sensor,,HC Upper Guest Mini-split Setpoint Mismatch,template,,,,,,,,,,,hc_upper_guest_minisplit_setpoint_mismatch
+binary_sensor.hc_any_mini_split_setpoint_mismatch,binary_sensor,,HC Any Mini-split Setpoint Mismatch,template,,,,,,,,,,,hc_any_minisplit_setpoint_mismatch
+script.hc_apply_cold_tolerance_and_restart,script,,HC Apply Cold Tolerance (Patch + Restart),script,,,,,,,,,,,hc_apply_cold_tolerance_and_restart
+input_number.hc_cold_tolerance,input_number,,HC Cold Tolerance,input_number,,,,,,,,,,,hc_cold_tolerance
+input_boolean.hc_enable_cold_tolerance_gate,input_boolean,,HC Enable Cold Tolerance Gate,input_boolean,,,,,,,,,,,hc_enable_cold_tolerance_gate
+automation.hc_cold_tolerance_gate_block_zone_turn_on,automation,,HC Cold Tolerance Gate - Block Zone Turn ON,automation,,,,,,,,,,,hc_cold_tolerance_gate_block_on
+person.root,person,,root,person,,,,,,,,,,,root
+person.admin,person,,admin,person,,,,,,,,,,,admin
+binary_sensor.new_garage_motion_sensor_motion,binary_sensor,,New Garage Motion Sensor Motion,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::binary_sensor::motion
+binary_sensor.new_garage_motion_sensor_tamper,binary_sensor,,New Garage Motion Sensor Tamper,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::binary_sensor::tamper
+sensor.new_garage_motion_sensor_last_update_time,sensor,,New Garage Motion Sensor Last Update Time,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::87::sensor::last_update
+sensor.new_garage_motion_sensor_battery,sensor,,New Garage Motion Sensor Battery,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::sensor::battery
+sensor.new_garage_motion_sensor_humidity,sensor,,New Garage Motion Sensor Humidity,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::sensor::humidity
+sensor.new_garage_motion_sensor_illuminance,sensor,,New Garage Motion Sensor Illuminance,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::sensor::illuminance
+sensor.new_garage_motion_sensor_temperature,sensor,,New Garage Motion Sensor Temperature,hubitat,,new garage motion sensor,Hubitat,Zooz Q Sensor ZSE11,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::87::sensor::temperature
+script.hc_kick_hydronic_thermostats,script,,HC Kick Hydronic Thermostats,script,,,,,,,,,,,hc_kick_hydronic_thermostats
+script.hc_kick_hydronic_after_broadcast,script,,HC Kick Hydronic After Broadcast,script,,,,,,,,,,,hc_kick_hydronic_after_broadcast
+script.hc_broadcast_garage_setpoint,script,,HC Broadcast Garage Setpoint,script,,,,,,,,,,,hc_broadcast_garage_setpoint
+input_number.hc_setpoint_garage,input_number,,HC Setpoint Garage,input_number,,,,,,,,,,,hc_setpoint_garage
+automation.hc_auto_broadcast_garage_setpoint,automation,,HC Auto Broadcast Garage Setpoint,automation,,,,,,,,,,,hc_auto_broadcast_garage_setpoint
+input_datetime.hc_dispatch_last_on_z1,input_datetime,,HC Dispatch Last ON Z1,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z1
+input_datetime.hc_dispatch_last_on_z2,input_datetime,,HC Dispatch Last ON Z2,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z2
+input_datetime.hc_dispatch_last_on_z3,input_datetime,,HC Dispatch Last ON Z3,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z3
+input_datetime.hc_dispatch_last_on_z4,input_datetime,,HC Dispatch Last ON Z4,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z4
+input_datetime.hc_dispatch_last_on_z5,input_datetime,,HC Dispatch Last ON Z5,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z5
+input_datetime.hc_dispatch_last_on_z6,input_datetime,,HC Dispatch Last ON Z6,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z6
+input_datetime.hc_dispatch_last_on_z7,input_datetime,,HC Dispatch Last ON Z7,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z7
+input_datetime.hc_dispatch_last_on_z8,input_datetime,,HC Dispatch Last ON Z8,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z8
+input_datetime.hc_dispatch_last_on_z9,input_datetime,,HC Dispatch Last ON Z9,input_datetime,,,,,,,,,,,hc_dispatch_last_on_z9
+counter.hc_dispatch_calls_z1_today,counter,,HC Z1 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z1_today
+counter.hc_dispatch_calls_z2_today,counter,,HC Z2 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z2_today
+counter.hc_dispatch_calls_z3_today,counter,,HC Z3 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z3_today
+counter.hc_dispatch_calls_z4_today,counter,,HC Z4 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z4_today
+counter.hc_dispatch_calls_z5_today,counter,,HC Z5 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z5_today
+counter.hc_dispatch_calls_z6_today,counter,,HC Z6 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z6_today
+counter.hc_dispatch_calls_z7_today,counter,,HC Z7 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z7_today
+counter.hc_dispatch_calls_z8_today,counter,,HC Z8 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z8_today
+counter.hc_dispatch_calls_z9_today,counter,,HC Z9 Call Starts Today,counter,,,,,,,,,,,hc_dispatch_calls_z9_today
+counter.hc_dispatch_pair_z3_z7,counter,,HC Pair Z3↔Z7 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z3_z7
+counter.hc_dispatch_pair_z3_z9,counter,,HC Pair Z3↔Z9 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z3_z9
+counter.hc_dispatch_pair_z7_z9,counter,,HC Pair Z7↔Z9 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z7_z9
+counter.hc_dispatch_pair_z1_z5,counter,,HC Pair Z1↔Z5 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z1_z5
+counter.hc_dispatch_pair_z1_z8,counter,,HC Pair Z1↔Z8 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z1_z8
+counter.hc_dispatch_pair_z5_z8,counter,,HC Pair Z5↔Z8 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z5_z8
+counter.hc_dispatch_pair_z2_z6,counter,,HC Pair Z2↔Z6 Within Window,counter,,,,,,,,,,,hc_dispatch_pair_z2_z6
+input_number.hc_dispatch_batch_window_sec,input_number,,HC Dispatch Batch Window,input_number,,,,,,,,,,,hc_dispatch_batch_window_sec
+input_number.hc_dispatch_near_call_margin_f,input_number,,HC Dispatch Near-Call Margin,input_number,,,,,,,,,,,hc_dispatch_near_call_margin_f
+input_boolean.hc_dispatcher_advisory_enabled,input_boolean,,HC Dispatcher Advisory Enabled,input_boolean,,,,,,,,,,,hc_dispatcher_advisory_enabled
+input_select.hc_dispatch_profile,input_select,,HC Dispatch Profile,input_select,,,,,,,,,,,hc_dispatch_profile
+sensor.hc_dispatch_active_zones,sensor,,HC Dispatch Active Zones,template,,,,,,,,,,,hc_dispatch_active_zones
+sensor.hc_dispatch_near_call_zones,sensor,,HC Dispatch Near-Call Zones,template,,,,,,,,,,,hc_dispatch_near_call_zones
+sensor.hc_dispatch_suggested_batch,sensor,,HC Dispatch Suggested Batch,template,,,,,,,,,,,hc_dispatch_suggested_batch
+sensor.hc_z1_avg_on_minutes_today,sensor,,HC Z1 Avg ON Minutes Today,template,,,,,,,,,,,hc_z1_avg_on_minutes_today
+sensor.hc_z2_avg_on_minutes_today,sensor,,HC Z2 Avg ON Minutes Today,template,,,,,,,,,,,hc_z2_avg_on_minutes_today
+sensor.hc_z3_avg_on_minutes_today,sensor,,HC Z3 Avg ON Minutes Today,template,,,,,,,,,,,hc_z3_avg_on_minutes_today
+sensor.hc_z4_avg_on_minutes_today,sensor,,HC Z4 Avg ON Minutes Today,template,,,,,,,,,,,hc_z4_avg_on_minutes_today
+sensor.hc_z5_avg_on_minutes_today,sensor,,HC Z5 Avg ON Minutes Today,template,,,,,,,,,,,hc_z5_avg_on_minutes_today
+sensor.hc_z6_avg_on_minutes_today,sensor,,HC Z6 Avg ON Minutes Today,template,,,,,,,,,,,hc_z6_avg_on_minutes_today
+sensor.hc_z7_avg_on_minutes_today,sensor,,HC Z7 Avg ON Minutes Today,template,,,,,,,,,,,hc_z7_avg_on_minutes_today
+sensor.hc_z8_avg_on_minutes_today,sensor,,HC Z8 Avg ON Minutes Today,template,,,,,,,,,,,hc_z8_avg_on_minutes_today
+sensor.hc_z9_avg_on_minutes_today,sensor,,HC Z9 Avg ON Minutes Today,template,,,,,,,,,,,hc_z9_avg_on_minutes_today
+binary_sensor.hc_dispatch_short_cycle_risk,binary_sensor,,HC Dispatch Short Cycle Risk,template,,,,,,,,,,,hc_dispatch_short_cycle_risk
+automation.hc_dispatcher_advisory_track_call_starts,automation,,HC Dispatcher Advisory - Track Call Starts,automation,,,,,,,,,,,hc_dispatch_advisory_track_call_starts
+automation.hc_dispatcher_advisory_reset_counters_daily,automation,,HC Dispatcher Advisory - Reset Counters Daily,automation,,,,,,,,,,,hc_dispatch_advisory_reset_counters_daily
+sensor.hc_indoor_outdoor_delta,sensor,,HC Indoor–Outdoor Delta,template,,,,,,,,,,,hc_indoor_outdoor_delta
+sensor.basement_bath_and_utility_last_update_time,sensor,,Basement Bath And Utility Last Update Time,hubitat,,Basement bath and utility,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::88::sensor::last_update
+sensor.basement_bath_and_utility_battery,sensor,,Basement Bath And Utility Battery,hubitat,,Basement bath and utility,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::88::sensor::battery
+sensor.basement_bath_and_utility_humidity,sensor,,Basement Bath And Utility Humidity,hubitat,,Basement bath and utility,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::88::sensor::humidity
+sensor.basement_bath_and_utility_temperature,sensor,,Basement Bath And Utility Temperature,hubitat,,Basement bath and utility,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::88::sensor::temperature
+input_number.hc_coincident_window_min,input_number,,HC Coincident Window (min),input_number,,,,,,,,,,,hc_coincident_window_min
+input_number.hc_disp_z1_setpoint_f,input_number,,HC DISP Z1 Setpoint (First Floor Bedroom & Bath),input_number,,,,,,,,,,,hc_disp_z1_setpoint_f
+input_number.hc_disp_z1_hot_tolerance_f,input_number,,HC DISP Z1 Hot Tolerance (First Floor Bedroom & Bath),input_number,,,,,,,,,,,hc_disp_z1_hot_tolerance_f
+input_number.hc_disp_z1_cold_tolerance_f,input_number,,HC DISP Z1 Cold Tolerance (First Floor Bedroom & Bath),input_number,,,,,,,,,,,hc_disp_z1_cold_tolerance_f
+input_number.hc_disp_z2_setpoint_f,input_number,,HC DISP Z2 Setpoint (Office & Upper Guest),input_number,,,,,,,,,,,hc_disp_z2_setpoint_f
+input_number.hc_disp_z2_hot_tolerance_f,input_number,,HC DISP Z2 Hot Tolerance (Office & Upper Guest),input_number,,,,,,,,,,,hc_disp_z2_hot_tolerance_f
+input_number.hc_disp_z2_cold_tolerance_f,input_number,,HC DISP Z2 Cold Tolerance (Office & Upper Guest),input_number,,,,,,,,,,,hc_disp_z2_cold_tolerance_f
+input_number.hc_disp_z3_setpoint_f,input_number,,HC DISP Z3 Setpoint (Basement Bath & Common),input_number,,,,,,,,,,,hc_disp_z3_setpoint_f
+input_number.hc_disp_z3_hot_tolerance_f,input_number,,HC DISP Z3 Hot Tolerance (Basement Bath & Common),input_number,,,,,,,,,,,hc_disp_z3_hot_tolerance_f
+input_number.hc_disp_z3_cold_tolerance_f,input_number,,HC DISP Z3 Cold Tolerance (Basement Bath & Common),input_number,,,,,,,,,,,hc_disp_z3_cold_tolerance_f
+input_number.hc_disp_z4_setpoint_f,input_number,,HC DISP Z4 Setpoint (Garage),input_number,,,,,,,,,,,hc_disp_z4_setpoint_f
+input_number.hc_disp_z4_hot_tolerance_f,input_number,,HC DISP Z4 Hot Tolerance (Garage),input_number,,,,,,,,,,,hc_disp_z4_hot_tolerance_f
+input_number.hc_disp_z4_cold_tolerance_f,input_number,,HC DISP Z4 Cold Tolerance (Garage),input_number,,,,,,,,,,,hc_disp_z4_cold_tolerance_f
+input_number.hc_disp_z5_setpoint_f,input_number,,HC DISP Z5 Setpoint (First Floor Living),input_number,,,,,,,,,,,hc_disp_z5_setpoint_f
+input_number.hc_disp_z5_hot_tolerance_f,input_number,,HC DISP Z5 Hot Tolerance (First Floor Living),input_number,,,,,,,,,,,hc_disp_z5_hot_tolerance_f
+input_number.hc_disp_z5_cold_tolerance_f,input_number,,HC DISP Z5 Cold Tolerance (First Floor Living),input_number,,,,,,,,,,,hc_disp_z5_cold_tolerance_f
+input_number.hc_disp_z6_setpoint_f,input_number,,HC DISP Z6 Setpoint (Master),input_number,,,,,,,,,,,hc_disp_z6_setpoint_f
+input_number.hc_disp_z6_hot_tolerance_f,input_number,,HC DISP Z6 Hot Tolerance (Master),input_number,,,,,,,,,,,hc_disp_z6_hot_tolerance_f
+input_number.hc_disp_z6_cold_tolerance_f,input_number,,HC DISP Z6 Cold Tolerance (Master),input_number,,,,,,,,,,,hc_disp_z6_cold_tolerance_f
+input_number.hc_disp_z7_setpoint_f,input_number,,HC DISP Z7 Setpoint (Basement Bar & TV South),input_number,,,,,,,,,,,hc_disp_z7_setpoint_f
+input_number.hc_disp_z7_hot_tolerance_f,input_number,,HC DISP Z7 Hot Tolerance (Basement Bar & TV South),input_number,,,,,,,,,,,hc_disp_z7_hot_tolerance_f
+input_number.hc_disp_z7_cold_tolerance_f,input_number,,HC DISP Z7 Cold Tolerance (Basement Bar & TV South),input_number,,,,,,,,,,,hc_disp_z7_cold_tolerance_f
+input_number.hc_disp_z8_setpoint_f,input_number,,HC DISP Z8 Setpoint (Dining Room),input_number,,,,,,,,,,,hc_disp_z8_setpoint_f
+input_number.hc_disp_z8_hot_tolerance_f,input_number,,HC DISP Z8 Hot Tolerance (Dining Room),input_number,,,,,,,,,,,hc_disp_z8_hot_tolerance_f
+input_number.hc_disp_z8_cold_tolerance_f,input_number,,HC DISP Z8 Cold Tolerance (Dining Room),input_number,,,,,,,,,,,hc_disp_z8_cold_tolerance_f
+input_number.hc_disp_z9_setpoint_f,input_number,,HC DISP Z9 Setpoint (Basement Bedroom),input_number,,,,,,,,,,,hc_disp_z9_setpoint_f
+input_number.hc_disp_z9_hot_tolerance_f,input_number,,HC DISP Z9 Hot Tolerance (Basement Bedroom),input_number,,,,,,,,,,,hc_disp_z9_hot_tolerance_f
+input_number.hc_disp_z9_cold_tolerance_f,input_number,,HC DISP Z9 Cold Tolerance (Basement Bedroom),input_number,,,,,,,,,,,hc_disp_z9_cold_tolerance_f
+input_boolean.hc_dispatcher_mode_enabled,input_boolean,,HC Dispatcher Mode Enabled (Stage 3),input_boolean,,,,,,,,,,,hc_dispatcher_mode_enabled
+input_boolean.hc_disp_follow_sync_enabled,input_boolean,,HC DISP Follow Sync Enabled,input_boolean,,,,,,,,,,,hc_disp_follow_sync_enabled
+input_boolean.hc_disp_z1_follow_broadcast,input_boolean,,HC DISP Z1 Follow Broadcast (First Floor Bedroom & Bath),input_boolean,,,,,,,,,,,hc_disp_z1_follow_broadcast
+input_boolean.hc_disp_z2_follow_broadcast,input_boolean,,HC DISP Z2 Follow Broadcast (Office & Upper Guest),input_boolean,,,,,,,,,,,hc_disp_z2_follow_broadcast
+input_boolean.hc_disp_z3_follow_broadcast,input_boolean,,HC DISP Z3 Follow Broadcast (Basement Bath & Common),input_boolean,,,,,,,,,,,hc_disp_z3_follow_broadcast
+input_boolean.hc_disp_z4_follow_broadcast,input_boolean,,HC DISP Z4 Follow Broadcast (Garage),input_boolean,,,,,,,,,,,hc_disp_z4_follow_broadcast
+input_boolean.hc_disp_z5_follow_broadcast,input_boolean,,HC DISP Z5 Follow Broadcast (First Floor Living),input_boolean,,,,,,,,,,,hc_disp_z5_follow_broadcast
+input_boolean.hc_disp_z6_follow_broadcast,input_boolean,,HC DISP Z6 Follow Broadcast (Master),input_boolean,,,,,,,,,,,hc_disp_z6_follow_broadcast
+input_boolean.hc_disp_z7_follow_broadcast,input_boolean,,HC DISP Z7 Follow Broadcast (Basement Bar & TV South),input_boolean,,,,,,,,,,,hc_disp_z7_follow_broadcast
+input_boolean.hc_disp_z8_follow_broadcast,input_boolean,,HC DISP Z8 Follow Broadcast (Dining Room),input_boolean,,,,,,,,,,,hc_disp_z8_follow_broadcast
+input_boolean.hc_disp_z9_follow_broadcast,input_boolean,,HC DISP Z9 Follow Broadcast (Basement Bedroom),input_boolean,,,,,,,,,,,hc_disp_z9_follow_broadcast
+script.hc_coincident_reset_counters,script,,HC Coincident Reset Counters,script,,,,,,,,,,,hc_coincident_reset_counters
+counter.hc_coincident_z1_z2_total,counter,,HC Coincident Z1+Z2 Total,counter,,,,,,,,,,,hc_coincident_z1_z2_total
+counter.hc_coincident_z1_z3_total,counter,,HC Coincident Z1+Z3 Total,counter,,,,,,,,,,,hc_coincident_z1_z3_total
+counter.hc_coincident_z1_z4_total,counter,,HC Coincident Z1+Z4 Total,counter,,,,,,,,,,,hc_coincident_z1_z4_total
+counter.hc_coincident_z1_z5_total,counter,,HC Coincident Z1+Z5 Total,counter,,,,,,,,,,,hc_coincident_z1_z5_total
+counter.hc_coincident_z1_z6_total,counter,,HC Coincident Z1+Z6 Total,counter,,,,,,,,,,,hc_coincident_z1_z6_total
+counter.hc_coincident_z1_z7_total,counter,,HC Coincident Z1+Z7 Total,counter,,,,,,,,,,,hc_coincident_z1_z7_total
+counter.hc_coincident_z1_z8_total,counter,,HC Coincident Z1+Z8 Total,counter,,,,,,,,,,,hc_coincident_z1_z8_total
+counter.hc_coincident_z1_z9_total,counter,,HC Coincident Z1+Z9 Total,counter,,,,,,,,,,,hc_coincident_z1_z9_total
+counter.hc_coincident_z2_z3_total,counter,,HC Coincident Z2+Z3 Total,counter,,,,,,,,,,,hc_coincident_z2_z3_total
+counter.hc_coincident_z2_z4_total,counter,,HC Coincident Z2+Z4 Total,counter,,,,,,,,,,,hc_coincident_z2_z4_total
+counter.hc_coincident_z2_z5_total,counter,,HC Coincident Z2+Z5 Total,counter,,,,,,,,,,,hc_coincident_z2_z5_total
+counter.hc_coincident_z2_z6_total,counter,,HC Coincident Z2+Z6 Total,counter,,,,,,,,,,,hc_coincident_z2_z6_total
+counter.hc_coincident_z2_z7_total,counter,,HC Coincident Z2+Z7 Total,counter,,,,,,,,,,,hc_coincident_z2_z7_total
+counter.hc_coincident_z2_z8_total,counter,,HC Coincident Z2+Z8 Total,counter,,,,,,,,,,,hc_coincident_z2_z8_total
+counter.hc_coincident_z2_z9_total,counter,,HC Coincident Z2+Z9 Total,counter,,,,,,,,,,,hc_coincident_z2_z9_total
+counter.hc_coincident_z3_z4_total,counter,,HC Coincident Z3+Z4 Total,counter,,,,,,,,,,,hc_coincident_z3_z4_total
+counter.hc_coincident_z3_z5_total,counter,,HC Coincident Z3+Z5 Total,counter,,,,,,,,,,,hc_coincident_z3_z5_total
+counter.hc_coincident_z3_z6_total,counter,,HC Coincident Z3+Z6 Total,counter,,,,,,,,,,,hc_coincident_z3_z6_total
+counter.hc_coincident_z3_z7_total,counter,,HC Coincident Z3+Z7 Total,counter,,,,,,,,,,,hc_coincident_z3_z7_total
+counter.hc_coincident_z3_z8_total,counter,,HC Coincident Z3+Z8 Total,counter,,,,,,,,,,,hc_coincident_z3_z8_total
+counter.hc_coincident_z3_z9_total,counter,,HC Coincident Z3+Z9 Total,counter,,,,,,,,,,,hc_coincident_z3_z9_total
+counter.hc_coincident_z4_z5_total,counter,,HC Coincident Z4+Z5 Total,counter,,,,,,,,,,,hc_coincident_z4_z5_total
+counter.hc_coincident_z4_z6_total,counter,,HC Coincident Z4+Z6 Total,counter,,,,,,,,,,,hc_coincident_z4_z6_total
+counter.hc_coincident_z4_z7_total,counter,,HC Coincident Z4+Z7 Total,counter,,,,,,,,,,,hc_coincident_z4_z7_total
+counter.hc_coincident_z4_z8_total,counter,,HC Coincident Z4+Z8 Total,counter,,,,,,,,,,,hc_coincident_z4_z8_total
+counter.hc_coincident_z4_z9_total,counter,,HC Coincident Z4+Z9 Total,counter,,,,,,,,,,,hc_coincident_z4_z9_total
+counter.hc_coincident_z5_z6_total,counter,,HC Coincident Z5+Z6 Total,counter,,,,,,,,,,,hc_coincident_z5_z6_total
+counter.hc_coincident_z5_z7_total,counter,,HC Coincident Z5+Z7 Total,counter,,,,,,,,,,,hc_coincident_z5_z7_total
+counter.hc_coincident_z5_z8_total,counter,,HC Coincident Z5+Z8 Total,counter,,,,,,,,,,,hc_coincident_z5_z8_total
+counter.hc_coincident_z5_z9_total,counter,,HC Coincident Z5+Z9 Total,counter,,,,,,,,,,,hc_coincident_z5_z9_total
+counter.hc_coincident_z6_z7_total,counter,,HC Coincident Z6+Z7 Total,counter,,,,,,,,,,,hc_coincident_z6_z7_total
+counter.hc_coincident_z6_z8_total,counter,,HC Coincident Z6+Z8 Total,counter,,,,,,,,,,,hc_coincident_z6_z8_total
+counter.hc_coincident_z6_z9_total,counter,,HC Coincident Z6+Z9 Total,counter,,,,,,,,,,,hc_coincident_z6_z9_total
+counter.hc_coincident_z7_z8_total,counter,,HC Coincident Z7+Z8 Total,counter,,,,,,,,,,,hc_coincident_z7_z8_total
+counter.hc_coincident_z7_z9_total,counter,,HC Coincident Z7+Z9 Total,counter,,,,,,,,,,,hc_coincident_z7_z9_total
+counter.hc_coincident_z8_z9_total,counter,,HC Coincident Z8+Z9 Total,counter,,,,,,,,,,,hc_coincident_z8_z9_total
+input_datetime.hc_coincident_last_on_z1,input_datetime,,HC Coincident Last On Z1,input_datetime,,,,,,,,,,,hc_coincident_last_on_z1
+input_datetime.hc_coincident_last_on_z2,input_datetime,,HC Coincident Last On Z2,input_datetime,,,,,,,,,,,hc_coincident_last_on_z2
+input_datetime.hc_coincident_last_on_z3,input_datetime,,HC Coincident Last On Z3,input_datetime,,,,,,,,,,,hc_coincident_last_on_z3
+input_datetime.hc_coincident_last_on_z4,input_datetime,,HC Coincident Last On Z4,input_datetime,,,,,,,,,,,hc_coincident_last_on_z4
+input_datetime.hc_coincident_last_on_z5,input_datetime,,HC Coincident Last On Z5,input_datetime,,,,,,,,,,,hc_coincident_last_on_z5
+input_datetime.hc_coincident_last_on_z6,input_datetime,,HC Coincident Last On Z6,input_datetime,,,,,,,,,,,hc_coincident_last_on_z6
+input_datetime.hc_coincident_last_on_z7,input_datetime,,HC Coincident Last On Z7,input_datetime,,,,,,,,,,,hc_coincident_last_on_z7
+input_datetime.hc_coincident_last_on_z8,input_datetime,,HC Coincident Last On Z8,input_datetime,,,,,,,,,,,hc_coincident_last_on_z8
+input_datetime.hc_coincident_last_on_z9,input_datetime,,HC Coincident Last On Z9,input_datetime,,,,,,,,,,,hc_coincident_last_on_z9
+automation.hc_disp_follow_master_setpoint,automation,,HC DISP Follow Master Setpoint,automation,,,,,,,,,,,hc_disp_follow_master_setpoint
+automation.hc_disp_follow_basement_setpoint,automation,,HC DISP Follow Basement Setpoint,automation,,,,,,,,,,,hc_disp_follow_basement_setpoint
+automation.hc_disp_follow_first_floor_setpoint,automation,,HC DISP Follow First Floor Setpoint,automation,,,,,,,,,,,hc_disp_follow_first_floor_setpoint
+automation.hc_disp_follow_upper_floor_setpoint,automation,,HC DISP Follow Upper Floor Setpoint,automation,,,,,,,,,,,hc_disp_follow_upper_floor_setpoint
+automation.hc_disp_follow_garage_setpoint,automation,,HC DISP Follow Garage Setpoint,automation,,,,,,,,,,,hc_disp_follow_garage_setpoint
+automation.hc_observability_coincident_heat_all_pairs,automation,,HC Observability - Coincident Heat (All Pairs),automation,,,,,,,,,,,hc_observability_coincident_heat
+sensor.hc_coincident_top_pairs,sensor,,HC Coincident Top Pairs,template,,,,,,,,,,,hc_coincident_top_pairs
+sensor.hc_coincident_matrix,sensor,,HC Coincident Matrix,template,,,,,,,,,,,hc_coincident_matrix
+binary_sensor.hc_any_call_for_heat,binary_sensor,,HC Any Call For Heat,template,,,,,,,,,,,hc_any_call_for_heat
+binary_sensor.hc_boiler_firing_proxy,binary_sensor,,HC Boiler Firing Proxy,template,,,,,,,,,,,hc_boiler_firing_proxy
+binary_sensor.hc_circulator_running_proxy,binary_sensor,,HC Circulator Running Proxy,template,,,,,,,,,,,hc_circulator_running_proxy
+sensor.hc_boiler_supply_temp,sensor,,HC Boiler Supply Temp,template,,,,,,,,,,,hc_boiler_supply_temp_f
+sensor.hc_boiler_return_temp,sensor,,HC Boiler Return Temp,template,,,,,,,,,,,hc_boiler_return_temp_f
+sensor.hc_open_zones_count,sensor,,HC Open Zones Count,template,,,,,,,,,,,hc_open_zones_count
+sensor.hc_calling_zones_count,sensor,,HC Calling Zones Count,template,,,,,,,,,,,hc_calling_zones_count
+input_number.hc_boiler_supply_temp_proxy_f,input_number,,HC Boiler Supply Temp Proxy (°F),input_number,,,,,,,,,,,hc_boiler_supply_temp_proxy_f
+input_number.hc_boiler_return_temp_proxy_f,input_number,,HC Boiler Return Temp Proxy (°F),input_number,,,,,,,,,,,hc_boiler_return_temp_proxy_f
+binary_sensor.influxdb_running,binary_sensor,,Running,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_state
+switch.influxdb,switch,,,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_state
+update.influxdb_update,update,,Update,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,,,config,a0d7b954_influxdb_version_latest
+sensor.influxdb_version,sensor,,Version,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_version
+sensor.influxdb_newest_version,sensor,,Newest version,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_version_latest
+sensor.influxdb_cpu_percent,sensor,,CPU percent,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_cpu_percent
+sensor.influxdb_memory_percent,sensor,,Memory percent,hassio,,InfluxDB,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_influxdb_memory_percent
+binary_sensor.grafana_running,binary_sensor,,Running,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_state
+switch.grafana,switch,,,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_state
+update.grafana_update,update,,Update,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,,,config,a0d7b954_grafana_version_latest
+sensor.grafana_version,sensor,,Version,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_version
+sensor.grafana_newest_version,sensor,,Newest version,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_version_latest
+sensor.grafana_cpu_percent,sensor,,CPU percent,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_cpu_percent
+sensor.grafana_memory_percent,sensor,,Memory percent,hassio,,Grafana,Home Assistant Community Add-ons,Home Assistant Add-on,hassio,Supervisor,system,integration,,,a0d7b954_grafana_memory_percent
+sensor.madmen_temp_last_update_time_2,sensor,,Madmen Temp Last Update Time,hubitat,,Madmen Temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::84::sensor::last_update
+sensor.boiler_out_last_update_time,sensor,,Boiler Out Last Update Time,hubitat,,Boiler out,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::89::sensor::last_update
+sensor.boiler_return_last_update_time,sensor,,Boiler Return Last Update Time,hubitat,,Boiler return,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,integration,,,3f7f484d::90::sensor::last_update
+sensor.madmen_temp_battery_2,sensor,,Madmen Temp Battery,hubitat,,Madmen Temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::84::sensor::battery
+sensor.boiler_out_battery,sensor,,Boiler Out Battery,hubitat,,Boiler out,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::89::sensor::battery
+sensor.boiler_return_battery,sensor,,Boiler Return Battery,hubitat,,Boiler return,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::90::sensor::battery
+sensor.madmen_temp_humidity_2,sensor,,Madmen Temp Humidity,hubitat,,Madmen Temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::84::sensor::humidity
+sensor.boiler_out_humidity,sensor,,Boiler Out Humidity,hubitat,,Boiler out,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::89::sensor::humidity
+sensor.boiler_return_humidity,sensor,,Boiler Return Humidity,hubitat,,Boiler return,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::90::sensor::humidity
+sensor.madmen_temp_temperature_2,sensor,,Madmen Temp Temperature,hubitat,,Madmen Temp,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::84::sensor::temperature
+sensor.boiler_out_temperature,sensor,,Boiler Out Temperature,hubitat,,Boiler out,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::89::sensor::temperature
+sensor.boiler_return_temperature,sensor,,Boiler Return Temperature,hubitat,,Boiler return,Hubitat,Generic Zigbee Temperature/Humidity Sensor,hubitat,Hubitat (3f7f484d) high country ,user,,,,3f7f484d::90::sensor::temperature
+button.first_floor_bathroom_pico_on,button,,First Floor Bathroom Pico On,lutron_caseta,,First Floor Bathroom Pico,"Lutron Electronics Co., Inc",PJ2-3BRL-GXX-X01 (Pico3ButtonRaiseLower),lutron_caseta,192.168.4.179,user,integration,,,08408247_101
+button.first_floor_bathroom_pico_stop,button,,First Floor Bathroom Pico Stop,lutron_caseta,,First Floor Bathroom Pico,"Lutron Electronics Co., Inc",PJ2-3BRL-GXX-X01 (Pico3ButtonRaiseLower),lutron_caseta,192.168.4.179,user,integration,,,08408247_102
+button.first_floor_bathroom_pico_off,button,,First Floor Bathroom Pico Off,lutron_caseta,,First Floor Bathroom Pico,"Lutron Electronics Co., Inc",PJ2-3BRL-GXX-X01 (Pico3ButtonRaiseLower),lutron_caseta,192.168.4.179,user,integration,,,08408247_103
+button.first_floor_bathroom_pico_raise,button,,First Floor Bathroom Pico Raise,lutron_caseta,,First Floor Bathroom Pico,"Lutron Electronics Co., Inc",PJ2-3BRL-GXX-X01 (Pico3ButtonRaiseLower),lutron_caseta,192.168.4.179,user,integration,,,08408247_104
+button.first_floor_bathroom_pico_lower,button,,First Floor Bathroom Pico Lower,lutron_caseta,,First Floor Bathroom Pico,"Lutron Electronics Co., Inc",PJ2-3BRL-GXX-X01 (Pico3ButtonRaiseLower),lutron_caseta,192.168.4.179,user,integration,,,08408247_105
+light.first_floor_bathroom_shower_lights,light,,First Floor Bathroom Shower Lights,lutron_caseta,,First Floor Bathroom Shower Lights,"Lutron Electronics Co., Inc",DVRF-6L (DivaSmartDimmer),lutron_caseta,192.168.4.179,user,,,,118617802
+switch.unassigned_smart_away,switch,,Unassigned Smart Away,lutron_caseta,,Smart Bridge 2,"Lutron Electronics Co., Inc",L-BDG2-WH (SmartBridge),lutron_caseta,192.168.4.179,user,,,,08408247_smart_away
+sensor.richardpiasentin_gmail_com_total_available_storage,sensor,,Total available storage,google_drive,,richardpiasentin@gmail.com,Google,Google Drive,google_drive,Google Drive,user,,,diagnostic,richardpiasentin@gmail.com_storage_total
+sensor.richardpiasentin_gmail_com_used_storage,sensor,,Used storage,google_drive,,richardpiasentin@gmail.com,Google,Google Drive,google_drive,Google Drive,user,,,diagnostic,richardpiasentin@gmail.com_storage_used
+sensor.richardpiasentin_gmail_com_used_storage_in_drive,sensor,,Used storage in Drive,google_drive,,richardpiasentin@gmail.com,Google,Google Drive,google_drive,Google Drive,user,integration,,diagnostic,richardpiasentin@gmail.com_storage_used_in_drive
+sensor.richardpiasentin_gmail_com_used_storage_in_drive_trash,sensor,,Used storage in Drive Trash,google_drive,,richardpiasentin@gmail.com,Google,Google Drive,google_drive,Google Drive,user,integration,,diagnostic,richardpiasentin@gmail.com_storage_used_in_drive_trash
+sensor.richardpiasentin_gmail_com_total_size_of_backups,sensor,,Total size of backups,google_drive,,richardpiasentin@gmail.com,Google,Google Drive,google_drive,Google Drive,user,integration,,diagnostic,richardpiasentin@gmail.com_backups_size

@@ -1,0 +1,1 @@
+lrwxrwxrwx    1 root     root            14 Dec 16 12:24 /config -> /homeassistant

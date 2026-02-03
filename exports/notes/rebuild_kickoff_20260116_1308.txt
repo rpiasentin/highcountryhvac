@@ -1,0 +1,208 @@
+Hydronic Dispatcher Rebuild - Kickoff Inventory - 2026-01-16T13:08:59-07:00
+========================================
+
+## A) Core health + version
+### ha core info
+arch: amd64
+audio_input: null
+audio_output: null
+backups_exclude_database: false
+boot: true
+duplicate_log_file: false
+image: ghcr.io/home-assistant/qemux86-64-homeassistant
+ip_address: 172.30.32.1
+machine: qemux86-64
+port: 8123
+ssl: false
+update_available: true
+version: 2025.12.5
+version_latest: 2026.1.1
+watchdog: true
+
+### ha supervisor info (if available)
+addons:
+- icon: true
+  name: Matter Server
+  repository: core
+  slug: core_matter_server
+  state: started
+  update_available: false
+  version: 8.1.2
+  version_latest: 8.1.2
+- icon: true
+  name: File editor
+  repository: core
+  slug: core_configurator
+  state: started
+  update_available: false
+  version: 5.8.0
+  version_latest: 5.8.0
+- icon: true
+  name: Advanced SSH & Web Terminal
+  repository: a0d7b954
+  slug: a0d7b954_ssh
+  state: started
+  update_available: false
+  version: 22.0.3
+  version_latest: 22.0.3
+- icon: true
+  name: Get HACS
+  repository: cb646a50
+  slug: cb646a50_get
+  state: unknown
+  update_available: false
+  version: 1.3.1
+  version_latest: 1.3.1
+addons_repositories:
+- name: Local add-ons
+  slug: local
+- name: HACS Add-ons Repository
+  slug: cb646a50
+- name: Music Assistant
+  slug: d5369777
+- name: ESPHome
+  slug: 5c53de3b
+- name: Home Assistant Community Add-ons
+  slug: a0d7b954
+- name: Official add-ons
+  slug: core
+arch: amd64
+auto_update: true
+channel: stable
+country: US
+debug: false
+debug_block: false
+detect_blocking_io: false
+diagnostics: null
+healthy: true
+ip_address: 172.30.32.2
+logging: info
+supported: true
+timezone: America/Denver
+update_available: false
+version: 2026.01.1
+version_latest: 2026.01.1
+wait_boot: 5
+
+### ha core check
+Command completed successfully.
+
+## B) Post-restore presence check (packages / lovelace)
+### /config/packages matches
+total 152K   
+drwxr-xr-x    2 root     root        4.0K Jan 12 21:30 .
+drwxr-xr-x   23 root     root        4.0K Jan 16 10:31 ..
+-rw-r--r--    1 root     root         183 Jan  5 19:31 hc_cold_tolerance_control.yaml
+-rw-r--r--    1 root     root        3.0K Jan 11 21:10 hc_cold_tolerance_gate.bak_20260111_211059
+-rw-r--r--    1 root     root        3.2K Jan 11 21:10 hc_cold_tolerance_gate.yaml
+-rw-r--r--    1 root     root       16.4K Jan 12 15:15 hc_dispatcher_advisory.yaml
+-rw-r--r--    1 root     root        2.2K Jan 11 21:11 hc_hydronic_kick.bak_20260111_211113
+-rw-r--r--    1 root     root        2.3K Jan 11 21:11 hc_hydronic_kick.yaml
+-rw-r--r--    1 root     root        2.3K Jan  5 15:56 hc_minisplit_sync_missing.yaml
+-rw-r--r--    1 root     root        1.9K Jan 12 21:30 hc_outdoor_delta_advisory.yaml
+-rw-r--r--    1 root     root         371 Jan 11 21:10 hc_zone4_garage_thermostat.yaml
+-rw-r--r--    1 root     root        3.1K Jan 11 21:10 hc_zone_delta_sensors.bak_20260111_211046
+-rw-r--r--    1 root     root        3.2K Jan 11 21:10 hc_zone_delta_sensors.yaml
+-rw-r--r--    1 root     root        6.7K Jan 11 21:18 high_country_call_for_heat.yaml
+-rw-r--r--    1 root     root        6.3K Dec 17 16:02 high_country_call_for_heat.yaml.bak_2026-01-11_211825
+-rw-r--r--    1 root     root        4.9K Jan  5 14:24 high_country_minisplit_sync.yaml
+-rw-r--r--    1 root     root          78 Dec 17 15:23 high_country_sanity.yaml
+-rw-r--r--    1 root     root        3.3K Jan 11 21:22 high_country_setpoint_automations.yaml
+-rw-r--r--    1 root     root        2.9K Dec 17 17:09 high_country_setpoint_automations.yaml.bak_2026-01-11_212233
+-rw-r--r--    1 root     root        8.2K Jan 11 21:10 high_country_setpoints.bak_20260111_211028
+-rw-r--r--    1 root     root        8.6K Jan 11 21:22 high_country_setpoints.yaml
+-rw-r--r--    1 root     root        5.6K Dec 17 17:55 high_country_setpoints.yaml.bak_2026-01-10_221031
+-rw-r--r--    1 root     root        8.3K Jan 11 21:10 high_country_setpoints.yaml.bak_2026-01-11_212233
+-rw-r--r--    1 root     root         695 Dec 18 18:50 high_country_upstairs_avg_temp.yaml
+--- filtered ---
+-rw-r--r--    1 root     root       16.4K Jan 12 15:15 hc_dispatcher_advisory.yaml
+
+### Lovelace YAML locations
+lrwxrwxrwx    1 root     root          14 Jan 16 10:31 /config -> /homeassistant
+ls: /config/lovelace: No such file or directory
+ls: /config/ui-lovelace.yaml: No such file or directory
+--- filtered ---
+
+## C) Entity registry checks (/config/.storage/core.entity_registry)
+matches: 35
+automation.hc_dispatcher_advisory_reset_counters_daily
+automation.hc_dispatcher_advisory_track_call_starts
+binary_sensor.hc_dispatch_short_cycle_risk
+counter.hc_dispatch_calls_z1_today
+counter.hc_dispatch_calls_z2_today
+counter.hc_dispatch_calls_z3_today
+counter.hc_dispatch_calls_z4_today
+counter.hc_dispatch_calls_z5_today
+counter.hc_dispatch_calls_z6_today
+counter.hc_dispatch_calls_z7_today
+counter.hc_dispatch_calls_z8_today
+counter.hc_dispatch_calls_z9_today
+counter.hc_dispatch_pair_z1_z5
+counter.hc_dispatch_pair_z1_z8
+counter.hc_dispatch_pair_z2_z6
+counter.hc_dispatch_pair_z3_z7
+counter.hc_dispatch_pair_z3_z9
+counter.hc_dispatch_pair_z5_z8
+counter.hc_dispatch_pair_z7_z9
+input_boolean.hc_dispatcher_advisory_enabled
+input_datetime.hc_dispatch_last_on_z1
+input_datetime.hc_dispatch_last_on_z2
+input_datetime.hc_dispatch_last_on_z3
+input_datetime.hc_dispatch_last_on_z4
+input_datetime.hc_dispatch_last_on_z5
+input_datetime.hc_dispatch_last_on_z6
+input_datetime.hc_dispatch_last_on_z7
+input_datetime.hc_dispatch_last_on_z8
+input_datetime.hc_dispatch_last_on_z9
+input_number.hc_dispatch_batch_window_sec
+input_number.hc_dispatch_near_call_margin_f
+input_select.hc_dispatch_profile
+sensor.hc_dispatch_active_zones
+sensor.hc_dispatch_near_call_zones
+sensor.hc_dispatch_suggested_batch
+
+### Baseline entity presence (entity_registry)
+TOTAL WANT 18
+OK switch.z1
+OK switch.z2
+OK switch.z3
+OK switch.z4
+OK switch.z5
+OK switch.z6
+OK switch.z7
+OK switch.z8
+OK switch.z9
+OK binary_sensor.hc_z1_call_for_heat
+OK binary_sensor.hc_z2_call_for_heat
+OK binary_sensor.hc_z3_call_for_heat
+OK binary_sensor.hc_z4_call_for_heat
+OK binary_sensor.hc_z5_call_for_heat
+OK binary_sensor.hc_z6_call_for_heat
+OK binary_sensor.hc_z7_call_for_heat
+OK binary_sensor.hc_z8_call_for_heat
+OK binary_sensor.hc_z9_call_for_heat
+
+## C) Restore state checks (/config/.storage/core.restore_state)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'get'
+
+## D) Grep restore_state for switch.z* and binary_sensor.hc_z*_call_for_heat
+      "state": {"entity_id":"binary_sensor.hc_z1_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z1 – First Floor Bedroom & Bath – Call For Heat"},"last_changed":"2026-01-16T17:46:39.263909+00:00","last_reported":"2026-01-16T17:46:39.263909+00:00","last_updated":"2026-01-16T17:46:39.263909+00:00","context":{"id":"01KF3YN5F8YQC4AVW117NDEEZT","parent_id":"01KF3YN5F5KC9NKJKBFXS1GXBX","user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z2_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z2 – Office & Upper Guest – Call For Heat"},"last_changed":"2026-01-16T17:46:39.186871+00:00","last_reported":"2026-01-16T17:46:39.186871+00:00","last_updated":"2026-01-16T17:46:39.186871+00:00","context":{"id":"01KF3YN5F93PW944SVVGYR2KFJ","parent_id":"01KF3YN5F5KC9NKJKBFXS1GXBX","user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z3_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z3 – Basement Bath & Common – Call For Heat"},"last_changed":"2026-01-16T17:46:51.125129+00:00","last_reported":"2026-01-16T17:46:51.125129+00:00","last_updated":"2026-01-16T17:46:51.125129+00:00","context":{"id":"01KF3YNH9W1Q8D42B6Z9W7MP6Q","parent_id":"01KF3YNH9V1Z7Y7354BY3X54WC","user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z4_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z4 – Garage – Call For Heat"},"last_changed":"2026-01-16T17:31:53.361823+00:00","last_reported":"2026-01-16T17:31:53.361823+00:00","last_updated":"2026-01-16T17:31:53.361823+00:00","context":{"id":"01KF3XT54H5AK66Y53F3BPR0VB","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z5_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z5 – First Floor Living – Call For Heat"},"last_changed":"2026-01-16T17:31:53.361945+00:00","last_reported":"2026-01-16T17:31:53.361945+00:00","last_updated":"2026-01-16T17:31:53.361945+00:00","context":{"id":"01KF3XT54HV5F4TNNW9W4RQPXN","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z6_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z6 – Master – Call For Heat"},"last_changed":"2026-01-16T17:31:53.362059+00:00","last_reported":"2026-01-16T17:31:53.362059+00:00","last_updated":"2026-01-16T17:31:53.362059+00:00","context":{"id":"01KF3XT54JQNX9CCCVY4AP8P6S","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z7_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z7 – Basement Bar & TV South – Call For Heat"},"last_changed":"2026-01-16T17:46:51.173618+00:00","last_reported":"2026-01-16T17:46:51.173618+00:00","last_updated":"2026-01-16T17:46:51.173618+00:00","context":{"id":"01KF3YNH9W1Q8D42B6Z9W7MP6Q","parent_id":"01KF3YNH9V1Z7Y7354BY3X54WC","user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z8_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z8 – Dining Room – Call For Heat"},"last_changed":"2026-01-16T17:31:53.362340+00:00","last_reported":"2026-01-16T17:31:53.362340+00:00","last_updated":"2026-01-16T17:31:53.362340+00:00","context":{"id":"01KF3XT54JQG5VZV6TTMK7DTWQ","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"binary_sensor.hc_z9_call_for_heat","state":"off","attributes":{"device_class":"heat","friendly_name":"HC Z9 – Basement Bedroom – Call For Heat"},"last_changed":"2026-01-16T17:50:23.076545+00:00","last_reported":"2026-01-16T17:50:23.076545+00:00","last_updated":"2026-01-16T17:50:23.076545+00:00","context":{"id":"01KF3YW0DDC29938D9T928T9BZ","parent_id":null,"user_id":"355e30d0e16e4c6f94ec1fb0bfcee936"}},
+
+## Optional: create HA backup now (recommended)
+job_id: 9677d5dada584e2994277df8668f01d7
+slug: 5b31a014
+
+## Note complete
+2026-01-16T13:39:49-07:00
+FILE=/config/exports/notes/rebuild_kickoff_20260116_1308.txt
+-rw-r--r--    1 root     root       10.3K Jan 16 13:39 /config/exports/notes/rebuild_kickoff_20260116_1308.txt

@@ -1,0 +1,276 @@
+title: "HVAC Admin (Verify)"
+views:
+  - title: Verify
+    path: verify
+    icon: mdi:check-decagram
+    cards:
+      - type: markdown
+        title: "HVAC Admin (Verify)"
+        content: >
+          Verification-first dashboard.
+          Move a setpoint slider → press Apply → confirm targets update, deltas make sense, and call-for-heat reflects reality.
+
+      - type: entities
+        title: "Control Surface"
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hc_setpoint_master
+            name: Master Setpoint
+          - entity: input_number.hc_setpoint_upper_floor
+            name: Upper Floor Setpoint
+          - entity: input_number.hc_setpoint_first_floor
+            name: First Floor Setpoint
+          - entity: input_number.hc_setpoint_basement
+            name: Basement Setpoint
+          - type: section
+          - entity: input_boolean.hc_enable_setpoint_broadcast
+            name: Enable Broadcast
+          - entity: input_boolean.hc_enable_minisplit_auto_on_setpoint
+            name: Mini-splits Auto-On on Setpoint Change
+          - entity: input_select.hc_minisplit_preferred_mode
+            name: Mini-split Preferred Mode
+
+      - type: grid
+        title: "Apply / Actions"
+        columns: 3
+        square: false
+        cards:
+          - type: button
+            name: Apply Master
+            icon: mdi:thermometer
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_master_setpoint
+
+          - type: button
+            name: Apply Upper Floor
+            icon: mdi:home-floor-2
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_upper_floor_setpoint
+
+          - type: button
+            name: Apply First Floor
+            icon: mdi:home-floor-1
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_first_floor_setpoint
+
+          - type: button
+            name: Apply Basement
+            icon: mdi:home-floor-b
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_broadcast_basement_setpoint
+
+          - type: button
+            name: "Splits: Apply Mode"
+            icon: mdi:air-conditioner
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_minisplits_apply_mode
+
+          - type: button
+            name: Retry Mini-splits (3x)
+            icon: mdi:refresh-alert
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              target:
+                entity_id: script.hc_retry_mismatched_minisplits
+
+      - type: markdown
+        title: "Master"
+        content: >
+          Verify minisplit reported setpoints (attribute temperature) and modes.
+
+      - type: entities
+        title: "Mini-splits (Reported Setpoint + Mode)"
+        show_header_toggle: false
+        entities:
+          - entity: climate.giovani_s_device
+            name: Master (Sensibo)
+          - type: attribute
+            entity: climate.giovani_s_device
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.upper_hall
+            name: Upper Hall (Sensibo)
+          - type: attribute
+            entity: climate.upper_hall
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.giovani_s_device_2
+            name: Office (Sensibo)
+          - type: attribute
+            entity: climate.giovani_s_device_2
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.upper_guest
+            name: Upper Guest (Sensibo)
+          - type: attribute
+            entity: climate.upper_guest
+            attribute: temperature
+            name: Reported Setpoint
+
+      - type: markdown
+        title: "Upper Floor"
+        content: >
+          Verify upper hydronic thermostats + deltas (Setpoint − Temp).
+
+      - type: entities
+        title: "Upper Hydronic Targets"
+        show_header_toggle: false
+        entities:
+          - entity: climate.zone_2_second_floor_office_and_upper_guest
+            name: Zone 2 (Office + Upper Guest)
+          - type: attribute
+            entity: climate.zone_2_second_floor_office_and_upper_guest
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.zone_6_master_thermostat
+            name: Zone 6 (Master)
+          - type: attribute
+            entity: climate.zone_6_master_thermostat
+            attribute: temperature
+            name: Reported Setpoint
+
+      - type: entities
+        title: "Upper Deltas + Temps"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.2nd_floor_office_temperature_temperature
+            name: Office Temp
+          - entity: sensor.upper_guest_temp_temperature
+            name: Upper Guest Temp
+          - entity: sensor.hc_office_guest_avg_temperature
+            name: Office+Guest Avg Temp
+          - type: section
+          - entity: sensor.hc_delta_upper_vs_office
+            name: Delta vs Office (°F)
+          - entity: sensor.hc_delta_upper_vs_upper_guest
+            name: Delta vs Upper Guest (°F)
+          - entity: sensor.hc_delta_upper_vs_office_guest_avg
+            name: Delta vs Avg (°F)
+
+      - type: markdown
+        title: "First Floor"
+        content: >
+          Verify first-floor hydronic zones + dining delta.
+
+      - type: entities
+        title: "First Floor Hydronic Targets"
+        show_header_toggle: false
+        entities:
+          - entity: climate.z1_first_floor_bedroom_and_bath
+            name: Zone 1 (Bedroom + Bath)
+          - type: attribute
+            entity: climate.z1_first_floor_bedroom_and_bath
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.zone_5_virtual_thermostat_first_floor_living
+            name: Zone 5 (Living - Virtual)
+          - type: attribute
+            entity: climate.zone_5_virtual_thermostat_first_floor_living
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.zone_8_dining_room
+            name: Zone 8 (Dining)
+          - type: attribute
+            entity: climate.zone_8_dining_room
+            attribute: temperature
+            name: Reported Setpoint
+
+      - type: entities
+        title: "First Floor Delta + Temp"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.madmen_temp_temperature
+            name: Dining Temp
+          - entity: sensor.hc_delta_first_floor_vs_dining
+            name: Delta vs Dining (°F)
+
+      - type: markdown
+        title: "Basement"
+        content: >
+          Verify basement hydronic zones. Add basement deltas once controlling sensors are confirmed.
+
+      - type: entities
+        title: "Basement Hydronic Targets"
+        show_header_toggle: false
+        entities:
+          - entity: climate.zone_3_basement_bath_and_common
+            name: Zone 3 (Basement Bath + Common)
+          - type: attribute
+            entity: climate.zone_3_basement_bath_and_common
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.zone_7_basement_bar_and_tv_room_south_side
+            name: Zone 7 (Bar + TV South)
+          - type: attribute
+            entity: climate.zone_7_basement_bar_and_tv_room_south_side
+            attribute: temperature
+            name: Reported Setpoint
+          - entity: climate.zone_9_basement_bedroom
+            name: Zone 9 (Basement Bedroom)
+          - type: attribute
+            entity: climate.zone_9_basement_bedroom
+            attribute: temperature
+            name: Reported Setpoint
+
+      - type: entities
+        title: "Hydronic Call for Heat (Now)"
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.hc_whole_house_call_for_heat
+            name: Whole House
+          - entity: binary_sensor.hc_basement_call_for_heat
+            name: Basement
+          - entity: binary_sensor.hc_first_floor_call_for_heat
+            name: First Floor
+          - entity: binary_sensor.hc_upper_floor_call_for_heat
+            name: Upper Floor
+          - entity: binary_sensor.hc_garage_call_for_heat
+            name: Garage
+
+      - type: entities
+        title: "Hydronic Duty Cycle (Hours Today)"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.hc_whole_house_call_for_heat_hours_today
+            name: Whole House (hrs today)
+          - entity: sensor.hc_basement_call_for_heat_hours_today
+            name: Basement (hrs today)
+          - entity: sensor.hc_first_floor_call_for_heat_hours_today
+            name: First Floor (hrs today)
+          - entity: sensor.hc_upper_floor_call_for_heat_hours_today
+            name: Upper Floor (hrs today)
+          - entity: sensor.hc_garage_call_for_heat_hours_today
+            name: Garage (hrs today)
+
+      - type: entity-filter
+        title: "Active Hydronic Zones (Calling Now)"
+        show_empty: false
+        state_filter:
+          - "on"
+        entities:
+          - binary_sensor.hc_z1_call_for_heat
+          - binary_sensor.hc_z2_call_for_heat
+          - binary_sensor.hc_z3_call_for_heat
+          - binary_sensor.hc_z4_call_for_heat
+          - binary_sensor.hc_z5_call_for_heat
+          - binary_sensor.hc_z6_call_for_heat
+          - binary_sensor.hc_z7_call_for_heat
+          - binary_sensor.hc_z8_call_for_heat
+          - binary_sensor.hc_z9_call_for_heat

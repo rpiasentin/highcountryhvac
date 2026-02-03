@@ -1,0 +1,13 @@
+Total backups listed: 6
+
+2026-01-06T22:30:21.161028+00:00  slug=0fdabfa4  type=partial  name=pre_hardening_2026-01-06
+2026-01-09T11:52:47.007221+00:00  slug=2ff5a0ef  type=partial  name=Automatic backup 2025.12.5
+  Δ from previous: 3682.43 minutes
+2026-01-10T12:37:02.009697+00:00  slug=d4e09df1  type=partial  name=Automatic backup 2025.12.5
+  Δ from previous: 1484.25 minutes
+2026-01-11T03:21:30.175472+00:00  slug=c945a7c0  type=partial  name=beffore move
+  Δ from previous: 884.47 minutes
+2026-01-11T04:34:39.036386+00:00  slug=c22805a0  type=full  name=hc_before_hydronic_tol_fix_2026-01-10_2134
+  Δ from previous: 73.15 minutes
+2026-01-11T11:53:43.007018+00:00  slug=a8a536e2  type=partial  name=Automatic backup 2025.12.5
+  Δ from previous: 439.07 minutes

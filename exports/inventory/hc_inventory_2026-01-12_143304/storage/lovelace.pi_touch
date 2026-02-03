@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.pi_touch",
+  "data": {
+    "config": {
+      "title": "Pi Touch",
+      "views": [
+        {
+          "title": "Home",
+          "path": "home",
+          "icon": "mdi:home",
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "tile",
+                      "entity": "cover.shades",
+                      "name": "FR Shades"
+                    },
+                    {
+                      "type": "tile",
+                      "entity": "cover.high_country_kitchen",
+                      "name": "Kitchen Shades"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "button",
+                      "name": "All Shades Down",
+                      "icon": "mdi:blinds",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "cover.close_cover",
+                        "target": {
+                          "entity_id": [
+                            "cover.shades",
+                            "cover.high_country_kitchen"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "button",
+                      "name": "All Shades Up",
+                      "icon": "mdi:blinds-open",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "cover.open_cover",
+                        "target": {
+                          "entity_id": [
+                            "cover.shades",
+                            "cover.high_country_kitchen"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "tile",
+                      "entity": "lock.front_door_lock",
+                      "name": "Front Door Lock"
+                    },
+                    {
+                      "type": "tile",
+                      "entity": "climate.main_floor_hall",
+                      "name": "Main Thermostat"
+                    },
+                    {
+                      "type": "tile",
+                      "entity": "climate.upper_hall",
+                      "name": "Mini Split – Upper Hall"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "button",
+                      "name": "Motion Check",
+                      "icon": "mdi:motion-sensor",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/pi-touch/motion"
+                      }
+                    },
+                    {
+                      "type": "button",
+                      "name": "Temperature Graphs",
+                      "icon": "mdi:chart-line",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/pi-touch/temps"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Motion",
+          "path": "motion",
+          "icon": "mdi:motion-sensor",
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "button",
+                  "name": "⬅ Back to Home",
+                  "icon": "mdi:arrow-left",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/pi-touch/home"
+                  }
+                },
+                {
+                  "type": "entities",
+                  "title": "Motion Status (Key Sensors)",
+                  "state_color": true,
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.1f_gr_s_z_motion",
+                      "name": "1F Great Room (Zooz)"
+                    },
+                    {
+                      "entity": "binary_sensor.2f_h_c_z_motion",
+                      "name": "2F Hall (Zooz)"
+                    },
+                    {
+                      "entity": "binary_sensor.b1_tv_c_z_motion",
+                      "name": "B1 TV Area (Zooz)"
+                    },
+                    {
+                      "entity": "binary_sensor.2f_mb_c_z_motion",
+                      "name": "2F Master (Zooz)"
+                    },
+                    {
+                      "entity": "binary_sensor.1f_fr_n_t_fp3001_motion",
+                      "name": "1F Front Room (FP3001)"
+                    },
+                    {
+                      "entity": "binary_sensor.1f_ha_c_afp3002_motion",
+                      "name": "1F Hall (Aqara/FP3002)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Temps",
+          "path": "temps",
+          "icon": "mdi:thermometer",
+          "panel": true,
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "button",
+                      "name": "⬅ Back to Home",
+                      "icon": "mdi:arrow-left",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "/pi-touch/home"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "All Room Temperatures (Last 24h)",
+                  "hours_to_show": 24,
+                  "refresh_interval": 60,
+                  "entities": [
+                    {
+                      "entity": "sensor.1f_gr_s_z_temperature",
+                      "name": "1F Great Room"
+                    },
+                    {
+                      "entity": "sensor.2f_h_c_z_temperature",
+                      "name": "2F Hall"
+                    },
+                    {
+                      "entity": "sensor.b1_tv_c_z_temperature",
+                      "name": "B1 TV Area"
+                    },
+                    {
+                      "entity": "sensor.2f_mb_c_z_temperature",
+                      "name": "2F Master"
+                    },
+                    {
+                      "entity": "sensor.upstairs_mantle_temperature_temperature",
+                      "name": "2F Front Bedroom"
+                    },
+                    {
+                      "entity": "sensor.main_floor_temperature_sensor_temperature",
+                      "name": "1F Kitchen"
+                    },
+                    {
+                      "entity": "sensor.basement_kitchen_temperature_temperature",
+                      "name": "B1 Kitchen"
+                    },
+                    {
+                      "entity": "sensor.high_country_front_door_multi_temperature",
+                      "name": "Outside North"
+                    },
+                    {
+                      "entity": "sensor.1f_fr_n_t_fp3001_temperature",
+                      "name": "1F Front Room"
+                    },
+                    {
+                      "entity": "sensor.1f_ha_c_afp3002_temperature",
+                      "name": "1F Hall"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

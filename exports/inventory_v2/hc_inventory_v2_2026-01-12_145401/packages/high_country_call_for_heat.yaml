@@ -1,0 +1,195 @@
+template:
+  - binary_sensor:
+      - name: "HC Z1 – First Floor Bedroom & Bath – Call For Heat"
+        unique_id: hc_z1_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z1', 'on') }}"
+
+      - name: "HC Z2 – Office & Upper Guest – Call For Heat"
+        unique_id: hc_z2_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z2', 'on') }}"
+
+      - name: "HC Z3 – Basement Bath & Common – Call For Heat"
+        unique_id: hc_z3_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z3', 'on') }}"
+
+      - name: "HC Z4 – Garage – Call For Heat"
+        unique_id: hc_z4_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z4', 'on') }}"
+
+      - name: "HC Z5 – First Floor Living – Call For Heat"
+        unique_id: hc_z5_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z5', 'on') }}"
+
+      - name: "HC Z6 – Master – Call For Heat"
+        unique_id: hc_z6_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z6', 'on') }}"
+
+      - name: "HC Z7 – Basement Bar & TV South – Call For Heat"
+        unique_id: hc_z7_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z7', 'on') }}"
+
+      - name: "HC Z8 – Dining Room – Call For Heat"
+        unique_id: hc_z8_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z8', 'on') }}"
+
+      - name: "HC Z9 – Basement Bedroom – Call For Heat"
+        unique_id: hc_z9_call_for_heat
+        device_class: heat
+        state: "{{ is_state('switch.z9', 'on') }}"
+      - name: "HC Basement Call For Heat"
+        unique_id: hc_basement_call_for_heat
+        device_class: heat
+        state: >
+          {{ is_state('binary_sensor.hc_z3_call_for_heat','on')
+             or is_state('binary_sensor.hc_z7_call_for_heat','on')
+             or is_state('binary_sensor.hc_z9_call_for_heat','on') }}
+             
+      - name: "HC Garage Call For Heat"
+        unique_id: hc_garage_call_for_heat
+        device_class: heat
+        state: "{{ is_state('binary_sensor.hc_z4_call_for_heat','on') }}"
+
+      - name: "HC First Floor Call For Heat"
+        unique_id: hc_first_floor_call_for_heat
+        device_class: heat
+        state: >
+          {{ is_state('binary_sensor.hc_z1_call_for_heat','on')
+             or is_state('binary_sensor.hc_z5_call_for_heat','on')
+             or is_state('binary_sensor.hc_z8_call_for_heat','on') }}
+
+      - name: "HC Upper Floor Call For Heat"
+        unique_id: hc_upper_floor_call_for_heat
+        device_class: heat
+        state: >
+          {{ is_state('binary_sensor.hc_z2_call_for_heat','on')
+             or is_state('binary_sensor.hc_z6_call_for_heat','on') }}
+
+      - name: "HC Whole House Call For Heat"
+        unique_id: hc_whole_house_call_for_heat
+        device_class: heat
+        state: >
+          {{ is_state('binary_sensor.hc_basement_call_for_heat','on')
+             or is_state('binary_sensor.hc_first_floor_call_for_heat','on')
+             or is_state('binary_sensor.hc_upper_floor_call_for_heat','on')
+             or is_state('binary_sensor.hc_garage_call_for_heat','on') }}
+
+sensor:
+  - platform: history_stats
+    name: "HC Z1 – First Floor Bedroom & Bath – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z1_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+    
+  - platform: history_stats
+    name: "HC Garage Call For Heat - Hours Today"
+    entity_id: binary_sensor.hc_garage_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z2 – Office & Upper Guest – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z2_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z3 – Basement Bath & Common – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z3_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z4 – Garage – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z4_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z5 – First Floor Living – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z5_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z6 – Master – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z6_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z7 – Basement Bar & TV South – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z7_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z8 – Dining Room – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z8_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Z9 – Basement Bedroom – Call For Heat – Hours Today"
+    entity_id: binary_sensor.hc_z9_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Basement Call For Heat - Hours Today"
+    entity_id: binary_sensor.hc_basement_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC First Floor Call For Heat - Hours Today"
+    entity_id: binary_sensor.hc_first_floor_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Upper Floor Call For Heat - Hours Today"
+    entity_id: binary_sensor.hc_upper_floor_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: "HC Whole House Call For Heat - Hours Today"
+    entity_id: binary_sensor.hc_whole_house_call_for_heat
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"

@@ -1,0 +1,2 @@
+/config/.storage/hassio
+/config/.storage/core.config_entries

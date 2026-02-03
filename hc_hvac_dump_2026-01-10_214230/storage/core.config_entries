@@ -1,0 +1,1129 @@
+{
+  "version": 1,
+  "minor_version": 5,
+  "key": "core.config_entries",
+  "data": {
+    "entries": [
+      {
+        "created_at": "2025-11-02T22:30:36.842243+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "sun",
+        "entry_id": "01K93B37HAFZYNWRMJ2XEQEKNN",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:30:36.842247+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "import",
+        "subentries": [],
+        "title": "Sun",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:30:37.095325+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "hassio",
+        "entry_id": "01K93B37S72HB76ECN0X0TY4YM",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:30:37.095328+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "system",
+        "subentries": [],
+        "title": "Supervisor",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:30:40.199886+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "backup",
+        "entry_id": "01K93B3AT7CC5DYXJN4XMXRCAS",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:30:40.199889+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "system",
+        "subentries": [],
+        "title": "Backup",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:30:40.970147+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {
+          "zeroconf": [
+            {
+              "domain": "zeroconf",
+              "key": [
+                "_meshcop._udp.local.",
+                "amazon #55C2._meshcop._udp.local."
+              ],
+              "version": 1
+            }
+          ]
+        },
+        "domain": "thread",
+        "entry_id": "01K93B3BJAZR29J0G6EZE56PK5",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:30:40.970150+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "zeroconf",
+        "subentries": [],
+        "title": "Thread",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:30:43.423913+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "go2rtc",
+        "entry_id": "01K93B3DYZPWA163ZR3ZA5GBP8",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:30:43.423917+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "system",
+        "subentries": [],
+        "title": "go2rtc",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:31:03.526857+00:00",
+        "data": {
+          "integration_created_addon": true,
+          "url": "ws://core-matter-server:5580/ws",
+          "use_addon": true
+        },
+        "disabled_by": null,
+        "discovery_keys": {
+          "zeroconf": [
+            {
+              "domain": "zeroconf",
+              "key": [
+                "_matter._tcp.local.",
+                "1EA066066C5BFB83-000000000001B669._matter._tcp.local."
+              ],
+              "version": 1
+            }
+          ]
+        },
+        "domain": "matter",
+        "entry_id": "01K93B41K6KBMNYP0YBD7CPAPA",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:31:03.526860+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "zeroconf",
+        "subentries": [],
+        "title": "Matter",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:39:30.384093+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "shopping_list",
+        "entry_id": "01K93BKGJGKM8ES5MZ8EJ3RAEC",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:39:30.384097+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "subentries": [],
+        "title": "Shopping list",
+        "unique_id": "shopping_list",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:39:30.402737+00:00",
+        "data": {
+          "track_home": true
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "met",
+        "entry_id": "01K93BKGK2ZQWCCVZPBDP6B04G",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:39:30.402740+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "subentries": [],
+        "title": "Home",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:39:30.402962+00:00",
+        "data": {
+          "language": "en",
+          "tld": "com"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "google_translate",
+        "entry_id": "01K93BKGK2D3T68P39TQZJ27MB",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:39:30.402964+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "subentries": [],
+        "title": "Google Translate text-to-speech",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:39:30.533184+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "radio_browser",
+        "entry_id": "01K93BKGQ588AKQ7K8TNWRNHYB",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:39:30.533187+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "subentries": [],
+        "title": "Radio Browser",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T22:45:28.645954+00:00",
+        "data": {
+          "api_key": "tskey-api-kKcL7LZNLd11CNTRL-gN1BoZfqWQPE1NPThC1yPPVF9XGh2EdK",
+          "tailnet": "richardpiasentin@gmail.com"
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "tailscale",
+        "entry_id": "01K93BYEE5DG2T0FG2PFAKRKWB",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T22:45:28.645957+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "richardpiasentin@gmail.com",
+        "unique_id": "richardpiasentin@gmail.com",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-02T23:44:28.862720+00:00",
+        "data": {
+          "token": "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"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "hacs",
+        "entry_id": "01K93FAFNYHZAM7HQQ5Z0H64Y3",
+        "minor_version": 1,
+        "modified_at": "2025-11-02T23:44:28.862721+00:00",
+        "options": {
+          "experimental": true
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-04T01:02:42.760216+00:00",
+        "data": {
+          "access_token": "3f7f484d-18f5-4f78-ad3c-26020c415b92",
+          "app_id": "82",
+          "host": "192.168.4.91",
+          "sync_areas": false,
+          "temperature_unit": "F"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "hubitat",
+        "entry_id": "01K9666EJ8NR5PYBK9FCK1MEKA",
+        "minor_version": 1,
+        "modified_at": "2025-11-10T19:25:39.250352+00:00",
+        "options": {
+          "device_list": [
+            "1",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59"
+          ],
+          "device_type_overrides": {},
+          "host": "192.168.4.91",
+          "server_port": 8122,
+          "server_ssl_cert": null,
+          "server_ssl_key": null,
+          "server_url": "http://192.168.4.96",
+          "sync_areas": true,
+          "temperature_unit": "F"
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": true,
+        "source": "user",
+        "subentries": [],
+        "title": "Hubitat (3f7f484d) high country ",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-04T02:52:04.151130+00:00",
+        "data": {
+          "app_data": {
+            "push_token": "fYTS5TNAF08_tQgfcG71Mj:APA91bEFRj4lvmPVW9tyoeUft1pCRKnh0nghzV9z7RyKxedvMR9a4KkktYcO7s-IVzPAsXkgdY0HEKciaR9pD8HNcDDlCcynup9YKx7zxqe97RdLge3Y-yMPjJtEMmqxvDSQjIwkOL0a",
+            "push_url": "https://mobile-apps.home-assistant.io/api/sendPushNotification"
+          },
+          "app_id": "io.robbie.HomeAssistant",
+          "app_name": "Home Assistant",
+          "app_version": "2025.10.0 (2025.1443)",
+          "device_id": "6C70C9CD-9387-4270-ACF6-E60354B08C8D",
+          "device_name": "Giovani  iphone 16pro",
+          "manufacturer": "Apple",
+          "model": "iPhone17,1",
+          "no_legacy_encryption": true,
+          "os_name": "iOS",
+          "os_version": "26.1",
+          "secret": "348f546f62c6d4c9feace922abbc4010c453482c0885ea55cd1e1a6552484745",
+          "supports_encryption": true,
+          "user_id": "355e30d0e16e4c6f94ec1fb0bfcee936",
+          "webhook_id": "4b8ca36e997d08c31c399450649bd133ba2b3fb2001545d6902cb5bb26db61e5"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "mobile_app",
+        "entry_id": "01K96CEP5QB8APY8B7NCB0EPJR",
+        "minor_version": 1,
+        "modified_at": "2025-11-12T22:35:46.344180+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "registration",
+        "subentries": [],
+        "title": "Giovani  iphone 16pro",
+        "unique_id": "io.robbie.HomeAssistant-6C70C9CD-9387-4270-ACF6-E60354B08C8D",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-04T20:26:55.876919+00:00",
+        "data": {
+          "access_token": "5a467512502791a4",
+          "host": "192.168.4.164"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "bond",
+        "entry_id": "01K988T6G4A8KAMAYHZQJXXSN6",
+        "minor_version": 1,
+        "modified_at": "2025-11-04T20:26:55.876922+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "My Bridgehigh trail main",
+        "unique_id": "ZZIA38003",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-04T23:02:16.655123+00:00",
+        "data": {
+          "api_key": "UAjLuvhtejIWp5pcxxrtBY6mp5zjrm"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "sensibo",
+        "entry_id": "01K98HPMTFG3B78RPPP9Y7KW94",
+        "minor_version": 1,
+        "modified_at": "2025-11-04T23:02:16.655127+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "agpiasentin",
+        "unique_id": "agpiasentin",
+        "version": 2
+      },
+      {
+        "created_at": "2025-11-15T23:50:12.398976+00:00",
+        "data": {
+          "host": "192.168.4.210",
+          "mac": "348e892df6aa",
+          "timeout": 5,
+          "type": 21003
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "broadlink",
+        "entry_id": "01KA4YTA5EM7PMGNQ6VRG6HPT1",
+        "minor_version": 1,
+        "modified_at": "2025-11-15T23:50:12.398977+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "Master broad link pro",
+        "unique_id": "348e892df6aa",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-16T16:02:41.135225+00:00",
+        "data": {
+          "password": "Colorado_102823",
+          "username": "Agpiasentin@gmail.com"
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "honeywell",
+        "entry_id": "01KA6PEZBF6ZXZPPAQS6CBFPHC",
+        "minor_version": 1,
+        "modified_at": "2025-11-16T16:02:41.135228+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "honeywell",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-16T16:18:33.334265+00:00",
+        "data": {
+          "name": "Front door lock",
+          "port": 21065
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "homekit",
+        "entry_id": "01KA6QC17PD81PJJCY3KC523BR",
+        "minor_version": 1,
+        "modified_at": "2025-11-16T16:18:33.339197+00:00",
+        "options": {
+          "filter": {
+            "exclude_domains": [],
+            "exclude_entities": [],
+            "include_domains": [],
+            "include_entities": [
+              "lock.front_door_lock"
+            ]
+          },
+          "mode": "accessory"
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "accessory",
+        "subentries": [],
+        "title": "Front door lock:21065",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-16T16:18:33.334583+00:00",
+        "data": {
+          "exclude_accessory_mode": true,
+          "name": "HASS Bridge",
+          "port": 21064
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "homekit",
+        "entry_id": "01KA6QC17P47TJNGCMV3BHM5ED",
+        "minor_version": 1,
+        "modified_at": "2025-11-16T16:18:33.341109+00:00",
+        "options": {
+          "filter": {
+            "exclude_domains": [],
+            "exclude_entities": [],
+            "include_domains": [
+              "alarm_control_panel",
+              "climate",
+              "cover",
+              "humidifier",
+              "fan",
+              "light",
+              "lock",
+              "media_player",
+              "remote",
+              "switch",
+              "vacuum",
+              "lawn_mower",
+              "water_heater"
+            ],
+            "include_entities": []
+          },
+          "mode": "bridge"
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "HASS Bridge:21064",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-16T16:32:13.620034+00:00",
+        "data": {
+          "cookie": "CcKpYrmLPa71Fx54qjOe4y4OnLvymwQH2DATJKEhKdpaEawlDypkyPDeploxhlwDDfosBavL_CqDUH_HVEfBbA==",
+          "ip_address": "192.168.4.165",
+          "password": "KUSUF"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "powerwall",
+        "entry_id": "01KA6R529MNWE6V1W97KEEMRVG",
+        "minor_version": 1,
+        "modified_at": "2026-01-06T21:51:38.720406+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "Piasentin ",
+        "unique_id": "1232100-00-H--GF2220690001PZ",
+        "version": 1
+      },
+      {
+        "created_at": "2025-11-18T04:47:51.309282+00:00",
+        "data": {
+          "app_data": {
+            "push_token": "dShdtMX4SkU6vOJOYMedCZ:APA91bGnRfPIFrS6mhfkuzR-ndx5lTIEUjbJNK4dYVstrO3lSTtYZ9F9MiEAwr26GS9KuA2zWXXSTJwbssTrmeekZAcJe8k5MfuuM0ucSAl04Q3UR7MQfnQ",
+            "push_url": "https://mobile-apps.home-assistant.io/api/sendPushNotification"
+          },
+          "app_id": "io.robbie.HomeAssistant",
+          "app_name": "Home Assistant",
+          "app_version": "2025.12.1 (2025.1546)",
+          "device_id": "123BDAAC-B54A-4370-B358-F9E319470438",
+          "device_name": "Giovani iPhone ",
+          "manufacturer": "Apple",
+          "model": "iPhone17,1",
+          "no_legacy_encryption": true,
+          "os_name": "iOS",
+          "os_version": "26.2",
+          "secret": "eab791b45b5928b0d4f42e527deb981e3ad44a98b8d7de506df9e75dcd934d0a",
+          "supports_encryption": true,
+          "user_id": "355e30d0e16e4c6f94ec1fb0bfcee936",
+          "webhook_id": "15820d8667eb1f89a6854f9e28d43aef3a42e59985c6747b8b0a0b708110afe5"
+        },
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "mobile_app",
+        "entry_id": "01KAAMMRGDT3H0GZ74AJWXVAAZ",
+        "minor_version": 1,
+        "modified_at": "2025-12-17T06:32:35.056271+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "registration",
+        "subentries": [],
+        "title": "Giovani iPhone ",
+        "unique_id": "io.robbie.HomeAssistant-123BDAAC-B54A-4370-B358-F9E319470438",
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-02T23:18:15.723518+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBGNR1DBEPJYDA3F021J55H8",
+        "minor_version": 2,
+        "modified_at": "2026-01-05T23:27:50.639914+00:00",
+        "options": {
+          "ac_mode": false,
+          "activity_temp": 0.0,
+          "away_temp": 0.0,
+          "cold_tolerance": 0.5,
+          "comfort_temp": 0.0,
+          "eco_temp": 0.0,
+          "heater": "switch.z5",
+          "home_temp": 0.0,
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 52.0,
+          "name": "zone 5 virtual thermostat - first floor living",
+          "sleep_temp": 0.0,
+          "target_sensor": "sensor.1f_gr_s_z_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 5 virtual thermostat - first floor living",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:33:18.724097+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK90A84SSJPNEC25F9QMP93",
+        "minor_version": 2,
+        "modified_at": "2026-01-05T23:22:15.449052+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z6",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 6 master thermostat",
+          "target_sensor": "sensor.2f_mb_c_z_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 6 master thermostat",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:35:46.471904+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK94TH7WZE9W28V9R8EX2G7",
+        "minor_version": 2,
+        "modified_at": "2026-01-08T17:37:30.758625+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z1",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "z1 first floor bedroom and bath",
+          "target_sensor": "sensor.1f_fr_n_t_fp3001_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "z1 first floor bedroom and bath",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:37:32.500596+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK9822M4A4EJWWS4K2QCCQ9",
+        "minor_version": 2,
+        "modified_at": "2025-12-30T16:13:20.622539+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z2",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 2 second floor office and upper guest",
+          "target_sensor": "sensor.hc_office_guest_avg_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 2 second floor office and upper guest",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:38:54.839678+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK9AJFQ4P1WHGJFZT3DD8GR",
+        "minor_version": 2,
+        "modified_at": "2026-01-05T23:27:32.377337+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z3",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 3,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 3 basement bath and common",
+          "target_sensor": "sensor.b1_tv_c_z_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 3 basement bath and common",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:42:43.676593+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK9HHYW9KJF0DG6NBDSQYDG",
+        "minor_version": 2,
+        "modified_at": "2026-01-05T23:28:30.894632+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z7",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 7 basement bar and tv room south side",
+          "target_sensor": "sensor.b1_tv_c_z_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 7 basement bar and tv room south side",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:44:35.502542+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK9MZ5EQC4G177KFJWBAZWP",
+        "minor_version": 2,
+        "modified_at": "2026-01-05T23:30:26.821287+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z8",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 8 Dining room",
+          "target_sensor": "sensor.madmen_temp_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 8 Dining room",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:45:45.833151+00:00",
+        "data": {},
+        "disabled_by": null,
+        "discovery_keys": {},
+        "domain": "generic_thermostat",
+        "entry_id": "01KBK9Q3V9GKMFQKM4F6JK3GHS",
+        "minor_version": 2,
+        "modified_at": "2025-12-27T19:53:04.851775+00:00",
+        "options": {
+          "ac_mode": false,
+          "cold_tolerance": 0.5,
+          "heater": "switch.z9",
+          "hot_tolerance": 0.0,
+          "max_temp": 80.0,
+          "min_cycle_duration": {
+            "hours": 0,
+            "minutes": 5,
+            "seconds": 0
+          },
+          "min_temp": 50.0,
+          "name": "zone 9 basement bedroom",
+          "target_sensor": "sensor.basement_kitchen_temperature_temperature",
+          "keep_alive": {
+            "hours": 0,
+            "minutes": 1,
+            "seconds": 0
+          }
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "zone 9 basement bedroom",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "created_at": "2025-12-03T23:47:45.386875+00:00",
+        "data": {
+          "cooler": null,
+          "humidity_sensor": "sensor.2f_mb_c_z_humidity",
+          "model": "Generic Component Switch",
+          "name": "master better thermostat",
+          "off_temperature": 20,
+          "outdoor_sensor": "sensor.high_country_front_door_multi_temperature",
+          "target_temp_step": "0.0",
+          "temperature_sensor": "sensor.2f_mb_c_z_temperature",
+          "thermostat": [
+            {
+              "adapter": null,
+              "advanced": {
+                "calibration": "target_temp_based",
+                "calibration_mode": "heating_power_calibration",
+                "child_lock": false,
+                "heat_auto_swapped": false,
+                "homematicip": false,
+                "no_off_system_mode": false,
+                "protect_overheating": false
+              },
+              "integration": "generic_thermostat",
+              "model": "Generic Component Switch",
+              "trv": "climate.zone_6_master_thermostat"
+            }
+          ],
+          "tolerance": 0.0,
+          "weather": null,
+          "window_off_delay": 0,
+          "window_off_delay_after": 0,
+          "window_sensors": null
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "better_thermostat",
+        "entry_id": "01KBK9TRKAVQJH08Q741T6S0VN",
+        "minor_version": 1,
+        "modified_at": "2025-12-03T23:47:45.386876+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "master better thermostat",
+        "unique_id": "master better thermostat_climate.zone_6_master_thermostat",
+        "version": 6
+      },
+      {
+        "created_at": "2025-12-04T00:27:38.427547+00:00",
+        "data": {
+          "cooler": null,
+          "humidity_sensor": "sensor.2f_h_c_z_humidity",
+          "model": "Generic Component Switch",
+          "name": "second floor better thermostat",
+          "off_temperature": 50,
+          "outdoor_sensor": "sensor.high_country_front_door_multi_temperature",
+          "target_temp_step": "0.0",
+          "temperature_sensor": "sensor.2f_h_c_z_temperature",
+          "thermostat": [
+            {
+              "adapter": null,
+              "advanced": {
+                "calibration": "target_temp_based",
+                "calibration_mode": "heating_power_calibration",
+                "child_lock": false,
+                "heat_auto_swapped": false,
+                "homematicip": false,
+                "no_off_system_mode": false,
+                "protect_overheating": false
+              },
+              "integration": "generic_thermostat",
+              "model": "Generic Component Switch",
+              "trv": "climate.zone_2_second_floor_office_and_upper_guest"
+            }
+          ],
+          "tolerance": 2.0,
+          "weather": null,
+          "window_off_delay": 900,
+          "window_off_delay_after": 0,
+          "window_sensors": null
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "better_thermostat",
+        "entry_id": "01KBKC3SHV6XN856899JZ572HT",
+        "minor_version": 1,
+        "modified_at": "2025-12-04T00:27:38.427549+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "second floor better thermostat",
+        "unique_id": "second floor better thermostat_climate.zone_2_second_floor_office_and_upper_guest",
+        "version": 6
+      },
+      {
+        "created_at": "2025-12-04T01:28:43.626856+00:00",
+        "data": {
+          "cooler": null,
+          "humidity_sensor": "sensor.basement_kitchen_temperature_humidity",
+          "model": "Generic Component Switch",
+          "name": "basement zone 7 better thermostat",
+          "off_temperature": 20,
+          "outdoor_sensor": "sensor.high_country_front_door_multi_temperature",
+          "target_temp_step": "0.0",
+          "temperature_sensor": "sensor.basement_kitchen_temperature_temperature",
+          "thermostat": [
+            {
+              "adapter": null,
+              "advanced": {
+                "calibration": "target_temp_based",
+                "calibration_mode": "heating_power_calibration",
+                "child_lock": false,
+                "heat_auto_swapped": false,
+                "homematicip": false,
+                "no_off_system_mode": false,
+                "protect_overheating": false
+              },
+              "integration": "generic_thermostat",
+              "model": "Generic Component Switch",
+              "trv": "climate.zone_7_basement_bar_and_tv_room_south_side"
+            }
+          ],
+          "tolerance": 2.0,
+          "weather": null,
+          "window_off_delay": 600,
+          "window_off_delay_after": 0,
+          "window_sensors": null
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "better_thermostat",
+        "entry_id": "01KBKFKMVAXGZX6RFVGFM28ADS",
+        "minor_version": 1,
+        "modified_at": "2025-12-04T01:28:43.626857+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "basement zone 7 better thermostat",
+        "unique_id": "basement zone 7 better thermostat_climate.zone_7_basement_bar_and_tv_room_south_side",
+        "version": 6
+      },
+      {
+        "created_at": "2025-12-04T01:34:03.466960+00:00",
+        "data": {
+          "cooler": null,
+          "humidity_sensor": "sensor.b1_tv_c_z_humidity",
+          "model": "Generic Component Switch",
+          "name": "basement zone 9 bedroom better thermostat",
+          "off_temperature": 20,
+          "outdoor_sensor": "sensor.high_country_front_door_multi_temperature",
+          "target_temp_step": "0.0",
+          "temperature_sensor": "sensor.b1_tv_c_z_temperature",
+          "thermostat": [
+            {
+              "adapter": null,
+              "advanced": {
+                "calibration": "target_temp_based",
+                "calibration_mode": "heating_power_calibration",
+                "child_lock": false,
+                "heat_auto_swapped": false,
+                "homematicip": false,
+                "no_off_system_mode": false,
+                "protect_overheating": false
+              },
+              "integration": "generic_thermostat",
+              "model": "Generic Component Switch",
+              "trv": "climate.zone_9_basement_bedroom"
+            }
+          ],
+          "tolerance": 0.0,
+          "weather": null,
+          "window_off_delay": 0,
+          "window_off_delay_after": 0,
+          "window_sensors": null
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "better_thermostat",
+        "entry_id": "01KBKFXD6ARX4Y8X4H9VZA3KX8",
+        "minor_version": 1,
+        "modified_at": "2025-12-04T01:34:03.466962+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "basement zone 9 bedroom better thermostat",
+        "unique_id": "basement zone 9 bedroom better thermostat_climate.zone_9_basement_bedroom",
+        "version": 6
+      },
+      {
+        "created_at": "2025-12-04T01:38:56.556274+00:00",
+        "data": {
+          "cooler": null,
+          "humidity_sensor": "sensor.b1_tv_c_z_humidity",
+          "model": "Generic Component Switch",
+          "name": "basement zone 3 better thermostat common and utility",
+          "off_temperature": 20,
+          "outdoor_sensor": "sensor.high_country_front_door_multi_temperature",
+          "target_temp_step": "0.0",
+          "temperature_sensor": "sensor.b1_tv_c_z_temperature",
+          "thermostat": [
+            {
+              "adapter": null,
+              "advanced": {
+                "calibration": "target_temp_based",
+                "calibration_mode": "heating_power_calibration",
+                "child_lock": false,
+                "heat_auto_swapped": false,
+                "homematicip": false,
+                "no_off_system_mode": false,
+                "protect_overheating": false
+              },
+              "integration": "generic_thermostat",
+              "model": "Generic Component Switch",
+              "trv": "climate.zone_3_basement_bath_and_common"
+            }
+          ],
+          "tolerance": 2.0,
+          "weather": null,
+          "window_off_delay": 0,
+          "window_off_delay_after": 0,
+          "window_sensors": null
+        },
+        "disabled_by": "user",
+        "discovery_keys": {},
+        "domain": "better_thermostat",
+        "entry_id": "01KBKG6BDC4G8XCE3KFAVGTGFB",
+        "minor_version": 1,
+        "modified_at": "2025-12-04T01:38:56.556275+00:00",
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "subentries": [],
+        "title": "basement zone 3 better thermostat common and utility",
+        "unique_id": "basement zone 3 better thermostat common and utility_climate.zone_3_basement_bath_and_common",
+        "version": 6
+      }
+    ]
+  }
+}

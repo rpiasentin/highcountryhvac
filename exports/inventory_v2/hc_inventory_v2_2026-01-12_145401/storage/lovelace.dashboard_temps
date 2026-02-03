@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_temps",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "New section"
+                },
+                {
+                  "chart_type": "line",
+                  "period": "5minute",
+                  "type": "statistics-graph",
+                  "entities": [
+                    "sensor.basement_kitchen_temperature_temperature",
+                    "sensor.b1_tv_c_z_temperature",
+                    "sensor.main_water_cutoff_temperature",
+                    "sensor.high_country_front_door_multi_temperature",
+                    "sensor.new_garage_motion_sensor_temperature"
+                  ],
+                  "stat_types": [
+                    "mean",
+                    "min",
+                    "max"
+                  ],
+                  "days_to_show": 2,
+                  "title": "basement floor"
+                },
+                {
+                  "chart_type": "line",
+                  "period": "5minute",
+                  "type": "statistics-graph",
+                  "entities": [
+                    "sensor.main_floor_temperature_sensor_temperature",
+                    "sensor.1f_gr_s_z_temperature",
+                    "sensor.1f_fr_n_t_fp3001_temperature",
+                    "sensor.1f_ha_c_afp3002_temperature",
+                    "sensor.madmen_temp_temperature",
+                    "sensor.high_country_front_door_multi_temperature"
+                  ],
+                  "stat_types": [
+                    "mean",
+                    "min",
+                    "max"
+                  ],
+                  "days_to_show": 2,
+                  "title": "first floor"
+                },
+                {
+                  "chart_type": "line",
+                  "period": "5minute",
+                  "type": "statistics-graph",
+                  "entities": [
+                    "sensor.2f_h_c_z_temperature",
+                    "sensor.2nd_floor_office_temperature_temperature",
+                    "sensor.2f_mb_c_z_temperature",
+                    "sensor.upper_guest_temp_temperature",
+                    "sensor.hc_office_guest_avg_temperature",
+                    "sensor.high_country_front_door_multi_temperature"
+                  ],
+                  "stat_types": [
+                    "mean",
+                    "min",
+                    "max"
+                  ],
+                  "days_to_show": 2,
+                  "title": "second floor"
+                },
+                {
+                  "chart_type": "line",
+                  "period": "5minute",
+                  "type": "statistics-graph",
+                  "entities": [
+                    "sensor.basement_kitchen_temperature_temperature",
+                    "sensor.b1_tv_c_z_temperature",
+                    "sensor.main_water_cutoff_temperature",
+                    "sensor.1f_fr_n_t_fp3001_temperature",
+                    "sensor.1f_ha_c_afp3002_temperature",
+                    "sensor.1f_gr_s_z_temperature",
+                    "sensor.main_floor_temperature_sensor_temperature",
+                    "sensor.upstairs_mantle_temperature_temperature",
+                    "sensor.2f_h_c_z_temperature",
+                    "sensor.2f_mb_c_z_temperature",
+                    "sensor.high_country_front_door_multi_temperature",
+                    "sensor.2nd_floor_office_temperature_temperature",
+                    "sensor.upper_guest_temp_temperature",
+                    "sensor.madmen_temp_temperature"
+                  ],
+                  "stat_types": [
+                    "mean"
+                  ],
+                  "days_to_show": 2,
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.high_country_front_door_multi_temperature"
+                    },
+                    {
+                      "entity": "sensor.main_water_cutoff_temperature"
+                    },
+                    {
+                      "entity": "sensor.b1_tv_c_z_temperature"
+                    },
+                    {
+                      "entity": "sensor.basement_kitchen_temperature_temperature"
+                    },
+                    {
+                      "entity": "sensor.1f_fr_n_t_fp3001_temperature"
+                    },
+                    {
+                      "entity": "sensor.main_floor_temperature_sensor_humidity"
+                    },
+                    {
+                      "entity": "sensor.1f_gr_s_z_temperature"
+                    },
+                    {
+                      "entity": "sensor.1f_ha_c_afp3002_temperature"
+                    },
+                    {
+                      "entity": "sensor.main_floor_temperature_sensor_temperature"
+                    },
+                    {
+                      "entity": "sensor.upstairs_mantle_temperature_temperature"
+                    },
+                    {
+                      "entity": "sensor.2f_h_c_z_temperature"
+                    },
+                    {
+                      "entity": "sensor.2f_mb_c_z_temperature"
+                    },
+                    {
+                      "entity": "sensor.basement_kitchen_temperature_temperature"
+                    },
+                    {
+                      "entity": "sensor.2nd_floor_office_temperature_temperature"
+                    },
+                    {
+                      "entity": "sensor.upper_guest_temp_temperature"
+                    },
+                    {
+                      "entity": "sensor.new_garage_motion_sensor_temperature"
+                    }
+                  ]
+                }
+              ],
+              "column_span": 1
+            }
+          ],
+          "header": {}
+        }
+      ]
+    }
+  }
+}

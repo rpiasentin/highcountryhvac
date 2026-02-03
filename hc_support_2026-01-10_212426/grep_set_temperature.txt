@@ -1,0 +1,11 @@
+/config/packages/high_country_setpoints.yaml:113:      - service: climate.set_temperature
+/config/packages/high_country_setpoints.yaml:137:      - service: climate.set_temperature
+/config/packages/high_country_setpoints.yaml:150:      - service: climate.set_temperature
+/config/packages/high_country_setpoints.yaml:173:      - service: climate.set_temperature
+/config/packages/high_country_minisplit_sync.yaml:112:                  - service: climate.set_temperature
+/config/hc_support_2026-01-10_210553/find_setpoint_broadcasts.py:26:        if walk(it, "climate.set_temperature") or walk(it, "climate.set_hvac_mode"):
+/config/blueprints/automation/panhans/advanced_heating_control.yaml:2741:            - action: climate.set_temperature
+/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:113:      - service: climate.set_temperature
+/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:137:      - service: climate.set_temperature
+/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:150:      - service: climate.set_temperature
+/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:173:      - service: climate.set_temperature

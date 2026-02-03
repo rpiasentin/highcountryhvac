@@ -1,0 +1,8 @@
+92:input_boolean.hc_enable_minisplit_auto_on_setpoint
+93:input_boolean.hc_enable_setpoint_broadcast
+94:input_boolean.high_country_sanity_flag
+95:input_number.hc_setpoint_basement
+96:input_number.hc_setpoint_first_floor
+97:input_number.hc_setpoint_master
+98:input_number.hc_setpoint_upper_floor
+99:input_select.hc_minisplit_preferred_mode

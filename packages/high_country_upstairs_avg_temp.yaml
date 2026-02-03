@@ -1,0 +1,14 @@
+template:
+  - sensor:
+      - name: "HC Office+Guest Avg Temperature"
+        unique_id: hc_office_guest_avg_temperature
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: "°F"
+        availability: >
+          {{ states('sensor.2nd_floor_office_temperature_temperature') not in ['unknown','unavailable','none']
+             and states('sensor.upper_guest_temp_temperature') not in ['unknown','unavailable','none'] }}
+        state: >
+          {% set o = states('sensor.2nd_floor_office_temperature_temperature') | float(0) %}
+          {% set g = states('sensor.upper_guest_temp_temperature') | float(0) %}
+          {{ ((o + g) / 2) | round(1) }}

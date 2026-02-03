@@ -1,0 +1,525 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.zone_control",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.giovani_s_device_2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.giovani_s_device_climate_react_2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "select.office_light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.giovani_s_device_timer_2"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "upper guest"
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.upper_guest"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.upper_guest_climate_react"
+                },
+                {
+                  "type": "tile",
+                  "entity": "select.upper_guest_light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.upper_guest_timer"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "master"
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.giovani_s_device"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.giovani_s_device_climate_react"
+                },
+                {
+                  "type": "tile",
+                  "entity": "select.master_light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.giovani_s_device_timer"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "upper hall"
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.upper_hall"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.upper_hall_climate_react"
+                },
+                {
+                  "type": "tile",
+                  "entity": "select.upper_hall_light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.upper_hall_timer"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Piasentin"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_backup_reserve",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_battery_export",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_battery_import",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_battery_power",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_charge"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.piasentin_charging"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.piasentin_grid_services_active",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.piasentin_grid_status",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_load_export",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_load_import",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_load_power",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_site_export",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_site_import",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_site_power",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_solar_export",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_solar_import",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.piasentin_solar_power",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.piasentin_status",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "switch.z1"
+                    },
+                    {
+                      "entity": "switch.z2"
+                    },
+                    {
+                      "entity": "switch.z3"
+                    },
+                    {
+                      "entity": "switch.z4"
+                    },
+                    {
+                      "entity": "switch.z5"
+                    },
+                    {
+                      "entity": "switch.z6"
+                    },
+                    {
+                      "entity": "switch.z7"
+                    },
+                    {
+                      "entity": "switch.z8"
+                    },
+                    {
+                      "entity": "switch.z9"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.zone_6_master_thermostat",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.z1_first_floor_bedroom_and_bath",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.zone_2_second_floor_office_and_upper_guest",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_3_basement_bath_and_common",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_5_virtual_thermostat_first_floor_living",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_7_basement_bar_and_tv_room_south_side",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_8_dining_room",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_9_basement_bedroom",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "entity": "climate.zone_4_garage",
+                  "vertical": false,
+                  "features_position": "bottom"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.b1_tv_c_z_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.basement_kitchen_temperature_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.1f_fr_n_t_fp3001_temperature",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.1f_ha_c_afp3002_temperature",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.b1_tv_c_z_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.1f_ha_c_afp3002_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.1f_gr_s_z_temperature"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.2f_mb_c_z_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.upstairs_mantle_temperature_temperature",
+                  "vertical": false,
+                  "features_position": "bottom",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.2f_h_c_z_temperature"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.hc_office_guest_avg_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.high_country_front_door_multi_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                },
+                {
+                  "type": "tile",
+                  "grid_options": {
+                    "columns": 9,
+                    "rows": 1
+                  },
+                  "entity": "sensor.new_garage_motion_sensor_temperature",
+                  "vertical": false,
+                  "features_position": "bottom"
+                }
+              ]
+            }
+          ],
+          "header": {
+            "layout": "responsive",
+            "badges_position": "bottom",
+            "badges_wrap": "scroll"
+          }
+        }
+      ]
+    }
+  }
+}

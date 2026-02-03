@@ -1,0 +1,281 @@
+input_number:
+  hc_setpoint_master:
+    name: "HC Setpoint Master"
+    min: 55
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+
+  hc_setpoint_basement:
+    name: "HC Setpoint Basement"
+    min: 55
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+
+  hc_setpoint_first_floor:
+    name: "HC Setpoint First Floor"
+    min: 55
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+
+  hc_setpoint_upper_floor:
+    name: "HC Setpoint Upper Floor"
+    min: 55
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+
+
+  hc_setpoint_garage:
+    name: "HC Setpoint Garage"
+    min: 40
+    max: 75
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+
+input_boolean:
+  hc_enable_setpoint_broadcast:
+    name: "HC Enable Setpoint Broadcast"
+
+  hc_enable_minisplit_auto_on_setpoint:
+    name: "HC Enable Mini-split Auto-On on Setpoint Change"
+
+input_select:
+  hc_minisplit_preferred_mode:
+    name: "HC Mini-split Preferred Mode"
+    options:
+      - auto
+      - heat
+      - cool
+    initial: auto
+
+script:
+  hc_minisplits_apply_mode:
+    alias: "HC Mini-splits Apply Mode (Turn On + Mode)"
+    mode: single
+    sequence:
+      - variables:
+          desired_raw: "{{ states('input_select.hc_minisplit_preferred_mode') }}"
+          splits:
+            - climate.upper_hall
+            - climate.giovani_s_device
+            - climate.giovani_s_device_2
+            - climate.upper_guest
+
+      - repeat:
+          for_each: "{{ splits }}"
+          sequence:
+            - variables:
+                e: "{{ repeat.item }}"
+                modes: "{{ state_attr(e, 'hvac_modes') or [] }}"
+                desired: >
+                  {% if desired_raw == 'auto' and 'auto' not in modes and 'heat_cool' in modes %}
+                    heat_cool
+                  {% else %}
+                    {{ desired_raw }}
+                  {% endif %}
+                mode_to_set: >
+                  {% if desired in modes %}{{ desired }}
+                  {% elif 'heat' in modes %}heat
+                  {% elif 'heat_cool' in modes %}heat_cool
+                  {% elif 'auto' in modes %}auto
+                  {% elif 'cool' in modes %}cool
+                  {% else %}{{ none }}{% endif %}
+
+            - choose:
+                - conditions: "{{ is_state(e, 'off') }}"
+                  sequence:
+                    - service: climate.turn_on
+                      target:
+                        entity_id: "{{ e }}"
+
+            - choose:
+                - conditions: "{{ mode_to_set is not none }}"
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: "{{ e }}"
+                      data:
+                        hvac_mode: "{{ mode_to_set }}"
+
+  hc_kick_hydronic_thermostats:
+    alias: "HC Kick Hydronic Thermostats"
+    mode: queued
+    sequence:
+      # Re-assert HVAC mode on hydronic zones (forces generic_thermostat control path)
+      - service: climate.set_hvac_mode
+        target:
+          entity_id:
+            - climate.z1_first_floor_bedroom_and_bath
+            - climate.zone_2_second_floor_office_and_upper_guest
+            - climate.zone_3_basement_bath_and_common
+            - climate.zone_5_virtual_thermostat_first_floor_living
+            - climate.zone_6_master_thermostat
+            - climate.zone_7_basement_bar_and_tv_room_south_side
+            - climate.zone_8_dining_room
+            - climate.zone_9_basement_bedroom
+        data:
+          hvac_mode: heat
+
+      - delay:
+          seconds: 1
+
+      # Ask HA to refresh the temp sensors that feed the hydronic thermostats
+      - service: homeassistant.update_entity
+        target:
+          entity_id:
+            - sensor.1f_fr_n_t_fp3001_temperature
+            - sensor.2nd_floor_office_temperature_temperature
+            - sensor.upper_guest_temp_temperature
+            - sensor.hc_office_guest_avg_temperature
+            - sensor.b1_tv_c_z_temperature
+            - sensor.1f_gr_s_z_temperature
+            - sensor.2f_mb_c_z_temperature
+            - sensor.madmen_temp_temperature
+            - sensor.basement_kitchen_temperature_temperature
+
+      - delay:
+          seconds: 1
+
+      # Refresh climates so hvac_action/state updates surface immediately
+      - service: homeassistant.update_entity
+        target:
+          entity_id:
+            - climate.z1_first_floor_bedroom_and_bath
+            - climate.zone_2_second_floor_office_and_upper_guest
+            - climate.zone_3_basement_bath_and_common
+            - climate.zone_5_virtual_thermostat_first_floor_living
+            - climate.zone_6_master_thermostat
+            - climate.zone_7_basement_bar_and_tv_room_south_side
+            - climate.zone_8_dining_room
+            - climate.zone_9_basement_bedroom
+
+  hc_broadcast_master_setpoint:
+    alias: "HC Broadcast Master Setpoint"
+    mode: single
+    sequence:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.hc_enable_minisplit_auto_on_setpoint
+                state: "on"
+            sequence:
+              - service: script.turn_on
+                target:
+                  entity_id: script.hc_minisplits_apply_mode
+
+      - service: climate.set_temperature
+        target:
+          entity_id:
+            # Hydronic climates
+            - climate.z1_first_floor_bedroom_and_bath
+            - climate.zone_2_second_floor_office_and_upper_guest
+            - climate.zone_3_basement_bath_and_common
+            - climate.zone_5_virtual_thermostat_first_floor_living
+            - climate.zone_6_master_thermostat
+            - climate.zone_7_basement_bar_and_tv_room_south_side
+            - climate.zone_8_dining_room
+            - climate.zone_9_basement_bedroom
+            # Mini-splits (Sensibo)
+            - climate.upper_hall
+            - climate.giovani_s_device
+            - climate.giovani_s_device_2
+            - climate.upper_guest
+        data:
+          temperature: "{{ states('input_number.hc_setpoint_master') | float }}"
+
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_kick_hydronic_thermostats
+
+  hc_broadcast_basement_setpoint:
+    alias: "HC Broadcast Basement Setpoint"
+    mode: single
+    sequence:
+      - service: climate.set_temperature
+        target:
+          entity_id:
+            - climate.zone_3_basement_bath_and_common
+            - climate.zone_7_basement_bar_and_tv_room_south_side
+            - climate.zone_9_basement_bedroom
+        data:
+          temperature: "{{ states('input_number.hc_setpoint_basement') | float }}"
+
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_kick_hydronic_thermostats
+
+  hc_broadcast_first_floor_setpoint:
+    alias: "HC Broadcast First Floor Setpoint"
+    mode: single
+    sequence:
+      - service: climate.set_temperature
+        target:
+          entity_id:
+            - climate.z1_first_floor_bedroom_and_bath
+            - climate.zone_5_virtual_thermostat_first_floor_living
+            - climate.zone_8_dining_room
+        data:
+          temperature: "{{ states('input_number.hc_setpoint_first_floor') | float }}"
+
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_kick_hydronic_thermostats
+
+  hc_broadcast_garage_setpoint:
+    alias: "HC Broadcast Garage Setpoint"
+    mode: single
+    sequence:
+      - service: climate.set_temperature
+        target:
+          entity_id:
+            - climate.zone_4_garage
+        data:
+          temperature: "{{ states('input_number.hc_setpoint_garage') | float }}"
+
+  hc_broadcast_upper_floor_setpoint:
+    alias: "HC Broadcast Upper Floor Setpoint"
+    mode: single
+    sequence:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.hc_enable_minisplit_auto_on_setpoint
+                state: "on"
+            sequence:
+              - service: script.turn_on
+                target:
+                  entity_id: script.hc_minisplits_apply_mode
+
+      - service: climate.set_temperature
+        target:
+          entity_id:
+            # Hydronic upstairs zones
+            - climate.zone_2_second_floor_office_and_upper_guest
+            - climate.zone_6_master_thermostat
+            # Mini-splits
+            - climate.upper_hall
+            - climate.giovani_s_device
+            - climate.giovani_s_device_2
+            - climate.upper_guest
+        data:
+          temperature: "{{ states('input_number.hc_setpoint_upper_floor') | float }}"
+
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        target:
+          entity_id: script.hc_kick_hydronic_thermostats

@@ -1,0 +1,12 @@
+72:climate.giovani_s_device
+73:climate.giovani_s_device_2
+74:climate.upper_guest
+75:climate.upper_hall
+76:climate.z1_first_floor_bedroom_and_bath
+77:climate.zone_2_second_floor_office_and_upper_guest
+78:climate.zone_3_basement_bath_and_common
+79:climate.zone_5_virtual_thermostat_first_floor_living
+80:climate.zone_6_master_thermostat
+81:climate.zone_7_basement_bar_and_tv_room_south_side
+82:climate.zone_8_dining_room
+83:climate.zone_9_basement_bedroom

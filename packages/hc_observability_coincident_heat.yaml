@@ -1,0 +1,428 @@
+# Stage 1 - Observability Coincident Heat (SAFE: no valve control)
+# Counts "coincident call-for-heat" pairs:
+# When any zone call-for-heat turns ON and stays on for 20s,
+# it records that zone's last-on timestamp, then checks if any other zone
+# last-on timestamp is within the user window (input_number.hc_coincident_window_min).
+# If yes, it increments exactly one counter for the pair (low zone number first).
+
+input_datetime:
+  hc_coincident_last_on_z1:
+    name: HC Coincident Last On Z1
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z2:
+    name: HC Coincident Last On Z2
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z3:
+    name: HC Coincident Last On Z3
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z4:
+    name: HC Coincident Last On Z4
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z5:
+    name: HC Coincident Last On Z5
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z6:
+    name: HC Coincident Last On Z6
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z7:
+    name: HC Coincident Last On Z7
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z8:
+    name: HC Coincident Last On Z8
+    has_date: true
+    has_time: true
+  hc_coincident_last_on_z9:
+    name: HC Coincident Last On Z9
+    has_date: true
+    has_time: true
+
+counter:
+  hc_coincident_z1_z2_total:
+    name: HC Coincident Z1+Z2 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z3_total:
+    name: HC Coincident Z1+Z3 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z4_total:
+    name: HC Coincident Z1+Z4 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z5_total:
+    name: HC Coincident Z1+Z5 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z6_total:
+    name: HC Coincident Z1+Z6 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z7_total:
+    name: HC Coincident Z1+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z8_total:
+    name: HC Coincident Z1+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z1_z9_total:
+    name: HC Coincident Z1+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z2_z3_total:
+    name: HC Coincident Z2+Z3 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z4_total:
+    name: HC Coincident Z2+Z4 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z5_total:
+    name: HC Coincident Z2+Z5 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z6_total:
+    name: HC Coincident Z2+Z6 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z7_total:
+    name: HC Coincident Z2+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z8_total:
+    name: HC Coincident Z2+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z2_z9_total:
+    name: HC Coincident Z2+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z3_z4_total:
+    name: HC Coincident Z3+Z4 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z3_z5_total:
+    name: HC Coincident Z3+Z5 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z3_z6_total:
+    name: HC Coincident Z3+Z6 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z3_z7_total:
+    name: HC Coincident Z3+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z3_z8_total:
+    name: HC Coincident Z3+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z3_z9_total:
+    name: HC Coincident Z3+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z4_z5_total:
+    name: HC Coincident Z4+Z5 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z4_z6_total:
+    name: HC Coincident Z4+Z6 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z4_z7_total:
+    name: HC Coincident Z4+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z4_z8_total:
+    name: HC Coincident Z4+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z4_z9_total:
+    name: HC Coincident Z4+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z5_z6_total:
+    name: HC Coincident Z5+Z6 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z5_z7_total:
+    name: HC Coincident Z5+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z5_z8_total:
+    name: HC Coincident Z5+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z5_z9_total:
+    name: HC Coincident Z5+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z6_z7_total:
+    name: HC Coincident Z6+Z7 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z6_z8_total:
+    name: HC Coincident Z6+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z6_z9_total:
+    name: HC Coincident Z6+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z7_z8_total:
+    name: HC Coincident Z7+Z8 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+  hc_coincident_z7_z9_total:
+    name: HC Coincident Z7+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+  hc_coincident_z8_z9_total:
+    name: HC Coincident Z8+Z9 Total
+    icon: mdi:counter
+    initial: 0
+    step: 1
+
+script:
+  hc_coincident_reset_counters:
+    alias: HC Coincident Reset Counters
+    mode: single
+    sequence:
+      - service: counter.reset
+        target:
+          entity_id:
+            - counter.hc_coincident_z1_z2_total
+            - counter.hc_coincident_z1_z3_total
+            - counter.hc_coincident_z1_z4_total
+            - counter.hc_coincident_z1_z5_total
+            - counter.hc_coincident_z1_z6_total
+            - counter.hc_coincident_z1_z7_total
+            - counter.hc_coincident_z1_z8_total
+            - counter.hc_coincident_z1_z9_total
+            - counter.hc_coincident_z2_z3_total
+            - counter.hc_coincident_z2_z4_total
+            - counter.hc_coincident_z2_z5_total
+            - counter.hc_coincident_z2_z6_total
+            - counter.hc_coincident_z2_z7_total
+            - counter.hc_coincident_z2_z8_total
+            - counter.hc_coincident_z2_z9_total
+            - counter.hc_coincident_z3_z4_total
+            - counter.hc_coincident_z3_z5_total
+            - counter.hc_coincident_z3_z6_total
+            - counter.hc_coincident_z3_z7_total
+            - counter.hc_coincident_z3_z8_total
+            - counter.hc_coincident_z3_z9_total
+            - counter.hc_coincident_z4_z5_total
+            - counter.hc_coincident_z4_z6_total
+            - counter.hc_coincident_z4_z7_total
+            - counter.hc_coincident_z4_z8_total
+            - counter.hc_coincident_z4_z9_total
+            - counter.hc_coincident_z5_z6_total
+            - counter.hc_coincident_z5_z7_total
+            - counter.hc_coincident_z5_z8_total
+            - counter.hc_coincident_z5_z9_total
+            - counter.hc_coincident_z6_z7_total
+            - counter.hc_coincident_z6_z8_total
+            - counter.hc_coincident_z6_z9_total
+            - counter.hc_coincident_z7_z8_total
+            - counter.hc_coincident_z7_z9_total
+            - counter.hc_coincident_z8_z9_total
+
+automation:
+  - id: hc_observability_coincident_heat
+    alias: HC Observability - Coincident Heat (All Pairs)
+    mode: queued
+    max: 50
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.hc_z1_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "1"
+      - platform: state
+        entity_id: binary_sensor.hc_z2_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "2"
+      - platform: state
+        entity_id: binary_sensor.hc_z3_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "3"
+      - platform: state
+        entity_id: binary_sensor.hc_z4_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "4"
+      - platform: state
+        entity_id: binary_sensor.hc_z5_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "5"
+      - platform: state
+        entity_id: binary_sensor.hc_z6_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "6"
+      - platform: state
+        entity_id: binary_sensor.hc_z7_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "7"
+      - platform: state
+        entity_id: binary_sensor.hc_z8_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "8"
+      - platform: state
+        entity_id: binary_sensor.hc_z9_call_for_heat
+        to: "on"
+        for: "00:00:20"
+        id: "9"
+    variables:
+      window_min: "{{ states('input_number.hc_coincident_window_min') | int(10) }}"
+    action:
+      - variables:
+          z: "{{ trigger.id | int }}"
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: "{{ 'input_datetime.hc_coincident_last_on_z' ~ z }}"
+        data:
+          date: "{{ now().strftime('%Y-%m-%d') }}"
+          time: "{{ now().strftime('%H:%M:%S') }}"
+      - repeat:
+          for_each: "{{ range(1,10) | list }}"
+          sequence:
+            - condition: template
+              value_template: "{{ repeat.item != z }}"
+            - variables:
+                other: "{{ repeat.item }}"
+                other_state: "{{ states('input_datetime.hc_coincident_last_on_z' ~ other) }}"
+                other_ts: >-
+                  {{ as_timestamp(as_datetime(other_state))
+                     if other_state not in ['unknown','unavailable','none',''] else none }}
+                delta_min: >-
+                  {{ ((as_timestamp(now()) - other_ts)/60)
+                     if other_ts is not none else none }}
+            - condition: template
+              value_template: "{{ delta_min is not none and delta_min >= 0 and delta_min <= window_min }}"
+            - variables:
+                low: "{{ [z, other] | min }}"
+                high: "{{ [z, other] | max }}"
+                ctr: "{{ 'counter.hc_coincident_z{}_z{}_total'.format(low, high) }}"
+            - service: counter.increment
+              target:
+                entity_id: "{{ ctr }}"
+
+# ---------- ADDITIONS: self-summarizing sensors (read-only) ----------
+
+template:
+  - sensor:
+      - name: "HC Coincident Top Pairs"
+        unique_id: hc_coincident_top_pairs
+        icon: mdi:chart-bar
+        state: >
+          {% set zs = range(1,10) | list %}
+          {% set pairs = namespace(list=[]) %}
+          {% for a in zs %}
+            {% for b in zs if b>a %}
+              {% set c = states('counter.hc_coincident_z' ~ a ~ '_z' ~ b ~ '_total') | int(0) %}
+              {% set pairs.list = pairs.list + [{'a':a,'b':b,'c':c}] %}
+            {% endfor %}
+          {% endfor %}
+          {% set top = pairs.list | sort(attribute='c', reverse=true) %}
+          {% if top|length == 0 or top[0].c == 0 %}
+            none
+          {% else %}
+            z{{ top[0].a }}-z{{ top[0].b }}: {{ top[0].c }}
+          {% endif %}
+        attributes:
+          window_min: "{{ states('input_number.hc_coincident_window_min') | int(10) }}"
+          top_12_md: >
+            {% set zs = range(1,10) | list %}
+            {% set pairs = namespace(list=[]) %}
+            {% for a in zs %}
+              {% for b in zs if b>a %}
+                {% set c = states('counter.hc_coincident_z' ~ a ~ '_z' ~ b ~ '_total') | int(0) %}
+                {% set pairs.list = pairs.list + [{'a':a,'b':b,'c':c}] %}
+              {% endfor %}
+            {% endfor %}
+            {% set top = pairs.list | sort(attribute='c', reverse=true) %}
+            {% set shown = top | selectattr('c','gt',0) | list %}
+            {% if shown|length == 0 %}
+            - none (all zero)
+            {% else %}
+            {% for p in shown[:12] %}
+            - z{{p.a}}-z{{p.b}}: {{p.c}}
+            {% endfor %}
+            {% endif %}
+
+      - name: "HC Coincident Matrix"
+        unique_id: hc_coincident_matrix
+        icon: mdi:table
+        state: "{{ states('input_number.hc_coincident_window_min') | int(10) }}m"
+        attributes:
+          matrix_md: >
+            {% set zs = range(1,10) | list %}
+            {% macro cnt(a,b) -%}
+              {%- if a==b -%} --
+              {%- else -%}
+                {%- set lo = [a,b] | min -%}
+                {%- set hi = [a,b] | max -%}
+                {{- states('counter.hc_coincident_z' ~ lo ~ '_z' ~ hi ~ '_total') | int(0) -}}
+              {%- endif -%}
+            {%- endmacro %}
+            |     |{% for z in zs %} z{{z}} |{% endfor %}
+            |:----|{% for z in zs %}:---:|{% endfor %}
+            {% for r in zs %}
+            | z{{r}} |{% for c in zs %} {{ cnt(r,c) }} |{% endfor %}
+            {% endfor %}

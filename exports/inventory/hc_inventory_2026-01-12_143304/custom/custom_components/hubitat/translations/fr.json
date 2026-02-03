@@ -1,0 +1,97 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Le hub est déjà configuré"
+        },
+        "error": {
+            "cannot_connect": "Impossible de se connecter, veuillez réessayer",
+            "invalid_access_token": "Le jeton d'accès n'est pas valide",
+            "invalid_hub_config": "Configuration du hub non valide",
+            "request_error": "Erreur de communication avec le hub",
+            "unknown": "Erreur inattendue"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "access_token": "Jeton d'accès 'Maker API' d'Hubitat",
+                    "app_id": "Maker API app ID",
+                    "host": "L'adresse du Hub",
+                    "server_port": "Port du serveur d'événements (facultatif)",
+                    "server_url": "URL du serveur d'événements (facultatif)",
+                    "server_ssl_cert": "Certificat SSL du serveur d'événements (facultatif)",
+                    "server_ssl_key": "Clé privée SSL du serveur d'événements (facultatif)",
+                    "temperature_unit": "Unités de température (optionnel)",
+                    "sync_areas": "Synchroniser les pièces"
+                },
+                "description": "Indiquez l'adresse IP ou le nom d'hôte de votre hub Hubitat, ainsi que l'ID d'application de son instance API Maker. En option, un numéro de port pour l'écoute du serveur d'événements de l'intégration, les unités utilisées pour les capteurs de température (F par défaut) et / ou l'URL sur laquelle Hubitat doit POSTER les événements.",
+                "title": "Connectez-vous à votre hub Hubitat"
+            }
+        },
+        "title": "Hubitat"
+    },
+    "device_automation": {
+        "trigger_subtype": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8"
+        },
+        "trigger_type": {
+            "double_tapped": "Boutton {subtype} tapé deux fois",
+            "held": "Boutton {subtype} tenu",
+            "pushed": "Boutton {subtype} poussé",
+            "code_name": "Déverrouillé avec code «{subtype}»"
+        }
+    },
+    "options": {
+        "error": {
+            "cannot_connect": "Impossible de se connecter, veuillez réessayer",
+            "invalid_access_token": "Le jeton d'accès n'est pas valide",
+            "invalid_hub_config": "Configuration du hub non valide",
+            "request_error": "Erreur de communication avec le hub",
+            "unknown": "Erreur inattendue"
+        },
+        "step": {
+            "override_lights": {
+              "data": {
+                "devices": "Interrupteurs qui devraient être des lumières"
+              },
+              "description": "Les appareils suivants ont été automatiquement classés comme interrupteurs. Sélectionnez ceux qui devraient plutôt être des lumières.",
+              "title": "Interrupteurs → Lumières"
+            },
+            "override_switches": {
+              "data": {
+                "devices": "Lumières qui devraient être des interrupteurs"
+              },
+              "description": "Les appareils suivants ont été automatiquement classés comme lumières. Sélectionnez ceux qui devraient plutôt être des interrupteurs.",
+              "title": "Lumières → Interrupteurs"
+            },
+            "remove_devices": {
+                "data": {
+                    "devices": "Appareils à supprimer"
+                },
+                "description": "Sélectionnez les appareils gérés par cette intégration que vous souhaitez supprimer. En général, cela concerne les appareils qui ne sont plus partagés par Hubitat.",
+                "title": "Supprimer les appareils"
+            },
+            "user": {
+                "data": {
+                    "host": "L'adresse du Hub",
+                    "app_id": "Maker API app ID",
+                    "access_token": "'Maker API' jeton d'accès",
+                    "server_port": "Port du serveur d'événements (facultatif)",
+                    "server_url": "URL du serveur d'événements (facultatif)",
+                    "server_ssl_cert": "Certificat SSL du serveur d'événements (facultatif)",
+                    "server_ssl_key": "Clé privée SSL du serveur d'événements (facultatif)",
+                    "temperature_unit": "Unités de température (optionnel)",
+                    "sync_areas": "Synchroniser les pièces"
+                },
+                "description": "Configurez les options pour Hubitat. Notez que la modification du 'Maker API app ID' provoquera la redécouverte vos appareils.",
+                "title": "Options d'Hubitat"
+            }
+        }
+    }
+}

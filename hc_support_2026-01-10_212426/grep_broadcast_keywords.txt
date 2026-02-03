@@ -1,0 +1,200 @@
+/config/hc_inventory_high-country-hvac.yaml:8:        title: Setpoints & Safety
+/config/hc_inventory_high-country-hvac.yaml:11:          - entity: input_number.hc_setpoint_master
+/config/hc_inventory_high-country-hvac.yaml:12:            name: Master Setpoint
+/config/hc_inventory_high-country-hvac.yaml:13:          - entity: input_number.hc_setpoint_basement
+/config/hc_inventory_high-country-hvac.yaml:14:            name: Basement Setpoint
+/config/hc_inventory_high-country-hvac.yaml:15:          - entity: input_number.hc_setpoint_first_floor
+/config/hc_inventory_high-country-hvac.yaml:16:            name: First Floor Setpoint
+/config/hc_inventory_high-country-hvac.yaml:17:          - entity: input_number.hc_setpoint_upper_floor
+/config/hc_inventory_high-country-hvac.yaml:18:            name: Upper Floor Setpoint
+/config/hc_inventory_high-country-hvac.yaml:20:          - entity: input_boolean.hc_enable_setpoint_broadcast
+/config/hc_inventory_high-country-hvac.yaml:21:            name: Enable Broadcast
+/config/hc_inventory_high-country-hvac.yaml:22:          - entity: input_boolean.hc_enable_minisplit_auto_on_setpoint
+/config/hc_inventory_high-country-hvac.yaml:23:            name: Mini-splits Auto-On on Setpoint Change
+/config/hc_inventory_high-country-hvac.yaml:24:          - entity: input_select.hc_minisplit_preferred_mode
+/config/hc_inventory_high-country-hvac.yaml:39:                entity_id: script.hc_broadcast_master_setpoint
+/config/hc_inventory_high-country-hvac.yaml:48:                entity_id: script.hc_broadcast_basement_setpoint
+/config/hc_inventory_high-country-hvac.yaml:57:                entity_id: script.hc_broadcast_first_floor_setpoint
+/config/hc_inventory_high-country-hvac.yaml:66:                entity_id: script.hc_broadcast_upper_floor_setpoint
+/config/hc_inventory_high-country-hvac.yaml:75:                entity_id: script.hc_retry_mismatched_minisplits
+/config/hc_inventory_high-country-hvac.yaml:78:            name: "Splits: Apply Mode"
+/config/hc_inventory_high-country-hvac.yaml:84:                entity_id: script.hc_minisplits_apply_mode
+/config/hc_inventory_high-country-hvac.yaml:87:        title: Mini-split Setpoint Sync (Desired vs Reported)
+/config/hc_inventory_high-country-hvac.yaml:91:          - entity: sensor.hc_desired_upper_setpoint
+/config/hc_inventory_high-country-hvac.yaml:92:            name: Desired Upper Setpoint (¬∞F)
+/config/hc_inventory_high-country-hvac.yaml:93:          - entity: binary_sensor.hc_any_minisplit_setpoint_mismatch
+/config/hc_inventory_high-country-hvac.yaml:94:            name: Any Mini-split Mismatch (problem)
+/config/hc_inventory_high-country-hvac.yaml:98:          - entity: sensor.hc_upper_hall_reported_setpoint
+/config/hc_inventory_high-country-hvac.yaml:99:            name: Reported Setpoint
+/config/hc_inventory_high-country-hvac.yaml:100:          - entity: binary_sensor.hc_upper_hall_setpoint_mismatch
+/config/hc_inventory_high-country-hvac.yaml:101:            name: Mismatch (problem)
+/config/hc_inventory_high-country-hvac.yaml:105:          - entity: sensor.hc_master_minisplit_reported_setpoint
+/config/hc_inventory_high-country-hvac.yaml:106:            name: Reported Setpoint
+/config/hc_inventory_high-country-hvac.yaml:107:          - entity: binary_sensor.hc_master_minisplit_setpoint_mismatch
+/config/hc_inventory_high-country-hvac.yaml:108:            name: Mismatch (problem)
+/config/hc_inventory_high-country-hvac.yaml:112:          - entity: sensor.hc_office_minisplit_reported_setpoint
+/config/hc_inventory_high-country-hvac.yaml:113:            name: Reported Setpoint
+/config/hc_inventory_high-country-hvac.yaml:114:          - entity: binary_sensor.hc_office_minisplit_setpoint_mismatch
+/config/hc_inventory_high-country-hvac.yaml:115:            name: Mismatch (problem)
+/config/hc_inventory_high-country-hvac.yaml:119:          - entity: sensor.hc_upper_guest_minisplit_reported_setpoint
+/config/hc_inventory_high-country-hvac.yaml:120:            name: Reported Setpoint
+/config/hc_inventory_high-country-hvac.yaml:121:          - entity: binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch
+/config/hc_inventory_high-country-hvac.yaml:122:            name: Mismatch (problem)
+/config/hc_inventory_high-country-hvac.yaml:129:          - entity: binary_sensor.hc_whole_house_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:131:          - entity: binary_sensor.hc_basement_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:133:          - entity: binary_sensor.hc_first_floor_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:135:          - entity: binary_sensor.hc_upper_floor_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:137:          - entity: binary_sensor.hc_garage_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:144:          - entity: sensor.hc_whole_house_call_for_heat_hours_today
+/config/hc_inventory_high-country-hvac.yaml:146:          - entity: sensor.hc_basement_call_for_heat_hours_today
+/config/hc_inventory_high-country-hvac.yaml:148:          - entity: sensor.hc_first_floor_call_for_heat_hours_today
+/config/hc_inventory_high-country-hvac.yaml:150:          - entity: sensor.hc_upper_floor_call_for_heat_hours_today
+/config/hc_inventory_high-country-hvac.yaml:152:          - entity: sensor.hc_garage_call_for_heat_hours_today
+/config/hc_inventory_high-country-hvac.yaml:161:          - binary_sensor.hc_z1_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:162:          - binary_sensor.hc_z2_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:163:          - binary_sensor.hc_z3_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:164:          - binary_sensor.hc_z4_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:165:          - binary_sensor.hc_z5_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:166:          - binary_sensor.hc_z6_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:167:          - binary_sensor.hc_z7_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:168:          - binary_sensor.hc_z8_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:169:          - binary_sensor.hc_z9_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:176:          - entity: binary_sensor.hc_whole_house_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:178:          - entity: binary_sensor.hc_basement_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:180:          - entity: binary_sensor.hc_first_floor_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:182:          - entity: binary_sensor.hc_upper_floor_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:184:          - entity: binary_sensor.hc_garage_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:192:          - entity: binary_sensor.hc_z1_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:194:          - entity: binary_sensor.hc_z2_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:196:          - entity: binary_sensor.hc_z3_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:198:          - entity: binary_sensor.hc_z4_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:200:          - entity: binary_sensor.hc_z5_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:202:          - entity: binary_sensor.hc_z6_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:204:          - entity: binary_sensor.hc_z7_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:206:          - entity: binary_sensor.hc_z8_call_for_heat
+/config/hc_inventory_high-country-hvac.yaml:208:          - entity: binary_sensor.hc_z9_call_for_heat
+/config/home-assistant_v2.db:76309:7qsensor.hc_upper_guest_mini_split_reported_setpoint–
+/config/home-assistant_v2.db:881523:Ysensor.hc_z1_call_for_heat_hours_today-É'
+/config/home-assistant_v2.db:881524:abinary_sensor.hc_whole_house_call_for_heat-É&
+/config/home-assistant_v2.db:881525:abinary_sensor.hc_upper_floor_call_for_heat-É%
+/config/home-assistant_v2.db:881526:abinary_sensor.hc_first_floor_call_for_heat*É$
+/config/home-assistant_v2.db:881527:[binary_sensor.hc_basement_call_for_heat$É#
+/config/home-assistant_v2.db:881528:Obinary_sensor.hc_z9_call_for_heat$É"
+/config/home-assistant_v2.db:881529:Obinary_sensor.hc_z8_call_for_heat$É!
+/config/home-assistant_v2.db:881530:Obinary_sensor.hc_z7_call_for_heat$É 
+/config/home-assistant_v2.db:881531:Obinary_sensor.hc_z6_call_for_heat!É
+/config/home-assistant_v2.db:881552:Obinary_sensor.hc_z5_call_for_heat$É
+/config/home-assistant_v2.db:881553:Obinary_sensor.hc_z4_call_for_heat$É
+/config/home-assistant_v2.db:881554:Obinary_sensor.hc_z3_call_for_heat$É
+/config/home-assistant_v2.db:881555:Obinary_sensor.hc_z2_call_for_heat$É
+/config/home-assistant_v2.db:881556:Obinary_sensor.hc_z1_call_for_heat)É
+/config/home-assistant_v2.db:881657:%Mbinar%Mbinary_sensor.hc_z8_heat_allowedÔ
+/config/home-assistant_v2.db:884192:	#sensor.hc_office_guest_avg_temperaturerecorder¬∞FtemperatureCo
+/config/home-assistant_v2.db:884216:	sensor.hc_garage_call_for_heat_hours_todayrecorderhdurationJi
+/config/home-assistant_v2.db:884220:	sensor.hc_first_floor_call_for_heat_hours_todayrecorderhdurationJh
+/config/home-assistant_v2.db:884224:	sensor.hc_whole_house_call_for_heat_hours_todayrecorderhdurationJg
+/config/home-assistant_v2.db:884228:	sensor.hc_upper_floor_call_for_heat_hours_todayrecorderhdurationAf
+/config/home-assistant_v2.db:884232:	sensor.hc_z9_call_for_heat_hours_todayrecorderhdurationAe
+/config/home-assistant_v2.db:884236:	sensor.hc_z8_call_for_heat_hours_todayrecorderhdurationGd
+/config/home-assistant_v2.db:884240:	sensor.hc_basement_call_for_heat_hours_todayrecorderhdurationAc
+/config/home-assistant_v2.db:884244:	sensor.hc_z5_call_for_heat_hours_todayrecorderhdurationAb
+/config/home-assistant_v2.db:884248:	sensor.hc_z7_call_for_heat_hours_todayrecorderhdurationAa
+/config/home-assistant_v2.db:884252:	sensor.hc_z4_call_for_heat_hours_todayrecorderhdurationA`
+/config/home-assistant_v2.db:884256:	sensor.hc_z6_call_for_heat_hours_todayrecorderhdurationA_
+/config/home-assistant_v2.db:884260:	sensor.hc_z2_call_for_heat_hours_todayrecorderhdurationA^
+/config/home-assistant_v2.db:884264:	sensor.hc_z3_call_for_heat_hours_todayrecorderhdurationA]
+/config/home-assistant_v2.db:884268:	sensor.hc_z1_call_for_heat_hours_todayrecorderhduration5\
+/config/home-assistant_v2.db:2370084:*Ysensor.hc_z6_call_for_heat_hours_today`*Ysensor.hc_z2_call_for_heat_hours_today_*Ysensor.hc_z3_call_for_heat_hours_today^*Ysensor.hc_z1_call_for_heat_hours_today]
+/config/home-assistant_v2.db:2371542:*Ysensor.hc_office_guest_avg_temperaturep.asensor.hc_garage_call_for_heat_hours_todayj3ksensor.hc_first_floor_call_for_heat_hours_todayi3ksensor.hc_whole_house_call_for_heat_hours_todayh3ksensor.hc_upper_floor_call_for_heat_hours_todayg*Ysensor.hc_z9_call_for_heat_hours_todayf*Ysensor.hc_z8_call_for_heat_hours_todaye0esensor.hc_basement_call_for_heat_hours_todayd*Ysensor.hc_z5_call_for_heat_hours_todayc*Ysensor.hc_z7_call_for_heat_hours_todayb*Ysensor.hc_z4_call_for_heat_hours_todaya Esensor.kid_room_sink_battery	4msensor.high_country_front_door_multi_temperature0esensor.high_country_front_door_multi_battery)Wsensor.half_bath_water_sensor_batteryCsensor.giovani_sink_battery'Ssensor.giovani_s_device_airq_tvoc_2U%Osensor.giovani_s_device_airq_tvocS&Qsensor.giovani_s_device_airq_co2_2V$Msensor.giovani_s_device_airq_co2T4msensor.front_room_motion_night_light_illuminance"Isensor.front_door_lock_battery*[	sensor.boiler_room_water_sensor_battery2isensor.basement_motion_night_light_illuminance3ksensor.basement_kitchen_temperature_temperature0esensor.basement_kitchen_temperature_humidity/csensor.basement_kitchen_temperature_battery5osensor.basement_kitchen_sink_water_sensor_battery Esensor.b1_tv_c_z_temperature6 Esensor.b1_tv_c_z_illuminance0?sensor.b1_tv_c_z_humidity*=sensor.b1_tv_c_z_battery$Asensor.alison_sink_battery3ksensor.2nd_floor_office_temperature_temperature[0esensor.2nd_floor_office_temperature_humidityZ/csensor.2nd_floor_office_temperature_batteryY Esensor.2f_mb_c_z_temperature7 Esensor.2f_mb_c_z_illuminance1?sensor.2f_mb_c_z_humidity+=sensor.2f_mb_c_z_battery%Csensor.2f_h_c_z_temperature5Csensor.2f_h_c_z_illuminance/=sensor.2f_h_c_z_humidity);sensor.2f_h_c_z_battery#&Qsensor.1f_ha_c_afp3002_temperature3&Qsensor.1f_ha_c_afp3002_illuminance-#Ksensor.1f_ha_c_afp3002_humidity'"Isensor.1f_ha_c_afp3002_battery! Esensor.1f_gr_s_z_temperature4 Esensor.1f_gr_s_z_illuminance.?sensor.1f_gr_s_z_humidity(=sensor.1f_gr_s_z_battery"'Ssensor.1f_fr_n_t_fp3001_temperature2'Ssensor.1f_fr_n_t_fp3001_illuminance,$Msensor.1f_fr_n_t_fp3001_humidity&#Ksensor.1f_fr_n_t_fp3001_battery 
+/config/home-assistant_v2.db:2768110:uautomation.hc_cold_tolerance_gate_block_zone_turn_on#Ép
+/config/home-assistant_v2.db:2768111:Mbinary_sensor.hc_z9_heat_allowed#Éo
+/config/home-assistant_v2.db:2768112:Mbinary_sensor.hc_z8_heat_allowed#Én
+/config/home-assistant_v2.db:2768113:Mbinary_sensor.hc_z7_heat_allowed#Ém
+/config/home-assistant_v2.db:2768114:Mbinary_sensor.hc_z6_heat_allowed#Él
+/config/home-assistant_v2.db:2768115:Mbinary_sensor.hc_z5_heat_allowed#Ék
+/config/home-assistant_v2.db:2768116:Mbinary_sensor.hc_z3_heat_allowed#Éj
+/config/home-assistant_v2.db:2768117:Mbinary_sensor.hc_z2_heat_allowed#Éi
+/config/home-assistant_v2.db:2768118:Mbinary_sensor.hc_z1_heat_allowed.Éh
+/config/home-assistant_v2.db:2768119:cinput_boolean.hc_enable_cold_tolerance_gate!Ég
+/config/home-assistant_v2.db:2768120:Iinput_number.hc_cold_toleranceÉf
+/config/home-assistant_v2.db:2768121:1sensor.hc_z9_deltaÉe
+/config/home-assistant_v2.db:2768122:1sensor.hc_z8_deltaÉd
+/config/home-assistant_v2.db:2768123:1sensor.hc_z7_deltaÉc
+/config/home-assistant_v2.db:2768124:1sensor.hc_z6_deltaÉb
+/config/home-assistant_v2.db:2768125:1sensor.hc_z5_deltaÉa
+/config/home-assistant_v2.db:2768126:1sensor.hc_z4_deltaÉ`
+/config/home-assistant_v2.db:2768127:1sensor.hc_z3_deltaÉ_
+/config/home-assistant_v2.db:2768128:1sensor.hc_z2_deltaÉ^
+/config/home-assistant_v2.db:2768129:1sensor.hc_z1_delta-É]
+/config/home-assistant_v2.db:2768130:ascript.hc_apply_cold_tolerance_and_restart3É\
+/config/home-assistant_v2.db:2768131:mbinary_sensor.hc_any_minisplit_setpoint_mismatch;É[
+/config/home-assistant_v2.db:2768132:}binary_sensor.hc_upper_guest_minisplit_setpoint_mismatch6ÉZ
+/config/home-assistant_v2.db:2768133:sbinary_sensor.hc_office_minisplit_setpoint_mismatch6ÉY
+/config/home-assistant_v2.db:2768134:sbinary_sensor.hc_master_minisplit_setpoint_mismatch4ÉX
+/config/home-assistant_v2.db:2768135:osensor.hc_upper_guest_minisplit_reported_setpoint/ÉW
+/config/home-assistant_v2.db:2768136:esensor.hc_office_minisplit_reported_setpoint/ÉV
+/config/home-assistant_v2.db:2768137:esensor.hc_master_minisplit_reported_setpoint4ÉU
+/config/home-assistant_v2.db:2768138:obinary_sensor.hc_any_mini_split_setpoint_mismatch<ÉT
+/config/home-assistant_v2.db:2768139:binary_sensor.hc_upper_guest_mini_split_setpoint_mismatch7ÉS
+/config/home-assistant_v2.db:2768140:ubinary_sensor.hc_office_mini_split_setpoint_mismatch7ÉR
+/config/home-assistant_v2.db:2768141:ubinary_sensor.hc_master_mini_split_setpoint_mismatch0ÉQ
+/config/home-assistant_v2.db:2768142:gbinary_sensor.hc_upper_hall_setpoint_mismatch5ÉP
+/config/home-assistant_v2.db:2768143:qsensor.hc_upper_guest_mini_split_reported_setpoint0ÉO
+/config/home-assistant_v2.db:2768144:gsensor.hc_office_mini_split_reported_setpoint0ÉN
+/config/home-assistant_v2.db:2768145:gsensor.hc_master_mini_split_reported_setpoint)ÉM
+/config/home-assistant_v2.db:2768146:Ysensor.hc_upper_hall_reported_setpoint#ÉL
+/config/home-assistant_v2.db:2768147:Msensor.hc_desired_upper_setpoint(ÉK
+/config/home-assistant_v2.db:2768148:Wscript.hc_retry_mismatched_minisplits)ÉJ
+/config/home-assistant_v2.db:2768149:Ysensor.hc_office_guest_avg_temperature&ÉI
+/config/home-assistant_v2.db:2768153:qinput_boolean.hc_enable_minisplit_auto_on_setpoint+ÉE
+/config/home-assistant_v2.db:2768154:]input_select.hc_minisplit_preferred_mode"ÉD
+/config/home-assistant_v2.db:2768155:Kscript.hc_minisplits_apply_modeAÉC
+/config/home-assistant_v2.db:2768157:oautomation.hc_auto_broadcast_upper_floor_setpoint1ÉA
+/config/home-assistant_v2.db:2768158:iautomation.hc_auto_broadcast_basement_setpoint4É@
+/config/home-assistant_v2.db:2768159:oautomation.hc_auto_broadcast_first_floor_setpoint+É?
+/config/home-assistant_v2.db:2768160:]script.hc_broadcast_upper_floor_setpoint+É>
+/config/home-assistant_v2.db:2768161:]script.hc_broadcast_first_floor_setpoint(É=
+/config/home-assistant_v2.db:2768162:Wscript.hc_broadcast_basement_setpoint&É<
+/config/home-assistant_v2.db:2768163:Sscript.hc_broadcast_master_setpoint'É;
+/config/home-assistant_v2.db:2768164:Uinput_number.hc_setpoint_upper_floor'É:
+/config/home-assistant_v2.db:2768165:Uinput_number.hc_setpoint_first_floor$É9
+/config/home-assistant_v2.db:2768166:Oinput_number.hc_setpoint_basement"É8
+/config/home-assistant_v2.db:2768167:Kinput_number.hc_setpoint_master-É7
+/config/home-assistant_v2.db:2768168:ainput_boolean.hc_enable_setpoint_broadcast(É6
+/config/home-assistant_v2.db:2768169:Wbinary_sensor.hc_garage_call_for_heat-É5
+/config/home-assistant_v2.db:2768170:asensor.hc_garage_call_for_heat_hours_today2É4
+/config/home-assistant_v2.db:2768171:ksensor.hc_first_floor_call_for_heat_hours_today2É3
+/config/home-assistant_v2.db:2768172:ksensor.hc_whole_house_call_for_heat_hours_today2É2
+/config/home-assistant_v2.db:2768173:ksensor.hc_upper_floor_call_for_heat_hours_today)É1
+/config/home-assistant_v2.db:2768174:Ysensor.hc_z9_call_for_heat_hours_today)É0
+/config/home-assistant_v2.db:2768175:Ysensor.hc_z8_call_for_heat_hours_today/É/
+/config/home-assistant_v2.db:2768176:esensor.hc_basement_call_for_heat_hours_today)É.
+/config/home-assistant_v2.db:2768177:Ysensor.hc_z5_call_for_heat_hours_today)É-
+/config/home-assistant_v2.db:2768178:Ysensor.hc_z7_call_for_heat_hours_today)É,
+/config/home-assistant_v2.db:2768179:Ysensor.hc_z4_call_for_heat_hours_today)É+
+/config/home-assistant_v2.db:2768180:Ysensor.hc_z6_call_for_heat_hours_today)É*
+/config/home-assistant_v2.db:2768181:Ysensor.hc_z2_call_for_heat_hours_today)É)
+/config/home-assistant_v2.db:2768182:Ysensor.hc_z3_call_for_heat_hours_today
+/config/home-assistant_v2.db:2956808:{"domain":"input_number","service":"set_value","service_data":{"value":66.0,"entity_id":["input_number.hc_setpoint_first_floor"]}}ÅïO
+/config/home-assistant_v2.db:2956810::{"domain":"input_number","service":"set_value","service_data":{"value":66.0,"entity_id":["input_number.hc_setpoint_basement"]}}ÅïN
+/config/home-assistant_v2.db:22231839:∆úix{"unit_of_measurement":"¬∞F","friendly_name":"HC Upper Hall Reported Setpoint"}TÉ±l
+/config/hc_verify_helpers.yaml:7:        unique_id: hc_delta_upper_vs_office
+/config/hc_verify_helpers.yaml:10:          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+/config/hc_verify_helpers.yaml:19:        unique_id: hc_delta_upper_vs_upper_guest
+/config/hc_verify_helpers.yaml:22:          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+/config/hc_verify_helpers.yaml:31:        unique_id: hc_delta_upper_vs_office_guest_avg
+/config/hc_verify_helpers.yaml:34:          {% set sp = states('input_number.hc_setpoint_upper_floor')|float(none) %}
+/config/hc_verify_helpers.yaml:35:          {% set t  = states('sensor.hc_office_guest_avg_temperature')|float(none) %}
+/config/hc_verify_helpers.yaml:43:        unique_id: hc_delta_first_floor_vs_dining
+/config/hc_verify_helpers.yaml:46:          {% set sp = states('input_number.hc_setpoint_first_floor')|float(none) %}
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:1:/config/packages/high_country_setpoints.yaml:113:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:2:/config/packages/high_country_setpoints.yaml:137:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:3:/config/packages/high_country_setpoints.yaml:150:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:4:/config/packages/high_country_setpoints.yaml:173:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:6:/config/hc_support_2026-01-10_210553/find_setpoint_broadcasts.py:26:        if walk(it, "climate.set_temperature") or walk(it, "climate.set_hvac_mode"):
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:8:/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:113:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:9:/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:137:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:10:/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:150:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_set_temperature.txt:11:/config/hc_inventory_2026-01-05_094313/config_src/packages/high_country_setpoints.yaml:173:      - service: climate.set_temperature
+/config/hc_support_2026-01-10_212426/grep_broadcast_keywords.txt:1:/config/hc_inventory_high-country-hvac.yaml:8:        title: Setpoints & Safety
+/config/hc_support_2026-01-10_212426/grep_broadcast_keywords.txt:2:/config/hc_inventory_high-country-hvac.yaml:11:          - entity: input_number.hc_setpoint_master

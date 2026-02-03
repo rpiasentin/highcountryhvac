@@ -1,0 +1,182 @@
+clear_code:
+  description: Delete a user code from a lock or keypad
+  fields:
+    entity_id:
+      description: Entity ID of a lock or keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    position:
+      description: Index of code to delete
+      example: 1
+      selector:
+        number:
+          min: 1
+          mode: box
+
+get_codes:
+  description: Gets the user codes from a lock or keypad
+  fields:
+    entity_id:
+      description: Entity ID of a lock or keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+
+set_code:
+  description: Set a user code for a lock or keypad
+  fields:
+    entity_id:
+      description: Entity ID of a lock or keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    position:
+      description: Index of code to set
+      example: 1
+      selector: 
+        number:
+          min: 1
+          mode: box
+    code:
+      description: Code
+      example: 5213
+      selector: 
+        text:
+    name:
+      description: Friendly name for code
+      example: Family
+      selector: 
+        text:
+
+set_code_length:
+  description: Set the length of user codes for a lock or keypad
+  fields:
+    entity_id:
+      description: Entity ID of a lock or keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    length:
+      description: Length of acceptable codes
+      example: 4
+      selector: 
+        number:
+          min: 1
+          max: 10
+          mode: box
+
+set_entry_delay:
+  description: Set the entry delay for a keypad in seconds
+  fields:
+    entity_id:
+      description: Entity ID of a keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    delay:
+      description: Delay in seconds
+      example: 30
+      selector: 
+        number:
+          min: 1
+          max: 600
+          mode: box
+
+set_exit_delay:
+  description: Set the exit delay for a keypad in seconds
+  fields:
+    entity_id:
+      description: Entity ID of a keypad
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    delay:
+      description: Delay in seconds
+      example: 30
+      selector: 
+        number:
+          min: 1
+          max: 600
+          mode: box
+
+send_command:
+  description: Send a command to a Hubitat device
+  fields:
+    entity_id:
+      description: Entity to send command to
+      required: true
+      name: Entity
+      selector:
+        entity:
+          integration: hubitat
+    command:
+      name: Command
+      description: A command to send
+      required: true
+      example: refresh
+      selector: 
+        text:
+    args:
+      name: Arguments
+      description: >-
+        Optional arguments for command; may be a single value or a list of
+        values
+      selector:
+        text:
+
+set_hsm:
+  description: Arm or disarm a hub’s HSM
+  fields:
+    hub:
+      name: Hub ID
+      description: >-
+        The ID of a hub (first 8 digits of the Maker API token). This is only
+        needed if you have multiple hubs.
+      example: ab12cd34
+      selector: 
+        text:
+    command:
+      name: Command
+      description: The HSM command to send
+      required: true
+      selector:
+        select:
+          options:
+            - 'armAway'
+            - 'armHome'
+            - 'armNight'
+            - 'disarm'
+            - 'disarmAll'
+
+set_hub_mode:
+  description: Set a hub’s mode
+  fields:
+    hub:
+      name: Hub ID
+      description: >-
+        The ID of a hub (first 8 digits of the Maker API token). This is only
+        needed if you have multiple hubs.
+      example: ab12cd34
+      selector:
+        text:
+    mode:
+      name: Mode
+      description: >-
+        The desired mode. Typical values are Day, Night, and Away, but your hub
+        may support other values.
+      required: true
+      selector:
+        text:

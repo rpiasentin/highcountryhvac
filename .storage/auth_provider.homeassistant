@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "auth_provider.homeassistant",
+  "data": {
+    "users": [
+      {
+        "username": "rpiasentin",
+        "password": "JDJiJDEyJFMwSGdQNmYuVy9SanIzNzVnZkpxei4zSnFGdjZ0eUV3QUhsdUo3WlJuOS54WG8wejJuOHU2"
+      },
+      {
+        "username": "samsung",
+        "password": "JDJiJDEyJFVleVFncnlHekV4eHluUGI4a3MzaU81TlMxeEl4SnhBVWZCcnIzSmtiWEhhdVRTYjZRbEpP"
+      },
+      {
+        "username": "root",
+        "password": "JDJiJDEyJEdtZS5GVTBldlBsb3IyREw4SC94QmVOSVk1LzFoS1hxZ1FiemNUZEF3LnUxSXlpc2VKRzVP"
+      },
+      {
+        "username": "admin",
+        "password": "JDJiJDEyJFFwaXMucUJGSTNrclN4Mk5HbTF0NU8zWVdpQVo2amlxS1Y0bTB5Z0JORllHSXFTRW1pcUs2"
+      }
+    ]
+  }
+}

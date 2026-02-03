@@ -1,0 +1,15 @@
+board: ova
+boot: A
+boot_slots:
+  A:
+    state: booted
+    status: good
+    version: "16.3"
+  B:
+    state: inactive
+    status: bad
+    version: null
+data_disk: QEMU-QEMU-HARDDISK-drive-scsi0
+update_available: false
+version: "16.3"
+version_latest: "16.3"

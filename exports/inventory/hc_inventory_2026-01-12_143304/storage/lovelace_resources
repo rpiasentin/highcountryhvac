@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "id": "3a86ad5e70264399b8282dc85b490a4c",
+        "url": "/hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js?hacstag=439367892221",
+        "type": "module"
+      }
+    ]
+  }
+}

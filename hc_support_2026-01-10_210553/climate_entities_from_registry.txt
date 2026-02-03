@@ -1,0 +1,20 @@
+Found 18 climate.* entities in entity_registry
+
+climate.basement_zone_3_better_thermostat_common_and_utility | platform=better_thermostat | name=None
+climate.basement_zone_7_better_thermostat | platform=better_thermostat | name=None
+climate.basement_zone_9_bedroom_better_thermostat | platform=better_thermostat | name=None
+climate.giovani_s_device | platform=sensibo | name=None
+climate.giovani_s_device_2 | platform=sensibo | name=None
+climate.main_floor_hall | platform=honeywell | name=None
+climate.master_better_thermostat | platform=better_thermostat | name=None
+climate.second_floor_better_thermostat | platform=better_thermostat | name=None
+climate.upper_guest | platform=sensibo | name=None
+climate.upper_hall | platform=sensibo | name=None
+climate.z1_first_floor_bedroom_and_bath | platform=generic_thermostat | name=z1 first floor bedroom and bath
+climate.zone_2_second_floor_office_and_upper_guest | platform=generic_thermostat | name=zone 2 second floor office and upper guest
+climate.zone_3_basement_bath_and_common | platform=generic_thermostat | name=zone 3 basement bath and common
+climate.zone_5_virtual_thermostat_first_floor_living | platform=generic_thermostat | name=zone 5 virtual thermostat - first floor living
+climate.zone_6_master_thermostat | platform=generic_thermostat | name=zone 6 master thermostat
+climate.zone_7_basement_bar_and_tv_room_south_side | platform=generic_thermostat | name=zone 7 basement bar and tv room south side
+climate.zone_8_dining_room | platform=generic_thermostat | name=zone 8 Dining room
+climate.zone_9_basement_bedroom | platform=generic_thermostat | name=zone 9 basement bedroom

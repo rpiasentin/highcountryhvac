@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "hassio",
+  "data": {
+    "hassio_user": "64158ccf50d64d86929b73caf47d41a8",
+    "update_config": {
+      "add_on_backup_before_update": true,
+      "add_on_backup_retain_copies": 1,
+      "core_backup_before_update": false
+    }
+  }
+}

@@ -1,0 +1,65 @@
+# Zone deltas: (setpoint - current_temperature), one per hydronic zone.
+# Z4 has no climate entity in your current inventory, so Z4 delta is set to none.
+
+template:
+  - sensor:
+      - name: "HC Z1 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.z1_first_floor_bedroom_and_bath','temperature') %}
+          {% set t  = state_attr('climate.z1_first_floor_bedroom_and_bath','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z2 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_2_second_floor_office_and_upper_guest','temperature') %}
+          {% set t  = state_attr('climate.zone_2_second_floor_office_and_upper_guest','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z3 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_3_basement_bath_and_common','temperature') %}
+          {% set t  = state_attr('climate.zone_3_basement_bath_and_common','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z4 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {{ none }}
+
+      - name: "HC Z5 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_5_virtual_thermostat_first_floor_living','temperature') %}
+          {% set t  = state_attr('climate.zone_5_virtual_thermostat_first_floor_living','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z6 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_6_master_thermostat','temperature') %}
+          {% set t  = state_attr('climate.zone_6_master_thermostat','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z7 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_7_basement_bar_and_tv_room_south_side','temperature') %}
+          {% set t  = state_attr('climate.zone_7_basement_bar_and_tv_room_south_side','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z8 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_8_dining_room','temperature') %}
+          {% set t  = state_attr('climate.zone_8_dining_room','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}
+
+      - name: "HC Z9 Delta"
+        unit_of_measurement: "°F"
+        state: >
+          {% set sp = state_attr('climate.zone_9_basement_bedroom','temperature') %}
+          {% set t  = state_attr('climate.zone_9_basement_bedroom','current_temperature') %}
+          {{ (sp - t) | round(2) if sp is not none and t is not none else none }}

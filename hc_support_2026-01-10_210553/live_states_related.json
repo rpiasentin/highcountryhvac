@@ -1,0 +1,224 @@
+{
+  "count": 8,
+  "entities": {
+    "climate.z1_first_floor_bedroom_and_bath": {
+      "entity_id": "climate.z1_first_floor_bedroom_and_bath",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 60,
+        "temperature": 61,
+        "hvac_action": "idle",
+        "friendly_name": "z1 first floor bedroom and bath",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.935235+00:00",
+      "last_reported": "2026-01-11T03:17:48.824102+00:00",
+      "last_updated": "2026-01-11T03:17:48.824102+00:00",
+      "context": {
+        "id": "01KENGYPMRBVRN06B4C87Q34Q2",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_2_second_floor_office_and_upper_guest": {
+      "entity_id": "climate.zone_2_second_floor_office_and_upper_guest",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 58,
+        "temperature": 60,
+        "hvac_action": "idle",
+        "friendly_name": "zone 2 second floor office and upper guest",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.935831+00:00",
+      "last_reported": "2026-01-11T01:49:58.493733+00:00",
+      "last_updated": "2026-01-11T01:49:58.493733+00:00",
+      "context": {
+        "id": "01KENBXVTXPZW3MGGG4EQZ4QJW",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_3_basement_bath_and_common": {
+      "entity_id": "climate.zone_3_basement_bath_and_common",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 57,
+        "temperature": 61,
+        "hvac_action": "heating",
+        "friendly_name": "zone 3 basement bath and common",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.936445+00:00",
+      "last_reported": "2026-01-11T02:23:27.362306+00:00",
+      "last_updated": "2026-01-11T02:23:27.362306+00:00",
+      "context": {
+        "id": "01KENDV5M2K0GCZBAAP1NJMZ2Z",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_5_virtual_thermostat_first_floor_living": {
+      "entity_id": "climate.zone_5_virtual_thermostat_first_floor_living",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 52,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "preset_modes": [
+          "none",
+          "away",
+          "comfort",
+          "eco",
+          "home",
+          "sleep",
+          "activity"
+        ],
+        "current_temperature": 62,
+        "temperature": 60,
+        "hvac_action": "idle",
+        "preset_mode": "none",
+        "friendly_name": "zone 5 virtual thermostat - first floor living",
+        "supported_features": 401
+      },
+      "last_changed": "2026-01-10T10:18:22.933949+00:00",
+      "last_reported": "2026-01-11T02:10:08.875491+00:00",
+      "last_updated": "2026-01-11T02:10:08.875491+00:00",
+      "context": {
+        "id": "01KEND2SVBMXQWT1S4MDG1Y8ET",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_6_master_thermostat": {
+      "entity_id": "climate.zone_6_master_thermostat",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 58,
+        "temperature": 60,
+        "hvac_action": "heating",
+        "friendly_name": "zone 6 master thermostat",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.934624+00:00",
+      "last_reported": "2026-01-11T03:33:15.211298+00:00",
+      "last_updated": "2026-01-11T03:33:15.211298+00:00",
+      "context": {
+        "id": "01KENHTZABMZK2FG7ZVY8DWWYC",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_7_basement_bar_and_tv_room_south_side": {
+      "entity_id": "climate.zone_7_basement_bar_and_tv_room_south_side",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 57,
+        "temperature": 60,
+        "hvac_action": "idle",
+        "friendly_name": "zone 7 basement bar and tv room south side",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.937071+00:00",
+      "last_reported": "2026-01-11T02:23:26.713332+00:00",
+      "last_updated": "2026-01-11T02:23:26.713332+00:00",
+      "context": {
+        "id": "01KENDV4ZS6QSAYZNTMQ96XQM4",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_8_dining_room": {
+      "entity_id": "climate.zone_8_dining_room",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 61,
+        "temperature": 61,
+        "hvac_action": "idle",
+        "friendly_name": "zone 8 Dining room",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.937645+00:00",
+      "last_reported": "2026-01-11T04:01:18.428793+00:00",
+      "last_updated": "2026-01-11T04:01:18.428793+00:00",
+      "context": {
+        "id": "01KENKEB2W7E9DXPKQJZ0Q4Q5W",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    "climate.zone_9_basement_bedroom": {
+      "entity_id": "climate.zone_9_basement_bedroom",
+      "state": "heat",
+      "attributes": {
+        "hvac_modes": [
+          "heat",
+          "off"
+        ],
+        "min_temp": 50,
+        "max_temp": 80,
+        "target_temp_step": 1,
+        "current_temperature": 58,
+        "temperature": 61,
+        "hvac_action": "heating",
+        "friendly_name": "zone 9 basement bedroom",
+        "supported_features": 385
+      },
+      "last_changed": "2026-01-10T10:18:22.938305+00:00",
+      "last_reported": "2026-01-11T04:01:28.292745+00:00",
+      "last_updated": "2026-01-11T04:01:28.292745+00:00",
+      "context": {
+        "id": "01KENKEMQ43XE6CXCN8EJEVKNF",
+        "parent_id": null,
+        "user_id": null
+      }
+    }
+  },
+  "failed": []
+}

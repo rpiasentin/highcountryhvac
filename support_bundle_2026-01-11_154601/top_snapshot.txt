@@ -1,0 +1,22 @@
+top - 15:46:01 up  4:12,  0 user,  load average: 0.12, 0.16, 0.11
+Tasks:  15 total,   1 running,  14 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.4 us,  0.0 sy,  0.0 ni, 95.2 id,  0.0 wa,  0.0 hi,  2.4 si,  0.0 st 
+MiB Mem :   7927.7 total,   5907.0 free,   1016.8 used,   1110.7 buff/cache     
+MiB Swap:   2616.1 total,   2616.1 free,      0.0 used.   6910.8 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0     440    104     52 S   0.0   0.0   0:00.01 s6-svsc+
+     17 root      20   0     220     76     56 S   0.0   0.0   0:00.00 s6-supe+
+     20 root      20   0     208     64     52 S   0.0   0.0   0:00.00 s6-linu+
+     29 root      20   0     220     68     56 S   0.0   0.0   0:00.00 s6-supe+
+     30 root      20   0     220     76     56 S   0.0   0.0   0:00.00 s6-supe+
+     31 root      20   0     220     76     56 S   0.0   0.0   0:00.00 s6-supe+
+     32 root      20   0     220     80     56 S   0.0   0.0   0:00.00 s6-supe+
+     40 root      20   0     208     68     44 S   0.0   0.0   0:00.00 s6-ipcs+
+    314 root      20   0   16108   3096   2340 S   0.0   0.0   0:00.50 ttyd
+    316 root      20   0    6680   4612   3560 S   0.0   0.1   0:00.02 sshd
+    358 root      20   0    2972   2412   1348 S   0.0   0.0   0:00.38 tmux: s+
+    361 root      20   0    5064   4748   1924 S   0.0   0.1   0:05.23 zsh
+    487 root      20   0    2248   2008   1632 S   0.0   0.0   0:00.00 tmux: c+
+   1042 root      20   0    2352   1744   1472 S   0.0   0.0   0:00.00 bash
+   1110 root      20   0    3924   3184   1320 R   0.0   0.0   0:00.00 top

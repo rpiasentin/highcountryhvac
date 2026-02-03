@@ -1,0 +1,14 @@
+entity_id	name	hvac_mode	hvac_action	current_temperature	setpoint
+climate.giovani_s_device	master	off		69.8	62
+climate.giovani_s_device_2	office	off		60.1	62
+climate.upper_guest	upper guest	off		62.8	62
+climate.upper_hall	upper hall	off		63.5	62
+climate.z1_first_floor_bedroom_and_bath	z1 first floor bedroom and bath	heat	heating	58	60
+climate.zone_2_second_floor_office_and_upper_guest	zone 2 second floor office and upper guest	heat	idle	60	60
+climate.zone_3_basement_bath_and_common	zone 3 basement bath and common	heat	idle	60	60
+climate.zone_4_garage	Zone 4 Garage	heat	idle	49	46
+climate.zone_5_virtual_thermostat_first_floor_living	zone 5 virtual thermostat - first floor living	heat	idle	61	60
+climate.zone_6_master_thermostat	zone 6 master thermostat	heat	idle	68	60
+climate.zone_7_basement_bar_and_tv_room_south_side	zone 7 basement bar and tv room south side	heat	idle	58	60
+climate.zone_8_dining_room	zone 8 Dining room	heat	heating	59	60
+climate.zone_9_basement_bedroom	zone 9 basement bedroom	heat	heating	56	60

@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "giovani_piasentin",
+        "name": "Giovani Piasentin",
+        "user_id": "355e30d0e16e4c6f94ec1fb0bfcee936",
+        "device_trackers": [
+          "device_tracker.giovani_iphone_16pro",
+          "device_tracker.giovani_iphone"
+        ]
+      },
+      {
+        "id": "samsung",
+        "name": "samsung",
+        "device_trackers": [],
+        "user_id": "1581e159cf334d4899b01c54efa4a511",
+        "picture": null
+      },
+      {
+        "id": "root",
+        "name": "root",
+        "device_trackers": [],
+        "user_id": "0edaa8b1813d46e09d6c546a607ec935",
+        "picture": null
+      },
+      {
+        "id": "admin",
+        "name": "admin",
+        "device_trackers": [],
+        "user_id": "98a94ecb39234c2ab5d203983eea47be",
+        "picture": null
+      }
+    ]
+  }
+}
