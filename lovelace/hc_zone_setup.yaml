@@ -154,6 +154,8 @@ views:
             entities:
               - entity: input_boolean.hc_dispatcher_mode_enabled
                 name: Dispatcher Mode Enabled
+              - entity: input_boolean.hc_enable_cold_tolerance_gate
+                name: Cold Tolerance Gate
               - entity: input_boolean.hc_dispatcher_auto_approve
                 name: Auto-Approve Batch
               - entity: input_button.hc_dispatch_approve_batch
@@ -165,6 +167,8 @@ views:
             title: Advisory Status
             show_header_toggle: false
             entities:
+              - entity: input_select.hc_dispatch_algorithm
+                name: Dispatch Algorithm
               - entity: sensor.hc_dispatch_suggested_batch
                 name: Suggested Batch
               - entity: input_number.hc_dispatch_near_call_margin_f
