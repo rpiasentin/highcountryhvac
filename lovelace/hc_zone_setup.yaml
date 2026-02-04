@@ -3,6 +3,7 @@ views:
   - title: Zone Matrix
     path: zone-matrix
     icon: mdi:vector-selection
+    type: panel
     cards:
       - type: vertical-stack
         cards:
@@ -145,49 +146,52 @@ views:
   - title: Dispatcher Operations
     path: dispatcher-ops
     icon: mdi:console-network
+    type: panel
     cards:
-      - type: entities
-        title: Gatekeeper
-        show_header_toggle: false
-        entities:
-          - entity: input_boolean.hc_dispatcher_mode_enabled
-            name: Dispatcher Mode Enabled
-          - entity: input_boolean.hc_enable_cold_tolerance_gate
-            name: Cold Tolerance Gate
-          - entity: input_boolean.hc_dispatcher_auto_approve
-            name: Auto-Approve Batch
-          - entity: input_button.hc_dispatch_approve_batch
-            name: Manual Approve Button
-          - entity: input_text.hc_dispatch_approved_batch
-            name: Active Approved Batch
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Gatekeeper
+            show_header_toggle: false
+            entities:
+              - entity: input_boolean.hc_dispatcher_mode_enabled
+                name: Dispatcher Mode Enabled
+              - entity: input_boolean.hc_enable_cold_tolerance_gate
+                name: Cold Tolerance Gate
+              - entity: input_boolean.hc_dispatcher_auto_approve
+                name: Auto-Approve Batch
+              - entity: input_button.hc_dispatch_approve_batch
+                name: Manual Approve Button
+              - entity: input_text.hc_dispatch_approved_batch
+                name: Active Approved Batch
 
-      - type: entities
-        title: Advisory Status
-        show_header_toggle: false
-        entities:
-          - entity: input_select.hc_dispatch_algorithm
-            name: Dispatch Algorithm
-          - entity: sensor.hc_dispatch_suggested_batch
-            name: Suggested Batch
-          - entity: input_number.hc_dispatch_near_call_margin_f
-            name: Near Call Margin (°F)
-          - entity: sensor.hc_dispatch_near_call_zones
-            name: Near-Call Zones
-          - entity: binary_sensor.system_control_active
-            name: System Control Active
+          - type: entities
+            title: Advisory Status
+            show_header_toggle: false
+            entities:
+              - entity: input_select.hc_dispatch_algorithm
+                name: Dispatch Algorithm
+              - entity: sensor.hc_dispatch_suggested_batch
+                name: Suggested Batch
+              - entity: input_number.hc_dispatch_near_call_margin_f
+                name: Near Call Margin (°F)
+              - entity: sensor.hc_dispatch_near_call_zones
+                name: Near-Call Zones
+              - entity: binary_sensor.system_control_active
+                name: System Control Active
 
-      - type: markdown
-        title: Cluster Statistics
-        content: >
-          | Cluster | Avg Temp | Total Length | Efficiency |
-          | :--- | :--- | :--- | :--- |
-          | **A** | {{ states('sensor.hc_cluster_a_average_temp') }}°F | {{ states('sensor.hc_cluster_a_total_length') }} ft | {{ state_attr('sensor.hc_cluster_a_total_length','efficiency_status') }} |
-          | **B** | {{ states('sensor.hc_cluster_b_average_temp') }}°F | {{ states('sensor.hc_cluster_b_total_length') }} ft | {{ state_attr('sensor.hc_cluster_b_total_length','efficiency_status') }} |
-          | **C** | {{ states('sensor.hc_cluster_c_average_temp') }}°F | {{ states('sensor.hc_cluster_c_total_length') }} ft | {{ state_attr('sensor.hc_cluster_c_total_length','efficiency_status') }} |
-          | **D** | {{ states('sensor.hc_cluster_d_average_temp') }}°F | {{ states('sensor.hc_cluster_d_total_length') }} ft | {{ state_attr('sensor.hc_cluster_d_total_length','efficiency_status') }} |
-          | **E** | {{ states('sensor.hc_cluster_e_average_temp') }}°F | {{ states('sensor.hc_cluster_e_total_length') }} ft | {{ state_attr('sensor.hc_cluster_e_total_length','efficiency_status') }} |
-          
-          *Target Efficiency: 45 - 75 ft*
+          - type: markdown
+            title: Cluster Statistics
+            content: >
+              | Cluster | Avg Temp | Total Length | Efficiency |
+              | :--- | :--- | :--- | :--- |
+              | **A** | {{ states('sensor.hc_cluster_a_average_temp') }}°F | {{ states('sensor.hc_cluster_a_total_length') }} ft | {{ state_attr('sensor.hc_cluster_a_total_length','efficiency_status') }} |
+              | **B** | {{ states('sensor.hc_cluster_b_average_temp') }}°F | {{ states('sensor.hc_cluster_b_total_length') }} ft | {{ state_attr('sensor.hc_cluster_b_total_length','efficiency_status') }} |
+              | **C** | {{ states('sensor.hc_cluster_c_average_temp') }}°F | {{ states('sensor.hc_cluster_c_total_length') }} ft | {{ state_attr('sensor.hc_cluster_c_total_length','efficiency_status') }} |
+              | **D** | {{ states('sensor.hc_cluster_d_average_temp') }}°F | {{ states('sensor.hc_cluster_d_total_length') }} ft | {{ state_attr('sensor.hc_cluster_d_total_length','efficiency_status') }} |
+              | **E** | {{ states('sensor.hc_cluster_e_average_temp') }}°F | {{ states('sensor.hc_cluster_e_total_length') }} ft | {{ state_attr('sensor.hc_cluster_e_total_length','efficiency_status') }} |
+              
+              *Target Efficiency: 45 - 75 ft*
 
   - title: Global Settings
     path: global-settings
