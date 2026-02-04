@@ -1,0 +1,95 @@
+# packages/hc_dispatcher_actuator.yaml
+# Dispatcher V2 Actuator
+# Controls zone switches based on the suggested/approved batch.
+# Safety gates:
+# - Requires input_boolean.hc_dispatcher_mode_enabled == on
+# - Auto-trigger requires input_boolean.hc_dispatcher_auto_approve == on
+# - Optional cold tolerance gate uses binary_sensor.hc_zX_heat_allowed
+
+automation:
+  - id: hc_dispatch_v2_apply_batch
+    alias: "HC Dispatch V2 - Apply Batch"
+    mode: queued
+    max: 10
+    trigger:
+      # 1. Auto Mode: Trigger on suggestion change
+      - platform: state
+        entity_id: sensor.hc_dispatch_suggested_batch
+      # 2. Manual Mode Button Press
+      - platform: state
+        entity_id: input_button.hc_dispatch_approve_batch
+
+    condition:
+      # Master Switch must be ON
+      - condition: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        state: "on"
+
+      # If triggered by sensor change, only proceed if Auto-Approve is ON
+      - condition: template
+        value_template: >
+          {% if trigger.platform == 'state' and trigger.entity_id == 'sensor.hc_dispatch_suggested_batch' %}
+            {{ is_state('input_boolean.hc_dispatcher_auto_approve', 'on') }}
+          {% else %}
+            true
+          {% endif %}
+
+    action:
+      - variables:
+          raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
+          gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
+          # Parse the human string "Z1 Name + Z2 Name" back to zone codes
+          batch_list: >
+            {% set out = [] %}
+            {% for z in range(1,10) %}
+               {% if ('Z' ~ z ~ ' ') in raw_batch or ('Z' ~ z ~ '+') in raw_batch or raw_batch.startswith('Z' ~ z) %}
+                 {% set out = out + ['switch.z' ~ z] %}
+               {% endif %}
+            {% endfor %}
+            {{ out }}
+
+      # Avoid acting if the sensor is unavailable/unknown
+      - condition: template
+        value_template: "{{ raw_batch not in ['unknown','unavailable','none',''] }}"
+
+      # 1. Update the "Approved Batch" text helper
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_approved_batch
+        data:
+          value: "{{ raw_batch }}"
+
+      # 2. Iterate all zones and turn ON/OFF
+      - repeat:
+          for_each: ["switch.z1", "switch.z2", "switch.z3", "switch.z4", "switch.z5", "switch.z6", "switch.z7", "switch.z8", "switch.z9"]
+          sequence:
+            - variables:
+                sw: "{{ repeat.item }}"
+                z: "{{ sw.split('.')[1] }}"
+                should_be_on: "{{ sw in batch_list }}"
+                gate_sensor: "{{ 'binary_sensor.hc_' ~ z ~ '_heat_allowed' }}"
+                gate_ok: >
+                  {% if gate_enabled %}
+                    {{ is_state(gate_sensor, 'on') }}
+                  {% else %}
+                    true
+                  {% endif %}
+
+            - choose:
+                # Turn ON
+                - conditions:
+                    - condition: template
+                      value_template: "{{ should_be_on and is_state(sw, 'off') and gate_ok }}"
+                  sequence:
+                    - service: switch.turn_on
+                      target:
+                        entity_id: "{{ sw }}"
+
+                # Turn OFF
+                - conditions:
+                    - condition: template
+                      value_template: "{{ (not should_be_on) and is_state(sw, 'on') }}"
+                  sequence:
+                    - service: switch.turn_off
+                      target:
+                        entity_id: "{{ sw }}"
