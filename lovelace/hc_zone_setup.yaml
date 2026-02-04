@@ -167,6 +167,8 @@ views:
             entities:
               - entity: sensor.hc_dispatch_suggested_batch
                 name: Suggested Batch
+              - entity: input_number.hc_dispatch_near_call_margin_f
+                name: Near Call Margin (°F)
               - entity: sensor.hc_dispatch_near_call_zones
                 name: Near-Call Zones
               - entity: binary_sensor.system_control_active
