@@ -1,0 +1,85 @@
+# packages/hc_dispatcher_v2_zone_lengths.yaml
+# Stores the Linear Feet length of each Hydronic Loop
+# Used to calculate cluster efficiency (Ideal: 45-75 ft)
+
+input_number:
+  hc_z1_length_feet:
+    name: "Z1 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z2_length_feet:
+    name: "Z2 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z3_length_feet:
+    name: "Z3 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z4_length_feet:
+    name: "Z4 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z5_length_feet:
+    name: "Z5 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z6_length_feet:
+    name: "Z6 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z7_length_feet:
+    name: "Z7 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z8_length_feet:
+    name: "Z8 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure
+
+  hc_z9_length_feet:
+    name: "Z9 Length (Feet)"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:tape-measure

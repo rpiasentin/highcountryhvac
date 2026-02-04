@@ -1,0 +1,169 @@
+# packages/hc_dispatcher_v2_cluster_stats.yaml
+# Calculates Average Temperature & Total Loop Length for each Matrix Cluster (A-E)
+
+template:
+  - sensor:
+      # --- CLUSTER A ---
+      - name: "HC Cluster A Average Temp"
+        unique_id: hc_cluster_a_avg_temp
+        unit_of_measurement: "°F"
+        icon: mdi:home-group
+        state: >
+          {% set ns = namespace(total=0, count=0) %}
+          {% set ids = ['climate.z1_first_floor_bedroom_and_bath', 'climate.zone_2_second_floor_office_and_upper_guest', 'climate.zone_3_basement_bath_and_common', 'climate.zone_4_garage', 'climate.zone_5_virtual_thermostat_first_floor_living', 'climate.zone_6_master_thermostat', 'climate.zone_7_basement_bar_and_tv_room_south_side', 'climate.zone_8_dining_room', 'climate.zone_9_basement_bedroom'] %} 
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster A' %}
+               {% set t = state_attr(ids[z-1], 'current_temperature') %}
+               {% if t is not none %}{% set ns.total = ns.total + t|float %}{% set ns.count = ns.count + 1 %}{% endif %}
+             {% endif %}
+          {% endfor %}
+          {{ (ns.total / ns.count)|round(1) if ns.count > 0 else 'unavailable' }}
+
+      - name: "HC Cluster A Total Length"
+        unique_id: hc_cluster_a_total_length
+        unit_of_measurement: "ft"
+        icon: mdi:tape-measure
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster A' %}
+               {% set ns.total = ns.total + states('input_number.hc_z' ~ z ~ '_length_feet')|float(0) %}
+             {% endif %}
+          {% endfor %}
+          {{ ns.total | int }}
+        attributes:
+          efficiency_status: >
+             {% set l = states('sensor.hc_cluster_a_total_length')|int(0) %}
+             {% if l == 0 %}Empty{% elif l >= 45 and l <= 75 %}Optimal{% else %}Suboptimal{% endif %}
+
+      # --- CLUSTER B ---
+      - name: "HC Cluster B Average Temp"
+        unique_id: hc_cluster_b_avg_temp
+        unit_of_measurement: "°F"
+        icon: mdi:home-group
+        state: >
+          {% set ns = namespace(total=0, count=0) %}
+          {% set ids = ['climate.z1_first_floor_bedroom_and_bath', 'climate.zone_2_second_floor_office_and_upper_guest', 'climate.zone_3_basement_bath_and_common', 'climate.zone_4_garage', 'climate.zone_5_virtual_thermostat_first_floor_living', 'climate.zone_6_master_thermostat', 'climate.zone_7_basement_bar_and_tv_room_south_side', 'climate.zone_8_dining_room', 'climate.zone_9_basement_bedroom'] %} 
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster B' %}
+               {% set t = state_attr(ids[z-1], 'current_temperature') %}
+               {% if t is not none %}{% set ns.total = ns.total + t|float %}{% set ns.count = ns.count + 1 %}{% endif %}
+             {% endif %}
+          {% endfor %}
+          {{ (ns.total / ns.count)|round(1) if ns.count > 0 else 'unavailable' }}
+          
+      - name: "HC Cluster B Total Length"
+        unique_id: hc_cluster_b_total_length
+        unit_of_measurement: "ft"
+        icon: mdi:tape-measure
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster B' %}
+               {% set ns.total = ns.total + states('input_number.hc_z' ~ z ~ '_length_feet')|float(0) %}
+             {% endif %}
+          {% endfor %}
+          {{ ns.total | int }}
+        attributes:
+          efficiency_status: >
+             {% set l = states('sensor.hc_cluster_b_total_length')|int(0) %}
+             {% if l == 0 %}Empty{% elif l >= 45 and l <= 75 %}Optimal{% else %}Suboptimal{% endif %}
+
+      # --- CLUSTER C ---
+      - name: "HC Cluster C Average Temp"
+        unique_id: hc_cluster_c_avg_temp
+        unit_of_measurement: "°F"
+        icon: mdi:home-group
+        state: >
+          {% set ns = namespace(total=0, count=0) %}
+          {% set ids = ['climate.z1_first_floor_bedroom_and_bath', 'climate.zone_2_second_floor_office_and_upper_guest', 'climate.zone_3_basement_bath_and_common', 'climate.zone_4_garage', 'climate.zone_5_virtual_thermostat_first_floor_living', 'climate.zone_6_master_thermostat', 'climate.zone_7_basement_bar_and_tv_room_south_side', 'climate.zone_8_dining_room', 'climate.zone_9_basement_bedroom'] %} 
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster C' %}
+               {% set t = state_attr(ids[z-1], 'current_temperature') %}
+               {% if t is not none %}{% set ns.total = ns.total + t|float %}{% set ns.count = ns.count + 1 %}{% endif %}
+             {% endif %}
+          {% endfor %}
+          {{ (ns.total / ns.count)|round(1) if ns.count > 0 else 'unavailable' }}
+          
+      - name: "HC Cluster C Total Length"
+        unique_id: hc_cluster_c_total_length
+        unit_of_measurement: "ft"
+        icon: mdi:tape-measure
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster C' %}
+               {% set ns.total = ns.total + states('input_number.hc_z' ~ z ~ '_length_feet')|float(0) %}
+             {% endif %}
+          {% endfor %}
+          {{ ns.total | int }}
+        attributes:
+          efficiency_status: >
+             {% set l = states('sensor.hc_cluster_c_total_length')|int(0) %}
+             {% if l == 0 %}Empty{% elif l >= 45 and l <= 75 %}Optimal{% else %}Suboptimal{% endif %}
+
+      # --- CLUSTER D ---
+      - name: "HC Cluster D Average Temp"
+        unique_id: hc_cluster_d_avg_temp
+        unit_of_measurement: "°F"
+        icon: mdi:home-group
+        state: >
+          {% set ns = namespace(total=0, count=0) %}
+          {% set ids = ['climate.z1_first_floor_bedroom_and_bath', 'climate.zone_2_second_floor_office_and_upper_guest', 'climate.zone_3_basement_bath_and_common', 'climate.zone_4_garage', 'climate.zone_5_virtual_thermostat_first_floor_living', 'climate.zone_6_master_thermostat', 'climate.zone_7_basement_bar_and_tv_room_south_side', 'climate.zone_8_dining_room', 'climate.zone_9_basement_bedroom'] %} 
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster D' %}
+               {% set t = state_attr(ids[z-1], 'current_temperature') %}
+               {% if t is not none %}{% set ns.total = ns.total + t|float %}{% set ns.count = ns.count + 1 %}{% endif %}
+             {% endif %}
+          {% endfor %}
+          {{ (ns.total / ns.count)|round(1) if ns.count > 0 else 'unavailable' }}
+          
+      - name: "HC Cluster D Total Length"
+        unique_id: hc_cluster_d_total_length
+        unit_of_measurement: "ft"
+        icon: mdi:tape-measure
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster D' %}
+               {% set ns.total = ns.total + states('input_number.hc_z' ~ z ~ '_length_feet')|float(0) %}
+             {% endif %}
+          {% endfor %}
+          {{ ns.total | int }}
+        attributes:
+          efficiency_status: >
+             {% set l = states('sensor.hc_cluster_d_total_length')|int(0) %}
+             {% if l == 0 %}Empty{% elif l >= 45 and l <= 75 %}Optimal{% else %}Suboptimal{% endif %}
+
+      # --- CLUSTER E ---
+      - name: "HC Cluster E Average Temp"
+        unique_id: hc_cluster_e_avg_temp
+        unit_of_measurement: "°F"
+        icon: mdi:home-group
+        state: >
+          {% set ns = namespace(total=0, count=0) %}
+          {% set ids = ['climate.z1_first_floor_bedroom_and_bath', 'climate.zone_2_second_floor_office_and_upper_guest', 'climate.zone_3_basement_bath_and_common', 'climate.zone_4_garage', 'climate.zone_5_virtual_thermostat_first_floor_living', 'climate.zone_6_master_thermostat', 'climate.zone_7_basement_bar_and_tv_room_south_side', 'climate.zone_8_dining_room', 'climate.zone_9_basement_bedroom'] %} 
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster E' %}
+               {% set t = state_attr(ids[z-1], 'current_temperature') %}
+               {% if t is not none %}{% set ns.total = ns.total + t|float %}{% set ns.count = ns.count + 1 %}{% endif %}
+             {% endif %}
+          {% endfor %}
+          {{ (ns.total / ns.count)|round(1) if ns.count > 0 else 'unavailable' }}
+          
+      - name: "HC Cluster E Total Length"
+        unique_id: hc_cluster_e_total_length
+        unit_of_measurement: "ft"
+        icon: mdi:tape-measure
+        state: >
+          {% set ns = namespace(total=0) %}
+          {% for z in range(1,10) %}
+             {% if states('input_select.hc_z' ~ z ~ '_cluster') == 'Cluster E' %}
+               {% set ns.total = ns.total + states('input_number.hc_z' ~ z ~ '_length_feet')|float(0) %}
+             {% endif %}
+          {% endfor %}
+          {{ ns.total | int }}
+        attributes:
+          efficiency_status: >
+             {% set l = states('sensor.hc_cluster_e_total_length')|int(0) %}
+             {% if l == 0 %}Empty{% elif l >= 45 and l <= 75 %}Optimal{% else %}Suboptimal{% endif %}

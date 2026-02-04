@@ -1,0 +1,68 @@
+# packages/hc_dispatcher_v2_helpers.yaml
+# New Helpers for Dispatcher V2 "Matrix" & "Gatekeeper"
+
+input_select:
+  # --- The "Matrix" (Cluster Assignment) ---
+  hc_z1_cluster:
+    name: "Z1 Cluster (1F Bed/Bath)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z2_cluster:
+    name: "Z2 Cluster (Office+Guest)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z3_cluster:
+    name: "Z3 Cluster (Bsm Bath+Common)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z4_cluster:
+    name: "Z4 Cluster (Garage)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z5_cluster:
+    name: "Z5 Cluster (1F Living)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z6_cluster:
+    name: "Z6 Cluster (Master)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z7_cluster:
+    name: "Z7 Cluster (Bsm Bar+TV)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z8_cluster:
+    name: "Z8 Cluster (Dining)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+  hc_z9_cluster:
+    name: "Z9 Cluster (Bsm Bed)"
+    options: ["Independent", "Cluster A", "Cluster B", "Cluster C", "Cluster D", "Cluster E"]
+    icon: mdi:vector-link
+    initial: "Independent"
+
+input_boolean:
+  # --- The "Gatekeeper" ---
+  hc_dispatcher_auto_approve:
+    name: "HC Dispatcher Auto-Approve"
+    icon: mdi:check-decagram
+    initial: off
+
+input_button:
+  hc_dispatch_approve_batch:
+    name: "HC Dispatch Approve Batch"
+    icon: mdi:check-bold
+
+input_text:
+  hc_dispatch_approved_batch:
+    name: "HC Dispatch Approved Batch (Active)"
+    icon: mdi:fire
+    initial: "none"
