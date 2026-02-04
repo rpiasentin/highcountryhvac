@@ -37,27 +37,40 @@ automation:
     action:
       - variables:
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
+          last_batch: "{{ states('input_text.hc_dispatch_last_suggested_batch') }}"
+          manual_trigger: "{{ trigger.platform == 'state' and trigger.entity_id == 'input_button.hc_dispatch_approve_batch' }}"
           gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
+          effective_batch: >
+            {% set invalid = ['unknown','unavailable','none',''] %}
+            {% if manual_trigger %}
+              {% if raw_batch in invalid or raw_batch == 'idle' %}
+                {{ last_batch }}
+              {% else %}
+                {{ raw_batch }}
+              {% endif %}
+            {% else %}
+              {{ raw_batch }}
+            {% endif %}
           # Parse the human string "Z1 Name + Z2 Name" back to zone codes
           batch_list: >
             {% set out = [] %}
             {% for z in range(1,10) %}
-               {% if ('Z' ~ z ~ ' ') in raw_batch or ('Z' ~ z ~ '+') in raw_batch or raw_batch.startswith('Z' ~ z) %}
+               {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
                  {% set out = out + ['switch.z' ~ z] %}
                {% endif %}
             {% endfor %}
             {{ out }}
 
-      # Avoid acting if the sensor is unavailable/unknown
+      # Avoid acting if the batch is unavailable/unknown
       - condition: template
-        value_template: "{{ raw_batch not in ['unknown','unavailable','none',''] }}"
+        value_template: "{{ effective_batch not in ['unknown','unavailable','none',''] }}"
 
       # 1. Update the "Approved Batch" text helper
       - service: input_text.set_value
         target:
           entity_id: input_text.hc_dispatch_approved_batch
         data:
-          value: "{{ raw_batch }}"
+          value: "{{ effective_batch }}"
 
       # 2. Iterate all zones and turn ON/OFF
       - repeat:

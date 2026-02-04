@@ -349,6 +349,23 @@ template:
           {% endif %}
 
 automation:
+  - id: hc_dispatch_store_last_suggested_batch
+    alias: "HC Dispatcher Advisory - Store Last Suggested Batch"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: sensor.hc_dispatch_suggested_batch
+    condition:
+      - condition: template
+        value_template: >
+          {{ trigger.to_state is not none and trigger.to_state.state not in ['idle','unknown','unavailable','none',''] }}
+    action:
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_last_suggested_batch
+        data:
+          value: "{{ trigger.to_state.state }}"
+
   - id: hc_dispatch_advisory_track_call_starts
     alias: "HC Dispatcher Advisory - Track Call Starts"
     mode: queued
