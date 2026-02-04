@@ -7,3 +7,12 @@ input_number:
     mode: slider
     unit_of_measurement: "°F"
     icon: mdi:snowflake-alert
+
+  hc_hot_tolerance:
+    name: "HC Hot Tolerance"
+    min: 0.0
+    max: 3.0
+    step: 0.1
+    mode: slider
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
