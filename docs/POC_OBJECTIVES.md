@@ -33,10 +33,15 @@ See `inventories/poc_compare_report.md` for the exact file-level diff.
 
 ## Recommended Next Steps
 1. Reconcile Dispatcher V2 logic with existing production dispatcher helpers and inputs.
-2. Introduce the POC Zone Setup dashboard into production after validating it against existing entities.
-3. Merge the POC actuator logic with production safety gates and call-for-heat constraints.
-4. Standardize entity naming across the dispatcher packages to remove ambiguity.
-5. Add explicit release steps and a lightweight test checklist for Dev → Stage → Prod.
+2. Standardize entity naming across the dispatcher packages to remove ambiguity and verify core system operation remains unchanged.
+3. Introduce the POC Zone Setup dashboard into production after validating it against existing entities.
+4. Merge the POC actuator logic with production safety gates and call-for-heat constraints.
+5. Add explicit release steps and a lightweight test checklist for Dev → Stage → Prod, with staging constraints noted below.
 
 ## Notes
 This repo is the canonical HVAC configuration and will be used to implement the long-term control strategy. The POC repo remains the reference for intended capabilities and next-step design decisions.
+
+### Staging Constraints
+- Home Assistant does not tolerate two instances controlling the same systems in parallel.
+- The Hubitat-backed infrastructure can post state updates to only one Home Assistant IP at a time.
+- Any staging validation must ensure prod is isolated or the Hubitat target is switched, otherwise entity states and control signals will conflict.
