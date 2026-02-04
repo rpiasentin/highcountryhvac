@@ -4,6 +4,13 @@ input_boolean:
     icon: mdi:radar
 
 input_select:
+  hc_dispatch_algorithm:
+    name: HC Dispatch Algorithm
+    options:
+      - Profile
+      - Matrix
+    initial: Profile
+
   hc_dispatch_profile:
     name: HC Dispatch Profile
     options:
@@ -101,20 +108,16 @@ template:
         unique_id: hc_dispatch_suggested_batch
         icon: mdi:vector-link
         state: >
+          {% set algorithm = states('input_select.hc_dispatch_algorithm') %}
+          {% if algorithm in ['unknown','unavailable','none',''] %}
+            {% set algorithm = 'Profile' %}
+          {% endif %}
+
           {% set labels = {
             'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
             'z4':'Z4 Garage','z5':'Z5 1F Living','z6':'Z6 Master','z7':'Z7 Bsm Bar+TV',
             'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
           } %}
-          {% set profile = states('input_select.hc_dispatch_profile') %}
-          {% set groups = {
-            'Basement (Z3+Z7+Z9)': ['z3','z7','z9'],
-            'First Floor (Z1+Z5+Z8)': ['z1','z5','z8'],
-            'Upper Floor (Z2+Z6)': ['z2','z6'],
-            'Whole House (Z1-Z9)': ['z1','z2','z3','z4','z5','z6','z7','z8','z9'],
-            'None': []
-          } %}
-          {% set group = groups.get(profile, []) %}
 
           {% set active = [] %}
           {% for z in range(1,10) %}
@@ -137,9 +140,75 @@ template:
             {% endif %}
           {% endfor %}
 
+          {# Algorithm branch #}
           {% if active|length == 0 %}
             idle
+          {% elif algorithm == 'Matrix' %}
+            {% set clusters = { 
+              'z1': states('input_select.hc_z1_cluster'),
+              'z2': states('input_select.hc_z2_cluster'),
+              'z3': states('input_select.hc_z3_cluster'),
+              'z4': states('input_select.hc_z4_cluster'),
+              'z5': states('input_select.hc_z5_cluster'),
+              'z6': states('input_select.hc_z6_cluster'),
+              'z7': states('input_select.hc_z7_cluster'),
+              'z8': states('input_select.hc_z8_cluster'),
+              'z9': states('input_select.hc_z9_cluster')
+            } %}
+
+            {% set active_zones = active %}
+            {% set active_clusters = [] %}
+
+            {# Identify active clusters from calling zones #}
+            {% for z in active_zones %}
+              {% set c = clusters[z] %}
+              {% if c != 'Independent' and c not in active_clusters %}
+                {% set active_clusters = active_clusters + [c] %}
+              {% endif %}
+            {% endfor %}
+
+            {# Add follower zones that share active clusters #}
+            {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
+              {% if z not in active_zones %}
+                {% set c = clusters[z] %}
+                {% if c in active_clusters %}
+                  {% set active_zones = active_zones + [z] %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {# Near-call optimization for Independent zones only #}
+            {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
+              {% if z not in active_zones %}
+                {% set c = clusters[z] %}
+                {% if c == 'Independent' %}
+                  {% set d = states('sensor.hc_' ~ z ~ '_delta') %}
+                  {% if d not in ['unknown','unavailable','none'] %}
+                    {% set dv = d|float(0) %}
+                    {% if dv >= (tol - m) and dv < tol %}
+                      {% set active_zones = active_zones + [z] %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% set out = [] %}
+            {% for z in active_zones | sort %}
+              {% set out = out + [labels.get(z, z|upper)] %}
+            {% endfor %}
+            {{ out | join(' + ') }}
           {% else %}
+            {% set profile = states('input_select.hc_dispatch_profile') %}
+            {% set groups = {
+              'Basement (Z3+Z7+Z9)': ['z3','z7','z9'],
+              'First Floor (Z1+Z5+Z8)': ['z1','z5','z8'],
+              'Upper Floor (Z2+Z6)': ['z2','z6'],
+              'Whole House (Z1-Z9)': ['z1','z2','z3','z4','z5','z6','z7','z8','z9'],
+              'None': []
+            } %}
+            {% set group = groups.get(profile, []) %}
+
             {% set candidate = active %}
             {% if group|length > 0 %}
               {% set active_in_group = active | select('in', group) | list %}
@@ -164,6 +233,7 @@ template:
             {{ out | join(' + ') }}
           {% endif %}
         attributes:
+          algorithm: "{{ states('input_select.hc_dispatch_algorithm') }}"
           profile: "{{ states('input_select.hc_dispatch_profile') }}"
           batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
           gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
