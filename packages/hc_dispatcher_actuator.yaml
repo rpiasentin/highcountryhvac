@@ -81,6 +81,13 @@ automation:
                 z: "{{ sw.split('.')[1] }}"
                 should_be_on: "{{ sw in batch_list }}"
                 gate_sensor: "{{ 'binary_sensor.hc_' ~ z ~ '_heat_allowed' }}"
+                min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
+                on_for_sec: >
+                  {% if is_state(sw, 'on') %}
+                    {{ (as_timestamp(now()) - as_timestamp(states[sw].last_changed)) | float(0) }}
+                  {% else %}
+                    0
+                  {% endif %}
                 gate_ok: >
                   {% if gate_enabled %}
                     {{ is_state(gate_sensor, 'on') }}
@@ -101,7 +108,7 @@ automation:
                 # Turn OFF
                 - conditions:
                     - condition: template
-                      value_template: "{{ (not should_be_on) and is_state(sw, 'on') }}"
+                      value_template: "{{ (not should_be_on) and is_state(sw, 'on') and (on_for_sec >= min_run_sec) }}"
                   sequence:
                     - service: switch.turn_off
                       target:

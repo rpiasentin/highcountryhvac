@@ -1,0 +1,63 @@
+# packages/hc_dispatcher_profile_lock.yaml
+# Enforce dispatcher setpoints in Profile mode to prevent thermostat drift.
+
+automation:
+  - id: hc_dispatch_profile_lock_setpoints
+    alias: "HC Dispatch Profile Lock Setpoints"
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.hc_dispatch_algorithm
+          - input_select.hc_dispatch_profile
+          - input_boolean.hc_dispatcher_mode_enabled
+          - input_number.hc_disp_z1_setpoint_f
+          - input_number.hc_disp_z2_setpoint_f
+          - input_number.hc_disp_z3_setpoint_f
+          - input_number.hc_disp_z4_setpoint_f
+          - input_number.hc_disp_z5_setpoint_f
+          - input_number.hc_disp_z6_setpoint_f
+          - input_number.hc_disp_z7_setpoint_f
+          - input_number.hc_disp_z8_setpoint_f
+          - input_number.hc_disp_z9_setpoint_f
+      - platform: time_pattern
+        minutes: "/2"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        state: "on"
+      - condition: template
+        value_template: "{{ is_state('input_select.hc_dispatch_algorithm','Profile') }}"
+    action:
+      - variables:
+          profile: "{{ states('input_select.hc_dispatch_profile') }}"
+          groups:
+            Basement (Z3+Z7+Z9): ['z3','z7','z9']
+            First Floor (Z1+Z5+Z8): ['z1','z5','z8']
+            Upper Floor (Z2+Z6): ['z2','z6']
+            Whole House (Z1-Z9): ['z1','z2','z3','z4','z5','z6','z7','z8','z9']
+            None: []
+          zone_map:
+            z1: climate.z1_first_floor_bedroom_and_bath
+            z2: climate.zone_2_second_floor_office_and_upper_guest
+            z3: climate.zone_3_basement_bath_and_common
+            z4: climate.zone_4_garage
+            z5: climate.zone_5_virtual_thermostat_first_floor_living
+            z6: climate.zone_6_master_thermostat
+            z7: climate.zone_7_basement_bar_and_tv_room_south_side
+            z8: climate.zone_8_dining_room
+            z9: climate.zone_9_basement_bedroom
+          group: "{{ groups.get(profile, []) }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ group|length > 0 }}"
+            sequence:
+              - repeat:
+                  for_each: "{{ group }}"
+                  sequence:
+                    - service: climate.set_temperature
+                      data:
+                        entity_id: "{{ zone_map[repeat.item] }}"
+                        temperature: "{{ states('input_number.hc_disp_' ~ repeat.item ~ '_setpoint_f')|float(0) }}"

@@ -119,6 +119,24 @@ template:
             'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
           } %}
 
+          {% set lengths = {
+            'z1': states('input_number.hc_z1_length_feet')|float(0),
+            'z2': states('input_number.hc_z2_length_feet')|float(0),
+            'z3': states('input_number.hc_z3_length_feet')|float(0),
+            'z4': states('input_number.hc_z4_length_feet')|float(0),
+            'z5': states('input_number.hc_z5_length_feet')|float(0),
+            'z6': states('input_number.hc_z6_length_feet')|float(0),
+            'z7': states('input_number.hc_z7_length_feet')|float(0),
+            'z8': states('input_number.hc_z8_length_feet')|float(0),
+            'z9': states('input_number.hc_z9_length_feet')|float(0)
+          } %}
+
+          {% set max_ft = states('input_number.hc_dispatch_max_batch_length_ft')|float(85) %}
+          {% set opp_min = states('input_number.hc_dispatch_opportunistic_min_ft')|float(50) %}
+          {% set opp_max = states('input_number.hc_dispatch_opportunistic_max_ft')|float(70) %}
+          {% set opp_enabled = is_state('input_boolean.hc_dispatch_opportunistic_enabled','on') %}
+          {% set manual_override = is_state('input_boolean.hc_dispatch_manual_override','on') %}
+
           {% set active_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
@@ -141,6 +159,12 @@ template:
             {% endif %}
           {% endfor %}
           {% set near = near_ns.list %}
+
+          {% set base_zones = [] %}
+          {% set final_zones = [] %}
+          {% set guardrail = 'idle' %}
+          {% set base_length = 0 %}
+          {% set callers_length = 0 %}
 
           {# Algorithm branch #}
           {% if active|length == 0 %}
@@ -178,7 +202,7 @@ template:
               {% endif %}
             {% endfor %}
 
-            {# Near-call optimization for Independent zones only #}
+            {# Near-call candidates for Independent zones only #}
             {% set near_ind_ns = namespace(list=[]) %}
             {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
               {% if z not in ns.active_zones %}
@@ -195,14 +219,8 @@ template:
               {% endif %}
             {% endfor %}
 
-            {# Union active zones and near-call independent zones (unique) #}
-            {% set all_zones = (ns.active_zones + near_ind_ns.list) | unique | list %}
-
-            {% set out_ns = namespace(list=[]) %}
-            {% for z in all_zones | sort %}
-              {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
-            {% endfor %}
-            {{ out_ns.list | join(' + ') }}
+            {% set base_zones = ns.active_zones | unique | list %}
+            {% set near_candidates = near_ind_ns.list %}
           {% else %}
             {% set profile = states('input_select.hc_dispatch_profile') %}
             {% set groups = {
@@ -214,25 +232,88 @@ template:
             } %}
             {% set group = groups.get(profile, []) %}
 
-            {% set candidate = active %}
+            {% set base_zones = active %}
             {% if group|length > 0 %}
               {% set active_in_group = active | select('in', group) | list %}
               {% if active_in_group|length > 0 %}
-                {% set candidate = active + (near | select('in', group) | list) %}
+                {% set base_zones = group %}
               {% elif profile == 'Whole House (Z1-Z9)' %}
-                {% set candidate = active + near %}
+                {% set base_zones = group %}
               {% endif %}
             {% endif %}
 
-            {% set uniq_ns = namespace(list=[]) %}
-            {% for z in candidate %}
-              {% if z not in uniq_ns.list %}
-                {% set uniq_ns.list = uniq_ns.list + [z] %}
-              {% endif %}
-            {% endfor %}
+            {% set base_zones = base_zones | unique | list %}
+            {% set near_candidates = near %}
+          {% endif %}
 
+          {# Compute base length #}
+          {% set base_len_ns = namespace(total=0) %}
+          {% for z in base_zones %}
+            {% set base_len_ns.total = base_len_ns.total + lengths.get(z, 0) %}
+          {% endfor %}
+          {% set base_length = base_len_ns.total %}
+
+          {% set callers = active %}
+          {% set callers_len_ns = namespace(total=0) %}
+          {% for z in callers %}
+            {% set callers_len_ns.total = callers_len_ns.total + lengths.get(z, 0) %}
+          {% endfor %}
+          {% set callers_length = callers_len_ns.total %}
+
+          {% set guardrail = 'ok' %}
+          {% set final_zones = base_zones %}
+
+          {# Hard cap: degrade to callers-only if base exceeds max #}
+          {% if base_length > max_ft %}
+            {% set guardrail = 'degraded_to_callers' %}
+            {% if callers_length > max_ft %}
+              {% set guardrail = 'blocked_over_max' %}
+              {% set final_zones = [] %}
+            {% else %}
+              {% set final_zones = callers %}
+            {% endif %}
+          {% else %}
+            {% set final_zones = base_zones %}
+
+            {# Opportunistic additions within guardrails #}
+            {% if opp_enabled and final_zones|length > 0 %}
+              {% set total_ns = namespace(total=base_length) %}
+              {% set added_ns = namespace(list=[]) %}
+              {% set limit_max = max_ft if manual_override else opp_max %}
+
+              {% for z in near_candidates %}
+                {% if z not in final_zones %}
+                  {% set zlen = lengths.get(z, 0) %}
+                  {% if (total_ns.total + zlen) <= limit_max %}
+                    {% set total_ns.total = total_ns.total + zlen %}
+                    {% set added_ns.list = added_ns.list + [z] %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% if not manual_override %}
+                {% if total_ns.total < opp_min %}
+                  {% set added_ns.list = [] %}
+                  {% set total_ns.total = base_length %}
+                  {% set guardrail = 'opportunistic_skipped_under_min' %}
+                {% elif added_ns.list|length > 0 %}
+                  {% set guardrail = 'opportunistic_applied' %}
+                {% endif %}
+              {% else %}
+                {% if added_ns.list|length > 0 %}
+                  {% set guardrail = 'opportunistic_applied_override' %}
+                {% endif %}
+              {% endif %}
+
+              {% set final_zones = (final_zones + added_ns.list) | unique | list %}
+            {% endif %}
+          {% endif %}
+
+          {% if final_zones|length == 0 %}
+            idle
+          {% else %}
             {% set out_ns = namespace(list=[]) %}
-            {% for z in uniq_ns.list %}
+            {% for z in final_zones | sort %}
               {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
             {% endfor %}
             {{ out_ns.list | join(' + ') }}
@@ -243,6 +324,24 @@ template:
           batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
           gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
           gate_threshold_f: "{{ states('input_number.hc_cold_tolerance')|float(0) }}"
+          guardrail_status: "{{ guardrail }}"
+          batch_length_ft: >
+            {% set ns = namespace(total=0) %}
+            {% for z in final_zones %}
+              {% set ns.total = ns.total + lengths.get(z, 0) %}
+            {% endfor %}
+            {{ ns.total | round(1) }}
+          base_length_ft: "{{ base_length | round(1) }}"
+          callers_length_ft: "{{ callers_length | round(1) }}"
+          max_length_ft: "{{ max_ft }}"
+          ideal_min_ft: "{{ states('input_number.hc_dispatch_ideal_min_ft')|float(0) }}"
+          ideal_max_ft: "{{ states('input_number.hc_dispatch_ideal_max_ft')|float(0) }}"
+          opportunistic_enabled: "{{ opp_enabled }}"
+          opportunistic_min_ft: "{{ opp_min }}"
+          opportunistic_max_ft: "{{ opp_max }}"
+          manual_override: "{{ manual_override }}"
+          base_zones: "{{ base_zones | join(',') if base_zones|length else 'none' }}"
+          final_zones: "{{ final_zones | join(',') if final_zones|length else 'none' }}"
 
       # Avg ON time today = (hours_today*60)/call_starts_today (rough proxy for cycle length)
       - name: "HC Z1 Avg ON Minutes Today"

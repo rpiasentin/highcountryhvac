@@ -150,35 +150,72 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - type: entities
-            title: Gatekeeper
-            show_header_toggle: false
-            entities:
-              - entity: input_boolean.hc_dispatcher_mode_enabled
-                name: Dispatcher Mode Enabled
-              - entity: input_boolean.hc_enable_cold_tolerance_gate
-                name: Cold Tolerance Gate
-              - entity: input_boolean.hc_dispatcher_auto_approve
-                name: Auto-Approve Batch
-              - entity: input_button.hc_dispatch_approve_batch
-                name: Manual Approve Button
-              - entity: input_text.hc_dispatch_approved_batch
-                name: Active Approved Batch
+      - type: entities
+        title: Gatekeeper
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.hc_dispatcher_mode_enabled
+            name: Dispatcher Mode Enabled
+          - entity: input_boolean.hc_enable_cold_tolerance_gate
+            name: Cold Tolerance Gate
+          - entity: input_boolean.hc_dispatcher_auto_approve
+            name: Auto-Approve Batch
+          - entity: input_boolean.hc_dispatch_opportunistic_enabled
+            name: Opportunistic Add
+          - entity: input_boolean.hc_dispatch_manual_override
+            name: Manual Override
+          - entity: input_button.hc_dispatch_approve_batch
+            name: Manual Approve Button
+          - entity: input_text.hc_dispatch_approved_batch
+            name: Active Approved Batch
 
-          - type: entities
-            title: Advisory Status
-            show_header_toggle: false
-            entities:
-              - entity: input_select.hc_dispatch_algorithm
-                name: Dispatch Algorithm
-              - entity: sensor.hc_dispatch_suggested_batch
-                name: Suggested Batch
-              - entity: input_number.hc_dispatch_near_call_margin_f
-                name: Near Call Margin (°F)
-              - entity: sensor.hc_dispatch_near_call_zones
-                name: Near-Call Zones
-              - entity: binary_sensor.system_control_active
-                name: System Control Active
+      - type: entities
+        title: Advisory Status
+        show_header_toggle: false
+        entities:
+          - entity: input_select.hc_dispatch_algorithm
+            name: Dispatch Algorithm
+          - entity: sensor.hc_dispatch_suggested_batch
+            name: Suggested Batch
+          - type: attribute
+            entity: sensor.hc_dispatch_suggested_batch
+            attribute: guardrail_status
+            name: Guardrail Status
+          - type: attribute
+            entity: sensor.hc_dispatch_suggested_batch
+            attribute: batch_length_ft
+            name: Batch Length (ft)
+          - type: attribute
+            entity: sensor.hc_dispatch_suggested_batch
+            attribute: base_length_ft
+            name: Base Length (ft)
+          - type: attribute
+            entity: sensor.hc_dispatch_suggested_batch
+            attribute: callers_length_ft
+            name: Callers Length (ft)
+          - entity: input_number.hc_dispatch_near_call_margin_f
+            name: Near Call Margin (°F)
+          - entity: sensor.hc_dispatch_near_call_zones
+            name: Near-Call Zones
+          - entity: binary_sensor.system_control_active
+            name: System Control Active
+
+      - type: entities
+        title: Dispatch Guardrails
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hc_dispatch_min_run_minutes
+            name: Min Run (min)
+          - entity: input_number.hc_dispatch_max_batch_length_ft
+            name: Max Batch Length (ft)
+          - entity: input_number.hc_dispatch_ideal_min_ft
+            name: Ideal Min (ft)
+          - entity: input_number.hc_dispatch_ideal_max_ft
+            name: Ideal Max (ft)
+          - entity: input_number.hc_dispatch_opportunistic_min_ft
+            name: Opportunistic Min (ft)
+          - entity: input_number.hc_dispatch_opportunistic_max_ft
+            name: Opportunistic Max (ft)
 
           - type: markdown
             title: Cluster Statistics

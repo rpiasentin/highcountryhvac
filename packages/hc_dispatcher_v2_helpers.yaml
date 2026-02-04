@@ -55,11 +55,80 @@ input_boolean:
     name: "HC Dispatcher Auto-Approve"
     icon: mdi:check-decagram
     initial: off
+  hc_dispatch_opportunistic_enabled:
+    name: "HC Dispatch Opportunistic Add"
+    icon: mdi:vector-combine
+    initial: off
+  hc_dispatch_manual_override:
+    name: "HC Dispatch Manual Override"
+    icon: mdi:alert-octagram
+    initial: off
 
 input_button:
   hc_dispatch_approve_batch:
     name: "HC Dispatch Approve Batch"
     icon: mdi:check-bold
+
+input_number:
+  hc_dispatch_min_run_minutes:
+    name: "HC Dispatch Min Run (min)"
+    min: 0
+    max: 60
+    step: 1
+    mode: box
+    unit_of_measurement: "min"
+    icon: mdi:timer
+    initial: 10
+
+  hc_dispatch_max_batch_length_ft:
+    name: "HC Dispatch Max Batch Length"
+    min: 20
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:ruler
+    initial: 85
+
+  hc_dispatch_ideal_min_ft:
+    name: "HC Dispatch Ideal Min"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:target
+    initial: 55
+
+  hc_dispatch_ideal_max_ft:
+    name: "HC Dispatch Ideal Max"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:target
+    initial: 75
+
+  hc_dispatch_opportunistic_min_ft:
+    name: "HC Dispatch Opportunistic Min"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:vector-combine
+    initial: 50
+
+  hc_dispatch_opportunistic_max_ft:
+    name: "HC Dispatch Opportunistic Max"
+    min: 0
+    max: 200
+    step: 1
+    mode: box
+    unit_of_measurement: "ft"
+    icon: mdi:vector-combine
+    initial: 70
 
 input_text:
   hc_dispatch_approved_batch:
