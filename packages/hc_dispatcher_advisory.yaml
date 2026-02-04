@@ -179,6 +179,7 @@ template:
             {% endfor %}
 
             {# Near-call optimization for Independent zones only #}
+            {% set near_ind_ns = namespace(list=[]) %}
             {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
               {% if z not in ns.active_zones %}
                 {% set c = clusters[z] %}
@@ -187,15 +188,18 @@ template:
                   {% if d not in ['unknown','unavailable','none'] %}
                     {% set dv = d|float(0) %}
                     {% if dv >= (tol - m) and dv < tol %}
-                      {% set ns.active_zones = ns.active_zones + [z] %}
+                      {% set near_ind_ns.list = near_ind_ns.list + [z] %}
                     {% endif %}
                   {% endif %}
                 {% endif %}
               {% endif %}
             {% endfor %}
 
+            {# Union active zones and near-call independent zones (unique) #}
+            {% set all_zones = (ns.active_zones + near_ind_ns.list) | unique | list %}
+
             {% set out_ns = namespace(list=[]) %}
-            {% for z in ns.active_zones | sort %}
+            {% for z in all_zones | sort %}
               {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
             {% endfor %}
             {{ out_ns.list | join(' + ') }}
