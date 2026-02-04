@@ -35,3 +35,10 @@ lovelace:
       show_in_sidebar: true
       require_admin: true
       filename: lovelace/hc_hydronic_test.yaml
+    hc-zone-setup:
+      mode: yaml
+      title: Zone Setup & Config
+      icon: mdi:vector-selection
+      show_in_sidebar: true
+      require_admin: true
+      filename: lovelace/hc_zone_setup.yaml

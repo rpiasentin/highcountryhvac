@@ -1,0 +1,210 @@
+title: Zone Setup & Config
+views:
+  - title: Zone Matrix
+    path: zone-matrix
+    icon: mdi:vector-selection
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: >
+              ## Zone Configuration Matrix
+              Assign Zones to Clusters (A-E) to link them together.
+              Enter Linear Feet for each zone to check Boiler Efficiency.
+
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              # --- Z1 ---
+              - type: entities
+                title: Z1 (1F Bed/Bath)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z1_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z1_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z1_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z1_setpoint_f
+                    name: Setpoint
+
+              # --- Z2 ---
+              - type: entities
+                title: Z2 (Office+Guest)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z2_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z2_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z2_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z2_setpoint_f
+                    name: Setpoint
+
+              # --- Z3 ---
+              - type: entities
+                title: Z3 (Bsm Bath)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z3_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z3_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z3_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z3_setpoint_f
+                    name: Setpoint
+
+              # --- Z4 ---
+              - type: entities
+                title: Z4 (Garage)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z4_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z4_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z4_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z4_setpoint_f
+                    name: Setpoint
+
+              # --- Z5 ---
+              - type: entities
+                title: Z5 (1F Living)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z5_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z5_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z5_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z5_setpoint_f
+                    name: Setpoint
+
+              # --- Z6 ---
+              - type: entities
+                title: Z6 (Master)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z6_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z6_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z6_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z6_setpoint_f
+                    name: Setpoint
+
+              # --- Z7 ---
+              - type: entities
+                title: Z7 (Bsm Bar+TV)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z7_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z7_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z7_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z7_setpoint_f
+                    name: Setpoint
+
+              # --- Z8 ---
+              - type: entities
+                title: Z8 (Dining)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z8_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z8_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z8_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z8_setpoint_f
+                    name: Setpoint
+
+              # --- Z9 ---
+              - type: entities
+                title: Z9 (Bsm Bed)
+                show_header_toggle: false
+                entities:
+                  - entity: input_select.hc_z9_cluster
+                    name: Cluster
+                  - entity: input_number.hc_z9_length_feet
+                    name: Loop Length
+                  - entity: input_boolean.hc_disp_z9_follow_broadcast
+                    name: Follow Floor Setpoint
+                  - entity: input_number.hc_disp_z9_setpoint_f
+                    name: Setpoint
+
+  - title: Dispatcher Operations
+    path: dispatcher-ops
+    icon: mdi:console-network
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            title: Gatekeeper
+            show_header_toggle: false
+            entities:
+              - entity: input_boolean.hc_dispatcher_auto_approve
+                name: Auto-Approve Batch
+              - entity: input_button.hc_dispatch_approve_batch
+                name: Manual Approve Button
+              - entity: input_text.hc_dispatch_approved_batch
+                name: Active Approved Batch
+          
+          - type: entities
+            title: Advisory Status
+            show_header_toggle: false
+            entities:
+              - entity: sensor.hc_dispatch_suggested_batch
+                name: Suggested Batch
+              - entity: sensor.hc_dispatch_near_call_zones
+                name: Near-Call Zones
+              - entity: binary_sensor.system_control_active
+                name: System Control Active
+
+      - type: markdown
+        title: Cluster Statistics
+        content: >
+          | Cluster | Avg Temp | Total Length | Efficiency |
+          | :--- | :--- | :--- | :--- |
+          | **A** | {{ states('sensor.hc_cluster_a_average_temp') }}°F | {{ states('sensor.hc_cluster_a_total_length') }} ft | {{ state_attr('sensor.hc_cluster_a_total_length','efficiency_status') }} |
+          | **B** | {{ states('sensor.hc_cluster_b_average_temp') }}°F | {{ states('sensor.hc_cluster_b_total_length') }} ft | {{ state_attr('sensor.hc_cluster_b_total_length','efficiency_status') }} |
+          | **C** | {{ states('sensor.hc_cluster_c_average_temp') }}°F | {{ states('sensor.hc_cluster_c_total_length') }} ft | {{ state_attr('sensor.hc_cluster_c_total_length','efficiency_status') }} |
+          | **D** | {{ states('sensor.hc_cluster_d_average_temp') }}°F | {{ states('sensor.hc_cluster_d_total_length') }} ft | {{ state_attr('sensor.hc_cluster_d_total_length','efficiency_status') }} |
+          | **E** | {{ states('sensor.hc_cluster_e_average_temp') }}°F | {{ states('sensor.hc_cluster_e_total_length') }} ft | {{ state_attr('sensor.hc_cluster_e_total_length','efficiency_status') }} |
+          
+          *Target Efficiency: 45 - 75 ft*
+
+  - title: Global Settings
+    path: global-settings
+    icon: mdi:cog
+    cards:
+      - type: entities
+        title: Broadcast Setpoints
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.hc_disp_follow_sync_enabled
+            name: Enable Broadcast Sync
+          - entity: input_number.hc_setpoint_master
+          - entity: input_number.hc_setpoint_basement
+          - entity: input_number.hc_setpoint_first_floor
+          - entity: input_number.hc_setpoint_upper_floor
+
+      - type: entities
+        title: Tolerances
+        show_header_toggle: false
+        entities:
+          - entity: input_number.hc_cold_tolerance
+            name: Cold Tolerance (Start)
+          - entity: input_number.hc_hot_tolerance
+            name: Hot Tolerance (Stop)
+          - entity: input_number.hc_dispatch_near_call_margin_f
+            name: Near Call Margin
