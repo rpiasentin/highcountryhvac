@@ -152,6 +152,8 @@ views:
             title: Gatekeeper
             show_header_toggle: false
             entities:
+              - entity: input_boolean.hc_dispatcher_mode_enabled
+                name: Dispatcher Mode Enabled
               - entity: input_boolean.hc_dispatcher_auto_approve
                 name: Auto-Approve Batch
               - entity: input_button.hc_dispatch_approve_batch
