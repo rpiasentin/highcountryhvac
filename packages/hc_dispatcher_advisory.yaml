@@ -77,13 +77,13 @@ template:
         unique_id: hc_dispatch_active_zones
         icon: mdi:fire
         state: >
-          {% set zones = [] %}
+          {% set ns = namespace(zones=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
-              {% set zones = zones + ['z' ~ z] %}
+              {% set ns.zones = ns.zones + ['z' ~ z] %}
             {% endif %}
           {% endfor %}
-          {{ zones | join(',') if zones|length else 'none' }}
+          {{ ns.zones | join(',') if ns.zones|length else 'none' }}
 
       - name: "HC Dispatch Near-Call Zones"
         unique_id: hc_dispatch_near_call_zones
@@ -91,18 +91,18 @@ template:
         state: >
           {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
           {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
-          {% set zones = [] %}
+          {% set ns = namespace(zones=[]) %}
           {% for z in range(1,10) %}
             {% set calling = is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
             {% set d = states('sensor.hc_z' ~ z ~ '_delta') %}
             {% if (not calling) and d not in ['unknown','unavailable','none'] %}
               {% set dv = d|float(0) %}
               {% if dv >= (tol - m) and dv < tol %}
-                {% set zones = zones + ['z' ~ z] %}
+                {% set ns.zones = ns.zones + ['z' ~ z] %}
               {% endif %}
             {% endif %}
           {% endfor %}
-          {{ zones | join(',') if zones|length else 'none' }}
+          {{ ns.zones | join(',') if ns.zones|length else 'none' }}
 
       - name: "HC Dispatch Suggested Batch"
         unique_id: hc_dispatch_suggested_batch
@@ -119,26 +119,28 @@ template:
             'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
           } %}
 
-          {% set active = [] %}
+          {% set active_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
-              {% set active = active + ['z' ~ z] %}
+              {% set active_ns.list = active_ns.list + ['z' ~ z] %}
             {% endif %}
           {% endfor %}
+          {% set active = active_ns.list %}
 
           {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
           {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
-          {% set near = [] %}
+          {% set near_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% set calling = is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
             {% set d = states('sensor.hc_z' ~ z ~ '_delta') %}
             {% if (not calling) and d not in ['unknown','unavailable','none'] %}
               {% set dv = d|float(0) %}
               {% if dv >= (tol - m) and dv < tol %}
-                {% set near = near + ['z' ~ z] %}
+                {% set near_ns.list = near_ns.list + ['z' ~ z] %}
               {% endif %}
             {% endif %}
           {% endfor %}
+          {% set near = near_ns.list %}
 
           {# Algorithm branch #}
           {% if active|length == 0 %}
@@ -156,48 +158,47 @@ template:
               'z9': states('input_select.hc_z9_cluster')
             } %}
 
-            {% set active_zones = active %}
-            {% set active_clusters = [] %}
+            {% set ns = namespace(active_zones=active, active_clusters=[]) %}
 
             {# Identify active clusters from calling zones #}
-            {% for z in active_zones %}
+            {% for z in ns.active_zones %}
               {% set c = clusters[z] %}
-              {% if c != 'Independent' and c not in active_clusters %}
-                {% set active_clusters = active_clusters + [c] %}
+              {% if c != 'Independent' and c not in ns.active_clusters %}
+                {% set ns.active_clusters = ns.active_clusters + [c] %}
               {% endif %}
             {% endfor %}
 
             {# Add follower zones that share active clusters #}
             {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
-              {% if z not in active_zones %}
+              {% if z not in ns.active_zones %}
                 {% set c = clusters[z] %}
-                {% if c in active_clusters %}
-                  {% set active_zones = active_zones + [z] %}
+                {% if c in ns.active_clusters %}
+                  {% set ns.active_zones = ns.active_zones + [z] %}
                 {% endif %}
               {% endif %}
             {% endfor %}
 
             {# Near-call optimization for Independent zones only #}
             {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
-              {% if z not in active_zones %}
+              {% if z not in ns.active_zones %}
                 {% set c = clusters[z] %}
                 {% if c == 'Independent' %}
                   {% set d = states('sensor.hc_' ~ z ~ '_delta') %}
                   {% if d not in ['unknown','unavailable','none'] %}
                     {% set dv = d|float(0) %}
                     {% if dv >= (tol - m) and dv < tol %}
-                      {% set active_zones = active_zones + [z] %}
+                      {% set ns.active_zones = ns.active_zones + [z] %}
                     {% endif %}
                   {% endif %}
                 {% endif %}
               {% endif %}
             {% endfor %}
 
-            {% set out = [] %}
-            {% for z in active_zones | sort %}
-              {% set out = out + [labels.get(z, z|upper)] %}
+            {% set out_ns = namespace(list=[]) %}
+            {% for z in ns.active_zones | sort %}
+              {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
             {% endfor %}
-            {{ out | join(' + ') }}
+            {{ out_ns.list | join(' + ') }}
           {% else %}
             {% set profile = states('input_select.hc_dispatch_profile') %}
             {% set groups = {
@@ -219,18 +220,18 @@ template:
               {% endif %}
             {% endif %}
 
-            {% set uniq = [] %}
+            {% set uniq_ns = namespace(list=[]) %}
             {% for z in candidate %}
-              {% if z not in uniq %}
-                {% set uniq = uniq + [z] %}
+              {% if z not in uniq_ns.list %}
+                {% set uniq_ns.list = uniq_ns.list + [z] %}
               {% endif %}
             {% endfor %}
 
-            {% set out = [] %}
-            {% for z in uniq %}
-              {% set out = out + [labels.get(z, z|upper)] %}
+            {% set out_ns = namespace(list=[]) %}
+            {% for z in uniq_ns.list %}
+              {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
             {% endfor %}
-            {{ out | join(' + ') }}
+            {{ out_ns.list | join(' + ') }}
           {% endif %}
         attributes:
           algorithm: "{{ states('input_select.hc_dispatch_algorithm') }}"
@@ -317,12 +318,13 @@ template:
         unique_id: hc_dispatch_short_cycle_risk
         device_class: problem
         state: >
-          {% set active = [] %}
+          {% set active_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
-              {% set active = active + ['z' ~ z] %}
+              {% set active_ns.list = active_ns.list + ['z' ~ z] %}
             {% endif %}
           {% endfor %}
+          {% set active = active_ns.list %}
           {% if active|length != 1 %}
             false
           {% else %}
