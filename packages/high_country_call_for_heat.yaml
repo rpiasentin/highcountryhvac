@@ -3,47 +3,110 @@ template:
       - name: "HC Z1 – First Floor Bedroom & Bath – Call For Heat"
         unique_id: hc_z1_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z1', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.z1_first_floor_bedroom_and_bath','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z1_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z2 – Office & Upper Guest – Call For Heat"
         unique_id: hc_z2_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z2', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_2_second_floor_office_and_upper_guest','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z2_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z3 – Basement Bath & Common – Call For Heat"
         unique_id: hc_z3_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z3', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_3_basement_bath_and_common','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z3_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z4 – Garage – Call For Heat"
         unique_id: hc_z4_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z4', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_4_garage','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z4_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z5 – First Floor Living – Call For Heat"
         unique_id: hc_z5_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z5', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_5_virtual_thermostat_first_floor_living','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z5_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z6 – Master – Call For Heat"
         unique_id: hc_z6_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z6', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_6_master_thermostat','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z6_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z7 – Basement Bar & TV South – Call For Heat"
         unique_id: hc_z7_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z7', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_7_basement_bar_and_tv_room_south_side','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z7_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z8 – Dining Room – Call For Heat"
         unique_id: hc_z8_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z8', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_8_dining_room','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z8_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
 
       - name: "HC Z9 – Basement Bedroom – Call For Heat"
         unique_id: hc_z9_call_for_heat
         device_class: heat
-        state: "{{ is_state('switch.z9', 'on') }}"
+        state: >
+          {% set action = state_attr('climate.zone_9_basement_bedroom','hvac_action') %}
+          {% if action == 'heating' %}
+            true
+          {% else %}
+            {% set d = states('sensor.hc_z9_delta') %}
+            {{ d not in ['unknown','unavailable','none'] and d|float(0) >= states('input_number.hc_cold_tolerance')|float(0) }}
+          {% endif %}
       - name: "HC Basement Call For Heat"
         unique_id: hc_basement_call_for_heat
         device_class: heat

@@ -1,14 +1,14 @@
 # packages/hc_dispatcher_actuator.yaml
-# Dispatcher V2 Actuator
-# Controls zone switches based on the suggested/approved batch.
+# Dispatcher V2 Actuator (Setpoint Control)
+# Adjusts thermostat setpoints to induce calls instead of toggling switches.
 # Safety gates:
 # - Requires input_boolean.hc_dispatcher_mode_enabled == on
 # - Auto-trigger requires input_boolean.hc_dispatcher_auto_approve == on
-# - Optional cold tolerance gate uses binary_sensor.hc_zX_heat_allowed
+# - Min run time enforced before restoring baseline setpoints
 
 automation:
   - id: hc_dispatch_v2_apply_batch
-    alias: "HC Dispatch V2 - Apply Batch"
+    alias: "HC Dispatch V2 - Apply Batch (Setpoints)"
     mode: queued
     max: 10
     trigger:
@@ -39,7 +39,6 @@ automation:
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
           last_batch: "{{ states('input_text.hc_dispatch_last_suggested_batch') }}"
           manual_trigger: "{{ trigger.platform == 'state' and trigger.entity_id == 'input_button.hc_dispatch_approve_batch' }}"
-          gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
           effective_batch: >
             {% set invalid = ['unknown','unavailable','none',''] %}
             {% if manual_trigger %}
@@ -52,14 +51,15 @@ automation:
               {{ raw_batch }}
             {% endif %}
           # Parse the human string "Z1 Name + Z2 Name" back to zone codes
-          batch_list: >
+          batch_zones: >
             {% set out = [] %}
             {% for z in range(1,10) %}
                {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
-                 {% set out = out + ['switch.z' ~ z] %}
+                 {% set out = out + ['z' ~ z] %}
                {% endif %}
             {% endfor %}
             {{ out }}
+          min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
 
       # Avoid acting if the batch is unavailable/unknown
       - condition: template
@@ -72,44 +72,53 @@ automation:
         data:
           value: "{{ effective_batch }}"
 
-      # 2. Iterate all zones and turn ON/OFF
+      # 2. Iterate all zones and set target/baseline setpoints
       - repeat:
-          for_each: ["switch.z1", "switch.z2", "switch.z3", "switch.z4", "switch.z5", "switch.z6", "switch.z7", "switch.z8", "switch.z9"]
+          for_each: ["z1","z2","z3","z4","z5","z6","z7","z8","z9"]
           sequence:
             - variables:
-                sw: "{{ repeat.item }}"
-                z: "{{ sw.split('.')[1] }}"
-                should_be_on: "{{ sw in batch_list }}"
-                gate_sensor: "{{ 'binary_sensor.hc_' ~ z ~ '_heat_allowed' }}"
-                min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
-                on_for_sec: >
-                  {% if is_state(sw, 'on') %}
-                    {{ (as_timestamp(now()) - as_timestamp(states[sw].last_changed)) | float(0) }}
+                z: "{{ repeat.item }}"
+                should_be_on: "{{ z in batch_zones }}"
+                climate_map:
+                  z1: climate.z1_first_floor_bedroom_and_bath
+                  z2: climate.zone_2_second_floor_office_and_upper_guest
+                  z3: climate.zone_3_basement_bath_and_common
+                  z4: climate.zone_4_garage
+                  z5: climate.zone_5_virtual_thermostat_first_floor_living
+                  z6: climate.zone_6_master_thermostat
+                  z7: climate.zone_7_basement_bar_and_tv_room_south_side
+                  z8: climate.zone_8_dining_room
+                  z9: climate.zone_9_basement_bedroom
+                climate: "{{ climate_map[z] }}"
+                target_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_setpoint_f')|float(0) }}"
+                baseline_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f')|float(0) }}"
+                current_temp: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                last_on: "{{ states('input_datetime.hc_dispatch_last_on_' ~ z) }}"
+                elapsed_sec: >
+                  {% if last_on not in ['unknown','unavailable','none',''] %}
+                    {{ (as_timestamp(now()) - as_timestamp(last_on)) | float(0) }}
                   {% else %}
-                    0
+                    999999
                   {% endif %}
-                gate_ok: >
-                  {% if gate_enabled %}
-                    {{ is_state(gate_sensor, 'on') }}
+                allow_restore: "{{ elapsed_sec >= min_run_sec }}"
+                desired_temp: >
+                  {% if should_be_on %}
+                    {{ target_temp }}
                   {% else %}
-                    true
+                    {% if allow_restore %}
+                      {{ baseline_temp }}
+                    {% else %}
+                      {{ target_temp }}
+                    {% endif %}
                   {% endif %}
 
-            - choose:
-                # Turn ON
-                - conditions:
-                    - condition: template
-                      value_template: "{{ should_be_on and is_state(sw, 'off') and gate_ok }}"
-                  sequence:
-                    - service: switch.turn_on
-                      target:
-                        entity_id: "{{ sw }}"
+            - condition: template
+              value_template: "{{ desired_temp > 0 }}"
 
-                # Turn OFF
-                - conditions:
-                    - condition: template
-                      value_template: "{{ (not should_be_on) and is_state(sw, 'on') and (on_for_sec >= min_run_sec) }}"
-                  sequence:
-                    - service: switch.turn_off
-                      target:
-                        entity_id: "{{ sw }}"
+            - condition: template
+              value_template: "{{ (current_temp | round(2)) != (desired_temp | round(2)) }}"
+
+            - service: climate.set_temperature
+              data:
+                entity_id: "{{ climate }}"
+                temperature: "{{ desired_temp }}"

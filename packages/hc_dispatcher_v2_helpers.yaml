@@ -70,6 +70,87 @@ input_button:
     icon: mdi:check-bold
 
 input_number:
+  hc_disp_z1_baseline_setpoint_f:
+    name: "HC Disp Z1 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z2_baseline_setpoint_f:
+    name: "HC Disp Z2 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z3_baseline_setpoint_f:
+    name: "HC Disp Z3 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z4_baseline_setpoint_f:
+    name: "HC Disp Z4 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z5_baseline_setpoint_f:
+    name: "HC Disp Z5 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z6_baseline_setpoint_f:
+    name: "HC Disp Z6 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z7_baseline_setpoint_f:
+    name: "HC Disp Z7 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z8_baseline_setpoint_f:
+    name: "HC Disp Z8 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
+  hc_disp_z9_baseline_setpoint_f:
+    name: "HC Disp Z9 Baseline Setpoint"
+    min: 40
+    max: 80
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+
   hc_dispatch_min_run_minutes:
     name: "HC Dispatch Min Run (min)"
     min: 0

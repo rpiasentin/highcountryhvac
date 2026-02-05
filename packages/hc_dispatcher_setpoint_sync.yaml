@@ -1,0 +1,131 @@
+# packages/hc_dispatcher_setpoint_sync.yaml
+# Dispatcher V2 setpoint sync: baseline capture and thermostat targeting.
+
+automation:
+  - id: hc_dispatch_baseline_capture
+    alias: "HC Dispatch Baseline Capture"
+    mode: queued
+    max: 20
+    trigger:
+      - platform: state
+        entity_id:
+          - climate.z1_first_floor_bedroom_and_bath
+          - climate.zone_2_second_floor_office_and_upper_guest
+          - climate.zone_3_basement_bath_and_common
+          - climate.zone_4_garage
+          - climate.zone_5_virtual_thermostat_first_floor_living
+          - climate.zone_6_master_thermostat
+          - climate.zone_7_basement_bar_and_tv_room_south_side
+          - climate.zone_8_dining_room
+          - climate.zone_9_basement_bedroom
+        attribute: temperature
+    action:
+      - variables:
+          dispatcher_on: "{{ is_state('input_boolean.hc_dispatcher_mode_enabled','on') }}"
+          climate_map:
+            climate.z1_first_floor_bedroom_and_bath: z1
+            climate.zone_2_second_floor_office_and_upper_guest: z2
+            climate.zone_3_basement_bath_and_common: z3
+            climate.zone_4_garage: z4
+            climate.zone_5_virtual_thermostat_first_floor_living: z5
+            climate.zone_6_master_thermostat: z6
+            climate.zone_7_basement_bar_and_tv_room_south_side: z7
+            climate.zone_8_dining_room: z8
+            climate.zone_9_basement_bedroom: z9
+          z: "{{ climate_map.get(trigger.entity_id) }}"
+          new_temp: "{{ state_attr(trigger.entity_id,'temperature')|float(0) }}"
+          target_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_setpoint_f')|float(0) }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ not dispatcher_on and z is not none }}"
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+          - conditions:
+              - condition: template
+                value_template: "{{ dispatcher_on and z is not none and (new_temp|round(2) != target_temp|round(2)) }}"
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+
+  - id: hc_dispatch_sync_targets_off
+    alias: "HC Dispatch Sync Targets (Dispatcher Off)"
+    mode: queued
+    max: 10
+    trigger:
+      - platform: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        to: "off"
+      - platform: state
+        entity_id:
+          - input_number.hc_disp_z1_baseline_setpoint_f
+          - input_number.hc_disp_z2_baseline_setpoint_f
+          - input_number.hc_disp_z3_baseline_setpoint_f
+          - input_number.hc_disp_z4_baseline_setpoint_f
+          - input_number.hc_disp_z5_baseline_setpoint_f
+          - input_number.hc_disp_z6_baseline_setpoint_f
+          - input_number.hc_disp_z7_baseline_setpoint_f
+          - input_number.hc_disp_z8_baseline_setpoint_f
+          - input_number.hc_disp_z9_baseline_setpoint_f
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        state: "off"
+    action:
+      - variables:
+          zones: [z1, z2, z3, z4, z5, z6, z7, z8, z9]
+      - repeat:
+          for_each: "{{ zones }}"
+          sequence:
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_disp_' ~ repeat.item ~ '_setpoint_f' }}"
+              data:
+                value: "{{ states('input_number.hc_disp_' ~ repeat.item ~ '_baseline_setpoint_f')|float(0) }}"
+
+  - id: hc_dispatch_restore_baseline_off
+    alias: "HC Dispatch Restore Baseline Setpoints (Dispatcher Off)"
+    mode: queued
+    max: 10
+    trigger:
+      - platform: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        to: "off"
+    action:
+      - variables:
+          zone_map:
+            z1: climate.z1_first_floor_bedroom_and_bath
+            z2: climate.zone_2_second_floor_office_and_upper_guest
+            z3: climate.zone_3_basement_bath_and_common
+            z4: climate.zone_4_garage
+            z5: climate.zone_5_virtual_thermostat_first_floor_living
+            z6: climate.zone_6_master_thermostat
+            z7: climate.zone_7_basement_bar_and_tv_room_south_side
+            z8: climate.zone_8_dining_room
+            z9: climate.zone_9_basement_bedroom
+      - repeat:
+          for_each: "{{ zone_map.keys() | list }}"
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                climate: "{{ zone_map[z] }}"
+                baseline: "{{ states('input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f')|float(0) }}"
+                current: "{{ state_attr(climate, 'temperature')|float(0) }}"
+            - condition: template
+              value_template: "{{ baseline > 0 and (current | round(2)) != (baseline | round(2)) }}"
+            - service: climate.set_temperature
+              data:
+                entity_id: "{{ climate }}"
+                temperature: "{{ baseline }}"
