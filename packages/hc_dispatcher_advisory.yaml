@@ -104,8 +104,8 @@ template:
           {% endfor %}
           {{ ns.zones | join(',') if ns.zones|length else 'none' }}
 
-      - name: "HC Dispatch Suggested Batch"
-        unique_id: hc_dispatch_suggested_batch
+      - name: "HC Dispatch Guardrail"
+        unique_id: hc_dispatch_guardrail
         icon: mdi:vector-link
         state: >
           {% set algorithm = states('input_select.hc_dispatch_algorithm') %}
@@ -310,15 +310,18 @@ template:
           {% endif %}
 
           {% if final_zones|length == 0 %}
-            idle
+            {% set suggested_batch = 'idle' %}
+            {% set guardrail = 'idle' %}
           {% else %}
             {% set out_ns = namespace(list=[]) %}
             {% for z in final_zones | sort %}
               {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
             {% endfor %}
-            {{ out_ns.list | join(' + ') }}
+            {% set suggested_batch = out_ns.list | join(' + ') %}
           {% endif %}
+          {{ guardrail }}
         attributes:
+          suggested_batch: "{{ suggested_batch | default('idle') }}"
           algorithm: "{{ states('input_select.hc_dispatch_algorithm') }}"
           profile: "{{ states('input_select.hc_dispatch_profile') }}"
           batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
@@ -342,6 +345,31 @@ template:
           manual_override: "{{ manual_override }}"
           base_zones: "{{ base_zones | join(',') if base_zones|length else 'none' }}"
           final_zones: "{{ final_zones | join(',') if final_zones|length else 'none' }}"
+
+      - name: "HC Dispatch Suggested Batch"
+        unique_id: hc_dispatch_suggested_batch
+        icon: mdi:vector-link
+        state: >
+          {{ state_attr('sensor.hc_dispatch_guardrail','suggested_batch') or 'idle' }}
+        attributes:
+          algorithm: "{{ states('input_select.hc_dispatch_algorithm') }}"
+          profile: "{{ states('input_select.hc_dispatch_profile') }}"
+          batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
+          gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
+          gate_threshold_f: "{{ states('input_number.hc_cold_tolerance')|float(0) }}"
+          guardrail_status: "{{ states('sensor.hc_dispatch_guardrail') }}"
+          batch_length_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','batch_length_ft') }}"
+          base_length_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','base_length_ft') }}"
+          callers_length_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','callers_length_ft') }}"
+          max_length_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','max_length_ft') }}"
+          ideal_min_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','ideal_min_ft') }}"
+          ideal_max_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','ideal_max_ft') }}"
+          opportunistic_enabled: "{{ state_attr('sensor.hc_dispatch_guardrail','opportunistic_enabled') }}"
+          opportunistic_min_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','opportunistic_min_ft') }}"
+          opportunistic_max_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','opportunistic_max_ft') }}"
+          manual_override: "{{ state_attr('sensor.hc_dispatch_guardrail','manual_override') }}"
+          base_zones: "{{ state_attr('sensor.hc_dispatch_guardrail','base_zones') }}"
+          final_zones: "{{ state_attr('sensor.hc_dispatch_guardrail','final_zones') }}"
 
       # Avg ON time today = (hours_today*60)/call_starts_today (rough proxy for cycle length)
       - name: "HC Z1 Avg ON Minutes Today"
