@@ -64,6 +64,12 @@ automation:
               {% endfor %}
               {{ ns.out | join(',') if ns.out|length else 'none' }}
             {% endif %}
+          final_zones_list: >
+            {% if final_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ final_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
 
       # Avoid acting if the batch is unavailable/unknown
@@ -83,9 +89,7 @@ automation:
           sequence:
             - variables:
                 z: "{{ repeat.item }}"
-                should_be_on: >
-                  {% set f = final_zones_str %}
-                  {{ f not in ['none','unknown','unavailable','', None] and (',' ~ f ~ ',') is search(',' ~ z ~ ',') }}
+                should_be_on: "{{ z in final_zones_list }}"
                 climate_map:
                   z1: climate.z1_first_floor_bedroom_and_bath
                   z2: climate.zone_2_second_floor_office_and_upper_guest
