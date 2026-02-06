@@ -26,6 +26,7 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - For added zones, temporarily raise setpoints above current temperature to ensure a call.
 - Stop when the original calling zone reaches its desired setpoint and min-run has elapsed.
 - Restore baseline setpoints for all batch zones.
+- Do not read or write baselines for non-batch zones (avoid circular control loops).
 - Profile lock should respect the opportunistic toggle (adds only when enabled).
 - Manual caps override allows temporary cap violations for Matrix/Opportunistic with a user-selectable duration.
 

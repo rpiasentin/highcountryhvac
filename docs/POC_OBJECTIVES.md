@@ -32,6 +32,7 @@ These are represented in the canonical config here and are treated as the curren
 
 ### Baseline + Override Setpoints
 - At batch start, the dispatcher captures baseline setpoints for **all zones included in the batch**, including the original calling zone.
+- **Non-batch zones are never modified** (no baseline capture, no override, no restore), to avoid circular control loops.
 - To ensure batch members actually fire, the dispatcher temporarily raises setpoints above current temperature for **added zones** (matrix followers or opportunistic adds), even if they would not normally call.
 - When stop conditions are met, all affected zones are restored to their baseline setpoints.
 - User edits to thermostat setpoints while dispatcher is ON are treated as the new baseline immediately.
