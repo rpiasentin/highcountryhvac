@@ -129,6 +129,7 @@ automation:
                   z8: climate.zone_8_dining_room
                   z9: climate.zone_9_basement_bedroom
                 climate: "{{ climate_map[z] }}"
+                climate_state: "{{ states(climate) }}"
                 target_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_setpoint_f')|float(0) }}"
                 baseline_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f')|float(0) }}"
                 current_temp: "{{ state_attr(climate, 'temperature')|float(0) }}"
@@ -158,7 +159,7 @@ automation:
                 value: >
                   z={{ z }} on={{ 1 if should_be_on else 0 }}
                   ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
-                  fz={{ final_zones_str }}
+                  st={{ climate_state }} fz={{ final_zones_str }}
 
             - choose:
                 - conditions:
@@ -174,13 +175,16 @@ automation:
                           ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
                           fz={{ final_zones_str }}
 
-            - condition: template
-              value_template: "{{ desired_temp > 0 }}"
-
-            - condition: template
-              value_template: "{{ (current_temp | round(2)) != (desired_temp | round(2)) }}"
-
-            - service: climate.set_temperature
-              data:
-                entity_id: "{{ climate }}"
-                temperature: "{{ desired_temp }}"
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ climate_state not in ['unknown','unavailable','none','']
+                           and desired_temp > 0
+                           and (current_temp | round(2)) != (desired_temp | round(2)) }}
+                  sequence:
+                    - service: climate.set_temperature
+                      continue_on_error: true
+                      data:
+                        entity_id: "{{ climate }}"
+                        temperature: "{{ desired_temp }}"
