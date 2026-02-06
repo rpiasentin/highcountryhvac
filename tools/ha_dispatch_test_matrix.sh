@@ -60,6 +60,12 @@ sleep 2
 echo "[5/5] Debug and climate snapshot"
 api_get "states/input_text.hc_dispatch_last_apply_debug"
 echo
+api_get "states/input_number.hc_disp_z3_setpoint_f"
+echo
+api_get "states/input_number.hc_disp_z7_setpoint_f"
+echo
+api_get "states/input_number.hc_disp_z9_setpoint_f"
+echo
 api_get "states/climate.zone_7_basement_bar_and_tv_room_south_side"
 echo
 api_get "states/climate.zone_3_basement_bath_and_common"

@@ -90,7 +90,7 @@ automation:
           entity_id: input_text.hc_dispatch_last_apply_debug
         data:
           value: >
-            trg={{ trigger.entity_id }} raw={{ raw_batch }} eff={{ effective_batch }}
+            trg={{ trigger.entity_id }} raw={{ raw_batch }} eff={{ effective_batch }} fz={{ final_zones_str }}
 
       # Avoid acting if the batch is unavailable/unknown
       - condition: template
@@ -144,15 +144,18 @@ automation:
                   {% endif %}
 
             - choose:
-                - conditions: "{{ z == 'z7' }}"
+                - conditions:
+                    - condition: template
+                      value_template: "{{ z == 'z7' }}"
                   sequence:
                     - service: input_text.set_value
                       target:
                         entity_id: input_text.hc_dispatch_last_apply_debug
                       data:
                         value: >
-                          fz={{ final_zones_str }} z7={{ 1 if should_be_on else 0 }}
+                          z7={{ 1 if should_be_on else 0 }}
                           ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
+                          fz={{ final_zones_str }}
 
             - condition: template
               value_template: "{{ desired_temp > 0 }}"
