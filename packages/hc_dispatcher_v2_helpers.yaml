@@ -267,6 +267,12 @@ input_text:
     max: 255
     initial: "none"
 
+  hc_dispatch_batch_callers:
+    name: "HC Dispatch Batch Callers"
+    icon: mdi:account-multiple
+    max: 255
+    initial: "none"
+
   hc_dispatch_last_apply_debug:
     name: "HC Dispatch Last Apply Debug"
     icon: mdi:bug

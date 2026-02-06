@@ -18,6 +18,9 @@ automation:
       # 2. Manual Mode Button Press
       - platform: state
         entity_id: input_button.hc_dispatch_approve_batch
+      # 3. Periodic check to enforce min-run restore
+      - platform: time_pattern
+        minutes: "/1"
 
     condition:
       # Master Switch must be ON
@@ -53,7 +56,28 @@ automation:
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
           last_batch: "{{ states('input_text.hc_dispatch_last_suggested_batch') }}"
           last_batch_zones_str: "{{ states('input_text.hc_dispatch_last_batch_zones') }}"
+          last_batch_zones_list: >
+            {% if last_batch_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ last_batch_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
           manual_trigger: "{{ trigger.platform == 'state' and trigger.entity_id == 'input_button.hc_dispatch_approve_batch' }}"
+          live_active: >
+            {% set ns = namespace(list=[]) %}
+            {% for z in range(1,10) %}
+              {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
+                {% set ns.list = ns.list + ['z' ~ z] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.list }}
+          batch_callers_str: "{{ states('input_text.hc_dispatch_batch_callers') }}"
+          batch_callers_list: >
+            {% if batch_callers_str not in ['none','unknown','unavailable','', None] %}
+              {{ batch_callers_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
           effective_batch: >
             {% if manual_trigger %}
               {% if raw_batch in invalid or raw_batch == 'idle' %}
@@ -91,6 +115,17 @@ automation:
             {% else %}
               {{ [] }}
             {% endif %}
+          new_batch_start: >
+            {{ final_zones_str not in ['none','unknown','unavailable','', None]
+               and last_batch_zones_str in ['none','unknown','unavailable','', None] }}
+          new_zones_list: >
+            {% set ns = namespace(out=[]) %}
+            {% for z in final_zones_list %}
+              {% if z not in last_batch_zones_list %}
+                {% set ns.out = ns.out + [z] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.out }}
           base_zones_list: >
             {% if base_zones_str not in ['none','unknown','unavailable','', None] %}
               {{ base_zones_str.split(',') }}
@@ -123,6 +158,20 @@ automation:
           force_delta: "{{ states('input_number.hc_dispatch_force_delta_f')|float(1.0) }}"
           force_cap: "{{ states('input_number.hc_dispatch_force_cap_f')|float(75) }}"
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
+          allow_restore_all: >
+            {% set ok = true %}
+            {% for z in batch_zones_list %}
+              {% set last_on = states('input_datetime.hc_dispatch_last_on_' ~ z) %}
+              {% if last_on not in ['unknown','unavailable','none',''] %}
+                {% set elapsed = (as_timestamp(now()) - as_timestamp(last_on)) | float(0) %}
+              {% else %}
+                {% set elapsed = 999999 %}
+              {% endif %}
+              {% if elapsed < min_run_sec %}
+                {% set ok = false %}
+              {% endif %}
+            {% endfor %}
+            {{ ok }}
           eff_ok: "{{ 1 if effective_batch not in ['unknown','unavailable','none',''] else 0 }}"
 
       - service: input_text.set_value
@@ -150,6 +199,17 @@ automation:
                   {{ final_zones_str not in ['none','unknown','unavailable','', None]
                      and final_zones_str != last_batch_zones_str }}
             sequence:
+              - choose:
+                  - conditions:
+                      - condition: template
+                        value_template: "{{ new_batch_start }}"
+                    sequence:
+                      - service: input_text.set_value
+                        target:
+                          entity_id: input_text.hc_dispatch_batch_callers
+                        data:
+                          value: "{{ live_active | join(',') if live_active|length else 'none' }}"
+
               - service: input_text.set_value
                 target:
                   entity_id: input_text.hc_dispatch_last_batch_zones
@@ -157,7 +217,7 @@ automation:
                   value: "{{ final_zones_str }}"
 
               - repeat:
-                  for_each: "{{ final_zones_list }}"
+                  for_each: "{{ new_zones_list }}"
                   sequence:
                     - variables:
                         z: "{{ repeat.item }}"
@@ -180,6 +240,11 @@ automation:
                         entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f' }}"
                       data:
                         value: "{{ baseline_now }}"
+                    - service: input_datetime.set_datetime
+                      target:
+                        entity_id: "{{ 'input_datetime.hc_dispatch_last_on_' ~ z }}"
+                      data:
+                        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
 
       - service: input_text.set_value
         target:
@@ -283,3 +348,22 @@ automation:
                       data:
                         entity_id: "{{ climate }}"
                         temperature: "{{ desired_temp }}"
+
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >
+                  {{ raw_batch in ['idle','unknown','unavailable','none','']
+                     and batch_zones_list|length > 0
+                     and allow_restore_all }}
+            sequence:
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_batch_callers
+                data:
+                  value: "none"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_last_batch_zones
+                data:
+                  value: "none"

@@ -143,13 +143,26 @@ template:
           {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
           {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
 
-          {% set active_ns = namespace(list=[]) %}
+          {% set live_active_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
-              {% set active_ns.list = active_ns.list + ['z' ~ z] %}
+              {% set live_active_ns.list = live_active_ns.list + ['z' ~ z] %}
             {% endif %}
           {% endfor %}
-          {% set active = active_ns.list %}
+          {% set live_active = live_active_ns.list %}
+
+          {% set stored_callers_str = states('input_text.hc_dispatch_batch_callers') %}
+          {% set stored_callers = stored_callers_str.split(',') if stored_callers_str not in ['unknown','unavailable','none',''] else [] %}
+          {% set stored_active_ns = namespace(list=[]) %}
+          {% for z in stored_callers %}
+            {% if is_state('binary_sensor.hc_' ~ z ~ '_call_for_heat','on') %}
+              {% set stored_active_ns.list = stored_active_ns.list + [z] %}
+            {% endif %}
+          {% endfor %}
+          {% set stored_active = stored_active_ns.list %}
+
+          {# Use stored callers while a batch is active so forced zones don't extend the batch #}
+          {% set active = stored_active if stored_callers|length > 0 else live_active %}
 
           {% set near_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
