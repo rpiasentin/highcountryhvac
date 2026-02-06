@@ -8,10 +8,17 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - POC vs canonical diff: `inventories/poc_compare_report.md`
 - HVAC inventory: `inventories/hvac_entity_inventory.csv`
 
+## Current Status (February 6, 2026)
+- Dispatcher V2 helpers, advisory logic, and guardrail logic are in production.
+- Actuator uses setpoint-based control with baseline restore.
+- Dispatcher Ops and Zone Setup dashboards are updated.
+- Guardrail validation has been completed for opportunistic skip and add.
+
 ## Phase 1: Baseline Safety and Naming Alignment
 1. Confirm dispatcher is gated by `input_boolean.hc_dispatcher_mode_enabled` in `packages/hc_dispatcher_inputs.yaml` and keep it off by default until validation is complete.
-2. Review existing helper names in `packages/hc_dispatcher_inputs.yaml` and `packages/hc_dispatcher_broadcast_follow.yaml` and define the canonical naming scheme for dispatcher entities.
-3. Apply naming changes consistently across dispatcher packages to avoid ambiguity before introducing new POC helpers.
+2. Verify core HVAC operation remains unchanged with dispatcher disabled.
+3. Review existing helper names in `packages/hc_dispatcher_inputs.yaml` and `packages/hc_dispatcher_broadcast_follow.yaml` and define the canonical naming scheme for dispatcher entities.
+4. Apply naming changes consistently across dispatcher packages to avoid ambiguity before introducing new POC helpers.
 
 ## Phase 2: Introduce POC Helpers and Cluster Stats
 1. Add POC helper packages to canonical config:

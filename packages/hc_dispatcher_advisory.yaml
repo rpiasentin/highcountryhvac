@@ -104,14 +104,15 @@ template:
           {% endfor %}
           {{ ns.zones | join(',') if ns.zones|length else 'none' }}
 
-      - name: "HC Dispatch Guardrail"
-        unique_id: hc_dispatch_guardrail
-        icon: mdi:vector-link
+      - name: "HC Dispatch Guardrail Payload"
+        unique_id: hc_dispatch_guardrail_payload
+        icon: mdi:code-json
         state: >
           {% set algorithm = states('input_select.hc_dispatch_algorithm') %}
           {% if algorithm in ['unknown','unavailable','none',''] %}
             {% set algorithm = 'Profile' %}
           {% endif %}
+          {% set profile = states('input_select.hc_dispatch_profile') %}
 
           {% set labels = {
             'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
@@ -137,6 +138,9 @@ template:
           {% set opp_enabled = is_state('input_boolean.hc_dispatch_opportunistic_enabled','on') %}
           {% set manual_override = is_state('input_boolean.hc_dispatch_manual_override','on') %}
 
+          {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
+          {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
+
           {% set active_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% if is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
@@ -145,8 +149,6 @@ template:
           {% endfor %}
           {% set active = active_ns.list %}
 
-          {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
-          {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
           {% set near_ns = namespace(list=[]) %}
           {% for z in range(1,10) %}
             {% set calling = is_state('binary_sensor.hc_z' ~ z ~ '_call_for_heat','on') %}
@@ -168,7 +170,7 @@ template:
 
           {# Algorithm branch #}
           {% if active|length == 0 %}
-            idle
+            {% set guardrail = 'idle' %}
           {% elif algorithm == 'Matrix' %}
             {% set clusters = { 
               'z1': states('input_select.hc_z1_cluster'),
@@ -222,7 +224,6 @@ template:
             {% set base_zones = ns.active_zones | unique | list %}
             {% set near_candidates = near_ind_ns.list %}
           {% else %}
-            {% set profile = states('input_select.hc_dispatch_profile') %}
             {% set groups = {
               'Basement (Z3+Z7+Z9)': ['z3','z7','z9'],
               'First Floor (Z1+Z5+Z8)': ['z1','z5','z8'],
@@ -246,7 +247,7 @@ template:
             {% set near_candidates = near %}
           {% endif %}
 
-          {# Compute base length #}
+          {# Compute base and callers length #}
           {% set base_len_ns = namespace(total=0) %}
           {% for z in base_zones %}
             {% set base_len_ns.total = base_len_ns.total + lengths.get(z, 0) %}
@@ -319,32 +320,166 @@ template:
             {% endfor %}
             {% set suggested_batch = out_ns.list | join(' + ') %}
           {% endif %}
-          {{ guardrail }}
+
+          {% set batch_len_ns = namespace(total=0) %}
+          {% for z in final_zones %}
+            {% set batch_len_ns.total = batch_len_ns.total + lengths.get(z, 0) %}
+          {% endfor %}
+          {% set batch_length = batch_len_ns.total %}
+
+          {% set alg_code = 'M' if algorithm == 'Matrix' else 'P' %}
+          {% set prof_code = {
+            'Basement (Z3+Z7+Z9)': 'B',
+            'First Floor (Z1+Z5+Z8)': 'F',
+            'Upper Floor (Z2+Z6)': 'U',
+            'Whole House (Z1-Z9)': 'W',
+            'None': 'N'
+          }.get(profile, 'N') %}
+          {% set result = {
+            'g': guardrail,
+            'bz': (base_zones | join(',') if base_zones|length else 'none'),
+            'fz': (final_zones | join(',') if final_zones|length else 'none'),
+            'bl': base_length|round(1),
+            'cl': callers_length|round(1),
+            'fl': batch_length|round(1),
+            'ml': max_ft,
+            'omin': opp_min,
+            'omax': opp_max,
+            'a': alg_code,
+            'p': prof_code,
+            'opp': 1 if opp_enabled else 0,
+            'man': 1 if manual_override else 0,
+            'bw': states('input_number.hc_dispatch_batch_window_sec')|int(180),
+            'gate': 1 if is_state('input_boolean.hc_enable_cold_tolerance_gate','on') else 0,
+            'gt': states('input_number.hc_cold_tolerance')|float(0),
+            'imin': states('input_number.hc_dispatch_ideal_min_ft')|float(0),
+            'imax': states('input_number.hc_dispatch_ideal_max_ft')|float(0)
+          } %}
+          {{ result | tojson }}
         attributes:
-          suggested_batch: "{{ suggested_batch | default('idle') }}"
-          algorithm: "{{ states('input_select.hc_dispatch_algorithm') }}"
-          profile: "{{ states('input_select.hc_dispatch_profile') }}"
-          batch_window_sec: "{{ states('input_number.hc_dispatch_batch_window_sec')|int(180) }}"
-          gate_enabled: "{{ is_state('input_boolean.hc_enable_cold_tolerance_gate','on') }}"
-          gate_threshold_f: "{{ states('input_number.hc_cold_tolerance')|float(0) }}"
-          guardrail_status: "{{ guardrail }}"
+          suggested_batch: "{{ (payload | from_json).suggested_batch }}"
+          algorithm: "{{ (payload | from_json).algorithm }}"
+          profile: "{{ (payload | from_json).profile }}"
+          batch_window_sec: "{{ (payload | from_json).batch_window_sec }}"
+          gate_enabled: "{{ (payload | from_json).gate_enabled }}"
+          gate_threshold_f: "{{ (payload | from_json).gate_threshold_f }}"
+          guardrail_status: "{{ (payload | from_json).guardrail }}"
+          batch_length_ft: "{{ (payload | from_json).batch_length_ft }}"
+          base_length_ft: "{{ (payload | from_json).base_length_ft }}"
+          callers_length_ft: "{{ (payload | from_json).callers_length_ft }}"
+          max_length_ft: "{{ (payload | from_json).max_length_ft }}"
+          ideal_min_ft: "{{ (payload | from_json).ideal_min_ft }}"
+          ideal_max_ft: "{{ (payload | from_json).ideal_max_ft }}"
+          opportunistic_enabled: "{{ (payload | from_json).opportunistic_enabled }}"
+          opportunistic_min_ft: "{{ (payload | from_json).opportunistic_min_ft }}"
+          opportunistic_max_ft: "{{ (payload | from_json).opportunistic_max_ft }}"
+          manual_override: "{{ (payload | from_json).manual_override }}"
+          base_zones: "{{ (payload | from_json).base_zones }}"
+          final_zones: "{{ (payload | from_json).final_zones }}"
+
+      - name: "HC Dispatch Guardrail"
+        unique_id: hc_dispatch_guardrail
+        icon: mdi:vector-link
+        state: >
+          {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+          {% if p in ['unknown','unavailable','none',''] %}
+            idle
+          {% else %}
+            {{ (p | from_json).g }}
+          {% endif %}
+        attributes:
+          suggested_batch: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              idle
+            {% else %}
+              {% set labels = {
+                'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
+                'z4':'Z4 Garage','z5':'Z5 1F Living','z6':'Z6 Master','z7':'Z7 Bsm Bar+TV',
+                'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
+              } %}
+              {% set fz = (p | from_json).fz %}
+              {% if fz in ['none',''] %}
+                idle
+              {% else %}
+                {% set out_ns = namespace(list=[]) %}
+                {% for z in fz.split(',') %}
+                  {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
+                {% endfor %}
+                {{ out_ns.list | join(' + ') }}
+              {% endif %}
+            {% endif %}
+          algorithm: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              Profile
+            {% else %}
+              {% set a = (p | from_json).a %}
+              {{ 'Matrix' if a == 'M' else 'Profile' }}
+            {% endif %}
+          profile: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              None
+            {% else %}
+              {% set code = (p | from_json).p %}
+              {% set map = {
+                'B':'Basement (Z3+Z7+Z9)',
+                'F':'First Floor (Z1+Z5+Z8)',
+                'U':'Upper Floor (Z2+Z6)',
+                'W':'Whole House (Z1-Z9)',
+                'N':'None'
+              } %}
+              {{ map.get(code, 'None') }}
+            {% endif %}
+          batch_window_sec: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).bw if p not in ['unknown','unavailable','none',''] else 180 }}
+          gate_enabled: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ ((p | from_json).gate == 1) if p not in ['unknown','unavailable','none',''] else false }}
+          gate_threshold_f: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).gt if p not in ['unknown','unavailable','none',''] else 0 }}
+          guardrail_status: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).g if p not in ['unknown','unavailable','none',''] else 'idle' }}
           batch_length_ft: >
-            {% set ns = namespace(total=0) %}
-            {% for z in final_zones %}
-              {% set ns.total = ns.total + lengths.get(z, 0) %}
-            {% endfor %}
-            {{ ns.total | round(1) }}
-          base_length_ft: "{{ base_length | round(1) }}"
-          callers_length_ft: "{{ callers_length | round(1) }}"
-          max_length_ft: "{{ max_ft }}"
-          ideal_min_ft: "{{ states('input_number.hc_dispatch_ideal_min_ft')|float(0) }}"
-          ideal_max_ft: "{{ states('input_number.hc_dispatch_ideal_max_ft')|float(0) }}"
-          opportunistic_enabled: "{{ opp_enabled }}"
-          opportunistic_min_ft: "{{ opp_min }}"
-          opportunistic_max_ft: "{{ opp_max }}"
-          manual_override: "{{ manual_override }}"
-          base_zones: "{{ base_zones | join(',') if base_zones|length else 'none' }}"
-          final_zones: "{{ final_zones | join(',') if final_zones|length else 'none' }}"
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).fl if p not in ['unknown','unavailable','none',''] else 0 }}
+          base_length_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).bl if p not in ['unknown','unavailable','none',''] else 0 }}
+          callers_length_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).cl if p not in ['unknown','unavailable','none',''] else 0 }}
+          max_length_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).ml if p not in ['unknown','unavailable','none',''] else 0 }}
+          ideal_min_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).imin if p not in ['unknown','unavailable','none',''] else 0 }}
+          ideal_max_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).imax if p not in ['unknown','unavailable','none',''] else 0 }}
+          opportunistic_enabled: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ ((p | from_json).opp == 1) if p not in ['unknown','unavailable','none',''] else false }}
+          opportunistic_min_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).omin if p not in ['unknown','unavailable','none',''] else 0 }}
+          opportunistic_max_ft: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).omax if p not in ['unknown','unavailable','none',''] else 0 }}
+          manual_override: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ ((p | from_json).man == 1) if p not in ['unknown','unavailable','none',''] else false }}
+          base_zones: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).bz if p not in ['unknown','unavailable','none',''] else 'none' }}
+          final_zones: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).fz if p not in ['unknown','unavailable','none',''] else 'none' }}
 
       - name: "HC Dispatch Suggested Batch"
         unique_id: hc_dispatch_suggested_batch

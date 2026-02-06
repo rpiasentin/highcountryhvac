@@ -22,6 +22,33 @@ Production already includes core HVAC packages and helpers that the POC expects,
 
 These are represented in the canonical config here and are treated as the current, authoritative system.
 
+## Dispatcher V2 Decisions (Current)
+- Modes: `Off`, `Matrix`, `Profile`. Opportunistic is a toggle that augments the active mode.
+- Off: system is controlled strictly by zone thermostats.
+- Matrix: cluster relationships define batch composition (followers join when any cluster member calls).
+- Profile: floor-based groups (Basement, First Floor, Upper Floor, Whole House).
+- Opportunistic: adds near-call zones when doing so stays within guardrails.
+- Setpoint strategy: dispatcher adjusts real climate setpoints and restores the prior baseline when the batch ends. User edits become the new baseline immediately.
+- Runtime guardrails: minimum run time 10 minutes, no minimum off time.
+- Length guardrails:
+  - Hard cap defaults to 85 ft and always applies.
+  - Opportunistic range defaults to 50–70 ft.
+  - Manual override allows opportunistic additions up to the hard cap and ignores the opportunistic minimum.
+  - If base exceeds hard cap, degrade to callers-only. If callers-only exceeds hard cap, block the batch (idle).
+- Near-call detection: delta within `(cold_tolerance - near_call_margin)` and `< cold_tolerance`. Near-call margin is adjustable.
+
+## Validation Snapshot (February 6, 2026)
+- Guardrail sensor computes correctly and emits non-idle output when a zone is calling.
+- Opportunistic skip is enforced when total length is below 50 ft.
+- Opportunistic add is applied when near-call zones bring the batch into the 50–70 ft range (example: Z1 + Z7 = 61 ft).
+
+## Home Assistant Constraints and Learnings
+- Sensor state length is limited (255 chars). Longer template output becomes `unknown`. Use compact payloads or attributes for structured data.
+- Template sensors only update when referenced entities change. Avoid relying on derived template sensors for core logic unless dependencies are explicit.
+- Complex logic is more reliable when broken into small, inspectable sensors with clear inputs and outputs.
+- When troubleshooting template output, use the Template editor or `/api/template` to validate results and limits.
+- YAML indentation errors are easy to introduce in large template blocks; keep template blocks tightly indented and avoid nested YAML structures.
+
 ## Gaps Between POC and Canonical
 From the POC vs canonical comparison, the key gaps are:
 - POC-only packages not yet in production.
@@ -32,11 +59,9 @@ From the POC vs canonical comparison, the key gaps are:
 See `inventories/poc_compare_report.md` for the exact file-level diff.
 
 ## Recommended Next Steps
-1. Reconcile Dispatcher V2 logic with existing production dispatcher helpers and inputs.
-2. Standardize entity naming across the dispatcher packages to remove ambiguity and verify core system operation remains unchanged.
-3. Introduce the POC Zone Setup dashboard into production after validating it against existing entities.
-4. Merge the POC actuator logic with production safety gates and call-for-heat constraints.
-5. Add explicit release steps and a lightweight test checklist for Dev → Stage → Prod, with staging constraints noted below.
+1. Run dispatcher actuation tests in prod-safe mode using `docs/TEST_CHECKLIST.md`.
+2. Confirm operator defaults for guardrails and near-call margin in Dispatcher Ops.
+3. Update inventory artifacts and tag a release after validation passes.
 
 ## Notes
 This repo is the canonical HVAC configuration and will be used to implement the long-term control strategy. The POC repo remains the reference for intended capabilities and next-step design decisions.
