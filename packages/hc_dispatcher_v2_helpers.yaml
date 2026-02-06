@@ -221,3 +221,8 @@ input_text:
     name: "HC Dispatch Last Suggested Batch"
     icon: mdi:history
     initial: "none"
+
+  hc_dispatch_last_apply_debug:
+    name: "HC Dispatch Last Apply Debug"
+    icon: mdi:bug
+    initial: "none"

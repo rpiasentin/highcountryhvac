@@ -123,6 +123,17 @@ automation:
                     {% endif %}
                   {% endif %}
 
+            - choose:
+                - conditions: "{{ z == 'z7' }}"
+                  sequence:
+                    - service: input_text.set_value
+                      target:
+                        entity_id: input_text.hc_dispatch_last_apply_debug
+                      data:
+                        value: >
+                          f={{ final_zones_str }} | z7_on={{ 1 if should_be_on else 0 }}
+                          cur={{ current_temp|round(1) }} des={{ desired_temp|round(1) }}
+
             - condition: template
               value_template: "{{ desired_temp > 0 }}"
 
