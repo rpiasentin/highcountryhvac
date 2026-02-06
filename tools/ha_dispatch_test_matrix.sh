@@ -60,6 +60,8 @@ sleep 2
 echo "[5/5] Debug and climate snapshot"
 api_get "states/input_text.hc_dispatch_last_apply_debug"
 echo
+api_get "states/input_text.hc_dispatch_loop_marker"
+echo
 api_get "states/input_number.hc_disp_z3_setpoint_f"
 echo
 api_get "states/input_number.hc_disp_z7_setpoint_f"

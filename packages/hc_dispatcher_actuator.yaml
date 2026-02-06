@@ -151,6 +151,15 @@ automation:
                     {% endif %}
                   {% endif %}
 
+            - service: input_text.set_value
+              target:
+                entity_id: input_text.hc_dispatch_loop_marker
+              data:
+                value: >
+                  z={{ z }} on={{ 1 if should_be_on else 0 }}
+                  ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
+                  fz={{ final_zones_str }}
+
             - choose:
                 - conditions:
                     - condition: template

@@ -227,3 +227,9 @@ input_text:
     icon: mdi:bug
     max: 255
     initial: "none"
+
+  hc_dispatch_loop_marker:
+    name: "HC Dispatch Loop Marker"
+    icon: mdi:sync
+    max: 255
+    initial: "none"
