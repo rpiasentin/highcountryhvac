@@ -84,17 +84,18 @@ automation:
               {{ [] }}
             {% endif %}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
+          eff_ok: "{{ 1 if effective_batch not in ['unknown','unavailable','none',''] else 0 }}"
 
       - service: input_text.set_value
         target:
           entity_id: input_text.hc_dispatch_last_apply_debug
         data:
           value: >
-            trg={{ trigger.entity_id }} raw={{ raw_batch }} eff={{ effective_batch }} fz={{ final_zones_str }}
+            trg={{ trigger.entity_id }} raw={{ raw_batch }} eff={{ effective_batch }} ok={{ eff_ok }} fz={{ final_zones_str }}
 
       # Avoid acting if the batch is unavailable/unknown
       - condition: template
-        value_template: "{{ effective_batch not in ['unknown','unavailable','none',''] }}"
+        value_template: "{{ eff_ok == 1 }}"
 
       # 1. Update the "Approved Batch" text helper
       - service: input_text.set_value
@@ -102,6 +103,13 @@ automation:
           entity_id: input_text.hc_dispatch_approved_batch
         data:
           value: "{{ effective_batch }}"
+
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_last_apply_debug
+        data:
+          value: >
+            loop fz={{ final_zones_str }} eff={{ effective_batch }}
 
       # 2. Iterate all zones and set target/baseline setpoints
       - repeat:
