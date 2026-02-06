@@ -61,3 +61,7 @@ In HA Terminal:
 chmod +x /config/hc_tools/ha_dispatch_test_matrix.sh
 /config/hc_tools/ha_dispatch_test_matrix.sh
 ```
+
+Notes:
+- The matrix script now forces a caller zone setpoint (default Z3) to create an active call.
+- It restores that caller setpoint at the end unless `RESTORE_CALLER=0` is set.

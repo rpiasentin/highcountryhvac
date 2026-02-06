@@ -9,7 +9,13 @@ AUTH_HEADER="Authorization: Bearer ${SUPERVISOR_TOKEN:?SUPERVISOR_TOKEN missing}
 
 # Test parameters
 TARGET_F=70
+CALLER_ZONE="z3"
 BASE_ZONES=("z3" "z7" "z9")
+RESTORE_CALLER=${RESTORE_CALLER:-1}
+
+CLIMATE_MAP_z3="climate.zone_3_basement_bath_and_common"
+CLIMATE_MAP_z7="climate.zone_7_basement_bar_and_tv_room_south_side"
+CLIMATE_MAP_z9="climate.zone_9_basement_bedroom"
 
 api_post() {
   local path="$1"
@@ -28,6 +34,11 @@ get_state() {
   api_get "states/$entity" | sed -n 's/.*"state":"\\([^"]*\\)".*/\\1/p'
 }
 
+get_attr_temperature() {
+  local entity="$1"
+  api_get "states/$entity" | sed -n 's/.*"temperature":\\([^,}]*\\).*/\\1/p'
+}
+
 echo "[1/5] Set dispatcher gates and modes"
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_auto_approve"}'
@@ -42,6 +53,13 @@ for z in "${BASE_ZONES[@]}"; do
   api_post "services/input_number/set_value" \
     "{\"entity_id\":\"input_number.hc_disp_${z}_setpoint_f\",\"value\":${TARGET_F}}"
 done
+
+echo "[2.5/5] Force a caller zone setpoint to create an active call"
+CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
+CALLER_CLIMATE="${!CALLER_CLIMATE_VAR}"
+CALLER_BASELINE="$(get_attr_temperature "${CALLER_CLIMATE}")"
+api_post "services/climate/set_temperature" \
+  "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${TARGET_F}}"
 
 echo "[3/5] Wait for suggested batch"
 for i in $(seq 1 20); do
@@ -80,3 +98,9 @@ api_get "states/climate.zone_3_basement_bath_and_common"
 echo
 api_get "states/climate.zone_9_basement_bedroom"
 echo
+
+if [ "${RESTORE_CALLER}" = "1" ] && [ -n "${CALLER_BASELINE}" ]; then
+  echo "[restore] Reset caller zone setpoint to baseline (${CALLER_BASELINE})"
+  api_post "services/climate/set_temperature" \
+    "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${CALLER_BASELINE}}"
+fi
