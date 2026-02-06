@@ -52,13 +52,13 @@ automation:
             {% endif %}
           # Parse the human string "Z1 Name + Z2 Name" back to zone codes
           batch_zones: >
-            {% set out = [] %}
+            {% set ns = namespace(out=[]) %}
             {% for z in range(1,10) %}
                {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
-                 {% set out = out + ['z' ~ z] %}
+                 {% set ns.out = ns.out + ['z' ~ z] %}
                {% endif %}
             {% endfor %}
-            {{ out }}
+            {{ ns.out }}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
 
       # Avoid acting if the batch is unavailable/unknown
