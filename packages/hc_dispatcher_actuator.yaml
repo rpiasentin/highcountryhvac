@@ -50,14 +50,19 @@ automation:
             {% else %}
               {{ raw_batch }}
             {% endif %}
-          # Parse the human string "Z1 Name + Z2 Name" back to zone codes
+          # Prefer guardrail final_zones when available; otherwise parse the human string
           batch_zones: >
             {% set ns = namespace(out=[]) %}
-            {% for z in range(1,10) %}
-               {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
-                 {% set ns.out = ns.out + ['z' ~ z] %}
-               {% endif %}
-            {% endfor %}
+            {% set guardrail_zones = state_attr('sensor.hc_dispatch_guardrail','final_zones') %}
+            {% if guardrail_zones not in ['none','unknown','unavailable','', None] and raw_batch not in invalid and raw_batch != 'idle' %}
+              {% set ns.out = guardrail_zones.split(',') %}
+            {% else %}
+              {% for z in range(1,10) %}
+                 {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
+                   {% set ns.out = ns.out + ['z' ~ z] %}
+                 {% endif %}
+              {% endfor %}
+            {% endif %}
             {{ ns.out }}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
 
