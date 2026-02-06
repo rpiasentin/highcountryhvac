@@ -22,6 +22,13 @@ automation:
     action:
       - variables:
           dispatcher_on: "{{ is_state('input_boolean.hc_dispatcher_mode_enabled','on') }}"
+          batch_str: "{{ states('input_text.hc_dispatch_last_batch_zones') }}"
+          batch_list: >
+            {% if batch_str not in ['none','unknown','unavailable','', None] %}
+              {{ batch_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
           climate_map:
             climate.z1_first_floor_bedroom_and_bath: z1
             climate.zone_2_second_floor_office_and_upper_guest: z2
@@ -52,7 +59,10 @@ automation:
                   value: "{{ new_temp }}"
           - conditions:
               - condition: template
-                value_template: "{{ dispatcher_on and z is not none and (new_temp|round(2) != target_temp|round(2)) }}"
+                value_template: >
+                  {{ dispatcher_on and z is not none
+                     and (new_temp|round(2) != target_temp|round(2))
+                     and (z not in batch_list) }}
             sequence:
               - service: input_number.set_value
                 target:

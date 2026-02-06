@@ -52,6 +52,7 @@ automation:
           invalid: ['unknown','unavailable','none','']
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
           last_batch: "{{ states('input_text.hc_dispatch_last_suggested_batch') }}"
+          last_batch_zones_str: "{{ states('input_text.hc_dispatch_last_batch_zones') }}"
           manual_trigger: "{{ trigger.platform == 'state' and trigger.entity_id == 'input_button.hc_dispatch_approve_batch' }}"
           effective_batch: >
             {% if manual_trigger %}
@@ -77,12 +78,50 @@ automation:
               {% endfor %}
               {{ ns.out | join(',') if ns.out|length else 'none' }}
             {% endif %}
+          base_zones_str: >
+            {% set guardrail_base = state_attr('sensor.hc_dispatch_guardrail','base_zones') %}
+            {% if guardrail_base not in ['none','unknown','unavailable','', None] and raw_batch not in invalid and raw_batch != 'idle' %}
+              {{ guardrail_base }}
+            {% else %}
+              {{ final_zones_str }}
+            {% endif %}
           final_zones_list: >
             {% if final_zones_str not in ['none','unknown','unavailable','', None] %}
               {{ final_zones_str.split(',') }}
             {% else %}
               {{ [] }}
             {% endif %}
+          base_zones_list: >
+            {% if base_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ base_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
+          batch_zones_str: >
+            {% if final_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ final_zones_str }}
+            {% elif last_batch_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ last_batch_zones_str }}
+            {% else %}
+              none
+            {% endif %}
+          batch_zones_list: >
+            {% if batch_zones_str not in ['none','unknown','unavailable','', None] %}
+              {{ batch_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
+          added_zones_list: >
+            {% set ns = namespace(out=[]) %}
+            {% for z in final_zones_list %}
+              {% if z not in base_zones_list %}
+                {% set ns.out = ns.out + [z] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.out }}
+          force_mode: "{{ states('input_select.hc_dispatch_force_mode') }}"
+          force_delta: "{{ states('input_number.hc_dispatch_force_delta_f')|float(1.0) }}"
+          force_cap: "{{ states('input_number.hc_dispatch_force_cap_f')|float(75) }}"
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
           eff_ok: "{{ 1 if effective_batch not in ['unknown','unavailable','none',''] else 0 }}"
 
@@ -104,12 +143,50 @@ automation:
         data:
           value: "{{ effective_batch }}"
 
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >
+                  {{ final_zones_str not in ['none','unknown','unavailable','', None]
+                     and final_zones_str != last_batch_zones_str }}
+            sequence:
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_last_batch_zones
+                data:
+                  value: "{{ final_zones_str }}"
+
+              - repeat:
+                  for_each: "{{ final_zones_list }}"
+                  sequence:
+                    - variables:
+                        z: "{{ repeat.item }}"
+                        climate_map:
+                          z1: climate.z1_first_floor_bedroom_and_bath
+                          z2: climate.zone_2_second_floor_office_and_upper_guest
+                          z3: climate.zone_3_basement_bath_and_common
+                          z4: climate.zone_4_garage
+                          z5: climate.zone_5_virtual_thermostat_first_floor_living
+                          z6: climate.zone_6_master_thermostat
+                          z7: climate.zone_7_basement_bar_and_tv_room_south_side
+                          z8: climate.zone_8_dining_room
+                          z9: climate.zone_9_basement_bedroom
+                        climate: "{{ climate_map[z] }}"
+                        baseline_now: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                    - condition: template
+                      value_template: "{{ baseline_now > 0 }}"
+                    - service: input_number.set_value
+                      target:
+                        entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f' }}"
+                      data:
+                        value: "{{ baseline_now }}"
+
       - service: input_text.set_value
         target:
           entity_id: input_text.hc_dispatch_last_apply_debug
         data:
           value: >
-            loop fz={{ final_zones_str }} eff={{ effective_batch }}
+            loop fz={{ final_zones_str }} bz={{ base_zones_str }} eff={{ effective_batch }}
 
       # 2. Iterate all zones and set target/baseline setpoints
       - repeat:
@@ -117,6 +194,7 @@ automation:
           sequence:
             - variables:
                 z: "{{ repeat.item }}"
+                in_batch: "{{ z in batch_zones_list }}"
                 should_be_on: "{{ z in final_zones_list }}"
                 climate_map:
                   z1: climate.z1_first_floor_bedroom_and_bath
@@ -132,7 +210,8 @@ automation:
                 climate_state: "{{ states(climate) }}"
                 target_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_setpoint_f')|float(0) }}"
                 baseline_temp: "{{ states('input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f')|float(0) }}"
-                current_temp: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                current_setpoint: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                current_room_temp: "{{ state_attr(climate, 'current_temperature')|float(0) }}"
                 last_on: "{{ states('input_datetime.hc_dispatch_last_on_' ~ z) }}"
                 elapsed_sec: >
                   {% if last_on not in ['unknown','unavailable','none',''] %}
@@ -141,9 +220,22 @@ automation:
                     999999
                   {% endif %}
                 allow_restore: "{{ elapsed_sec >= min_run_sec }}"
+                force_for_zone: >
+                  {% if force_mode == 'All' and should_be_on %}
+                    true
+                  {% elif force_mode == 'Added Only' and should_be_on and (z in added_zones_list) %}
+                    true
+                  {% else %}
+                    false
+                  {% endif %}
                 desired_temp: >
                   {% if should_be_on %}
-                    {{ target_temp }}
+                    {% if force_for_zone and current_room_temp > 0 %}
+                      {% set v = target_temp if target_temp > (current_room_temp + force_delta) else (current_room_temp + force_delta) %}
+                      {{ v if v < force_cap else force_cap }}
+                    {% else %}
+                      {{ target_temp }}
+                    {% endif %}
                   {% else %}
                     {% if allow_restore %}
                       {{ baseline_temp }}
@@ -152,13 +244,16 @@ automation:
                     {% endif %}
                   {% endif %}
 
+            - condition: template
+              value_template: "{{ in_batch }}"
+
             - service: input_text.set_value
               target:
                 entity_id: input_text.hc_dispatch_loop_marker
               data:
                 value: >
                   z={{ z }} on={{ 1 if should_be_on else 0 }}
-                  ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
+                  ct={{ current_room_temp|round(1) }} dt={{ desired_temp|round(1) }}
                   st={{ climate_state }} fz={{ final_zones_str }}
 
             - choose:
@@ -172,7 +267,7 @@ automation:
                       data:
                         value: >
                           z7={{ 1 if should_be_on else 0 }}
-                          ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
+                          ct={{ current_room_temp|round(1) }} dt={{ desired_temp|round(1) }}
                           fz={{ final_zones_str }}
 
             - choose:
@@ -181,7 +276,7 @@ automation:
                       value_template: >
                         {{ climate_state not in ['unknown','unavailable','none','']
                            and desired_temp > 0
-                           and (current_temp | round(2)) != (desired_temp | round(2)) }}
+                           and (current_setpoint | round(2)) != (desired_temp | round(2)) }}
                   sequence:
                     - service: climate.set_temperature
                       continue_on_error: true

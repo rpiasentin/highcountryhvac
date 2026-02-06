@@ -163,7 +163,7 @@ views:
               - entity: input_boolean.hc_dispatch_opportunistic_enabled
                 name: Opportunistic Add
               - entity: input_boolean.hc_dispatch_manual_override
-                name: Manual Override
+                name: Manual Caps Override
               - entity: input_button.hc_dispatch_approve_batch
                 name: Manual Approve Button
               - entity: input_text.hc_dispatch_approved_batch
@@ -216,6 +216,16 @@ views:
                 name: Opportunistic Min (ft)
               - entity: input_number.hc_dispatch_opportunistic_max_ft
                 name: Opportunistic Max (ft)
+              - entity: input_number.hc_dispatch_manual_caps_minutes
+                name: Manual Caps Minutes
+              - entity: input_datetime.hc_dispatch_manual_caps_until
+                name: Manual Caps Until
+              - entity: input_select.hc_dispatch_force_mode
+                name: Force Mode
+              - entity: input_number.hc_dispatch_force_delta_f
+                name: Force Delta (°F)
+              - entity: input_number.hc_dispatch_force_cap_f
+                name: Force Cap (°F)
 
           - type: markdown
             title: Cluster Statistics

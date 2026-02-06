@@ -136,7 +136,9 @@ template:
           {% set opp_min = states('input_number.hc_dispatch_opportunistic_min_ft')|float(50) %}
           {% set opp_max = states('input_number.hc_dispatch_opportunistic_max_ft')|float(70) %}
           {% set opp_enabled = is_state('input_boolean.hc_dispatch_opportunistic_enabled','on') %}
-          {% set manual_override = is_state('input_boolean.hc_dispatch_manual_override','on') %}
+          {% set manual_override_raw = is_state('input_boolean.hc_dispatch_manual_override','on') %}
+          {% set manual_until = states('input_datetime.hc_dispatch_manual_caps_until') %}
+          {% set manual_caps_active = manual_override_raw and manual_until not in ['unknown','unavailable','none',''] and (as_timestamp(now()) < as_timestamp(manual_until)) %}
 
           {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
           {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
@@ -264,8 +266,8 @@ template:
           {% set guardrail = 'ok' %}
           {% set final_zones = base_zones %}
 
-          {# Hard cap: degrade to callers-only if base exceeds max #}
-          {% if base_length > max_ft %}
+          {# Hard cap: degrade to callers-only if base exceeds max (unless manual caps override active) #}
+          {% if (not manual_caps_active) and base_length > max_ft %}
             {% set guardrail = 'degraded_to_callers' %}
             {% if callers_length > max_ft %}
               {% set guardrail = 'blocked_over_max' %}
@@ -275,12 +277,15 @@ template:
             {% endif %}
           {% else %}
             {% set final_zones = base_zones %}
+            {% if manual_caps_active and base_length > max_ft %}
+              {% set guardrail = 'manual_caps_override' %}
+            {% endif %}
 
             {# Opportunistic additions within guardrails #}
             {% if opp_enabled and final_zones|length > 0 %}
               {% set total_ns = namespace(total=base_length) %}
               {% set added_ns = namespace(list=[]) %}
-              {% set limit_max = max_ft if manual_override else opp_max %}
+              {% set limit_max = 9999 if manual_caps_active else opp_max %}
 
               {% for z in near_candidates %}
                 {% if z not in final_zones %}
@@ -292,7 +297,7 @@ template:
                 {% endif %}
               {% endfor %}
 
-              {% if not manual_override %}
+              {% if not manual_caps_active %}
                 {% if total_ns.total < opp_min %}
                   {% set added_ns.list = [] %}
                   {% set total_ns.total = base_length %}
@@ -348,7 +353,8 @@ template:
             'a': alg_code,
             'p': prof_code,
             'opp': 1 if opp_enabled else 0,
-            'man': 1 if manual_override else 0,
+            'man': 1 if manual_caps_active else 0,
+            'mu': manual_until,
             'bw': states('input_number.hc_dispatch_batch_window_sec')|int(180),
             'gate': 1 if is_state('input_boolean.hc_enable_cold_tolerance_gate','on') else 0,
             'gt': states('input_number.hc_cold_tolerance')|float(0),
@@ -374,6 +380,7 @@ template:
           opportunistic_min_ft: "{{ (payload | from_json).opportunistic_min_ft }}"
           opportunistic_max_ft: "{{ (payload | from_json).opportunistic_max_ft }}"
           manual_override: "{{ (payload | from_json).manual_override }}"
+          manual_caps_until: "{{ (payload | from_json).mu }}"
           base_zones: "{{ (payload | from_json).base_zones }}"
           final_zones: "{{ (payload | from_json).final_zones }}"
 
@@ -474,6 +481,9 @@ template:
           manual_override: >
             {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
             {{ ((p | from_json).man == 1) if p not in ['unknown','unavailable','none',''] else false }}
+          manual_caps_until: >
+            {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
+            {{ (p | from_json).mu if p not in ['unknown','unavailable','none',''] else 'unknown' }}
           base_zones: >
             {% set p = states('sensor.hc_dispatch_guardrail_payload') %}
             {{ (p | from_json).bz if p not in ['unknown','unavailable','none',''] else 'none' }}
@@ -503,6 +513,7 @@ template:
           opportunistic_min_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','opportunistic_min_ft') }}"
           opportunistic_max_ft: "{{ state_attr('sensor.hc_dispatch_guardrail','opportunistic_max_ft') }}"
           manual_override: "{{ state_attr('sensor.hc_dispatch_guardrail','manual_override') }}"
+          manual_caps_until: "{{ state_attr('sensor.hc_dispatch_guardrail','manual_caps_until') }}"
           base_zones: "{{ state_attr('sensor.hc_dispatch_guardrail','base_zones') }}"
           final_zones: "{{ state_attr('sensor.hc_dispatch_guardrail','final_zones') }}"
 

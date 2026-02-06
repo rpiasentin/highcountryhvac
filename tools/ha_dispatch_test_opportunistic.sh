@@ -35,8 +35,12 @@ api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispat
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_auto_approve"}'
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_opportunistic_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_enable_setpoint_broadcast"}'
+api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_manual_override"}'
 api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_algorithm","option":"Matrix"}'
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_near_call_margin_f","value":1.5}'
+api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_force_mode","option":"Added Only"}'
+api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_delta_f","value":1.0}'
+api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_cap_f","value":75}'
 
 echo "[2/5] Set dispatcher target setpoints"
 api_post "services/input_number/set_value" \
