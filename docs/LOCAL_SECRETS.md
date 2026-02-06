@@ -12,3 +12,4 @@ Do not place real tokens or passwords in the repository.
 ## Notes
 - Codex sandbox cannot reach the Home Assistant API directly (network restricted).
 - Use your local terminal for API-driven tests, or provide screenshots/logs from HA.
+- For a repeatable workflow, see `docs/ACCESS.md` and `tools/ha_snapshot.py`.
