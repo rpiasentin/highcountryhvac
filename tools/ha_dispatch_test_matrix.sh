@@ -55,9 +55,15 @@ done
 
 echo "[4/5] Manual approve"
 api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_approve_batch"}'
-sleep 2
+sleep 6
 
 echo "[5/5] Debug and climate snapshot"
+api_get "states/automation.hc_dispatch_v2_apply_batch"
+echo
+api_get "states/sensor.hc_dispatch_suggested_batch"
+echo
+api_get "states/input_text.hc_dispatch_last_suggested_batch"
+echo
 api_get "states/input_text.hc_dispatch_last_apply_debug"
 echo
 api_get "states/input_text.hc_dispatch_loop_marker"
