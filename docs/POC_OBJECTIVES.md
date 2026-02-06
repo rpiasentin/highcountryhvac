@@ -23,18 +23,35 @@ Production already includes core HVAC packages and helpers that the POC expects,
 These are represented in the canonical config here and are treated as the current, authoritative system.
 
 ## Dispatcher V2 Decisions (Current)
+### Operating Model
 - Modes: `Off`, `Matrix`, `Profile`. Opportunistic is a toggle that augments the active mode.
-- Off: system is controlled strictly by zone thermostats.
-- Matrix: cluster relationships define batch composition (followers join when any cluster member calls).
-- Profile: floor-based groups (Basement, First Floor, Upper Floor, Whole House).
-- Opportunistic: adds near-call zones when doing so stays within guardrails.
-- Setpoint strategy: dispatcher adjusts real climate setpoints and restores the prior baseline when the batch ends. User edits become the new baseline immediately.
-- Runtime guardrails: minimum run time 10 minutes, no minimum off time.
-- Length guardrails:
-  - Hard cap defaults to 85 ft and always applies.
-  - Opportunistic range defaults to 50–70 ft.
-  - Manual override allows opportunistic additions up to the hard cap and ignores the opportunistic minimum.
-  - If base exceeds hard cap, degrade to callers-only. If callers-only exceeds hard cap, block the batch (idle).
+- Off: dispatcher does nothing; thermostats control switches directly.
+- Matrix: clusters define relationships. When any zone in a cluster calls, the dispatcher batches the full cluster (plus opportunistic adds if enabled).
+- Profile: no cluster relationships. The dispatcher respects broadcast setpoints (profile lock) and only batches calling zones unless opportunistic adds are enabled.
+- Opportunistic: adds near-call zones to the current mode when guardrails allow it.
+
+### Baseline + Override Setpoints
+- At batch start, the dispatcher captures baseline setpoints for **all zones included in the batch**, including the original calling zone.
+- To ensure batch members actually fire, the dispatcher temporarily raises setpoints above current temperature for **added zones** (matrix followers or opportunistic adds), even if they would not normally call.
+- When stop conditions are met, all affected zones are restored to their baseline setpoints.
+- User edits to thermostat setpoints while dispatcher is ON are treated as the new baseline immediately.
+
+### Stop Behavior
+- A batch begins when one or more real thermostats call for heat.
+- Stop conditions: the **original calling zone** reaches its desired setpoint **and** minimum run time has elapsed.
+- At stop, the dispatcher restores baseline setpoints for all batch zones.
+
+### Guardrails
+- Minimum run time: 10 minutes. No minimum off time.
+- Hard cap: default 85 ft and always applies **unless manual caps override is enabled**.
+  - If base exceeds hard cap, degrade to callers-only.
+  - If callers-only exceeds hard cap, block the batch (idle).
+- Opportunistic range defaults to 50–70 ft (user-tunable).
+- Manual caps override: allows temporary cap violations for Matrix/Opportunistic batches.
+  - Controlled by a toggle plus a user-selectable duration (minutes, up to 24 hours).
+  - Intended for manual approval only.
+
+### Near-Call Detection
 - Near-call detection: delta within `(cold_tolerance - near_call_margin)` and `< cold_tolerance`. Near-call margin is adjustable.
 
 ## Validation Snapshot (February 6, 2026)

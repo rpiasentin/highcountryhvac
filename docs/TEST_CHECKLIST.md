@@ -42,6 +42,25 @@
    - Compare `desired_temp` vs current temperature; if `desired_temp <= current`, the thermostat will not call.
    - Temporarily disable `input_boolean.hc_enable_setpoint_broadcast` to rule out broadcast overrides from `packages/high_country_setpoints.yaml`.
 
+## Forced-Call Behavior (Required)
+1. Select a batch with at least one added zone (Matrix follower or opportunistic add).
+2. Confirm the added zone’s **current temperature is above its nominal target** (so it would normally not call).
+3. Approve the batch and verify the added zone’s setpoint is raised **above current temperature**.
+4. Confirm the added zone calls for heat.
+5. After stop conditions, verify the baseline setpoints are restored.
+
+## Manual Caps Override
+1. Enable manual caps override and set a duration (minutes).
+2. Create a batch that would exceed the hard cap.
+3. Verify the batch is allowed **only while override is active**.
+4. After the override window expires, verify the same batch is blocked or degraded per the hard cap.
+
+## Profile Lock + Opportunistic
+1. Set algorithm to Profile and enable the opportunistic toggle.
+2. Confirm calling zones follow broadcast setpoints (no drift).
+3. Confirm opportunistic adds occur only when enabled.
+4. Disable opportunistic and verify no near-call zones are added.
+
 ## Post-Validation
 1. Update `inventories/entity_inventory.csv` and `inventories/hvac_entity_inventory.csv`.
 2. Record release notes and tag the release.

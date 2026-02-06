@@ -13,17 +13,21 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - Actuator uses setpoint-based control with baseline restore.
 - Dispatcher Ops and Zone Setup dashboards are updated.
 - Guardrail validation has been completed for opportunistic skip and add.
-- Actuation validation is blocked: manual approve shows `final_zones` (ex: Z1+Z7), but Z7 does not actuate.
-- Debug helper `input_text.hc_dispatch_last_apply_debug` was added to surface the actuator decision for Z7.
+- Actuation validation is blocked: added zones are not reliably forced to call when their nominal thermostat setpoint would not call.
+- Debug helpers `input_text.hc_dispatch_last_apply_debug` and `input_text.hc_dispatch_loop_marker` are available for actuator visibility.
 
 ## Current Blocker (Actuation)
-- Symptom: manual approve updates `input_text.hc_dispatch_approved_batch`, but Z7 setpoint does not change and no call occurs.
-- Guardrail output is correct, so the issue is downstream of advisory logic.
-- Likely causes:
-  - Desired setpoint is not above current temperature (generic thermostat never calls).
-  - Another automation immediately overwrites the setpoint (candidate: `packages/high_country_setpoints.yaml` broadcast automations).
-  - Actuator conditions prevent `climate.set_temperature` execution for Z7.
-- Next step: capture `input_text.hc_dispatch_last_apply_debug` after a manual approve and compare to the Z7 climate setpoint and current temp to confirm which branch is taken.
+- The missing behavior is **forced-call induction** for batch additions.
+- Baseline capture exists, but the actuator does not reliably raise added-zone setpoints above current temperature.
+- Without forced override, Matrix/Profile/Opportunistic adds often do not call.
+
+## Target Operating Model (Behavior to Implement)
+- At batch start, capture baseline setpoints for all batch zones.
+- For added zones, temporarily raise setpoints above current temperature to ensure a call.
+- Stop when the original calling zone reaches its desired setpoint and min-run has elapsed.
+- Restore baseline setpoints for all batch zones.
+- Profile lock should respect the opportunistic toggle (adds only when enabled).
+- Manual caps override allows temporary cap violations for Matrix/Opportunistic with a user-selectable duration.
 
 ## Phase 1: Baseline Safety and Naming Alignment
 1. Confirm dispatcher is gated by `input_boolean.hc_dispatcher_mode_enabled` in `packages/hc_dispatcher_inputs.yaml` and keep it off by default until validation is complete.
@@ -47,6 +51,8 @@ This roadmap applies the POC objectives to the canonical production configuratio
    - Must respect `input_boolean.hc_dispatcher_mode_enabled`.
    - Must respect cold tolerance and system control constraints.
 2. Confirm actuator does not run in auto mode unless explicitly enabled.
+3. Implement forced-call setpoint overrides for added zones (configurable delta and cap).
+4. Add manual caps override duration logic and UI controls.
 
 ## Phase 5: Dashboard and Operator Workflow
 1. Add the POC dashboard to `lovelace/hc_zone_setup.yaml` and register it in `configuration.yaml` if needed.
