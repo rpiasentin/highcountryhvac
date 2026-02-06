@@ -36,11 +36,11 @@ automation:
 
     action:
       - variables:
+          invalid: ['unknown','unavailable','none','']
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
           last_batch: "{{ states('input_text.hc_dispatch_last_suggested_batch') }}"
           manual_trigger: "{{ trigger.platform == 'state' and trigger.entity_id == 'input_button.hc_dispatch_approve_batch' }}"
           effective_batch: >
-            {% set invalid = ['unknown','unavailable','none',''] %}
             {% if manual_trigger %}
               {% if raw_batch in invalid or raw_batch == 'idle' %}
                 {{ last_batch }}
