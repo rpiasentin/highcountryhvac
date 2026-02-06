@@ -35,6 +35,19 @@ automation:
           {% endif %}
 
     action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >
+                  {{ trigger.platform == 'state'
+                     and trigger.entity_id == 'input_button.hc_dispatch_approve_batch'
+                     and states('sensor.hc_dispatch_suggested_batch') in ['unknown','unavailable','none','','idle'] }}
+            sequence:
+              - wait_template: >
+                  {{ states('sensor.hc_dispatch_suggested_batch') not in ['unknown','unavailable','none','','idle'] }}
+                timeout: "00:00:30"
+                continue_on_timeout: true
+
       - variables:
           invalid: ['unknown','unavailable','none','']
           raw_batch: "{{ states('sensor.hc_dispatch_suggested_batch') }}"
@@ -71,6 +84,13 @@ automation:
               {{ [] }}
             {% endif %}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
+
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_last_apply_debug
+        data:
+          value: >
+            trg={{ trigger.entity_id }} raw={{ raw_batch }} eff={{ effective_batch }}
 
       # Avoid acting if the batch is unavailable/unknown
       - condition: template
