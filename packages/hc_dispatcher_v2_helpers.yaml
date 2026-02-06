@@ -225,4 +225,5 @@ input_text:
   hc_dispatch_last_apply_debug:
     name: "HC Dispatch Last Apply Debug"
     icon: mdi:bug
+    max: 255
     initial: "none"

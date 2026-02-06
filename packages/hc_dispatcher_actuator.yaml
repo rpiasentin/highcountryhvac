@@ -131,8 +131,8 @@ automation:
                         entity_id: input_text.hc_dispatch_last_apply_debug
                       data:
                         value: >
-                          f={{ final_zones_str }} | z7_on={{ 1 if should_be_on else 0 }}
-                          cur={{ current_temp|round(1) }} des={{ desired_temp|round(1) }}
+                          fz={{ final_zones_str }} z7={{ 1 if should_be_on else 0 }}
+                          ct={{ current_temp|round(1) }} dt={{ desired_temp|round(1) }}
 
             - condition: template
               value_template: "{{ desired_temp > 0 }}"
