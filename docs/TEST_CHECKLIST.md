@@ -37,6 +37,10 @@
 3. Induce a Matrix batch and manually approve it.
 4. Verify setpoints are adjusted for the approved batch and restored afterward.
 5. Confirm minimum run time is enforced (10 minutes) before shutoff.
+6. If a zone fails to actuate:
+   - Check `input_text.hc_dispatch_last_apply_debug` to confirm the actuator computed the zone as ON and which setpoint it tried to apply.
+   - Compare `desired_temp` vs current temperature; if `desired_temp <= current`, the thermostat will not call.
+   - Temporarily disable `input_boolean.hc_enable_setpoint_broadcast` to rule out broadcast overrides from `packages/high_country_setpoints.yaml`.
 
 ## Post-Validation
 1. Update `inventories/entity_inventory.csv` and `inventories/hvac_entity_inventory.csv`.
