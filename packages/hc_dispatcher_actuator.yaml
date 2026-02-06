@@ -51,19 +51,19 @@ automation:
               {{ raw_batch }}
             {% endif %}
           # Prefer guardrail final_zones when available; otherwise parse the human string
-          batch_zones: >
-            {% set ns = namespace(out=[]) %}
+          final_zones_str: >
             {% set guardrail_zones = state_attr('sensor.hc_dispatch_guardrail','final_zones') %}
             {% if guardrail_zones not in ['none','unknown','unavailable','', None] and raw_batch not in invalid and raw_batch != 'idle' %}
-              {% set ns.out = guardrail_zones.split(',') %}
+              {{ guardrail_zones }}
             {% else %}
+              {% set ns = namespace(out=[]) %}
               {% for z in range(1,10) %}
                  {% if ('Z' ~ z ~ ' ') in effective_batch or ('Z' ~ z ~ '+') in effective_batch or effective_batch.startswith('Z' ~ z) %}
                    {% set ns.out = ns.out + ['z' ~ z] %}
                  {% endif %}
               {% endfor %}
+              {{ ns.out | join(',') if ns.out|length else 'none' }}
             {% endif %}
-            {{ ns.out }}
           min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
 
       # Avoid acting if the batch is unavailable/unknown
@@ -83,7 +83,9 @@ automation:
           sequence:
             - variables:
                 z: "{{ repeat.item }}"
-                should_be_on: "{{ z in batch_zones }}"
+                should_be_on: >
+                  {% set f = final_zones_str %}
+                  {{ f not in ['none','unknown','unavailable','', None] and (',' ~ f ~ ',') is search(',' ~ z ~ ',') }}
                 climate_map:
                   z1: climate.z1_first_floor_bedroom_and_bath
                   z2: climate.zone_2_second_floor_office_and_upper_guest
