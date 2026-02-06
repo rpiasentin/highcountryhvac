@@ -24,4 +24,21 @@ Run the snapshot script from your Mac and share the output (or commit the JSON f
 The entities are controlled by `tools/ha_snapshot_entities.txt`.
 
 ## HA Terminal Add-on (Fallback)
-If Python is not available, we can provide a curl-based command that queries the same entities through the Supervisor token.
+If Python is not available, use the HA Terminal add-on to dump all states, then extract the dispatcher subset locally.
+
+1. In the HA Terminal add-on, run:
+   ```bash
+   mkdir -p /config/reports
+   curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" \
+     http://supervisor/core/api/states > /config/reports/ha_states_all.json
+   ```
+
+2. Copy the file to your Mac:
+   ```bash
+   scp root@192.168.1.113:/config/reports/ha_states_all.json /Users/giovanipiasentin/dev/codex/highcountryhvac/reports/
+   ```
+
+3. Extract the dispatcher snapshot:
+   ```bash
+   python3 tools/ha_extract_snapshot.py reports/ha_states_all.json
+   ```
