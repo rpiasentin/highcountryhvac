@@ -13,6 +13,7 @@ BASE_ZONES=("z3" "z7" "z9")
 WAIT_MINUTES=${WAIT_MINUTES:-10}
 RESTORE_WAIT_SECONDS=${RESTORE_WAIT_SECONDS:-120}
 RESET_TRACKING=${RESET_TRACKING:-1}
+STOP_SETPOINT_MODE=${STOP_SETPOINT_MODE:-baseline} # baseline | safe
 
 CLIMATE_MAP_z3="climate.zone_3_basement_bath_and_common"
 CLIMATE_MAP_z7="climate.zone_7_basement_bar_and_tv_room_south_side"
@@ -56,16 +57,16 @@ safe_setpoint() {
 
 caller_stop_setpoint() {
   local ct="$1"
-  local orig="$2"
-  if [ -z "$ct" ]; then
-    echo "$orig"
+  local baseline="$2"
+  if [ "$STOP_SETPOINT_MODE" = "safe" ]; then
+    safe_setpoint "$ct"
     return
   fi
-  awk -v ct="$ct" -v orig="$orig" 'BEGIN{
-    v=ct-1; if(v<50)v=50;
-    if(orig=="" || orig=="null") {printf "%.1f", v; exit}
-    if(orig < v) printf "%.1f", orig; else printf "%.1f", v;
-  }'
+  if [ -n "$baseline" ]; then
+    echo "$baseline"
+  else
+    safe_setpoint "$ct"
+  fi
 }
 
 echo "[1/9] Set dispatcher gates and modes"
