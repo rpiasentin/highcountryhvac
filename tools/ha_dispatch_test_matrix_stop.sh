@@ -12,7 +12,7 @@ CALLER_ZONE=${CALLER_ZONE:-z3}
 BASE_ZONES=("z3" "z7" "z9")
 WAIT_MINUTES=${WAIT_MINUTES:-10}
 RESTORE_WAIT_SECONDS=${RESTORE_WAIT_SECONDS:-120}
-RESET_TRACKING=${RESET_TRACKING:-0}
+RESET_TRACKING=${RESET_TRACKING:-1}
 
 CLIMATE_MAP_z3="climate.zone_3_basement_bath_and_common"
 CLIMATE_MAP_z7="climate.zone_7_basement_bar_and_tv_room_south_side"
@@ -54,7 +54,21 @@ safe_setpoint() {
   awk -v ct="$ct" 'BEGIN{v=ct-1; if(v<50)v=50; printf "%.1f", v}'
 }
 
-echo "[1/8] Set dispatcher gates and modes"
+caller_stop_setpoint() {
+  local ct="$1"
+  local orig="$2"
+  if [ -z "$ct" ]; then
+    echo "$orig"
+    return
+  fi
+  awk -v ct="$ct" -v orig="$orig" 'BEGIN{
+    v=ct-1; if(v<50)v=50;
+    if(orig=="" || orig=="null") {printf "%.1f", v; exit}
+    if(orig < v) printf "%.1f", orig; else printf "%.1f", v;
+  }'
+}
+
+echo "[1/9] Set dispatcher gates and modes"
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_auto_approve"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_opportunistic_enabled"}'
@@ -68,22 +82,24 @@ api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispat
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_cap_f","value":75}'
 
 if [ "$RESET_TRACKING" = "1" ]; then
-  echo "[1.5/8] Reset batch tracking"
+  echo "[1.5/9] Reset batch tracking"
   api_post "services/input_text/set_value" '{"entity_id":"input_text.hc_dispatch_batch_callers","value":"none"}'
   api_post "services/input_text/set_value" '{"entity_id":"input_text.hc_dispatch_last_batch_zones","value":"none"}'
 fi
 
-echo "[2/8] Snapshot original setpoints"
+echo "[2/9] Snapshot original setpoints"
 ORIG_Z3="$(get_attr_temperature "${CLIMATE_MAP_z3}")"
 ORIG_Z7="$(get_attr_temperature "${CLIMATE_MAP_z7}")"
 ORIG_Z9="$(get_attr_temperature "${CLIMATE_MAP_z9}")"
 
 CT_Z7="$(get_attr_current_temp "${CLIMATE_MAP_z7}")"
 CT_Z9="$(get_attr_current_temp "${CLIMATE_MAP_z9}")"
+CT_Z3="$(get_attr_current_temp "${CLIMATE_MAP_z3}")"
 SAFE_Z7="$(safe_setpoint "$CT_Z7")"
 SAFE_Z9="$(safe_setpoint "$CT_Z9")"
+STOP_Z3="$(caller_stop_setpoint "$CT_Z3" "$ORIG_Z3")"
 
-echo "[2.5/8] Ensure non-callers are below current temp"
+echo "[2.5/9] Ensure non-callers are below current temp"
 api_post "services/climate/set_temperature" \
   "{\"entity_id\":\"${CLIMATE_MAP_z7}\",\"temperature\":${SAFE_Z7}}"
 api_post "services/climate/set_temperature" \
@@ -91,20 +107,20 @@ api_post "services/climate/set_temperature" \
 
 sleep 3
 
-echo "[3/8] Set dispatcher target setpoints"
+echo "[3/9] Set dispatcher target setpoints"
 for z in "${BASE_ZONES[@]}"; do
   api_post "services/input_number/set_value" \
     "{\"entity_id\":\"input_number.hc_disp_${z}_setpoint_f\",\"value\":${TARGET_F}}"
 done
 
-echo "[4/8] Force a caller zone setpoint to create an active call"
+echo "[4/9] Force a caller zone setpoint to create an active call"
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
 CALLER_CLIMATE="${!CALLER_CLIMATE_VAR}"
 api_post "services/climate/set_temperature" \
   "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${TARGET_F}}"
 
 
-echo "[5/8] Wait for suggested batch"
+echo "[5/9] Wait for suggested batch"
 for i in $(seq 1 30); do
   sb="$(get_state "sensor.hc_dispatch_suggested_batch")"
   if [ -n "$sb" ] && [ "$sb" != "idle" ] && [ "$sb" != "unknown" ] && [ "$sb" != "unavailable" ] && [ "$sb" != "none" ]; then
@@ -114,18 +130,16 @@ for i in $(seq 1 30); do
   sleep 2
 done
 
-echo "[6/8] Manual approve"
+echo "[6/9] Manual approve"
 api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_approve_batch"}'
 
 min_wait=$((WAIT_MINUTES * 60))
-echo "[7/8] Wait min-run (${WAIT_MINUTES} min)"
+echo "[7/9] Wait min-run (${WAIT_MINUTES} min)"
 sleep "$min_wait"
 
-echo "[7.5/8] Drop caller back to baseline (${ORIG_Z3})"
-if [ -n "${ORIG_Z3}" ]; then
-  api_post "services/climate/set_temperature" \
-    "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${ORIG_Z3}}"
-fi
+echo "[7.5/9] Drop caller to stop setpoint (${STOP_Z3})"
+api_post "services/climate/set_temperature" \
+  "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${STOP_Z3}}"
 
 for i in $(seq 1 30); do
   sb="$(get_state "sensor.hc_dispatch_suggested_batch")"
@@ -136,7 +150,7 @@ for i in $(seq 1 30); do
   sleep 2
 done
 
-echo "[8/8] Wait for restore (${RESTORE_WAIT_SECONDS}s) + snapshot"
+echo "[8/9] Wait for restore (${RESTORE_WAIT_SECONDS}s) + snapshot"
 sleep "$RESTORE_WAIT_SECONDS"
 
 api_get "states/sensor.hc_dispatch_suggested_batch"
@@ -162,7 +176,8 @@ echo
 api_get "states/climate.zone_9_basement_bedroom"
 echo
 
-echo "[restore] Return original setpoints"
+
+echo "[9/9] Return original setpoints"
 if [ -n "${ORIG_Z7}" ]; then
   api_post "services/climate/set_temperature" \
     "{\"entity_id\":\"${CLIMATE_MAP_z7}\",\"temperature\":${ORIG_Z7}}"
