@@ -29,6 +29,13 @@ automation:
             {% else %}
               {{ [] }}
             {% endif %}
+          callers_str: "{{ states('input_text.hc_dispatch_batch_callers') }}"
+          callers_list: >
+            {% if callers_str not in ['none','unknown','unavailable','', None] %}
+              {{ callers_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
           climate_map:
             climate.z1_first_floor_bedroom_and_bath: z1
             climate.zone_2_second_floor_office_and_upper_guest: z2
@@ -46,6 +53,24 @@ automation:
           - conditions:
               - condition: template
                 value_template: "{{ not dispatcher_on and z is not none }}"
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_baseline_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_disp_' ~ z ~ '_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+          - conditions:
+              - condition: template
+                value_template: >
+                  {{ dispatcher_on and z is not none
+                     and (new_temp|round(2) != target_temp|round(2))
+                     and (z in batch_list)
+                     and (z in callers_list) }}
             sequence:
               - service: input_number.set_value
                 target:
