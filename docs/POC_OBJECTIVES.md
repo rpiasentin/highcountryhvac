@@ -1,90 +1,112 @@
-# POC Objectives and Next Steps
+# POC Objectives and Operating Model
 
 ## Purpose
-This document captures the intent of the `homeassistantantigravity` proof-of-concept (POC) and maps it onto the canonical production configuration now stored in this repo. The POC is treated as objectives and next steps, not as the current source of truth.
+This document maps the `homeassistantantigravity` proof-of-concept (POC) into the canonical production configuration in this repo. The POC is treated as objectives and next steps, not as the current source of truth.
 
-## POC Objectives (What the POC Adds)
-- Introduce Dispatcher V2 with a Matrix-style cluster model for zone batching.
-- Add helpers to assign zones to clusters A–E or keep them independent.
-- Compute cluster stats (average temp, total loop length) to guide efficiency (target 45–75 ft per cluster).
-- Provide advisory logic for suggested batches and near-call zones.
-- Provide an actuator path for auto/manual batch approval.
-- Provide a Zone Setup dashboard for cluster assignment and loop lengths.
-- Maintain an inventory and changelog for releases.
+This release focuses on **Dispatcher V2**: taking existing broadcast setpoints (Z1–Z9) and batching zone inclusion to optimize boiler efficiency. It does **not** change how broadcasts are created.
 
-## Canonical Baseline (What Production Already Has)
-Production already includes core HVAC packages and helpers that the POC expects, including:
-- Call-for-heat detection and zone delta sensors.
-- Setpoints and setpoint automations.
-- Cold tolerance control and gatekeeping.
-- Dispatcher inputs and broadcast-follow logic.
-- Hydronic kick and observability packages.
+## User Mental Model (Broadcast Modes, Out of Scope for This Release)
+Users typically set desired temperatures via existing broadcast logic:
+- Mode A: Master setpoint for the entire house.
+- Mode B: Floor-by-floor setpoints.
+- Mode C: Individual room/zone setpoints.
 
-These are represented in the canonical config here and are treated as the current, authoritative system.
+Those broadcasts are already implemented in the canonical system and set the thermostat setpoints for Z1–Z9. Dispatcher V2 consumes those setpoints and decides **which zones should be included together** to improve efficiency.
 
-## Dispatcher V2 Decisions (Current)
-### Operating Model
-- Modes: `Off`, `Matrix`, `Profile`. Opportunistic is a toggle that augments the active mode.
-- Off: dispatcher does nothing; thermostats control switches directly.
-- Matrix: clusters define relationships. When any zone in a cluster calls, the dispatcher batches the full cluster (plus opportunistic adds if enabled).
-- Profile: no cluster relationships. The dispatcher respects broadcast setpoints (profile lock) and only batches calling zones unless opportunistic adds are enabled.
-- Opportunistic: adds near-call zones to the current mode when guardrails allow it.
+## Dispatcher V2 Objectives (What This Release Adds)
+- Matrix-style cluster batching.
+- Profile mode batching that respects existing setpoints.
+- Opportunistic adds of near-call zones within guardrails.
+- Guardrail enforcement (length caps, min run time, manual caps override).
+- Actuation by **setpoint adjustment** rather than direct switch toggles.
+- Operator dashboards for cluster assignment, guardrails, and approval flow.
 
-### Baseline + Override Setpoints
-- At batch start, the dispatcher captures baseline setpoints for **all zones included in the batch**, including the original calling zone.
-- **Non-batch zones are never modified** (no baseline capture, no override, no restore), to avoid circular control loops.
-- To ensure batch members actually fire, the dispatcher temporarily raises setpoints above current temperature for **added zones** (matrix followers or opportunistic adds), even if they would not normally call.
-- When stop conditions are met, all affected zones are restored to their baseline setpoints.
-- User edits to thermostat setpoints while dispatcher is ON are treated as the new baseline immediately.
+## Operating Modes and When to Use Them
+Dispatcher modes are separate from broadcast modes.
 
-### Stop Behavior
-- A batch begins when one or more real thermostats call for heat.
-- Stop conditions: the **original calling zone** reaches its desired setpoint **and** minimum run time has elapsed.
-- At stop, the dispatcher restores baseline setpoints for all batch zones.
+### Off
+If you want default thermostat behavior only.
+- Use when: you are changing core HVAC settings or want no batching.
+- Expect: only native thermostat calls control zones.
 
-### Guardrails
-- Minimum run time: 10 minutes. No minimum off time.
-- Hard cap: default 85 ft and always applies **unless manual caps override is enabled**.
-  - If base exceeds hard cap, degrade to callers-only.
-  - If callers-only exceeds hard cap, block the batch (idle).
-- Opportunistic range defaults to 50–70 ft (user-tunable).
-- Manual caps override: allows temporary cap violations for Matrix/Opportunistic batches.
-  - Controlled by a toggle plus a user-selectable duration (minutes, up to 24 hours).
-  - Intended for manual approval only.
+### Matrix
+If you want strict cluster batching.
+- Use when: you have defined clusters (A–E) and want any member to pull the whole cluster.
+- Expect: when **any zone in cluster A calls**, all of cluster A is brought online until the original caller reaches its setpoint and min-run is satisfied.
+- Example: you want Z3, Z7, Z9 to run together because the combined loop length is efficient. Put them in Cluster A.
 
-### Near-Call Detection
-- Near-call detection: delta within `(cold_tolerance - near_call_margin)` and `< cold_tolerance`. Near-call margin is adjustable.
+### Profile
+If you want to respect existing broadcast setpoints, but still allow dispatcher optimization.
+- Use when: you want the current broadcast setpoints to drive calls, but still want guardrails, approvals, and optional opportunistic adds.
+- Expect: the dispatcher does **not** impose cluster relationships; it only reacts to which zones are calling and can add near-call zones if the opportunistic toggle is on.
+- Example: you are running floor-by-floor setpoints and want dispatcher safety and opportunistic efficiency, without forcing clusters.
 
-## Validation Snapshot (February 6, 2026)
-- Guardrail sensor computes correctly and emits non-idle output when a zone is calling.
-- Opportunistic skip is enforced when total length is below 50 ft.
-- Opportunistic add is applied when near-call zones bring the batch into the 50–70 ft range (example: Z1 + Z7 = 61 ft).
+### Opportunistic Toggle (Applies to Matrix or Profile)
+If you want near-call zones added when it improves efficiency and stays within guardrails.
+- Use when: you are comfortable adding near-call zones to an existing batch.
+- Expect: dispatcher adds near-call zones **only if** guardrails allow it (length caps, min run, manual override rules).
+
+## How Batch Behavior Works
+### Start
+- A batch begins when one or more **real thermostats** call for heat.
+- In Matrix: base batch = calling zones + all zones in their cluster(s).
+- In Profile: base batch = calling zones only (no cluster expansion).
+- Opportunistic: near-call zones may be added if enabled and guardrails allow.
+
+### Baseline and Override Setpoints
+- At batch start, dispatcher captures **baseline setpoints** for all zones in the batch.
+- Added zones (matrix followers or opportunistic adds) have their setpoints temporarily raised above current temperature to force a call.
+- Non-batch zones are never modified.
+
+### Stop
+- Stop condition: the **original caller** reaches its desired setpoint **and** min-run is satisfied.
+- Dispatcher restores all batch zones to their captured baselines.
+- User edits to thermostat setpoints while dispatcher is ON are treated as new baselines immediately.
+
+## Guardrails and Controls
+All controls are in Dispatcher Ops:
+- Min run time (default 10 min).
+- Hard cap: max batch length (default 85 ft).
+- Ideal range (default 55–75 ft), informational.
+- Opportunistic range (default 50–70 ft).
+- Manual caps override toggle + duration (minutes, up to 24 hours).
+- Force-call parameters (delta and cap) for added zones.
+
+### Suggested Batch + Guardrail Attributes
+- `sensor.hc_dispatch_suggested_batch` is the operator-facing summary.
+- Attributes include:
+  - `base_zones` and `final_zones`
+  - `batch_length_ft`, `base_length_ft`, `callers_length_ft`
+  - guardrail status and cap values
+  - opportunistic enabled and limits
+
+## Example Scenarios
+### Example 1: Matrix Efficiency
+You want basement zones to always run together for stable boiler load.
+- Broadcast setpoints already target each basement zone.
+- Set Z3, Z7, Z9 to Cluster A.
+- Dispatcher mode: Matrix. Opportunistic: off.
+- Result: any call from Z3/Z7/Z9 pulls all three until the original caller satisfies.
+
+### Example 2: Profile with Opportunistic
+You want floor setpoints to drive calls, but want near-call adds to smooth load.
+- Broadcast sets floor setpoints.
+- Dispatcher mode: Profile. Opportunistic: on.
+- Result: only calling zones run, but near-call zones can join if guardrails allow.
+
+### Example 3: Manual Caps Override
+You want to allow a large batch temporarily.
+- Enable manual caps override and set duration to 60 minutes.
+- Dispatcher allows cap violations during that window.
+- After expiration, cap is enforced again.
 
 ## Home Assistant Constraints and Learnings
-- Sensor state length is limited (255 chars). Longer template output becomes `unknown`. Use compact payloads or attributes for structured data.
-- Template sensors only update when referenced entities change. Avoid relying on derived template sensors for core logic unless dependencies are explicit.
-- Complex logic is more reliable when broken into small, inspectable sensors with clear inputs and outputs.
-- When troubleshooting template output, use the Template editor or `/api/template` to validate results and limits.
-- YAML indentation errors are easy to introduce in large template blocks; keep template blocks tightly indented and avoid nested YAML structures.
+- Template sensor outputs are limited to 255 chars. Put structured data in attributes.
+- Template sensors only update when referenced entities change; keep dependencies explicit.
+- Large template logic is fragile. Prefer multiple small, inspectable sensors.
+- Re-applying helper packages can reset cluster assignments; keep a record of desired cluster state.
 
-## Gaps Between POC and Canonical
-From the POC vs canonical comparison, the key gaps are:
-- POC-only packages not yet in production.
-- Canonical-only packages not represented in POC.
-- `hc_dispatcher_advisory.yaml` differs between POC and production.
-- POC-only dashboard `hc_zone_setup.yaml` is not yet in production.
-
-See `inventories/poc_compare_report.md` for the exact file-level diff.
-
-## Recommended Next Steps
-1. Run dispatcher actuation tests in prod-safe mode using `docs/TEST_CHECKLIST.md`.
-2. Confirm operator defaults for guardrails and near-call margin in Dispatcher Ops.
-3. Update inventory artifacts and tag a release after validation passes.
-
-## Notes
-This repo is the canonical HVAC configuration and will be used to implement the long-term control strategy. The POC repo remains the reference for intended capabilities and next-step design decisions.
-
-### Staging Constraints
+## Staging Constraints
 - Home Assistant does not tolerate two instances controlling the same systems in parallel.
-- The Hubitat-backed infrastructure can post state updates to only one Home Assistant IP at a time.
-- Any staging validation must ensure prod is isolated or the Hubitat target is switched, otherwise entity states and control signals will conflict.
+- Hubitat can post state updates to only one Home Assistant IP at a time.
+- Any staging validation must ensure prod is isolated or Hubitat is switched, otherwise entity states and control signals will conflict.

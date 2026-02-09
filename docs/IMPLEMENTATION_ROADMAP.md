@@ -8,58 +8,54 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - POC vs canonical diff: `inventories/poc_compare_report.md`
 - HVAC inventory: `inventories/hvac_entity_inventory.csv`
 
-## Current Status (February 6, 2026)
-- Dispatcher V2 helpers, advisory logic, and guardrail logic are in production.
-- Actuator uses setpoint-based control with baseline restore.
+## Current Status (As Of Feb 2026)
+- Dispatcher V2 helpers, advisory logic, guardrails, and actuator are implemented.
+- Manual caps override duration, min-run enforcement, and force-call logic are implemented.
 - Dispatcher Ops and Zone Setup dashboards are updated.
-- Guardrail validation has been completed for opportunistic skip and add.
-- Actuation validation is blocked: added zones are not reliably forced to call when their nominal thermostat setpoint would not call.
-- Debug helpers `input_text.hc_dispatch_last_apply_debug` and `input_text.hc_dispatch_loop_marker` are available for actuator visibility.
+- Test scripts exist for matrix, opportunistic, and stop behavior.
+- Open work: verify end-to-end stop/restore behavior across modes and edge cases.
 
-## Current Blocker (Actuation)
-- The missing behavior is **forced-call induction** for batch additions.
-- Baseline capture exists, but the actuator does not reliably raise added-zone setpoints above current temperature.
-- Without forced override, Matrix/Profile/Opportunistic adds often do not call.
-
-## Target Operating Model (Behavior to Implement)
-- At batch start, capture baseline setpoints for all batch zones.
-- For added zones, temporarily raise setpoints above current temperature to ensure a call.
-- Stop when the original calling zone reaches its desired setpoint and min-run has elapsed.
-- Restore baseline setpoints for all batch zones.
-- Do not read or write baselines for non-batch zones (avoid circular control loops).
-- Profile lock should respect the opportunistic toggle (adds only when enabled).
-- Manual caps override allows temporary cap violations for Matrix/Opportunistic with a user-selectable duration.
+## Target Operating Model (Behavior)
+- Batch starts when one or more real thermostats call.
+- Matrix expands to cluster members; Profile does not.
+- Opportunistic adds near-call zones when enabled and within guardrails.
+- Baselines captured at batch start for all batch zones; non-batch zones are untouched.
+- Added zones receive forced setpoints above current temp to induce calls.
+- Stop when original caller hits its setpoint and min-run has elapsed.
+- Restore baselines to all batch zones.
+- Caller setpoint changes during batch are accepted as new baseline.
 
 ## Phase 1: Baseline Safety and Naming Alignment
-1. Confirm dispatcher is gated by `input_boolean.hc_dispatcher_mode_enabled` in `packages/hc_dispatcher_inputs.yaml` and keep it off by default until validation is complete.
+1. Confirm dispatcher gate (`input_boolean.hc_dispatcher_mode_enabled`) is OFF by default until validation passes.
 2. Verify core HVAC operation remains unchanged with dispatcher disabled.
-3. Review existing helper names in `packages/hc_dispatcher_inputs.yaml` and `packages/hc_dispatcher_broadcast_follow.yaml` and define the canonical naming scheme for dispatcher entities.
-4. Apply naming changes consistently across dispatcher packages to avoid ambiguity before introducing new POC helpers.
+3. Align helper naming across dispatcher packages and dashboards.
 
-## Phase 2: Introduce POC Helpers and Cluster Stats
-1. Add POC helper packages to canonical config:
-   - `packages/hc_dispatcher_v2_helpers.yaml`
-   - `packages/hc_dispatcher_v2_zone_lengths.yaml`
-   - `packages/hc_dispatcher_v2_cluster_stats.yaml`
-2. Validate that new helpers do not collide with existing entities and appear in the inventory.
+## Phase 2: Helpers and Guardrails
+1. Add V2 helpers, guardrail controls, and manual caps override duration.
+2. Validate that new helpers do not collide with existing entities.
 
-## Phase 3: Advisory Logic Reconciliation
-1. Merge POC dispatcher advisory logic into `packages/hc_dispatcher_advisory.yaml` after aligning naming.
-2. Validate advisory output against existing dispatcher inputs and cold tolerance gating (`packages/hc_cold_tolerance_gate.yaml`).
+## Phase 3: Advisory Logic
+1. Merge POC advisory logic and confirm guardrail outputs.
+2. Validate near-call detection and guardrail statuses.
 
 ## Phase 4: Actuator Integration
-1. Add actuator automation from `packages/hc_dispatcher_actuator.yaml` with explicit gating:
-   - Must respect `input_boolean.hc_dispatcher_mode_enabled`.
-   - Must respect cold tolerance and system control constraints.
-2. Confirm actuator does not run in auto mode unless explicitly enabled.
-3. Implement forced-call setpoint overrides for added zones (configurable delta and cap).
-4. Add manual caps override duration logic and UI controls.
+1. Enforce gating by dispatcher master switch.
+2. Implement force-call overrides for added zones (delta and cap).
+3. Enforce min-run time before restore.
+4. Freeze caller set during batch to avoid forced zones extending the batch.
+5. Accept caller setpoint changes during batch (baseline updates).
 
-## Phase 5: Dashboard and Operator Workflow
-1. Add the POC dashboard to `lovelace/hc_zone_setup.yaml` and register it in `configuration.yaml` if needed.
-2. Update operator notes and usage instructions for the new dashboard and dispatcher controls.
+## Phase 5: Dashboards and Operator Workflow
+1. Update Dispatcher Ops with all guardrail controls and force parameters.
+2. Update Zone Setup dashboard for cluster assignment and loop lengths.
+3. Add operator guidance in `docs/HYDRONIC_TESTING.md`.
 
-## Phase 6: Release and Test Workflow
-1. Use `docs/TEST_CHECKLIST.md` for validation.
-2. Document a minimal “safe mode” procedure for prod-only testing when staging is unavailable.
-3. Tag releases after successful prod validation.
+## Phase 6: Validation and Release
+1. Run `docs/HYDRONIC_TESTING.md` stepwise tests.
+2. Complete `docs/TEST_CHECKLIST.md`.
+3. Update inventories and tag a release.
+
+## Blockers and Risks
+- Cluster assignments may be reset when helper packages are reloaded; ensure cluster state is explicitly restored in tests.
+- Caller baseline updates must be honored to avoid the dispatcher re-starting a finished batch.
+- Profile/opportunistic edge cases must be validated separately after matrix stop/restore is confirmed.
