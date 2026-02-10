@@ -1,0 +1,502 @@
+# packages/hc_dispatcher_registry.yaml
+# Dispatcher Registry (v0.1)
+# Helpers only; no actuation logic.
+
+input_boolean:
+  hc_dispatch_reg_enabled:
+    name: HC Dispatch Registry Enabled
+    icon: mdi:database
+    initial: off
+  hc_dispatch_reg_z1_calling:
+    name: "HC Dispatch Z1 Calling (First Floor Bedroom & Bath)"
+    icon: mdi:fire
+  hc_dispatch_reg_z1_batch_member:
+    name: "HC Dispatch Z1 Batch Member (First Floor Bedroom & Bath)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z1_batch_added:
+    name: "HC Dispatch Z1 Batch Added (First Floor Bedroom & Bath)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z2_calling:
+    name: "HC Dispatch Z2 Calling (Office & Upper Guest)"
+    icon: mdi:fire
+  hc_dispatch_reg_z2_batch_member:
+    name: "HC Dispatch Z2 Batch Member (Office & Upper Guest)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z2_batch_added:
+    name: "HC Dispatch Z2 Batch Added (Office & Upper Guest)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z3_calling:
+    name: "HC Dispatch Z3 Calling (Basement Bath & Common)"
+    icon: mdi:fire
+  hc_dispatch_reg_z3_batch_member:
+    name: "HC Dispatch Z3 Batch Member (Basement Bath & Common)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z3_batch_added:
+    name: "HC Dispatch Z3 Batch Added (Basement Bath & Common)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z4_calling:
+    name: "HC Dispatch Z4 Calling (Garage)"
+    icon: mdi:fire
+  hc_dispatch_reg_z4_batch_member:
+    name: "HC Dispatch Z4 Batch Member (Garage)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z4_batch_added:
+    name: "HC Dispatch Z4 Batch Added (Garage)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z5_calling:
+    name: "HC Dispatch Z5 Calling (First Floor Living)"
+    icon: mdi:fire
+  hc_dispatch_reg_z5_batch_member:
+    name: "HC Dispatch Z5 Batch Member (First Floor Living)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z5_batch_added:
+    name: "HC Dispatch Z5 Batch Added (First Floor Living)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z6_calling:
+    name: "HC Dispatch Z6 Calling (Master)"
+    icon: mdi:fire
+  hc_dispatch_reg_z6_batch_member:
+    name: "HC Dispatch Z6 Batch Member (Master)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z6_batch_added:
+    name: "HC Dispatch Z6 Batch Added (Master)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z7_calling:
+    name: "HC Dispatch Z7 Calling (Basement Bar & TV South)"
+    icon: mdi:fire
+  hc_dispatch_reg_z7_batch_member:
+    name: "HC Dispatch Z7 Batch Member (Basement Bar & TV South)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z7_batch_added:
+    name: "HC Dispatch Z7 Batch Added (Basement Bar & TV South)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z8_calling:
+    name: "HC Dispatch Z8 Calling (Dining Room)"
+    icon: mdi:fire
+  hc_dispatch_reg_z8_batch_member:
+    name: "HC Dispatch Z8 Batch Member (Dining Room)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z8_batch_added:
+    name: "HC Dispatch Z8 Batch Added (Dining Room)"
+    icon: mdi:vector-combine
+  hc_dispatch_reg_z9_calling:
+    name: "HC Dispatch Z9 Calling (Basement Bedroom)"
+    icon: mdi:fire
+  hc_dispatch_reg_z9_batch_member:
+    name: "HC Dispatch Z9 Batch Member (Basement Bedroom)"
+    icon: mdi:vector-link
+  hc_dispatch_reg_z9_batch_added:
+    name: "HC Dispatch Z9 Batch Added (Basement Bedroom)"
+    icon: mdi:vector-combine
+
+input_select:
+  hc_dispatch_reg_state:
+    name: HC Dispatch Registry State
+    options: [idle, evaluating, batch_active, cooldown]
+    initial: idle
+  hc_dispatch_reg_active_mode:
+    name: HC Dispatch Registry Active Mode
+    options: [Matrix, Profile]
+    initial: Matrix
+  hc_dispatch_reg_manual_change_type:
+    name: HC Dispatch Registry Manual Change Type
+    options: [thermostat_setpoint, cluster_change, guardrail_change, toggle_change, other]
+    initial: other
+
+input_number:
+  hc_dispatch_reg_cooldown_minutes:
+    name: HC Dispatch Registry Cooldown (min)
+    min: 1
+    max: 60
+    step: 1
+    mode: box
+    unit_of_measurement: min
+    icon: mdi:timer-off
+    initial: 5
+  hc_dispatch_reg_active_length_ft:
+    name: HC Dispatch Registry Active Length
+    min: 0
+    max: 300
+    step: 1
+    mode: box
+    unit_of_measurement: ft
+    icon: mdi:ruler
+    initial: 0
+  hc_dispatch_reg_z1_user_baseline_f:
+    name: "HC Dispatch Z1 User Baseline (First Floor Bedroom & Bath)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z1_system_override_f:
+    name: "HC Dispatch Z1 System Override (First Floor Bedroom & Bath)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z1_effective_setpoint_f:
+    name: "HC Dispatch Z1 Effective Setpoint (First Floor Bedroom & Bath)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z1_last_user_setpoint_f:
+    name: "HC Dispatch Z1 Last User Setpoint (First Floor Bedroom & Bath)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z2_user_baseline_f:
+    name: "HC Dispatch Z2 User Baseline (Office & Upper Guest)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z2_system_override_f:
+    name: "HC Dispatch Z2 System Override (Office & Upper Guest)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z2_effective_setpoint_f:
+    name: "HC Dispatch Z2 Effective Setpoint (Office & Upper Guest)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z2_last_user_setpoint_f:
+    name: "HC Dispatch Z2 Last User Setpoint (Office & Upper Guest)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z3_user_baseline_f:
+    name: "HC Dispatch Z3 User Baseline (Basement Bath & Common)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z3_system_override_f:
+    name: "HC Dispatch Z3 System Override (Basement Bath & Common)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z3_effective_setpoint_f:
+    name: "HC Dispatch Z3 Effective Setpoint (Basement Bath & Common)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z3_last_user_setpoint_f:
+    name: "HC Dispatch Z3 Last User Setpoint (Basement Bath & Common)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z4_user_baseline_f:
+    name: "HC Dispatch Z4 User Baseline (Garage)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z4_system_override_f:
+    name: "HC Dispatch Z4 System Override (Garage)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z4_effective_setpoint_f:
+    name: "HC Dispatch Z4 Effective Setpoint (Garage)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z4_last_user_setpoint_f:
+    name: "HC Dispatch Z4 Last User Setpoint (Garage)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z5_user_baseline_f:
+    name: "HC Dispatch Z5 User Baseline (First Floor Living)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z5_system_override_f:
+    name: "HC Dispatch Z5 System Override (First Floor Living)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z5_effective_setpoint_f:
+    name: "HC Dispatch Z5 Effective Setpoint (First Floor Living)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z5_last_user_setpoint_f:
+    name: "HC Dispatch Z5 Last User Setpoint (First Floor Living)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z6_user_baseline_f:
+    name: "HC Dispatch Z6 User Baseline (Master)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z6_system_override_f:
+    name: "HC Dispatch Z6 System Override (Master)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z6_effective_setpoint_f:
+    name: "HC Dispatch Z6 Effective Setpoint (Master)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z6_last_user_setpoint_f:
+    name: "HC Dispatch Z6 Last User Setpoint (Master)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z7_user_baseline_f:
+    name: "HC Dispatch Z7 User Baseline (Basement Bar & TV South)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z7_system_override_f:
+    name: "HC Dispatch Z7 System Override (Basement Bar & TV South)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z7_effective_setpoint_f:
+    name: "HC Dispatch Z7 Effective Setpoint (Basement Bar & TV South)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z7_last_user_setpoint_f:
+    name: "HC Dispatch Z7 Last User Setpoint (Basement Bar & TV South)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z8_user_baseline_f:
+    name: "HC Dispatch Z8 User Baseline (Dining Room)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z8_system_override_f:
+    name: "HC Dispatch Z8 System Override (Dining Room)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z8_effective_setpoint_f:
+    name: "HC Dispatch Z8 Effective Setpoint (Dining Room)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z8_last_user_setpoint_f:
+    name: "HC Dispatch Z8 Last User Setpoint (Dining Room)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+  hc_dispatch_reg_z9_user_baseline_f:
+    name: "HC Dispatch Z9 User Baseline (Basement Bedroom)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z9_system_override_f:
+    name: "HC Dispatch Z9 System Override (Basement Bedroom)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-alert
+  hc_dispatch_reg_z9_effective_setpoint_f:
+    name: "HC Dispatch Z9 Effective Setpoint (Basement Bedroom)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer
+  hc_dispatch_reg_z9_last_user_setpoint_f:
+    name: "HC Dispatch Z9 Last User Setpoint (Basement Bedroom)"
+    min: 0
+    max: 90
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°F"
+    icon: mdi:thermometer-check
+
+input_text:
+  hc_dispatch_reg_active_batch_id:
+    name: HC Dispatch Registry Active Batch ID
+    max: 255
+  hc_dispatch_reg_active_zones:
+    name: HC Dispatch Registry Active Zones
+    max: 255
+  hc_dispatch_reg_active_callers:
+    name: HC Dispatch Registry Active Callers
+    max: 255
+  hc_dispatch_reg_guardrail_status:
+    name: HC Dispatch Registry Guardrail Status
+    max: 255
+  hc_dispatch_reg_manual_change_entity:
+    name: HC Dispatch Registry Manual Change Entity
+    max: 255
+  hc_dispatch_reg_version:
+    name: HC Dispatch Registry Version
+    max: 64
+    initial: v0.1
+  hc_dispatch_reg_z1_entities:
+    name: "HC Dispatch Z1 Entities (First Floor Bedroom & Bath)"
+    max: 255
+    initial: "climate=climate.z1_first_floor_bedroom_and_bath,temp=sensor.1f_fr_n_t_fp3001_temperature,switch=switch.z1"
+  hc_dispatch_reg_z2_entities:
+    name: "HC Dispatch Z2 Entities (Office & Upper Guest)"
+    max: 255
+    initial: "climate=climate.zone_2_second_floor_office_and_upper_guest,temp=sensor.2nd_floor_office_temperature_temperature,switch=switch.z2"
+  hc_dispatch_reg_z3_entities:
+    name: "HC Dispatch Z3 Entities (Basement Bath & Common)"
+    max: 255
+    initial: "climate=climate.zone_3_basement_bath_and_common,temp=sensor.basement_bath_and_utility_temperature,switch=switch.z3"
+  hc_dispatch_reg_z4_entities:
+    name: "HC Dispatch Z4 Entities (Garage)"
+    max: 255
+    initial: "climate=climate.zone_4_garage,temp=sensor.new_garage_motion_sensor_temperature,switch=switch.z4"
+  hc_dispatch_reg_z5_entities:
+    name: "HC Dispatch Z5 Entities (First Floor Living)"
+    max: 255
+    initial: "climate=climate.zone_5_virtual_thermostat_first_floor_living,temp=sensor.1f_gr_s_z_temperature,switch=switch.z5"
+  hc_dispatch_reg_z6_entities:
+    name: "HC Dispatch Z6 Entities (Master)"
+    max: 255
+    initial: "climate=climate.zone_6_master_thermostat,temp=sensor.2f_mb_c_z_temperature,switch=switch.z6"
+  hc_dispatch_reg_z7_entities:
+    name: "HC Dispatch Z7 Entities (Basement Bar & TV South)"
+    max: 255
+    initial: "climate=climate.zone_7_basement_bar_and_tv_room_south_side,temp=sensor.b1_tv_c_z_temperature,switch=switch.z7"
+  hc_dispatch_reg_z8_entities:
+    name: "HC Dispatch Z8 Entities (Dining Room)"
+    max: 255
+    initial: "climate=climate.zone_8_dining_room,temp=sensor.dining_temp_temperature,switch=switch.z8"
+  hc_dispatch_reg_z9_entities:
+    name: "HC Dispatch Z9 Entities (Basement Bedroom)"
+    max: 255
+    initial: "climate=climate.zone_9_basement_bedroom,temp=sensor.b1_bguestroom_temperature,switch=switch.z9"
+
+input_datetime:
+  hc_dispatch_reg_cooldown_until: { name: "HC Dispatch Registry Cooldown Until", has_date: true, has_time: true }
+  hc_dispatch_reg_active_started_at: { name: "HC Dispatch Registry Active Started", has_date: true, has_time: true }
+  hc_dispatch_reg_manual_change_at: { name: "HC Dispatch Registry Manual Change At", has_date: true, has_time: true }
+  hc_dispatch_reg_z1_last_on: { name: "HC Dispatch Z1 Last On (First Floor Bedroom & Bath)", has_date: true, has_time: true }
+  hc_dispatch_reg_z1_last_off: { name: "HC Dispatch Z1 Last Off (First Floor Bedroom & Bath)", has_date: true, has_time: true }
+  hc_dispatch_reg_z1_last_user_change: { name: "HC Dispatch Z1 Last User Change (First Floor Bedroom & Bath)", has_date: true, has_time: true }
+  hc_dispatch_reg_z2_last_on: { name: "HC Dispatch Z2 Last On (Office & Upper Guest)", has_date: true, has_time: true }
+  hc_dispatch_reg_z2_last_off: { name: "HC Dispatch Z2 Last Off (Office & Upper Guest)", has_date: true, has_time: true }
+  hc_dispatch_reg_z2_last_user_change: { name: "HC Dispatch Z2 Last User Change (Office & Upper Guest)", has_date: true, has_time: true }
+  hc_dispatch_reg_z3_last_on: { name: "HC Dispatch Z3 Last On (Basement Bath & Common)", has_date: true, has_time: true }
+  hc_dispatch_reg_z3_last_off: { name: "HC Dispatch Z3 Last Off (Basement Bath & Common)", has_date: true, has_time: true }
+  hc_dispatch_reg_z3_last_user_change: { name: "HC Dispatch Z3 Last User Change (Basement Bath & Common)", has_date: true, has_time: true }
+  hc_dispatch_reg_z4_last_on: { name: "HC Dispatch Z4 Last On (Garage)", has_date: true, has_time: true }
+  hc_dispatch_reg_z4_last_off: { name: "HC Dispatch Z4 Last Off (Garage)", has_date: true, has_time: true }
+  hc_dispatch_reg_z4_last_user_change: { name: "HC Dispatch Z4 Last User Change (Garage)", has_date: true, has_time: true }
+  hc_dispatch_reg_z5_last_on: { name: "HC Dispatch Z5 Last On (First Floor Living)", has_date: true, has_time: true }
+  hc_dispatch_reg_z5_last_off: { name: "HC Dispatch Z5 Last Off (First Floor Living)", has_date: true, has_time: true }
+  hc_dispatch_reg_z5_last_user_change: { name: "HC Dispatch Z5 Last User Change (First Floor Living)", has_date: true, has_time: true }
+  hc_dispatch_reg_z6_last_on: { name: "HC Dispatch Z6 Last On (Master)", has_date: true, has_time: true }
+  hc_dispatch_reg_z6_last_off: { name: "HC Dispatch Z6 Last Off (Master)", has_date: true, has_time: true }
+  hc_dispatch_reg_z6_last_user_change: { name: "HC Dispatch Z6 Last User Change (Master)", has_date: true, has_time: true }
+  hc_dispatch_reg_z7_last_on: { name: "HC Dispatch Z7 Last On (Basement Bar & TV South)", has_date: true, has_time: true }
+  hc_dispatch_reg_z7_last_off: { name: "HC Dispatch Z7 Last Off (Basement Bar & TV South)", has_date: true, has_time: true }
+  hc_dispatch_reg_z7_last_user_change: { name: "HC Dispatch Z7 Last User Change (Basement Bar & TV South)", has_date: true, has_time: true }
+  hc_dispatch_reg_z8_last_on: { name: "HC Dispatch Z8 Last On (Dining Room)", has_date: true, has_time: true }
+  hc_dispatch_reg_z8_last_off: { name: "HC Dispatch Z8 Last Off (Dining Room)", has_date: true, has_time: true }
+  hc_dispatch_reg_z8_last_user_change: { name: "HC Dispatch Z8 Last User Change (Dining Room)", has_date: true, has_time: true }
+  hc_dispatch_reg_z9_last_on: { name: "HC Dispatch Z9 Last On (Basement Bedroom)", has_date: true, has_time: true }
+  hc_dispatch_reg_z9_last_off: { name: "HC Dispatch Z9 Last Off (Basement Bedroom)", has_date: true, has_time: true }
+  hc_dispatch_reg_z9_last_user_change: { name: "HC Dispatch Z9 Last User Change (Basement Bedroom)", has_date: true, has_time: true }
+

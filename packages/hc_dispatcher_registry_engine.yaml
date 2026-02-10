@@ -1,0 +1,192 @@
+# packages/hc_dispatcher_registry_engine.yaml
+# Dispatcher Registry Engine (v0.1)
+# Scaffolding only: tracks live state into registry helpers.
+
+automation:
+  - id: hc_dispatch_reg_sync_calling
+    alias: "HC Dispatch Registry - Sync Calling"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.hc_z1_call_for_heat
+          - binary_sensor.hc_z2_call_for_heat
+          - binary_sensor.hc_z3_call_for_heat
+          - binary_sensor.hc_z4_call_for_heat
+          - binary_sensor.hc_z5_call_for_heat
+          - binary_sensor.hc_z6_call_for_heat
+          - binary_sensor.hc_z7_call_for_heat
+          - binary_sensor.hc_z8_call_for_heat
+          - binary_sensor.hc_z9_call_for_heat
+    action:
+      - variables:
+          z: "{{ trigger.entity_id.split('.')[1].split('_')[1] }}"
+          is_on: "{{ trigger.to_state.state == 'on' }}"
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          calling_entity: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_calling' }}"
+          last_on_entity: "{{ 'input_datetime.hc_dispatch_reg_' ~ z ~ '_last_on' }}"
+          last_off_entity: "{{ 'input_datetime.hc_dispatch_reg_' ~ z ~ '_last_off' }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ is_on }}"
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: "{{ calling_entity }}"
+              - service: input_datetime.set_datetime
+                target:
+                  entity_id: "{{ last_on_entity }}"
+                data:
+                  datetime: "{{ now_str }}"
+          - conditions:
+              - condition: template
+                value_template: "{{ not is_on }}"
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: "{{ calling_entity }}"
+              - service: input_datetime.set_datetime
+                target:
+                  entity_id: "{{ last_off_entity }}"
+                data:
+                  datetime: "{{ now_str }}"
+
+  - id: hc_dispatch_reg_sync_effective_setpoint
+    alias: "HC Dispatch Registry - Sync Effective Setpoint"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - climate.z1_first_floor_bedroom_and_bath
+          - climate.zone_2_second_floor_office_and_upper_guest
+          - climate.zone_3_basement_bath_and_common
+          - climate.zone_4_garage
+          - climate.zone_5_virtual_thermostat_first_floor_living
+          - climate.zone_6_master_thermostat
+          - climate.zone_7_basement_bar_and_tv_room_south_side
+          - climate.zone_8_dining_room
+          - climate.zone_9_basement_bedroom
+        attribute: temperature
+    action:
+      - variables:
+          climate_map:
+            climate.z1_first_floor_bedroom_and_bath: z1
+            climate.zone_2_second_floor_office_and_upper_guest: z2
+            climate.zone_3_basement_bath_and_common: z3
+            climate.zone_4_garage: z4
+            climate.zone_5_virtual_thermostat_first_floor_living: z5
+            climate.zone_6_master_thermostat: z6
+            climate.zone_7_basement_bar_and_tv_room_south_side: z7
+            climate.zone_8_dining_room: z8
+            climate.zone_9_basement_bedroom: z9
+          z: "{{ climate_map.get(trigger.entity_id) }}"
+          new_temp: "{{ state_attr(trigger.entity_id, 'temperature')|float(0) }}"
+          manual_change: "{{ trigger.to_state.context.user_id is not none }}"
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+      - condition: template
+        value_template: "{{ z is not none and new_temp > 0 }}"
+      - service: input_number.set_value
+        target:
+          entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_effective_setpoint_f' }}"
+        data:
+          value: "{{ new_temp }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ manual_change }}"
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_last_user_setpoint_f' }}"
+                data:
+                  value: "{{ new_temp }}"
+              - service: input_datetime.set_datetime
+                target:
+                  entity_id: "{{ 'input_datetime.hc_dispatch_reg_' ~ z ~ '_last_user_change' }}"
+                data:
+                  datetime: "{{ now_str }}"
+              - service: input_datetime.set_datetime
+                target:
+                  entity_id: input_datetime.hc_dispatch_reg_manual_change_at
+                data:
+                  datetime: "{{ now_str }}"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_reg_manual_change_entity
+                data:
+                  value: "{{ trigger.entity_id }}"
+              - service: input_select.select_option
+                target:
+                  entity_id: input_select.hc_dispatch_reg_manual_change_type
+                data:
+                  option: thermostat_setpoint
+
+  - id: hc_dispatch_reg_track_config_changes
+    alias: "HC Dispatch Registry - Track Config Changes"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.hc_dispatch_algorithm
+          - input_select.hc_dispatch_profile
+          - input_boolean.hc_dispatch_opportunistic_enabled
+          - input_boolean.hc_dispatcher_mode_enabled
+          - input_number.hc_dispatch_max_batch_length_ft
+          - input_number.hc_dispatch_opportunistic_min_ft
+          - input_number.hc_dispatch_opportunistic_max_ft
+          - input_number.hc_dispatch_min_run_minutes
+          - input_number.hc_dispatch_force_delta_f
+          - input_number.hc_dispatch_force_cap_f
+          - input_number.hc_dispatch_ideal_min_ft
+          - input_number.hc_dispatch_ideal_max_ft
+          - input_number.hc_dispatch_batch_window_sec
+          - input_select.hc_z1_cluster
+          - input_select.hc_z2_cluster
+          - input_select.hc_z3_cluster
+          - input_select.hc_z4_cluster
+          - input_select.hc_z5_cluster
+          - input_select.hc_z6_cluster
+          - input_select.hc_z7_cluster
+          - input_select.hc_z8_cluster
+          - input_select.hc_z9_cluster
+          - input_number.hc_z1_length_feet
+          - input_number.hc_z2_length_feet
+          - input_number.hc_z3_length_feet
+          - input_number.hc_z4_length_feet
+          - input_number.hc_z5_length_feet
+          - input_number.hc_z6_length_feet
+          - input_number.hc_z7_length_feet
+          - input_number.hc_z8_length_feet
+          - input_number.hc_z9_length_feet
+    action:
+      - variables:
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          eid: "{{ trigger.entity_id }}"
+          change_type: >
+            {% if eid.startswith('input_select.hc_z') and eid.endswith('_cluster') %}
+              cluster_change
+            {% elif eid.startswith('input_number.hc_z') and eid.endswith('_length_feet') %}
+              guardrail_change
+            {% elif eid == 'input_boolean.hc_dispatcher_mode_enabled' %}
+              toggle_change
+            {% elif eid.startswith('input_number.hc_dispatch_') or eid.startswith('input_boolean.hc_dispatch_') or eid.startswith('input_select.hc_dispatch_') %}
+              guardrail_change
+            {% else %}
+              other
+            {% endif %}
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.hc_dispatch_reg_manual_change_at
+        data:
+          datetime: "{{ now_str }}"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_manual_change_entity
+        data:
+          value: "{{ eid }}"
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.hc_dispatch_reg_manual_change_type
+        data:
+          option: "{{ change_type }}"
