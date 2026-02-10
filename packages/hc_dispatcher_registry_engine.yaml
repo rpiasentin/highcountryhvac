@@ -82,7 +82,10 @@ automation:
             climate.zone_9_basement_bedroom: z9
           z: "{{ climate_map.get(trigger.entity_id) }}"
           new_temp: "{{ state_attr(trigger.entity_id, 'temperature')|float(0) }}"
-          manual_change: "{{ trigger.to_state.context.user_id is not none }}"
+          reg_state: "{{ states('input_select.hc_dispatch_reg_state') }}"
+          manual_change: >
+            {{ trigger.to_state.context.user_id is not none
+               or trigger.to_state.context.parent_id is none }}
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
       - condition: template
         value_template: "{{ z is not none and new_temp > 0 }}"
@@ -96,6 +99,11 @@ automation:
               - condition: template
                 value_template: "{{ manual_change }}"
             sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f' }}"
+                data:
+                  value: "{{ new_temp }}"
               - service: input_number.set_value
                 target:
                   entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_last_user_setpoint_f' }}"
@@ -121,6 +129,15 @@ automation:
                   entity_id: input_select.hc_dispatch_reg_manual_change_type
                 data:
                   option: thermostat_setpoint
+          - conditions:
+              - condition: template
+                value_template: "{{ reg_state != 'batch_active' and not manual_change }}"
+            sequence:
+              - service: input_number.set_value
+                target:
+                  entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f' }}"
+                data:
+                  value: "{{ new_temp }}"
 
   - id: hc_dispatch_reg_track_config_changes
     alias: "HC Dispatch Registry - Track Config Changes"
@@ -141,6 +158,11 @@ automation:
           - input_number.hc_dispatch_ideal_min_ft
           - input_number.hc_dispatch_ideal_max_ft
           - input_number.hc_dispatch_batch_window_sec
+          - input_number.hc_setpoint_master
+          - input_number.hc_setpoint_basement
+          - input_number.hc_setpoint_first_floor
+          - input_number.hc_setpoint_upper_floor
+          - input_number.hc_setpoint_garage
           - input_select.hc_z1_cluster
           - input_select.hc_z2_cluster
           - input_select.hc_z3_cluster
@@ -163,6 +185,9 @@ automation:
       - variables:
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
           eid: "{{ trigger.entity_id }}"
+          manual_change: >
+            {{ trigger.to_state.context.user_id is not none
+               or trigger.to_state.context.parent_id is none }}
           change_type: >
             {% if eid.startswith('input_select.hc_z') and eid.endswith('_cluster') %}
               cluster_change
@@ -170,11 +195,15 @@ automation:
               guardrail_change
             {% elif eid == 'input_boolean.hc_dispatcher_mode_enabled' %}
               toggle_change
+            {% elif eid.startswith('input_number.hc_setpoint_') %}
+              thermostat_setpoint
             {% elif eid.startswith('input_number.hc_dispatch_') or eid.startswith('input_boolean.hc_dispatch_') or eid.startswith('input_select.hc_dispatch_') %}
               guardrail_change
             {% else %}
               other
             {% endif %}
+      - condition: template
+        value_template: "{{ manual_change }}"
       - service: input_datetime.set_datetime
         target:
           entity_id: input_datetime.hc_dispatch_reg_manual_change_at

@@ -27,6 +27,10 @@ automation:
       - condition: state
         entity_id: input_boolean.hc_dispatcher_mode_enabled
         state: "on"
+      # Disable legacy actuator when registry rewrite is enabled
+      - condition: state
+        entity_id: input_boolean.hc_dispatch_reg_enabled
+        state: "off"
 
       # If triggered by sensor change, only proceed if Auto-Approve is ON
       - condition: template

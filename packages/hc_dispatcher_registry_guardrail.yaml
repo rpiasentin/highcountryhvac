@@ -1,0 +1,371 @@
+# packages/hc_dispatcher_registry_guardrail.yaml
+# Dispatcher Registry Guardrail (v0.1)
+# Computes suggested batch from registry state and guardrails.
+
+template:
+  - sensor:
+      - name: "HC Dispatch Reg Guardrail Payload"
+        unique_id: hc_dispatch_reg_guardrail_payload
+        icon: mdi:code-json
+        state: >
+          {% set invalid = ['unknown','unavailable','none',''] %}
+          {% set reg_enabled = is_state('input_boolean.hc_dispatch_reg_enabled','on') %}
+          {% set reg_state = states('input_select.hc_dispatch_reg_state') %}
+          {% set cooldown_until = states('input_datetime.hc_dispatch_reg_cooldown_until') %}
+          {% set in_cooldown = (reg_state == 'cooldown') and (cooldown_until not in invalid) and (as_timestamp(now()) < as_timestamp(cooldown_until)) %}
+
+          {% if not reg_enabled or in_cooldown %}
+            {{ {'g':'idle','bz':'none','fz':'none','bl':0,'cl':0,'fl':0,'ml':states('input_number.hc_dispatch_max_batch_length_ft')|float(85),
+                'omin':states('input_number.hc_dispatch_opportunistic_min_ft')|float(50),
+                'omax':states('input_number.hc_dispatch_opportunistic_max_ft')|float(70),
+                'a':'P','p':'N','opp':0,'man':0,'mu':cooldown_until,'bw':states('input_number.hc_dispatch_batch_window_sec')|int(180),
+                'gate':1 if is_state('input_boolean.hc_enable_cold_tolerance_gate','on') else 0,
+                'gt':states('input_number.hc_cold_tolerance')|float(0),
+                'imin':states('input_number.hc_dispatch_ideal_min_ft')|float(0),
+                'imax':states('input_number.hc_dispatch_ideal_max_ft')|float(0),
+                'callers':'none'} | tojson }}
+          {% else %}
+            {% set algorithm = states('input_select.hc_dispatch_algorithm') %}
+            {% if algorithm in invalid %}
+              {% set algorithm = 'Profile' %}
+            {% endif %}
+            {% set profile = states('input_select.hc_dispatch_profile') %}
+
+            {% set labels = {
+              'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
+              'z4':'Z4 Garage','z5':'Z5 1F Living','z6':'Z6 Master','z7':'Z7 Bsm Bar+TV',
+              'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
+            } %}
+
+            {% set lengths = {
+              'z1': states('input_number.hc_z1_length_feet')|float(0),
+              'z2': states('input_number.hc_z2_length_feet')|float(0),
+              'z3': states('input_number.hc_z3_length_feet')|float(0),
+              'z4': states('input_number.hc_z4_length_feet')|float(0),
+              'z5': states('input_number.hc_z5_length_feet')|float(0),
+              'z6': states('input_number.hc_z6_length_feet')|float(0),
+              'z7': states('input_number.hc_z7_length_feet')|float(0),
+              'z8': states('input_number.hc_z8_length_feet')|float(0),
+              'z9': states('input_number.hc_z9_length_feet')|float(0)
+            } %}
+
+            {% set max_ft = states('input_number.hc_dispatch_max_batch_length_ft')|float(85) %}
+            {% set opp_min = states('input_number.hc_dispatch_opportunistic_min_ft')|float(50) %}
+            {% set opp_max = states('input_number.hc_dispatch_opportunistic_max_ft')|float(70) %}
+            {% set opp_enabled = is_state('input_boolean.hc_dispatch_opportunistic_enabled','on') %}
+            {% set manual_override_raw = is_state('input_boolean.hc_dispatch_manual_override','on') %}
+            {% set manual_until = states('input_datetime.hc_dispatch_manual_caps_until') %}
+            {% set manual_caps_active = manual_override_raw and manual_until not in invalid and (as_timestamp(now()) < as_timestamp(manual_until)) %}
+
+            {% set tol = states('input_number.hc_cold_tolerance')|float(0) %}
+            {% set m = states('input_number.hc_dispatch_near_call_margin_f')|float(0.3) %}
+
+            {% set frozen_callers_str = states('input_text.hc_dispatch_reg_active_callers') %}
+            {% set frozen_callers = frozen_callers_str.split(',') if frozen_callers_str not in invalid else [] %}
+
+            {% set live_ns = namespace(list=[]) %}
+            {% for z in range(1,10) %}
+              {% if is_state('input_boolean.hc_dispatch_reg_z' ~ z ~ '_calling','on') %}
+                {% set live_ns.list = live_ns.list + ['z' ~ z] %}
+              {% endif %}
+            {% endfor %}
+
+            {% set callers = frozen_callers if reg_state == 'batch_active' and frozen_callers|length > 0 else live_ns.list %}
+
+            {% set near_ns = namespace(list=[]) %}
+            {% for z in range(1,10) %}
+              {% set calling = is_state('input_boolean.hc_dispatch_reg_z' ~ z ~ '_calling','on') %}
+              {% set d = states('sensor.hc_z' ~ z ~ '_delta') %}
+              {% if (not calling) and d not in invalid %}
+                {% set dv = d|float(0) %}
+                {% if dv >= (tol - m) and dv < tol %}
+                  {% set near_ns.list = near_ns.list + ['z' ~ z] %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% set near = near_ns.list %}
+
+            {% set base_zones = [] %}
+            {% set final_zones = [] %}
+            {% set guardrail = 'idle' %}
+            {% set base_length = 0 %}
+            {% set callers_length = 0 %}
+
+            {% if callers|length == 0 %}
+              {% set guardrail = 'idle' %}
+            {% elif algorithm == 'Matrix' %}
+              {% set clusters = {
+                'z1': states('input_select.hc_z1_cluster'),
+                'z2': states('input_select.hc_z2_cluster'),
+                'z3': states('input_select.hc_z3_cluster'),
+                'z4': states('input_select.hc_z4_cluster'),
+                'z5': states('input_select.hc_z5_cluster'),
+                'z6': states('input_select.hc_z6_cluster'),
+                'z7': states('input_select.hc_z7_cluster'),
+                'z8': states('input_select.hc_z8_cluster'),
+                'z9': states('input_select.hc_z9_cluster')
+              } %}
+
+              {% set ns = namespace(active_zones=callers, active_clusters=[]) %}
+              {% for z in ns.active_zones %}
+                {% set c = clusters[z] %}
+                {% if c != 'Independent' and c not in ns.active_clusters %}
+                  {% set ns.active_clusters = ns.active_clusters + [c] %}
+                {% endif %}
+              {% endfor %}
+
+              {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
+                {% if z not in ns.active_zones %}
+                  {% set c = clusters[z] %}
+                  {% if c in ns.active_clusters %}
+                    {% set ns.active_zones = ns.active_zones + [z] %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% set near_ind_ns = namespace(list=[]) %}
+              {% for z in ['z1','z2','z3','z4','z5','z6','z7','z8','z9'] %}
+                {% if z not in ns.active_zones %}
+                  {% set c = clusters[z] %}
+                  {% if c == 'Independent' %}
+                    {% set d = states('sensor.hc_' ~ z ~ '_delta') %}
+                    {% if d not in invalid %}
+                      {% set dv = d|float(0) %}
+                      {% if dv >= (tol - m) and dv < tol %}
+                        {% set near_ind_ns.list = near_ind_ns.list + [z] %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% set base_zones = ns.active_zones | unique | list %}
+              {% set near_candidates = near_ind_ns.list %}
+            {% else %}
+              {% set groups = {
+                'Basement (Z3+Z7+Z9)': ['z3','z7','z9'],
+                'First Floor (Z1+Z5+Z8)': ['z1','z5','z8'],
+                'Upper Floor (Z2+Z6)': ['z2','z6'],
+                'Whole House (Z1-Z9)': ['z1','z2','z3','z4','z5','z6','z7','z8','z9'],
+                'None': []
+              } %}
+              {% set group = groups.get(profile, []) %}
+
+              {% set base_zones = callers %}
+              {% if group|length > 0 %}
+                {% set active_in_group = callers | select('in', group) | list %}
+                {% if active_in_group|length > 0 %}
+                  {% set base_zones = group %}
+                {% elif profile == 'Whole House (Z1-Z9)' %}
+                  {% set base_zones = group %}
+                {% endif %}
+              {% endif %}
+
+              {% set base_zones = base_zones | unique | list %}
+              {% set near_candidates = near %}
+            {% endif %}
+
+            {% set base_len_ns = namespace(total=0) %}
+            {% for z in base_zones %}
+              {% set base_len_ns.total = base_len_ns.total + lengths.get(z, 0) %}
+            {% endfor %}
+            {% set base_length = base_len_ns.total %}
+
+            {% set callers_len_ns = namespace(total=0) %}
+            {% for z in callers %}
+              {% set callers_len_ns.total = callers_len_ns.total + lengths.get(z, 0) %}
+            {% endfor %}
+            {% set callers_length = callers_len_ns.total %}
+
+            {% set guardrail = 'ok' %}
+            {% set final_zones = base_zones %}
+
+            {% if (not manual_caps_active) and base_length > max_ft %}
+              {% set guardrail = 'degraded_to_callers' %}
+              {% set final_zones = callers %}
+              {% if callers_length > max_ft %}
+                {% set guardrail = 'blocked_over_max' %}
+                {% set final_zones = callers %}
+              {% endif %}
+            {% else %}
+              {% set final_zones = base_zones %}
+              {% if manual_caps_active and base_length > max_ft %}
+                {% set guardrail = 'manual_caps_override' %}
+              {% endif %}
+
+              {% if opp_enabled and final_zones|length > 0 %}
+                {% set total_ns = namespace(total=base_length) %}
+                {% set added_ns = namespace(list=[]) %}
+                {% set limit_max = 9999 if manual_caps_active else opp_max %}
+
+                {% for z in near_candidates %}
+                  {% if z not in final_zones %}
+                    {% set zlen = lengths.get(z, 0) %}
+                    {% if (total_ns.total + zlen) <= limit_max %}
+                      {% set total_ns.total = total_ns.total + zlen %}
+                      {% set added_ns.list = added_ns.list + [z] %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if not manual_caps_active %}
+                  {% if total_ns.total < opp_min %}
+                    {% set added_ns.list = [] %}
+                    {% set total_ns.total = base_length %}
+                    {% set guardrail = 'opportunistic_skipped_under_min' %}
+                  {% elif added_ns.list|length > 0 %}
+                    {% set guardrail = 'opportunistic_applied' %}
+                  {% endif %}
+                {% else %}
+                  {% if added_ns.list|length > 0 %}
+                    {% set guardrail = 'opportunistic_applied_override' %}
+                  {% endif %}
+                {% endif %}
+
+                {% set final_zones = (final_zones + added_ns.list) | unique | list %}
+              {% endif %}
+            {% endif %}
+
+            {% if final_zones|length == 0 %}
+              {% set suggested_batch = 'idle' %}
+              {% set guardrail = 'idle' %}
+            {% else %}
+              {% set out_ns = namespace(list=[]) %}
+              {% for z in final_zones | sort %}
+                {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
+              {% endfor %}
+              {% set suggested_batch = out_ns.list | join(' + ') %}
+            {% endif %}
+
+            {% set batch_len_ns = namespace(total=0) %}
+            {% for z in final_zones %}
+              {% set batch_len_ns.total = batch_len_ns.total + lengths.get(z, 0) %}
+            {% endfor %}
+            {% set batch_length = batch_len_ns.total %}
+
+            {% set alg_code = 'M' if algorithm == 'Matrix' else 'P' %}
+            {% set prof_code = {
+              'Basement (Z3+Z7+Z9)': 'B',
+              'First Floor (Z1+Z5+Z8)': 'F',
+              'Upper Floor (Z2+Z6)': 'U',
+              'Whole House (Z1-Z9)': 'W',
+              'None': 'N'
+            }.get(profile, 'N') %}
+
+            {% set result = {
+              'g': guardrail,
+              'bz': (base_zones | join(',') if base_zones|length else 'none'),
+              'fz': (final_zones | join(',') if final_zones|length else 'none'),
+              'bl': base_length|round(1),
+              'cl': callers_length|round(1),
+              'fl': batch_length|round(1),
+              'ml': max_ft,
+              'omin': opp_min,
+              'omax': opp_max,
+              'a': alg_code,
+              'p': prof_code,
+              'opp': 1 if opp_enabled else 0,
+              'man': 1 if manual_caps_active else 0,
+              'mu': manual_until,
+              'bw': states('input_number.hc_dispatch_batch_window_sec')|int(180),
+              'gate': 1 if is_state('input_boolean.hc_enable_cold_tolerance_gate','on') else 0,
+              'gt': states('input_number.hc_cold_tolerance')|float(0),
+              'imin': states('input_number.hc_dispatch_ideal_min_ft')|float(0),
+              'imax': states('input_number.hc_dispatch_ideal_max_ft')|float(0),
+              'callers': (callers | join(',') if callers|length else 'none')
+            } %}
+            {{ result | tojson }}
+          {% endif %}
+        attributes:
+          suggested_batch: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              idle
+            {% else %}
+              {% set data = p | from_json %}
+              {% if data.fz in ['none',''] %}
+                idle
+              {% else %}
+                {% set labels = {
+                  'z1':'Z1 1F Bed/Bath','z2':'Z2 Office+Guest','z3':'Z3 Bsm Bath+Common',
+                  'z4':'Z4 Garage','z5':'Z5 1F Living','z6':'Z6 Master','z7':'Z7 Bsm Bar+TV',
+                  'z8':'Z8 Dining','z9':'Z9 Bsm Bedroom'
+                } %}
+                {% set out_ns = namespace(list=[]) %}
+                {% for z in data.fz.split(',') %}
+                  {% set out_ns.list = out_ns.list + [labels.get(z, z|upper)] %}
+                {% endfor %}
+                {{ out_ns.list | join(' + ') }}
+              {% endif %}
+            {% endif %}
+          algorithm: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              Profile
+            {% else %}
+              {% set a = (p | from_json).a %}
+              {{ 'Matrix' if a == 'M' else 'Profile' }}
+            {% endif %}
+          profile: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {% if p in ['unknown','unavailable','none',''] %}
+              None
+            {% else %}
+              {% set code = (p | from_json).p %}
+              {% set map = {
+                'B':'Basement (Z3+Z7+Z9)',
+                'F':'First Floor (Z1+Z5+Z8)',
+                'U':'Upper Floor (Z2+Z6)',
+                'W':'Whole House (Z1-Z9)',
+                'N':'None'
+              } %}
+              {{ map.get(code, 'None') }}
+            {% endif %}
+          guardrail_status: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {{ (p | from_json).g if p not in ['unknown','unavailable','none',''] else 'idle' }}
+          batch_length_ft: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {{ (p | from_json).fl if p not in ['unknown','unavailable','none',''] else 0 }}
+          base_zones: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {{ (p | from_json).bz if p not in ['unknown','unavailable','none',''] else 'none' }}
+          final_zones: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {{ (p | from_json).fz if p not in ['unknown','unavailable','none',''] else 'none' }}
+          callers: >
+            {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+            {{ (p | from_json).callers if p not in ['unknown','unavailable','none',''] else 'none' }}
+
+      - name: "HC Dispatch Reg Guardrail"
+        unique_id: hc_dispatch_reg_guardrail
+        icon: mdi:vector-link
+        state: >
+          {% set p = states('sensor.hc_dispatch_reg_guardrail_payload') %}
+          {% if p in ['unknown','unavailable','none',''] %}
+            idle
+          {% else %}
+            {{ (p | from_json).g }}
+          {% endif %}
+        attributes:
+          suggested_batch: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','suggested_batch') or 'idle' }}"
+          algorithm: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','algorithm') or 'Profile' }}"
+          profile: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','profile') or 'None' }}"
+          base_zones: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','base_zones') or 'none' }}"
+          final_zones: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','final_zones') or 'none' }}"
+          callers: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','callers') or 'none' }}"
+          guardrail_status: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','guardrail_status') or 'idle' }}"
+          batch_length_ft: "{{ state_attr('sensor.hc_dispatch_reg_guardrail_payload','batch_length_ft') or 0 }}"
+
+      - name: "HC Dispatch Reg Suggested Batch"
+        unique_id: hc_dispatch_reg_suggested_batch
+        icon: mdi:vector-link
+        state: >
+          {{ state_attr('sensor.hc_dispatch_reg_guardrail','suggested_batch') or 'idle' }}
+        attributes:
+          algorithm: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','algorithm') }}"
+          profile: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','profile') }}"
+          guardrail_status: "{{ states('sensor.hc_dispatch_reg_guardrail') }}"
+          base_zones: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','base_zones') }}"
+          final_zones: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','final_zones') }}"
+          callers: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','callers') }}"

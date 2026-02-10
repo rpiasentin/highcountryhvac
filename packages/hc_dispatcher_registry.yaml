@@ -415,18 +415,23 @@ input_text:
   hc_dispatch_reg_active_batch_id:
     name: HC Dispatch Registry Active Batch ID
     max: 255
+    initial: none
   hc_dispatch_reg_active_zones:
     name: HC Dispatch Registry Active Zones
     max: 255
+    initial: none
   hc_dispatch_reg_active_callers:
     name: HC Dispatch Registry Active Callers
     max: 255
+    initial: none
   hc_dispatch_reg_guardrail_status:
     name: HC Dispatch Registry Guardrail Status
     max: 255
+    initial: none
   hc_dispatch_reg_manual_change_entity:
     name: HC Dispatch Registry Manual Change Entity
     max: 255
+    initial: none
   hc_dispatch_reg_version:
     name: HC Dispatch Registry Version
     max: 64
@@ -499,4 +504,3 @@ input_datetime:
   hc_dispatch_reg_z9_last_on: { name: "HC Dispatch Z9 Last On (Basement Bedroom)", has_date: true, has_time: true }
   hc_dispatch_reg_z9_last_off: { name: "HC Dispatch Z9 Last Off (Basement Bedroom)", has_date: true, has_time: true }
   hc_dispatch_reg_z9_last_user_change: { name: "HC Dispatch Z9 Last User Change (Basement Bedroom)", has_date: true, has_time: true }
-

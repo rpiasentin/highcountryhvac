@@ -1,0 +1,473 @@
+# packages/hc_dispatcher_registry_control.yaml
+# Dispatcher Registry Controller (v0.1)
+# Implements manual abort + cooldown + batch apply using registry state.
+
+automation:
+  - id: hc_dispatch_reg_manual_abort
+    alias: "HC Dispatch Registry - Manual Abort"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: input_datetime.hc_dispatch_reg_manual_change_at
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatch_reg_enabled
+        state: "on"
+    action:
+      - variables:
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          cooldown_mins: "{{ states('input_number.hc_dispatch_reg_cooldown_minutes')|int(5) }}"
+          cooldown_until: "{{ (now() + timedelta(minutes=cooldown_mins)).strftime('%Y-%m-%d %H:%M:%S') }}"
+          zones: [z1,z2,z3,z4,z5,z6,z7,z8,z9]
+          climate_map:
+            z1: climate.z1_first_floor_bedroom_and_bath
+            z2: climate.zone_2_second_floor_office_and_upper_guest
+            z3: climate.zone_3_basement_bath_and_common
+            z4: climate.zone_4_garage
+            z5: climate.zone_5_virtual_thermostat_first_floor_living
+            z6: climate.zone_6_master_thermostat
+            z7: climate.zone_7_basement_bar_and_tv_room_south_side
+            z8: climate.zone_8_dining_room
+            z9: climate.zone_9_basement_bedroom
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.hc_dispatch_reg_state
+        data:
+          option: cooldown
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.hc_dispatch_reg_cooldown_until
+        data:
+          datetime: "{{ cooldown_until }}"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_guardrail_status
+        data:
+          value: "manual_abort"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_zones
+        data:
+          value: "none"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_callers
+        data:
+          value: "none"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_batch_id
+        data:
+          value: "none"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hc_dispatch_reg_active_length_ft
+        data:
+          value: 0
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.hc_dispatch_reg_active_started_at
+        data:
+          datetime: "{{ now_str }}"
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.hc_dispatcher_mode_enabled
+      - repeat:
+          for_each: "{{ zones }}"
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                climate: "{{ climate_map[z] }}"
+                baseline: "{{ states('input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f')|float(0) }}"
+                current: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                restore: >
+                  {% if baseline > 0 %}
+                    {{ baseline }}
+                  {% elif current > 0 %}
+                    {{ current }}
+                  {% else %}
+                    0
+                  {% endif %}
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: "{{ restore > 0 }}"
+                  sequence:
+                    - service: climate.set_temperature
+                      data:
+                        entity_id: "{{ climate }}"
+                        temperature: "{{ restore }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_system_override_f' }}"
+              data:
+                value: 0
+            - service: input_boolean.turn_off
+              target:
+                entity_id:
+                  - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
+                  - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+
+  - id: hc_dispatch_reg_cooldown_expire
+    alias: "HC Dispatch Registry - Cooldown Expire"
+    mode: queued
+    trigger:
+      - platform: time_pattern
+        minutes: "/1"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatch_reg_enabled
+        state: "on"
+      - condition: state
+        entity_id: input_select.hc_dispatch_reg_state
+        state: cooldown
+      - condition: template
+        value_template: >
+          {% set until = states('input_datetime.hc_dispatch_reg_cooldown_until') %}
+          {{ until not in ['unknown','unavailable','none',''] and as_timestamp(now()) >= as_timestamp(until) }}
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.hc_dispatch_reg_state
+        data:
+          option: idle
+
+  - id: hc_dispatch_reg_apply_batch
+    alias: "HC Dispatch Registry - Apply Batch"
+    mode: queued
+    max: 10
+    trigger:
+      - platform: state
+        entity_id: sensor.hc_dispatch_reg_suggested_batch
+      - platform: state
+        entity_id: input_button.hc_dispatch_approve_batch
+      - platform: time_pattern
+        minutes: "/1"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hc_dispatch_reg_enabled
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.hc_dispatcher_mode_enabled
+        state: "on"
+      - condition: template
+        value_template: "{{ states('input_select.hc_dispatch_reg_state') != 'cooldown' }}"
+      - condition: template
+        value_template: >
+          {% if trigger.platform == 'state' and trigger.entity_id == 'sensor.hc_dispatch_reg_suggested_batch' %}
+            {{ is_state('input_boolean.hc_dispatcher_auto_approve', 'on') }}
+          {% else %}
+            true
+          {% endif %}
+    action:
+      - variables:
+          invalid: ['unknown','unavailable','none','']
+          reg_state: "{{ states('input_select.hc_dispatch_reg_state') }}"
+          raw_batch: "{{ states('sensor.hc_dispatch_reg_suggested_batch') }}"
+          final_zones_str: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','final_zones') }}"
+          base_zones_str: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','base_zones') }}"
+          callers_str: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','callers') }}"
+          active_zones_str: "{{ states('input_text.hc_dispatch_reg_active_zones') }}"
+          active_callers_str: "{{ states('input_text.hc_dispatch_reg_active_callers') }}"
+          final_zones_list: >
+            {% if final_zones_str not in invalid %}
+              {{ final_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
+          active_zones_list: >
+            {% if active_zones_str not in invalid %}
+              {{ active_zones_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
+          callers_list: >
+            {% if reg_state == 'batch_active' and active_callers_str not in invalid %}
+              {{ active_callers_str.split(',') }}
+            {% elif callers_str not in invalid %}
+              {{ callers_str.split(',') }}
+            {% else %}
+              {{ [] }}
+            {% endif %}
+          batch_zones_list: "{{ active_zones_list if active_zones_list|length else final_zones_list }}"
+          new_batch_start: "{{ final_zones_list|length > 0 and active_zones_list|length == 0 }}"
+          new_zones_list: >
+            {% set ns = namespace(out=[]) %}
+            {% for z in final_zones_list %}
+              {% if z not in active_zones_list %}
+                {% set ns.out = ns.out + [z] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.out }}
+          force_mode: "{{ states('input_select.hc_dispatch_force_mode') }}"
+          force_delta: "{{ states('input_number.hc_dispatch_force_delta_f')|float(1.0) }}"
+          force_cap: "{{ states('input_number.hc_dispatch_force_cap_f')|float(75) }}"
+          min_run_sec: "{{ (states('input_number.hc_dispatch_min_run_minutes')|float(10)) * 60 }}"
+          allow_restore_all: >
+            {% set ok = true %}
+            {% for z in batch_zones_list %}
+              {% set last_on = states('input_datetime.hc_dispatch_reg_' ~ z ~ '_last_on') %}
+              {% if last_on not in invalid %}
+                {% set elapsed = (as_timestamp(now()) - as_timestamp(last_on)) | float(0) %}
+              {% else %}
+                {% set elapsed = 999999 %}
+              {% endif %}
+              {% if elapsed < min_run_sec %}
+                {% set ok = false %}
+              {% endif %}
+            {% endfor %}
+            {{ ok }}
+          callers_still_calling: >
+            {% set ns = namespace(list=[]) %}
+            {% for z in callers_list %}
+              {% if is_state('input_boolean.hc_dispatch_reg_' ~ z ~ '_calling','on') %}
+                {% set ns.list = ns.list + [z] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.list }}
+          should_stop: "{{ batch_zones_list|length > 0 and callers_still_calling|length == 0 and allow_restore_all }}"
+          climate_map:
+            z1: climate.z1_first_floor_bedroom_and_bath
+            z2: climate.zone_2_second_floor_office_and_upper_guest
+            z3: climate.zone_3_basement_bath_and_common
+            z4: climate.zone_4_garage
+            z5: climate.zone_5_virtual_thermostat_first_floor_living
+            z6: climate.zone_6_master_thermostat
+            z7: climate.zone_7_basement_bar_and_tv_room_south_side
+            z8: climate.zone_8_dining_room
+            z9: climate.zone_9_basement_bedroom
+
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ should_stop }}"
+            sequence:
+              - repeat:
+                  for_each: "{{ batch_zones_list }}"
+                  sequence:
+                    - variables:
+                        z: "{{ repeat.item }}"
+                        climate: "{{ climate_map[z] }}"
+                        baseline: "{{ states('input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f')|float(0) }}"
+                        current: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                        restore: >
+                          {% if baseline > 0 %}
+                            {{ baseline }}
+                          {% elif current > 0 %}
+                            {{ current }}
+                          {% else %}
+                            0
+                          {% endif %}
+                    - choose:
+                        - conditions:
+                            - condition: template
+                              value_template: "{{ restore > 0 }}"
+                          sequence:
+                            - service: climate.set_temperature
+                              data:
+                                entity_id: "{{ climate }}"
+                                temperature: "{{ restore }}"
+                    - service: input_number.set_value
+                      target:
+                        entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_system_override_f' }}"
+                      data:
+                        value: 0
+                    - service: input_boolean.turn_off
+                      target:
+                        entity_id:
+                          - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
+                          - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_reg_active_zones
+                data:
+                  value: "none"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_reg_active_callers
+                data:
+                  value: "none"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_reg_active_batch_id
+                data:
+                  value: "none"
+              - service: input_text.set_value
+                target:
+                  entity_id: input_text.hc_dispatch_reg_guardrail_status
+                data:
+                  value: "idle"
+              - service: input_number.set_value
+                target:
+                  entity_id: input_number.hc_dispatch_reg_active_length_ft
+                data:
+                  value: 0
+              - service: input_select.select_option
+                target:
+                  entity_id: input_select.hc_dispatch_reg_state
+                data:
+                  option: idle
+
+          - conditions:
+              - condition: template
+                value_template: "{{ final_zones_list|length == 0 and active_zones_list|length == 0 }}"
+            sequence:
+              - service: input_select.select_option
+                target:
+                  entity_id: input_select.hc_dispatch_reg_state
+                data:
+                  option: idle
+
+        default:
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ new_batch_start }}"
+                sequence:
+                  - service: input_select.select_option
+                    target:
+                      entity_id: input_select.hc_dispatch_reg_state
+                    data:
+                      option: batch_active
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_active_batch_id
+                    data:
+                      value: "{{ now().strftime('%Y%m%d%H%M%S') }}"
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_active_zones
+                    data:
+                      value: "{{ final_zones_list | join(',') }}"
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_active_callers
+                    data:
+                      value: "{{ callers_list | join(',') if callers_list|length else 'none' }}"
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_guardrail_status
+                    data:
+                      value: "{{ states('sensor.hc_dispatch_reg_guardrail') }}"
+                  - service: input_number.set_value
+                    target:
+                      entity_id: input_number.hc_dispatch_reg_active_length_ft
+                    data:
+                      value: "{{ state_attr('sensor.hc_dispatch_reg_guardrail','batch_length_ft')|float(0) if state_attr('sensor.hc_dispatch_reg_guardrail','batch_length_ft') is not none else 0 }}"
+                  - service: input_select.select_option
+                    target:
+                      entity_id: input_select.hc_dispatch_reg_active_mode
+                    data:
+                      option: "{{ states('input_select.hc_dispatch_algorithm') if states('input_select.hc_dispatch_algorithm') in ['Matrix','Profile'] else 'Profile' }}"
+                  - service: input_datetime.set_datetime
+                    target:
+                      entity_id: input_datetime.hc_dispatch_reg_active_started_at
+                    data:
+                      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ new_zones_list|length > 0 }}"
+                sequence:
+                  - repeat:
+                      for_each: "{{ new_zones_list }}"
+                      sequence:
+                        - variables:
+                            z: "{{ repeat.item }}"
+                            climate: "{{ climate_map[z] }}"
+                            baseline_now: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                        - choose:
+                            - conditions:
+                                - condition: template
+                                  value_template: "{{ baseline_now > 0 }}"
+                              sequence:
+                                - service: input_number.set_value
+                                  target:
+                                    entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f' }}"
+                                  data:
+                                    value: "{{ baseline_now }}"
+                        - service: input_boolean.turn_on
+                          target:
+                            entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
+                        - choose:
+                            - conditions:
+                                - condition: template
+                                  value_template: "{{ z not in callers_list }}"
+                              sequence:
+                                - service: input_boolean.turn_on
+                                  target:
+                                    entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_active_zones
+                    data:
+                      value: "{{ (active_zones_list + new_zones_list) | unique | join(',') }}"
+
+          - repeat:
+              for_each: "{{ batch_zones_list }}"
+              sequence:
+                - variables:
+                    z: "{{ repeat.item }}"
+                    climate: "{{ climate_map[z] }}"
+                    is_caller: "{{ z in callers_list }}"
+                    baseline: "{{ states('input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f')|float(0) }}"
+                    current_setpoint: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                    current_room_temp: "{{ state_attr(climate, 'current_temperature')|float(0) }}"
+                    force_for_zone: >
+                      {% if force_mode == 'All' %}
+                        true
+                      {% elif force_mode == 'Added Only' and (not is_caller) %}
+                        true
+                      {% else %}
+                        false
+                      {% endif %}
+                    desired_temp: >
+                      {% set b = baseline if baseline > 0 else current_setpoint %}
+                      {% if force_for_zone and current_room_temp > 0 %}
+                        {% set v = b if b > (current_room_temp + force_delta) else (current_room_temp + force_delta) %}
+                        {{ v if v < force_cap else force_cap }}
+                      {% else %}
+                        {{ b }}
+                      {% endif %}
+                - choose:
+                    - conditions:
+                        - condition: template
+                          value_template: "{{ desired_temp > 0 and (current_setpoint | round(2)) != (desired_temp | round(2)) }}"
+                      sequence:
+                        - service: climate.set_temperature
+                          continue_on_error: true
+                          data:
+                            entity_id: "{{ climate }}"
+                            temperature: "{{ desired_temp }}"
+                - choose:
+                    - conditions:
+                        - condition: template
+                          value_template: "{{ force_for_zone and desired_temp > 0 }}"
+                      sequence:
+                        - service: input_number.set_value
+                          target:
+                            entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_system_override_f' }}"
+                          data:
+                            value: "{{ desired_temp }}"
+                    - default:
+                        - service: input_number.set_value
+                          target:
+                            entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_system_override_f' }}"
+                          data:
+                            value: 0
+                - service: input_boolean.turn_on
+                  target:
+                    entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
+                - choose:
+                    - conditions:
+                        - condition: template
+                          value_template: "{{ not is_caller }}"
+                      sequence:
+                        - service: input_boolean.turn_on
+                          target:
+                            entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+                    - default:
+                        - service: input_boolean.turn_off
+                          target:
+                            entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"

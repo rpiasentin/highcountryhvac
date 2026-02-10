@@ -3,6 +3,20 @@
 ## Overview
 Dispatcher V2 is a setpoint-based batching system layered on top of existing broadcast logic. Broadcast modes (whole house, by floor, by room) are **out of scope** for this release. Dispatcher consumes the resulting zone setpoints (Z1–Z9) and determines which zones should be included together to optimize boiler efficiency.
 
+## Feb 10, 2026 Rearchitecture (Planned)
+We will **rewrite the dispatcher core** around a state registry and first-principles thermostat model. The input/output layer (broadcast setpoints + dashboards) stays intact.
+
+Key architectural changes:
+- Create a **dispatcher state registry** (per-zone records for baseline, override, call state, run time, cluster, loop length).
+- Treat **generic thermostats** as the canonical per-zone control surface (temp sensors + zone switches).
+- Add a **manual change detector** that treats any user edits (thermostats or dispatcher config) as a global abort:
+  - Restore all dispatcher-touched zones to baseline.
+  - Disable dispatcher.
+  - Enforce configurable cooldown before resuming analysis.
+- Explicitly account for **all live calls** (batch or non-batch) when enforcing max loop length.
+
+Rollback reference: manual backup **“tuesday feb 10 before rewrite.”**
+
 ## Core Packages and Roles
 - `packages/hc_dispatcher_v2_helpers.yaml`
   - Defines clusters, guardrail inputs, force-call parameters, and debug helpers.
@@ -14,6 +28,14 @@ Dispatcher V2 is a setpoint-based batching system layered on top of existing bro
   - Keeps dispatcher baselines aligned with user changes.
 - `packages/hc_dispatcher_manual_caps_override.yaml`
   - Manages manual caps override duration.
+- `packages/hc_dispatcher_registry.yaml`
+  - Registry helpers (global + per-zone state).
+- `packages/hc_dispatcher_registry_engine.yaml`
+  - Registry state sync (calling, effective setpoints, manual change tracking).
+- `packages/hc_dispatcher_registry_guardrail.yaml`
+  - Registry-based guardrail/suggested batch computation.
+- `packages/hc_dispatcher_registry_control.yaml`
+  - Registry controller (manual abort, cooldown, batch apply).
 - `lovelace/hc_zone_setup.yaml`
   - Operator dashboards for clusters and dispatcher controls.
 
