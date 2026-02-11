@@ -51,6 +51,10 @@
 2. Verify dispatcher state moves to `cooldown` and gate turns OFF.
 3. Verify active zones clear and baselines restore.
 
+## Registry Stop + Restore Test (Rewrite)
+1. Run `ha_dispatch_reg_test_stop_restore.sh`.
+2. Verify batch clears after min-run and registry state returns to `idle`.
+
 ## Manual Change Global Abort (Post-Rearchitecture)
 1. With dispatcher ON, change any thermostat setpoint manually.
 2. Verify all dispatcher-touched zones restore to baseline.

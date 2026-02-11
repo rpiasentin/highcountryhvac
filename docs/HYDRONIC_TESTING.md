@@ -63,6 +63,27 @@ Expected:
 - `input_text.hc_dispatch_reg_active_zones` = `none`.
 - Dispatcher master gate = `off`.
 
+### Registry Stop + Restore Test
+Script: `ha_dispatch_reg_test_stop_restore.sh`
+Purpose: confirm min-run enforcement and batch clear without manual abort.
+
+Steps:
+1. Run:
+   ```bash
+   WAIT_MINUTES=5 /config/hc_tools/ha_dispatch_reg_test_stop_restore.sh
+   ```
+2. The script will:
+   - Create a short caller (target = current + 1°F).
+   - Wait min-run time.
+   - Wait for batch to clear naturally.
+
+Expected:
+- `input_text.hc_dispatch_reg_active_zones` clears to `none`.
+- Registry state returns to `idle`.
+
+### Registry Debug Guide
+Use `docs/DISPATCHER_REGISTRY_DEBUG.md` for interpreting registry helpers and guardrail outputs.
+
 ### 1) Matrix Start Test
 Script: `ha_dispatch_test_matrix.sh`
 Purpose: confirm Matrix batching and forced-call behavior.
