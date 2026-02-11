@@ -25,6 +25,7 @@ All batch logic reads/writes the registry. Any state derived from live entities 
 ## Global Registry Fields
 - `hc_dispatch_reg_state`: `idle`, `evaluating`, `batch_active`, `cooldown`.
 - `hc_dispatch_reg_enabled`: master enable for the new dispatcher core.
+- `hc_dispatch_reg_apply_in_progress`: suppresses false manual-change detection while dispatcher applies setpoints.
 - `hc_dispatch_reg_cooldown_until`: timestamp when evaluation can resume.
 - `hc_dispatch_reg_active_batch_id`: unique ID per batch.
 - `hc_dispatch_reg_active_zones`: comma list of zones (e.g. `z3,z7,z9`).
@@ -72,7 +73,7 @@ Manual change applies to:
 1. **Collect callers** from registry `calling` fields.
 2. **Matrix or Profile** expansion to base batch.
 3. **Opportunistic adds** within caps.
-4. **Guardrails** enforce max length with total active calls included.
+4. **Guardrails** enforce max length with **total active calls** included (batch + any external live calls).
 5. Freeze callers at batch start; write active batch to registry.
 
 ## Batch Execution (High Level)

@@ -7,6 +7,10 @@ input_boolean:
     name: HC Dispatch Registry Enabled
     icon: mdi:database
     initial: off
+  hc_dispatch_reg_apply_in_progress:
+    name: HC Dispatch Registry Apply In Progress
+    icon: mdi:progress-clock
+    initial: off
   hc_dispatch_reg_z1_calling:
     name: "HC Dispatch Z1 Calling (First Floor Bedroom & Bath)"
     icon: mdi:fire

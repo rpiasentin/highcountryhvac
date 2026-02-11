@@ -3,6 +3,94 @@
 # Implements manual abort + cooldown + batch apply using registry state.
 
 automation:
+  - id: hc_dispatch_reg_bootstrap
+    alias: "HC Dispatch Registry - Bootstrap"
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: input_boolean.hc_dispatch_reg_enabled
+        to: "on"
+    action:
+      - variables:
+          now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+          zones: [z1,z2,z3,z4,z5,z6,z7,z8,z9]
+          climate_map:
+            z1: climate.z1_first_floor_bedroom_and_bath
+            z2: climate.zone_2_second_floor_office_and_upper_guest
+            z3: climate.zone_3_basement_bath_and_common
+            z4: climate.zone_4_garage
+            z5: climate.zone_5_virtual_thermostat_first_floor_living
+            z6: climate.zone_6_master_thermostat
+            z7: climate.zone_7_basement_bar_and_tv_room_south_side
+            z8: climate.zone_8_dining_room
+            z9: climate.zone_9_basement_bedroom
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.hc_dispatch_reg_state
+        data:
+          option: idle
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_zones
+        data:
+          value: "none"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_callers
+        data:
+          value: "none"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_active_batch_id
+        data:
+          value: "none"
+      - service: input_text.set_value
+        target:
+          entity_id: input_text.hc_dispatch_reg_guardrail_status
+        data:
+          value: "idle"
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.hc_dispatch_reg_active_length_ft
+        data:
+          value: 0
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.hc_dispatch_reg_active_started_at
+        data:
+          datetime: "{{ now_str }}"
+      - repeat:
+          for_each: "{{ zones }}"
+          sequence:
+            - variables:
+                z: "{{ repeat.item }}"
+                climate: "{{ climate_map[z] }}"
+                baseline: "{{ state_attr(climate, 'temperature')|float(0) }}"
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: "{{ baseline > 0 }}"
+                  sequence:
+                    - service: input_number.set_value
+                      target:
+                        entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f' }}"
+                      data:
+                        value: "{{ baseline }}"
+                    - service: input_number.set_value
+                      target:
+                        entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_last_user_setpoint_f' }}"
+                      data:
+                        value: "{{ baseline }}"
+            - service: input_number.set_value
+              target:
+                entity_id: "{{ 'input_number.hc_dispatch_reg_' ~ z ~ '_system_override_f' }}"
+              data:
+                value: 0
+            - service: input_boolean.turn_off
+              target:
+                entity_id:
+                  - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
+                  - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
   - id: hc_dispatch_reg_manual_abort
     alias: "HC Dispatch Registry - Manual Abort"
     mode: queued
@@ -14,6 +102,9 @@ automation:
         entity_id: input_boolean.hc_dispatch_reg_enabled
         state: "on"
     action:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.hc_dispatch_reg_apply_in_progress
       - variables:
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
           cooldown_mins: "{{ states('input_number.hc_dispatch_reg_cooldown_minutes')|int(5) }}"
@@ -107,6 +198,9 @@ automation:
                 entity_id:
                   - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_member' }}"
                   - "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.hc_dispatch_reg_apply_in_progress
 
   - id: hc_dispatch_reg_cooldown_expire
     alias: "HC Dispatch Registry - Cooldown Expire"
@@ -160,6 +254,9 @@ automation:
             true
           {% endif %}
     action:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.hc_dispatch_reg_apply_in_progress
       - variables:
           invalid: ['unknown','unavailable','none','']
           reg_state: "{{ states('input_select.hc_dispatch_reg_state') }}"
@@ -430,6 +527,8 @@ automation:
                       {% else %}
                         {{ b }}
                       {% endif %}
+                - condition: template
+                  value_template: "{{ states('input_select.hc_dispatch_reg_state') != 'cooldown' }}"
                 - choose:
                     - conditions:
                         - condition: template
@@ -471,3 +570,6 @@ automation:
                         - service: input_boolean.turn_off
                           target:
                             entity_id: "{{ 'input_boolean.hc_dispatch_reg_' ~ z ~ '_batch_added' }}"
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.hc_dispatch_reg_apply_in_progress

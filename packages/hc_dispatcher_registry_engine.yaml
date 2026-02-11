@@ -78,14 +78,15 @@ automation:
             climate.zone_5_virtual_thermostat_first_floor_living: z5
             climate.zone_6_master_thermostat: z6
             climate.zone_7_basement_bar_and_tv_room_south_side: z7
-            climate.zone_8_dining_room: z8
-            climate.zone_9_basement_bedroom: z9
+          climate.zone_8_dining_room: z8
+          climate.zone_9_basement_bedroom: z9
           z: "{{ climate_map.get(trigger.entity_id) }}"
           new_temp: "{{ state_attr(trigger.entity_id, 'temperature')|float(0) }}"
+          apply_in_progress: "{{ is_state('input_boolean.hc_dispatch_reg_apply_in_progress','on') }}"
           reg_state: "{{ states('input_select.hc_dispatch_reg_state') }}"
           manual_change: >
             {{ trigger.to_state.context.user_id is not none
-               or trigger.to_state.context.parent_id is none }}
+               or (not apply_in_progress and trigger.to_state.context.parent_id is none) }}
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
       - condition: template
         value_template: "{{ z is not none and new_temp > 0 }}"
@@ -148,7 +149,11 @@ automation:
           - input_select.hc_dispatch_algorithm
           - input_select.hc_dispatch_profile
           - input_boolean.hc_dispatch_opportunistic_enabled
+          - input_boolean.hc_dispatcher_auto_approve
+          - input_boolean.hc_dispatch_manual_override
+          - input_select.hc_dispatch_force_mode
           - input_boolean.hc_dispatcher_mode_enabled
+          - input_number.hc_dispatch_manual_caps_minutes
           - input_number.hc_dispatch_max_batch_length_ft
           - input_number.hc_dispatch_opportunistic_min_ft
           - input_number.hc_dispatch_opportunistic_max_ft
@@ -158,6 +163,19 @@ automation:
           - input_number.hc_dispatch_ideal_min_ft
           - input_number.hc_dispatch_ideal_max_ft
           - input_number.hc_dispatch_batch_window_sec
+          - input_number.hc_dispatch_near_call_margin_f
+          - input_boolean.hc_enable_cold_tolerance_gate
+          - input_number.hc_cold_tolerance
+          - input_boolean.hc_disp_follow_sync_enabled
+          - input_boolean.hc_disp_z1_follow_broadcast
+          - input_boolean.hc_disp_z2_follow_broadcast
+          - input_boolean.hc_disp_z3_follow_broadcast
+          - input_boolean.hc_disp_z4_follow_broadcast
+          - input_boolean.hc_disp_z5_follow_broadcast
+          - input_boolean.hc_disp_z6_follow_broadcast
+          - input_boolean.hc_disp_z7_follow_broadcast
+          - input_boolean.hc_disp_z8_follow_broadcast
+          - input_boolean.hc_disp_z9_follow_broadcast
           - input_number.hc_setpoint_master
           - input_number.hc_setpoint_basement
           - input_number.hc_setpoint_first_floor
@@ -192,6 +210,18 @@ automation:
             {% if eid.startswith('input_select.hc_z') and eid.endswith('_cluster') %}
               cluster_change
             {% elif eid.startswith('input_number.hc_z') and eid.endswith('_length_feet') %}
+              guardrail_change
+            {% elif eid.startswith('input_boolean.hc_disp_') %}
+              toggle_change
+            {% elif eid == 'input_select.hc_dispatch_force_mode' %}
+              guardrail_change
+            {% elif eid in ['input_boolean.hc_dispatcher_auto_approve','input_boolean.hc_dispatch_manual_override'] %}
+              toggle_change
+            {% elif eid == 'input_number.hc_dispatch_manual_caps_minutes' %}
+              guardrail_change
+            {% elif eid in ['input_boolean.hc_enable_cold_tolerance_gate','input_number.hc_cold_tolerance'] %}
+              guardrail_change
+            {% elif eid == 'input_number.hc_dispatch_near_call_margin_f' %}
               guardrail_change
             {% elif eid == 'input_boolean.hc_dispatcher_mode_enabled' %}
               toggle_change

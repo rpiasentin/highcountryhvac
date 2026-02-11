@@ -5,6 +5,8 @@ This file enumerates all helpers used by the dispatcher registry. These are the 
 ## Global Helpers
 - `input_boolean.hc_dispatch_reg_enabled`
   - Master enable for the rewrite (kept OFF until cutover).
+- `input_boolean.hc_dispatch_reg_apply_in_progress`
+  - Suppresses false manual-change detection while dispatcher applies setpoints.
 - `input_select.hc_dispatch_reg_state`
   - `idle`, `evaluating`, `batch_active`, `cooldown`.
 - `input_number.hc_dispatch_reg_cooldown_minutes`

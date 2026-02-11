@@ -69,8 +69,10 @@ template:
                 {% set live_ns.list = live_ns.list + ['z' ~ z] %}
               {% endif %}
             {% endfor %}
+            {% set live_callers = live_ns.list %}
 
-            {% set callers = frozen_callers if reg_state == 'batch_active' and frozen_callers|length > 0 else live_ns.list %}
+            {% set callers = frozen_callers if reg_state == 'batch_active' and frozen_callers|length > 0 else live_callers %}
+            {% set external_callers = live_callers | reject('in', callers) | list %}
 
             {% set near_ns = namespace(list=[]) %}
             {% for z in range(1,10) %}
@@ -177,13 +179,20 @@ template:
             {% endfor %}
             {% set callers_length = callers_len_ns.total %}
 
+            {% set ext_len_ns = namespace(total=0) %}
+            {% for z in external_callers %}
+              {% set ext_len_ns.total = ext_len_ns.total + lengths.get(z, 0) %}
+            {% endfor %}
+            {% set external_length = ext_len_ns.total %}
+            {% set effective_base_length = base_length + external_length %}
+
             {% set guardrail = 'ok' %}
             {% set final_zones = base_zones %}
 
-            {% if (not manual_caps_active) and base_length > max_ft %}
+            {% if (not manual_caps_active) and effective_base_length > max_ft %}
               {% set guardrail = 'degraded_to_callers' %}
               {% set final_zones = callers %}
-              {% if callers_length > max_ft %}
+              {% if (callers_length + external_length) > max_ft %}
                 {% set guardrail = 'blocked_over_max' %}
                 {% set final_zones = callers %}
               {% endif %}
@@ -194,7 +203,7 @@ template:
               {% endif %}
 
               {% if opp_enabled and final_zones|length > 0 %}
-                {% set total_ns = namespace(total=base_length) %}
+                {% set total_ns = namespace(total=effective_base_length) %}
                 {% set added_ns = namespace(list=[]) %}
                 {% set limit_max = 9999 if manual_caps_active else opp_max %}
 

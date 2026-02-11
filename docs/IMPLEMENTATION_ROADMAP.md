@@ -23,6 +23,7 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - **Decision (Feb 10, 2026):** re-architect dispatcher core due to accumulated organic fixes and timing instability.
 - Rollback reference: manual backup **“tuesday feb 10 before rewrite.”**
 - Rearchitecture progress: registry helpers, registry engine, registry guardrail, and registry controller added; legacy actuator/setpoint sync gated off when registry is enabled.
+- Registry control now includes manual abort + cooldown logic and bootstrap baseline capture on enable.
 
 ## Target Operating Model (Behavior)
 - Batch starts when one or more real thermostats call.
