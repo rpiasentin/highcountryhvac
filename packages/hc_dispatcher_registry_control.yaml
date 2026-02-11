@@ -461,6 +461,11 @@ automation:
                       entity_id: input_datetime.hc_dispatch_reg_active_started_at
                     data:
                       datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+                  - service: input_text.set_value
+                    target:
+                      entity_id: input_text.hc_dispatch_reg_guardrail_status
+                    data:
+                      value: "{{ states('sensor.hc_dispatch_reg_guardrail') }}"
 
           - choose:
               - conditions:
@@ -474,10 +479,11 @@ automation:
                             z: "{{ repeat.item }}"
                             climate: "{{ climate_map[z] }}"
                             baseline_now: "{{ state_attr(climate, 'temperature')|float(0) }}"
+                            current_baseline: "{{ states('input_number.hc_dispatch_reg_' ~ z ~ '_user_baseline_f')|float(0) }}"
                         - choose:
                             - conditions:
                                 - condition: template
-                                  value_template: "{{ baseline_now > 0 }}"
+                                  value_template: "{{ baseline_now > 0 and (current_baseline | round(2)) != (baseline_now | round(2)) }}"
                               sequence:
                                 - service: input_number.set_value
                                   target:

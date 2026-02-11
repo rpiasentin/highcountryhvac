@@ -201,6 +201,25 @@ views:
                 name: System Control Active
 
           - type: entities
+            title: Registry Status (Rewrite)
+            show_header_toggle: false
+            entities:
+              - entity: input_boolean.hc_dispatch_reg_enabled
+                name: Registry Enabled
+              - entity: input_select.hc_dispatch_reg_state
+                name: Registry State
+              - entity: sensor.hc_dispatch_reg_suggested_batch
+                name: Reg Suggested Batch
+              - entity: input_text.hc_dispatch_reg_active_zones
+                name: Reg Active Zones
+              - entity: input_text.hc_dispatch_reg_active_callers
+                name: Reg Active Callers
+              - entity: input_text.hc_dispatch_reg_guardrail_status
+                name: Reg Guardrail Status
+              - entity: input_datetime.hc_dispatch_reg_cooldown_until
+                name: Cooldown Until
+
+          - type: entities
             title: Dispatch Guardrails
             show_header_toggle: false
             entities:
