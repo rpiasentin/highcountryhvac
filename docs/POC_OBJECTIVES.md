@@ -21,6 +21,39 @@ Those broadcasts are already implemented in the canonical system and set the the
 - Actuation by **setpoint adjustment** rather than direct switch toggles.
 - Operator dashboards for cluster assignment, guardrails, and approval flow.
 
+## Feb 10, 2026 Rearchitecture Decision (First-Principles Reset)
+Dispatcher V2 input/output behavior and dashboards are working, but the internal batching logic has accumulated organic fixes and timing edge cases. We will reset to first principles and **rewrite the dispatcher core** while keeping broadcast/deployer logic intact.
+
+### First-Principles Model (Operational)
+- Use Home Assistant **generic thermostats** for all 9 zones, sourced from the canonical temperature sensors and zone switches.
+- Keep broadcast logic and dashboards unchanged (they remain the user-facing input layer).
+- The dispatcher becomes a **batching controller** that overlays on top of generic thermostats.
+
+### Core Behavior Requirements (New Baseline)
+- At batch start, snapshot **user intended baselines** for all thermostats.
+- Maintain a dispatcher **state registry** (“mini-database”) with per-zone records:
+  - Entity IDs (climate, temp sensor, call for heat, switch/actuator).
+  - User baseline setpoint.
+  - System override setpoint (if any).
+  - Batch membership, cluster, length, and call state.
+  - Last on/off timestamps and run-time counters.
+- Batch decisions must **always** account for other live calls (even outside the batch) so total loop length never exceeds the hard cap.
+
+### Manual Change Global Reset
+If **any** thermostat setpoint or dispatcher control is manually changed:
+- Abort all dispatcher-initiated batches immediately.
+- Restore **all** thermostats touched by dispatcher to their baselines.
+- Turn dispatcher OFF.
+- Enforce a configurable **cooldown** (default 5 minutes) before resuming batch analysis.
+
+### Design Goals
+- Deterministic, inspectable system state (no stale batch lists).
+- Clear separation between **user intent** (baseline) and **system overrides**.
+- Stable stop conditions with explicit exit paths for all loops.
+
+### Snapshot Reference
+A manual backup labeled **“tuesday feb 10 before rewrite”** is the rollback reference for this rearchitecture. Documented here so we can return to a known state quickly if the rewrite fails.
+
 ## Operating Modes and When to Use Them
 Dispatcher modes are separate from broadcast modes.
 
@@ -62,6 +95,7 @@ If you want near-call zones added when it improves efficiency and stays within g
 - Stop condition: the **original caller** reaches its desired setpoint **and** min-run is satisfied.
 - Dispatcher restores all batch zones to their captured baselines.
 - User edits to thermostat setpoints while dispatcher is ON are treated as new baselines immediately.
+- Manual override abort: a manual setpoint change on a batch zone immediately aborts the batch, restores all zones to baseline, and turns the dispatcher OFF. The changed zone becomes the new baseline.
 
 ## Guardrails and Controls
 All controls are in Dispatcher Ops:

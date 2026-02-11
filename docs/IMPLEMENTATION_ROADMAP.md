@@ -74,6 +74,12 @@ This roadmap applies the POC objectives to the canonical production configuratio
 5. Replace or simplify batch call tracking and restore logic using the registry as the source of truth.
 6. Update tests and dashboards to the new model.
 
+## Feature Requests (Post-Rewrite)
+1. Add a **Manual Change Detection Bypass** toggle in Dispatcher Ops:
+   - When enabled, guardrail/dispatcher config changes do **not** trigger global abort/cooldown.
+   - Must be time‑boxed with a user‑selectable duration (minutes) before auto‑reverting to normal detection.
+   - Intended for safe tuning sessions without forced resets.
+
 ## Blockers and Risks
 - Cluster assignments may be reset when helper packages are reloaded; ensure cluster state is explicitly restored in tests.
 - Cluster average temp sensors will be unavailable for empty clusters; audit ignores those by design.

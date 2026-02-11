@@ -25,6 +25,13 @@ chmod +x /config/hc_tools/ha_dispatch_test_*.sh
 
 Restart Home Assistant after package changes.
 
+## Change Control Note
+Before the dispatcher rearchitecture, a manual backup labeled **“tuesday feb 10 before rewrite”** was taken as a rollback reference. Keep this note in sync with future release markers.
+
+## Registry Cutover
+If you are enabling the registry-based dispatcher, follow:
+- `docs/DISPATCHER_REGISTRY_CUTOVER.md`
+
 ## Local Snapshot Script (Mac)
 If you prefer to snapshot from the Mac:
 

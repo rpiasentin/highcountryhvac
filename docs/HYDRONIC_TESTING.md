@@ -7,9 +7,21 @@ This document provides stepwise testing to isolate dispatcher issues and verify 
 - Dispatcher gate is OFF before loading updates.
 - Cluster assignments are restored after helper reloads.
   - Example: Z3, Z7, Z9 in Cluster A; Z5 Independent.
+- Ensure Z8 thermostat uses `sensor.dining_temp_temperature` as its temperature sensor.
+
+## Feb 10, 2026 Rearchitecture Note
+Dispatcher core logic is slated for rewrite. Upcoming behavior changes:
+- Any **manual change** to any thermostat or dispatcher control will abort all batches.
+- Dispatcher will restore **all** zones touched by batching to baseline.
+- A configurable cooldown (default 5 minutes) will block re-analysis after a manual change.
+When the rewrite lands, update tests here to reflect the new global-abort behavior.
 
 ## Scripts
 Scripts are in `tools/` and should be copied to `/config/hc_tools/` in HA.
+
+### Registry Cutover Checklist
+Before using the registry rewrite, follow:
+- `docs/DISPATCHER_REGISTRY_CUTOVER.md`
 
 ### 1) Matrix Start Test
 Script: `ha_dispatch_test_matrix.sh`
@@ -55,6 +67,8 @@ Expected:
 - Suggested batch goes idle after caller hits baseline.
 - `input_text.hc_dispatch_batch_callers` clears to `none`.
 - Batch zones restore to baseline setpoints.
+Note:
+- If manual override abort is enabled, any manual setpoint change during a batch will immediately abort the batch, restore baselines, and turn dispatcher OFF.
 
 ## Debug Checklist
 If a test fails, inspect:
@@ -63,12 +77,15 @@ If a test fails, inspect:
 - `input_text.hc_dispatch_loop_marker`
 - `input_text.hc_dispatch_batch_callers`
 - `input_text.hc_dispatch_last_batch_zones`
+- `sensor.hc_cluster_a_average_temp` (should be numeric when Cluster A has members)
+- `input_boolean.hc_dispatcher_mode_enabled` (manual override abort turns this OFF)
 
 Common issues:
 - Cluster assignments reset after helper reload.
 - Caller setpoint changes not reflected in baseline helpers.
 - Non-callers already calling at batch start.
 - Broadcast setpoints overriding dispatcher setpoints.
+- Cluster average temp sensors show `unavailable` when a cluster is empty (expected).
 
 ## Safe Testing Notes
 - Use low-risk windows when testing in production.

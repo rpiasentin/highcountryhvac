@@ -10,10 +10,14 @@
 2. Review recent changes against `inventories/poc_compare_report.md`.
 3. Run Home Assistant “Check configuration” and resolve any errors.
 4. After restart, confirm `sensor.hc_dispatch_suggested_batch` is not `unknown`.
+5. Run `tools/ha_entity_audit.sh`; ignore cluster average temp sensors when clusters are empty.
+6. Confirm the rollback reference exists: manual backup **“tuesday feb 10 before rewrite.”**
+7. If using the registry rewrite, complete `docs/DISPATCHER_REGISTRY_CUTOVER.md`.
 
 ## Cluster Prerequisites (Matrix Tests)
 1. Ensure cluster assignments are restored after any helper reload.
 2. Example: set Z3, Z7, Z9 to Cluster A and Z5 to Independent.
+3. Ensure Z8 thermostat uses `sensor.dining_temp_temperature` as its temperature sensor.
 
 ## Prod-Only Safe Test (When Staging Is Unavailable)
 1. Keep dispatcher gate OFF while loading new helpers and dashboards.
@@ -34,6 +38,13 @@
 3. Induce a Matrix batch and manually approve it.
 4. Verify setpoints are adjusted for the approved batch and restored afterward.
 5. Confirm minimum run time is enforced (10 minutes) before shutoff.
+6. Manual override abort: change a batch zone setpoint and verify batch clears, baselines restore, and dispatcher turns OFF.
+
+## Manual Change Global Abort (Post-Rearchitecture)
+1. With dispatcher ON, change any thermostat setpoint manually.
+2. Verify all dispatcher-touched zones restore to baseline.
+3. Verify dispatcher turns OFF immediately.
+4. Verify cooldown blocks re-analysis for the configured duration.
 
 ## Forced-Call Behavior
 1. Select a batch with at least one added zone.
