@@ -44,6 +44,25 @@ Expected:
 - `input_text.hc_dispatch_reg_active_zones` reflects the batch.
 - Added zones receive forced setpoints.
 
+### Registry Manual Abort Test
+Script: `ha_dispatch_reg_test_manual_abort.sh`
+Purpose: confirm global manual-change abort + cooldown.
+
+Steps:
+1. Run:
+   ```bash
+   /config/hc_tools/ha_dispatch_reg_test_manual_abort.sh
+   ```
+2. The script will:
+   - Create a batch.
+   - Manually change one thermostat setpoint.
+   - Verify dispatcher state moves to `cooldown` and gate turns OFF.
+
+Expected:
+- `input_select.hc_dispatch_reg_state` = `cooldown`.
+- `input_text.hc_dispatch_reg_active_zones` = `none`.
+- Dispatcher master gate = `off`.
+
 ### 1) Matrix Start Test
 Script: `ha_dispatch_test_matrix.sh`
 Purpose: confirm Matrix batching and forced-call behavior.

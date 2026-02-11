@@ -46,6 +46,11 @@
 3. Verify registry sensors show batch, callers, and active zones.
 4. Confirm added zones are forced and restore behavior is correct.
 
+## Registry Manual Abort Test (Rewrite)
+1. Run `ha_dispatch_reg_test_manual_abort.sh`.
+2. Verify dispatcher state moves to `cooldown` and gate turns OFF.
+3. Verify active zones clear and baselines restore.
+
 ## Manual Change Global Abort (Post-Rearchitecture)
 1. With dispatcher ON, change any thermostat setpoint manually.
 2. Verify all dispatcher-touched zones restore to baseline.
