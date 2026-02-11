@@ -40,6 +40,12 @@
 5. Confirm minimum run time is enforced (10 minutes) before shutoff.
 6. Manual override abort: change a batch zone setpoint and verify batch clears, baselines restore, and dispatcher turns OFF.
 
+## Registry Matrix Test (Rewrite)
+1. Complete `docs/DISPATCHER_REGISTRY_CUTOVER.md`.
+2. Run `ha_dispatch_reg_test_matrix.sh`.
+3. Verify registry sensors show batch, callers, and active zones.
+4. Confirm added zones are forced and restore behavior is correct.
+
 ## Manual Change Global Abort (Post-Rearchitecture)
 1. With dispatcher ON, change any thermostat setpoint manually.
 2. Verify all dispatcher-touched zones restore to baseline.

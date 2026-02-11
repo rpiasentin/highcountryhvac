@@ -23,6 +23,27 @@ Scripts are in `tools/` and should be copied to `/config/hc_tools/` in HA.
 Before using the registry rewrite, follow:
 - `docs/DISPATCHER_REGISTRY_CUTOVER.md`
 
+### Registry Matrix Test (New Dispatcher)
+Script: `ha_dispatch_reg_test_matrix.sh`
+Purpose: confirm registry-based Matrix batching and manual-approval flow.
+
+Steps:
+1. Run:
+   ```bash
+   /config/hc_tools/ha_dispatch_reg_test_matrix.sh
+   ```
+2. The script will:
+   - Enable registry helpers.
+   - Set Matrix mode.
+   - Create a manual call (triggers cooldown).
+   - Wait for cooldown to expire.
+   - Enable dispatcher gate and approve batch.
+
+Expected:
+- `sensor.hc_dispatch_reg_suggested_batch` shows Z3 + Z7 + Z9.
+- `input_text.hc_dispatch_reg_active_zones` reflects the batch.
+- Added zones receive forced setpoints.
+
 ### 1) Matrix Start Test
 Script: `ha_dispatch_test_matrix.sh`
 Purpose: confirm Matrix batching and forced-call behavior.

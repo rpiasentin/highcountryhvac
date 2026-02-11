@@ -194,7 +194,7 @@ template:
               {% set final_zones = callers %}
               {% if (callers_length + external_length) > max_ft %}
                 {% set guardrail = 'blocked_over_max' %}
-                {% set final_zones = callers %}
+                {% set final_zones = [] %}
               {% endif %}
             {% else %}
               {% set final_zones = base_zones %}
