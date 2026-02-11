@@ -203,9 +203,12 @@ automation:
       - variables:
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
           eid: "{{ trigger.entity_id }}"
-          manual_change: >
+          manual_change_raw: >
             {{ trigger.to_state.context.user_id is not none
                or trigger.to_state.context.parent_id is none }}
+          manual_change: >
+            {{ manual_change_raw
+               and not (eid == 'input_boolean.hc_dispatcher_mode_enabled' and trigger.to_state.state == 'on') }}
           change_type: >
             {% if eid.startswith('input_select.hc_z') and eid.endswith('_cluster') %}
               cluster_change
