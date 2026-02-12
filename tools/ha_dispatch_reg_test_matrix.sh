@@ -53,6 +53,21 @@ wait_for_reg_idle() {
   return 1
 }
 
+wait_for_reg_state() {
+  local target="$1"
+  local max_wait="${2:-60}"
+  local waited=0
+  while [ "$waited" -lt "$max_wait" ]; do
+    st="$(get_state "input_select.hc_dispatch_reg_state")"
+    if [ "$st" = "$target" ]; then
+      return 0
+    fi
+    sleep 2
+    waited=$((waited+2))
+  done
+  return 1
+}
+
 echo "[1/6] Disable registry + dispatcher, set modes (avoids manual-abort during config)"
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
@@ -75,7 +90,10 @@ CALLER_BASELINE="$(get_attr_temperature "${CALLER_CLIMATE}")"
 api_post "services/climate/set_temperature" \
   "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${TARGET_F}}"
 
-echo "[3/6] Wait for cooldown to expire"
+echo "[3/6] Wait for cooldown to start"
+wait_for_reg_state "cooldown" 60 || echo "Cooldown did not start within 60s (continuing)"
+
+echo "[3.5/6] Wait for cooldown to expire"
 if ! wait_for_reg_idle; then
   echo "Cooldown did not expire in ${COOLDOWN_WAIT_SEC}s"
   exit 1
