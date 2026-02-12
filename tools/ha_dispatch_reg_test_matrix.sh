@@ -9,7 +9,7 @@ BASE_URL="http://supervisor/core/api"
 AUTH_HEADER="Authorization: Bearer ${SUPERVISOR_TOKEN:?SUPERVISOR_TOKEN missing}"
 
 TARGET_F=${TARGET_F:-70}
-CALLER_ZONE=${CALLER_ZONE:-z3}
+CALLER_ZONE=${CALLER_ZONE:-z7}
 BASE_ZONES=("z3" "z7" "z9")
 COOLDOWN_WAIT_SEC=${COOLDOWN_WAIT_SEC:-360}
 RESTORE_CALLER=${RESTORE_CALLER:-0}
@@ -38,6 +38,22 @@ get_state() {
 get_attr_temperature() {
   local entity="$1"
   api_get "states/$entity" | sed -n 's/.*"temperature":\([^,}]*\).*/\1/p'
+}
+
+wait_for_call_state() {
+  local entity="$1"
+  local target="$2"
+  local max_wait="${3:-120}"
+  local waited=0
+  while [ "$waited" -lt "$max_wait" ]; do
+    st="$(get_state "$entity")"
+    if [ "$st" = "$target" ]; then
+      return 0
+    fi
+    sleep 2
+    waited=$((waited+2))
+  done
+  return 1
 }
 
 wait_for_reg_idle() {
@@ -87,8 +103,21 @@ echo "[2/6] Create a caller by setting thermostat (will trigger cooldown)"
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
 CALLER_CLIMATE="${!CALLER_CLIMATE_VAR}"
 CALLER_BASELINE="$(get_attr_temperature "${CALLER_CLIMATE}")"
+CALLER_CURRENT="$(get_attr_temperature "${CALLER_CLIMATE}")"
+LOW_F="$(python3 - <<PY
+curr=float("${CALLER_CURRENT:-0}")
+low=max(55.0, curr-5.0)
+print(f\"{low:.1f}\")
+PY
+)"
+echo "  - step: drop setpoint to ${LOW_F} to clear call (if any)"
+api_post "services/climate/set_temperature" \
+  "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${LOW_F}}"
+wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "off" 90 || echo "  - warning: call did not clear in 90s"
+echo "  - step: raise setpoint to ${TARGET_F} to create call"
 api_post "services/climate/set_temperature" \
   "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${TARGET_F}}"
+wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "on" 90 || echo "  - warning: call did not start in 90s"
 
 echo "[3/6] Wait for cooldown to start"
 wait_for_reg_state "cooldown" 60 || echo "Cooldown did not start within 60s (continuing)"
