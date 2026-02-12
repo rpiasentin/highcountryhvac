@@ -154,6 +154,8 @@ views:
             title: Gatekeeper
             show_header_toggle: false
             entities:
+              - entity: input_boolean.hc_dispatch_reg_enabled
+                name: Registry Enabled
               - entity: input_boolean.hc_dispatcher_mode_enabled
                 name: Dispatcher Mode Enabled
               - entity: input_boolean.hc_enable_cold_tolerance_gate
@@ -204,8 +206,6 @@ views:
             title: Registry Status (Rewrite)
             show_header_toggle: false
             entities:
-              - entity: input_boolean.hc_dispatch_reg_enabled
-                name: Registry Enabled
               - entity: input_select.hc_dispatch_reg_state
                 name: Registry State
               - entity: sensor.hc_dispatch_reg_suggested_batch
