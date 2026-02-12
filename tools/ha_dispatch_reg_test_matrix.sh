@@ -66,6 +66,7 @@ api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_di
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_delta_f","value":1.0}'
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_cap_f","value":75}'
 api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_reg_state","option":"idle"}'
+api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 
 echo "[2/6] Create a caller by setting thermostat (will trigger cooldown)"
@@ -81,8 +82,7 @@ if ! wait_for_reg_idle; then
   exit 1
 fi
 
-echo "[4/6] Enable dispatcher gate"
-api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
+echo "[4/6] Dispatcher gate already enabled"
 
 echo "[5/6] Wait for registry suggested batch"
 for i in $(seq 1 20); do
