@@ -53,8 +53,8 @@ wait_for_reg_idle() {
   return 1
 }
 
-echo "[1/6] Enable registry + set modes"
-api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
+echo "[1/6] Disable registry, set modes (avoids manual-abort during config)"
+api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_auto_approve"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_opportunistic_enabled"}'
@@ -65,6 +65,8 @@ api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispat
 api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_force_mode","option":"Added Only"}'
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_delta_f","value":1.0}'
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_cap_f","value":75}'
+api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_reg_state","option":"idle"}'
+api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 
 echo "[2/6] Create a caller by setting thermostat (will trigger cooldown)"
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
