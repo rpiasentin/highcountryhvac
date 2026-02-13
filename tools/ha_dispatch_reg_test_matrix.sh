@@ -40,6 +40,16 @@ get_attr_temperature() {
   api_get "states/$entity" | sed -n 's/.*"temperature":\([^,}]*\).*/\1/p'
 }
 
+assert_not_unavailable() {
+  local entity="$1"
+  local st
+  st="$(get_state "$entity")"
+  if [ "$st" = "unavailable" ] || [ -z "$st" ]; then
+    echo "ERROR: ${entity} is unavailable. Fix config/reload before testing."
+    exit 1
+  fi
+}
+
 wait_for_call_state() {
   local entity="$1"
   local target="$2"
@@ -97,7 +107,13 @@ api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_di
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_delta_f","value":1.0}'
 api_post "services/input_number/set_value" '{"entity_id":"input_number.hc_dispatch_force_cap_f","value":75}'
 api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_reg_state","option":"idle"}'
+for z in z3 z7 z9; do
+  api_post "services/input_select/select_option" "{\"entity_id\":\"input_select.hc_${z}_cluster\",\"option\":\"Cluster A\"}"
+done
+api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_z5_cluster","option":"Independent"}'
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
+
+assert_not_unavailable "automation.hc_dispatch_registry_apply_batch"
 
 echo "[2/6] Create a caller by setting thermostat (will trigger cooldown)"
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
