@@ -161,7 +161,13 @@ template:
 
               {% set base_zones = callers %}
               {% if group|length > 0 %}
-                {% set active_in_group = callers | select('in', group) | list %}
+                {% set active_ns = namespace(list=[]) %}
+                {% for z in callers %}
+                  {% if z in group %}
+                    {% set active_ns.list = active_ns.list + [z] %}
+                  {% endif %}
+                {% endfor %}
+                {% set active_in_group = active_ns.list %}
                 {% if active_in_group|length > 0 %}
                   {% set base_zones = group %}
                 {% elif profile == 'Whole House (Z1-Z9)' %}
