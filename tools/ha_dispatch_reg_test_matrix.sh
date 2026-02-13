@@ -113,6 +113,17 @@ short_state() {
   printf "%-55s %s\n" "$entity" "$st"
 }
 
+assert_state() {
+  local entity="$1"
+  local expected="$2"
+  local st
+  st="$(get_state "$entity")"
+  if [ "$st" != "$expected" ]; then
+    echo "ERROR: ${entity} expected ${expected}, got ${st}"
+    exit 1
+  fi
+}
+
 echo "[1/6] Disable registry + dispatcher, set modes (avoids manual-abort during config)"
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
@@ -133,6 +144,7 @@ api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_z5
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 
 assert_not_unavailable "automation.hc_dispatch_registry_apply_batch"
+assert_state "input_boolean.hc_dispatch_reg_enabled" "on"
 mkdir -p "$REPORT_DIR"
 {
   echo "Dispatch Registry Matrix Test"
@@ -186,10 +198,14 @@ sleep 6
 echo "[6/6] Debug snapshot"
 for entity in \
   sensor.hc_dispatch_reg_suggested_batch \
+  sensor.hc_dispatch_reg_guardrail_payload \
   sensor.hc_dispatch_reg_guardrail \
+  input_boolean.hc_dispatch_reg_enabled \
+  input_boolean.hc_dispatcher_mode_enabled \
   input_text.hc_dispatch_reg_active_zones \
   input_text.hc_dispatch_reg_active_callers \
   input_select.hc_dispatch_reg_state \
+  input_datetime.hc_dispatch_reg_cooldown_until \
   input_text.hc_dispatch_reg_manual_change_entity \
   input_select.hc_dispatch_reg_manual_change_type \
   input_datetime.hc_dispatch_reg_manual_change_at \
@@ -204,6 +220,8 @@ done
 
 echo "Summary:"
 short_state "input_select.hc_dispatch_reg_state"
+short_state "input_boolean.hc_dispatch_reg_enabled"
+short_state "input_boolean.hc_dispatcher_mode_enabled"
 short_state "input_text.hc_dispatch_reg_manual_change_entity"
 short_state "input_select.hc_dispatch_reg_manual_change_type"
 short_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat"
