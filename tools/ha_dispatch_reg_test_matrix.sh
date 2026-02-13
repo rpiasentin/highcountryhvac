@@ -13,6 +13,9 @@ CALLER_ZONE=${CALLER_ZONE:-z7}
 BASE_ZONES=("z3" "z7" "z9")
 COOLDOWN_WAIT_SEC=${COOLDOWN_WAIT_SEC:-360}
 RESTORE_CALLER=${RESTORE_CALLER:-0}
+REPORT_DIR=${REPORT_DIR:-/config/reports}
+TS="$(date +%Y%m%d_%H%M%S)"
+REPORT_FILE="${REPORT_DIR}/dispatch_reg_matrix_${TS}.log"
 
 CLIMATE_MAP_z3="climate.zone_3_basement_bath_and_common"
 CLIMATE_MAP_z7="climate.zone_7_basement_bar_and_tv_room_south_side"
@@ -94,6 +97,22 @@ wait_for_reg_state() {
   return 1
 }
 
+write_snapshot() {
+  local path="$1"
+  {
+    echo "### $path"
+    api_get "states/$path"
+    echo
+  } >> "$REPORT_FILE"
+}
+
+short_state() {
+  local entity="$1"
+  local st
+  st="$(get_state "$entity")"
+  printf "%-55s %s\n" "$entity" "$st"
+}
+
 echo "[1/6] Disable registry + dispatcher, set modes (avoids manual-abort during config)"
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
@@ -114,6 +133,14 @@ api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_z5
 api_post "services/input_boolean/turn_on" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 
 assert_not_unavailable "automation.hc_dispatch_registry_apply_batch"
+mkdir -p "$REPORT_DIR"
+{
+  echo "Dispatch Registry Matrix Test"
+  echo "Timestamp: $TS"
+  echo "Caller zone: $CALLER_ZONE"
+  echo "Target temp: $TARGET_F"
+  echo
+} > "$REPORT_FILE"
 
 echo "[2/6] Create a caller by setting thermostat (will trigger cooldown)"
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
@@ -157,22 +184,32 @@ api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_a
 sleep 6
 
 echo "[6/6] Debug snapshot"
-api_get "states/sensor.hc_dispatch_reg_suggested_batch"
-echo
-api_get "states/sensor.hc_dispatch_reg_guardrail"
-echo
-api_get "states/input_text.hc_dispatch_reg_active_zones"
-echo
-api_get "states/input_text.hc_dispatch_reg_active_callers"
-echo
-api_get "states/input_select.hc_dispatch_reg_state"
-echo
-api_get "states/climate.zone_7_basement_bar_and_tv_room_south_side"
-echo
-api_get "states/climate.zone_3_basement_bath_and_common"
-echo
-api_get "states/climate.zone_9_basement_bedroom"
-echo
+for entity in \
+  sensor.hc_dispatch_reg_suggested_batch \
+  sensor.hc_dispatch_reg_guardrail \
+  input_text.hc_dispatch_reg_active_zones \
+  input_text.hc_dispatch_reg_active_callers \
+  input_select.hc_dispatch_reg_state \
+  input_text.hc_dispatch_reg_manual_change_entity \
+  input_select.hc_dispatch_reg_manual_change_type \
+  input_datetime.hc_dispatch_reg_manual_change_at \
+  automation.hc_dispatch_registry_apply_batch \
+  binary_sensor.hc_${CALLER_ZONE}_call_for_heat \
+  input_boolean.hc_dispatch_reg_${CALLER_ZONE}_calling \
+  climate.zone_7_basement_bar_and_tv_room_south_side \
+  climate.zone_3_basement_bath_and_common \
+  climate.zone_9_basement_bedroom; do
+  write_snapshot "$entity"
+done
+
+echo "Summary:"
+short_state "input_select.hc_dispatch_reg_state"
+short_state "input_text.hc_dispatch_reg_manual_change_entity"
+short_state "input_select.hc_dispatch_reg_manual_change_type"
+short_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat"
+short_state "input_boolean.hc_dispatch_reg_${CALLER_ZONE}_calling"
+short_state "automation.hc_dispatch_registry_apply_batch"
+echo "Full snapshot saved to: $REPORT_FILE"
 
 if [ "${RESTORE_CALLER}" = "1" ] && [ -n "${CALLER_BASELINE}" ]; then
   echo "[restore] Reset caller zone setpoint to baseline (${CALLER_BASELINE})"
