@@ -72,7 +72,13 @@ template:
             {% set live_callers = live_ns.list %}
 
             {% set callers = frozen_callers if reg_state == 'batch_active' and frozen_callers|length > 0 else live_callers %}
-            {% set external_callers = live_callers | reject('in', callers) | list %}
+            {% set ext_ns = namespace(list=[]) %}
+            {% for z in live_callers %}
+              {% if z not in callers %}
+                {% set ext_ns.list = ext_ns.list + [z] %}
+              {% endif %}
+            {% endfor %}
+            {% set external_callers = ext_ns.list %}
 
             {% set near_ns = namespace(list=[]) %}
             {% for z in range(1,10) %}
