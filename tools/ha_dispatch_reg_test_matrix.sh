@@ -149,7 +149,7 @@ for line in lines:
             out.append(line[10:])
         else:
             out.append(line.lstrip())
-open(sys.argv[1],'w').write("\\n".join(out).rstrip()+\"\\n\")
+open(sys.argv[1],'w').write("\n".join(out).rstrip()+"\n")
 PY
   python3 - <<'PY' "$tmpl_file" "$json_file"
 import json,sys
