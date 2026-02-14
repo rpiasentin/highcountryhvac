@@ -42,20 +42,41 @@ get_state() {
 get_attr() {
   local entity="$1"
   local attr="$2"
-  api_get "states/$entity" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d.get("attributes",{}).get(sys.argv[1],""))' "$attr"
+  api_get "states/$entity" | python3 - "$attr" <<'PY'
+import json,sys
+attr=sys.argv[1]
+raw=sys.stdin.read().strip()
+if not raw:
+    print("")
+    raise SystemExit(0)
+try:
+    d=json.loads(raw)
+except Exception:
+    print("")
+    raise SystemExit(0)
+print(d.get("attributes",{}).get(attr,""))
+PY
 }
 
 get_payload_field() {
   local field="$1"
-  api_get "states/sensor.hc_dispatch_reg_guardrail_payload" | python3 - <<'PY' "$field"
+  api_get "states/sensor.hc_dispatch_reg_guardrail_payload" | python3 - "$field" <<'PY'
 import json,sys
-d=json.load(sys.stdin)
+raw=sys.stdin.read().strip()
+if not raw:
+    print("")
+    raise SystemExit(0)
+try:
+    d=json.loads(raw)
+except Exception:
+    print("")
+    raise SystemExit(0)
 s=d.get("state","")
 try:
     data=json.loads(s)
 except Exception:
     print("")
-    sys.exit(0)
+    raise SystemExit(0)
 print(data.get(sys.argv[1],""))
 PY
 }
