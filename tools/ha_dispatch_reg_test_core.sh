@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ERR_LINE=""
+ERR_CMD=""
+
 # Core registry test: Matrix cluster, Matrix near-call (opportunistic), Profile group.
 # Intentionally disables manual-abort automation during the test to avoid cooldown gating.
 
@@ -150,9 +153,16 @@ set_temp() {
   api_post "services/climate/set_temperature" "{\"entity_id\":\"${climate}\",\"temperature\":${value}}"
 }
 
-header() { echo "== $1 =="; }
-pass() { echo "PASS: $*"; }
-fail() { echo "FAIL: $*"; }
+say() {
+  echo "$*"
+  echo "$*" >> "$REPORT_FILE"
+}
+
+header() { say "== $1 =="; }
+pass() { say "PASS: $*"; }
+fail() { say "FAIL: $*"; }
+
+trap 'say "ERROR line ${LINENO}: ${BASH_COMMAND}"' ERR
 
 log() { echo "$*" >> "$REPORT_FILE"; }
 
@@ -374,4 +384,4 @@ fi
 
 header "Restore"
 set_automation "automation.hc_dispatch_registry_manual_abort" "turn_on"
-echo "Full snapshot saved to: $REPORT_FILE"
+say "Full snapshot saved to: $REPORT_FILE"
