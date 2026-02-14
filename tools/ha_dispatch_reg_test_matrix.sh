@@ -124,23 +124,33 @@ assert_state() {
   fi
 }
 
-extract_guardrail_template() {
-  awk '
-    /name: "HC Dispatch Reg Guardrail Payload"/ {in=1}
-    in && /state: >/ {state=1; next}
-    state {
-      if ($0 ~ /^        attributes:/) {exit}
-      sub(/^          /,"")
-      print
-    }
-  ' /config/packages/hc_dispatcher_registry_guardrail.yaml
-}
-
 diag_guardrail_template() {
   local tmpl_file="${REPORT_DIR}/guardrail_template_${TS}.j2"
   local json_file="${REPORT_DIR}/guardrail_template_${TS}.json"
   local resp_file="${REPORT_DIR}/guardrail_template_${TS}.out"
-  extract_guardrail_template > "$tmpl_file"
+  python3 - <<'PY' "$tmpl_file"
+import sys
+path="/config/packages/hc_dispatcher_registry_guardrail.yaml"
+lines=open(path).read().splitlines()
+out=[]
+in_block=False
+state_block=False
+for line in lines:
+    if 'name: "HC Dispatch Reg Guardrail Payload"' in line:
+        in_block=True
+        continue
+    if in_block and line.strip().startswith("state: >"):
+        state_block=True
+        continue
+    if state_block:
+        if line.startswith("        attributes:"):
+            break
+        if line.startswith("          "):
+            out.append(line[10:])
+        else:
+            out.append(line.lstrip())
+open(sys.argv[1],'w').write("\\n".join(out).rstrip()+\"\\n\")
+PY
   python3 - <<'PY' "$tmpl_file" "$json_file"
 import json,sys
 tmpl=open(sys.argv[1]).read()
@@ -149,6 +159,7 @@ PY
   curl -s -H "$AUTH_HEADER" -H "Content-Type: application/json" \
     -X POST "$BASE_URL/template" -d @"$json_file" > "$resp_file"
   echo "Guardrail template eval saved to: $resp_file"
+  echo "Guardrail template source saved to: $tmpl_file"
 }
 
 echo "[1/6] Disable registry + dispatcher, set modes (avoids manual-abort during config)"
