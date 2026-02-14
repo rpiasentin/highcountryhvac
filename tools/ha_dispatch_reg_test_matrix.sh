@@ -124,6 +124,33 @@ assert_state() {
   fi
 }
 
+extract_guardrail_template() {
+  awk '
+    /name: "HC Dispatch Reg Guardrail Payload"/ {in=1}
+    in && /state: >/ {state=1; next}
+    state {
+      if ($0 ~ /^        attributes:/) {exit}
+      sub(/^          /,"")
+      print
+    }
+  ' /config/packages/hc_dispatcher_registry_guardrail.yaml
+}
+
+diag_guardrail_template() {
+  local tmpl_file="${REPORT_DIR}/guardrail_template_${TS}.j2"
+  local json_file="${REPORT_DIR}/guardrail_template_${TS}.json"
+  local resp_file="${REPORT_DIR}/guardrail_template_${TS}.out"
+  extract_guardrail_template > "$tmpl_file"
+  python3 - <<'PY' "$tmpl_file" "$json_file"
+import json,sys
+tmpl=open(sys.argv[1]).read()
+open(sys.argv[2],'w').write(json.dumps({"template": tmpl}))
+PY
+  curl -s -H "$AUTH_HEADER" -H "Content-Type: application/json" \
+    -X POST "$BASE_URL/template" -d @"$json_file" > "$resp_file"
+  echo "Guardrail template eval saved to: $resp_file"
+}
+
 echo "[1/6] Disable registry + dispatcher, set modes (avoids manual-abort during config)"
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatch_reg_enabled"}'
 api_post "services/input_boolean/turn_off" '{"entity_id":"input_boolean.hc_dispatcher_mode_enabled"}'
@@ -228,6 +255,11 @@ short_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat"
 short_state "input_boolean.hc_dispatch_reg_${CALLER_ZONE}_calling"
 short_state "automation.hc_dispatch_registry_apply_batch"
 echo "Full snapshot saved to: $REPORT_FILE"
+
+if [ "$(get_state "sensor.hc_dispatch_reg_guardrail_payload")" = "unknown" ]; then
+  echo "Guardrail payload is unknown; running template eval..."
+  diag_guardrail_template
+fi
 
 if [ "${RESTORE_CALLER}" = "1" ] && [ -n "${CALLER_BASELINE}" ]; then
   echo "[restore] Reset caller zone setpoint to baseline (${CALLER_BASELINE})"
