@@ -78,8 +78,8 @@ automation:
             climate.zone_5_virtual_thermostat_first_floor_living: z5
             climate.zone_6_master_thermostat: z6
             climate.zone_7_basement_bar_and_tv_room_south_side: z7
-          climate.zone_8_dining_room: z8
-          climate.zone_9_basement_bedroom: z9
+            climate.zone_8_dining_room: z8
+            climate.zone_9_basement_bedroom: z9
           z: "{{ climate_map.get(trigger.entity_id) }}"
           new_temp: "{{ state_attr(trigger.entity_id, 'temperature')|float(0) }}"
           apply_in_progress: "{{ is_state('input_boolean.hc_dispatch_reg_apply_in_progress','on') }}"
