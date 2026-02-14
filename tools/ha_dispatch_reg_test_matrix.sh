@@ -186,7 +186,7 @@ CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
 CALLER_CLIMATE="${!CALLER_CLIMATE_VAR}"
 CALLER_BASELINE="$(get_attr_temperature "${CALLER_CLIMATE}")"
 CALLER_CURRENT="$(get_attr_temperature "${CALLER_CLIMATE}")"
-LOW_F="$(awk -v curr="${CALLER_CURRENT:-0}" 'BEGIN{low=curr-5; if(low<55) low=55; printf "%.1f", low}')"
+LOW_F="51.0"
 echo "  - step: drop setpoint to ${LOW_F} to clear call (if any)"
 api_post "services/climate/set_temperature" \
   "{\"entity_id\":\"${CALLER_CLIMATE}\",\"temperature\":${LOW_F}}"
