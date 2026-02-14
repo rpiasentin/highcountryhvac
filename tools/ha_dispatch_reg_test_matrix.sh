@@ -69,19 +69,6 @@ wait_for_call_state() {
   return 1
 }
 
-wait_for_reg_idle() {
-  local waited=0
-  while [ "$waited" -lt "$COOLDOWN_WAIT_SEC" ]; do
-    st="$(get_state "input_select.hc_dispatch_reg_state")"
-    if [ "$st" = "idle" ]; then
-      return 0
-    fi
-    sleep 5
-    waited=$((waited+5))
-  done
-  return 1
-}
-
 wait_for_reg_state() {
   local target="$1"
   local max_wait="${2:-60}"
@@ -93,6 +80,39 @@ wait_for_reg_state() {
     fi
     sleep 2
     waited=$((waited+2))
+  done
+  return 1
+}
+
+cooldown_active() {
+  local state until
+  state="$(get_state "input_select.hc_dispatch_reg_state")"
+  if [ "$state" != "cooldown" ]; then
+    echo "inactive"
+    return 0
+  fi
+  until="$(get_state "input_datetime.hc_dispatch_reg_cooldown_until")"
+  python3 - <<'PY' "$until"
+import sys,datetime
+s=sys.argv[1]
+try:
+    dt=datetime.datetime.strptime(s, "%Y-%m-%d %H:%M:%S")
+except Exception:
+    print("active")
+    sys.exit(0)
+print("active" if datetime.datetime.now() < dt else "inactive")
+PY
+}
+
+wait_for_cooldown_clear() {
+  local max_wait="${COOLDOWN_WAIT_SEC}"
+  local waited=0
+  while [ "$waited" -lt "$max_wait" ]; do
+    if [ "$(cooldown_active)" = "inactive" ]; then
+      return 0
+    fi
+    sleep 5
+    waited=$((waited+5))
   done
   return 1
 }
@@ -208,11 +228,14 @@ api_post "services/climate/set_temperature" \
 wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "on" 90 || echo "  - warning: call did not start in 90s"
 
 echo "[3/6] Wait for cooldown to start"
-wait_for_reg_state "cooldown" 60 || echo "Cooldown did not start within 60s (continuing)"
+if ! wait_for_reg_state "cooldown" 60; then
+  st="$(get_state "input_select.hc_dispatch_reg_state")"
+  echo "Cooldown did not start within 60s (state=${st}). Continuing..."
+fi
 
-echo "[3.5/6] Wait for cooldown to expire"
-if ! wait_for_reg_idle; then
-  echo "Cooldown did not expire in ${COOLDOWN_WAIT_SEC}s"
+echo "[3.5/6] Wait for cooldown to clear"
+if ! wait_for_cooldown_clear; then
+  echo "Cooldown did not clear in ${COOLDOWN_WAIT_SEC}s"
   exit 1
 fi
 
