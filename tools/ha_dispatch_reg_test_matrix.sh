@@ -43,6 +43,12 @@ get_attr_temperature() {
   api_get "states/$entity" | sed -n 's/.*"temperature":\([^,}]*\).*/\1/p'
 }
 
+get_attr() {
+  local entity="$1"
+  local attr="$2"
+  api_get "states/$entity" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d.get("attributes",{}).get(sys.argv[1],""))' "$attr"
+}
+
 assert_not_unavailable() {
   local entity="$1"
   local st
@@ -85,23 +91,23 @@ wait_for_reg_state() {
 }
 
 cooldown_active() {
-  local state until
+  local state until_ts now_ts
   state="$(get_state "input_select.hc_dispatch_reg_state")"
   if [ "$state" != "cooldown" ]; then
     echo "inactive"
     return 0
   fi
-  until="$(get_state "input_datetime.hc_dispatch_reg_cooldown_until")"
-  python3 - <<'PY' "$until"
-import sys,datetime
-s=sys.argv[1]
-try:
-    dt=datetime.datetime.strptime(s, "%Y-%m-%d %H:%M:%S")
-except Exception:
-    print("active")
-    sys.exit(0)
-print("active" if datetime.datetime.now() < dt else "inactive")
-PY
+  until_ts="$(get_attr "input_datetime.hc_dispatch_reg_cooldown_until" "timestamp")"
+  if [ -z "$until_ts" ] || [ "$until_ts" = "None" ]; then
+    echo "active"
+    return 0
+  fi
+  now_ts="$(date +%s)"
+  if [ "$now_ts" -lt "${until_ts%.*}" ]; then
+    echo "active"
+  else
+    echo "inactive"
+  fi
 }
 
 wait_for_cooldown_clear() {
@@ -115,6 +121,21 @@ wait_for_cooldown_clear() {
     waited=$((waited+5))
   done
   return 1
+}
+
+cooldown_expired() {
+  local until_ts now_ts
+  until_ts="$(get_attr "input_datetime.hc_dispatch_reg_cooldown_until" "timestamp")"
+  if [ -z "$until_ts" ] || [ "$until_ts" = "None" ]; then
+    echo "no"
+    return 0
+  fi
+  now_ts="$(date +%s)"
+  if [ "$now_ts" -ge "${until_ts%.*}" ]; then
+    echo "yes"
+  else
+    echo "no"
+  fi
 }
 
 write_snapshot() {
@@ -237,6 +258,10 @@ echo "[3.5/6] Wait for cooldown to clear"
 if ! wait_for_cooldown_clear; then
   echo "Cooldown did not clear in ${COOLDOWN_WAIT_SEC}s"
   exit 1
+fi
+if [ "$(get_state "input_select.hc_dispatch_reg_state")" = "cooldown" ] && [ "$(cooldown_expired)" = "yes" ]; then
+  echo "Cooldown expired but state still cooldown; forcing idle"
+  api_post "services/input_select/select_option" '{"entity_id":"input_select.hc_dispatch_reg_state","option":"idle"}'
 fi
 
 echo "[4/6] Enable dispatcher gate (after cooldown)"
