@@ -101,6 +101,9 @@ automation:
       - condition: state
         entity_id: input_boolean.hc_dispatch_reg_enabled
         state: "on"
+      - condition: state
+        entity_id: input_boolean.hc_dispatch_reg_ignore_manual_changes
+        state: "off"
     action:
       - service: input_boolean.turn_on
         target:

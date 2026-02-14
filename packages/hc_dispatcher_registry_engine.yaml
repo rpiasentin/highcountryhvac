@@ -84,9 +84,11 @@ automation:
           new_temp: "{{ state_attr(trigger.entity_id, 'temperature')|float(0) }}"
           apply_in_progress: "{{ is_state('input_boolean.hc_dispatch_reg_apply_in_progress','on') }}"
           reg_state: "{{ states('input_select.hc_dispatch_reg_state') }}"
+          ignore_manual: "{{ is_state('input_boolean.hc_dispatch_reg_ignore_manual_changes','on') }}"
           manual_change: >
             {{ trigger.to_state.context.user_id is not none
                or (not apply_in_progress and trigger.to_state.context.parent_id is none) }}
+          manual_change_effective: "{{ manual_change and not ignore_manual }}"
           now_str: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
       - condition: template
         value_template: "{{ z is not none and new_temp > 0 }}"
@@ -98,7 +100,7 @@ automation:
       - choose:
           - conditions:
               - condition: template
-                value_template: "{{ manual_change }}"
+                value_template: "{{ manual_change_effective }}"
             sequence:
               - service: input_number.set_value
                 target:
@@ -132,7 +134,7 @@ automation:
                   option: thermostat_setpoint
           - conditions:
               - condition: template
-                value_template: "{{ reg_state != 'batch_active' and not manual_change }}"
+                value_template: "{{ reg_state != 'batch_active' and not manual_change_effective }}"
             sequence:
               - service: input_number.set_value
                 target:
@@ -206,8 +208,10 @@ automation:
           manual_change_raw: >
             {{ trigger.to_state.context.user_id is not none
                or trigger.to_state.context.parent_id is none }}
+          ignore_manual: "{{ is_state('input_boolean.hc_dispatch_reg_ignore_manual_changes','on') }}"
           manual_change: >
             {{ manual_change_raw
+               and not ignore_manual
                and not (eid == 'input_boolean.hc_dispatcher_mode_enabled' and trigger.to_state.state == 'on') }}
           change_type: >
             {% if eid.startswith('input_select.hc_z') and eid.endswith('_cluster') %}

@@ -154,6 +154,8 @@ views:
             title: Gatekeeper
             show_header_toggle: false
             entities:
+              - entity: input_boolean.hc_dispatch_reg_ignore_manual_changes
+                name: Ignore Manual Change Detection
               - entity: input_boolean.hc_dispatch_reg_enabled
                 name: Registry Enabled
               - entity: input_boolean.hc_dispatcher_mode_enabled

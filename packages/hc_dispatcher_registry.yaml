@@ -7,6 +7,10 @@ input_boolean:
     name: HC Dispatch Registry Enabled
     icon: mdi:database
     initial: off
+  hc_dispatch_reg_ignore_manual_changes:
+    name: HC Dispatch Ignore Manual Changes
+    icon: mdi:shield-off
+    initial: off
   hc_dispatch_reg_apply_in_progress:
     name: HC Dispatch Registry Apply In Progress
     icon: mdi:progress-clock
