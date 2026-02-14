@@ -23,7 +23,7 @@ template:
                 'gt':states('input_number.hc_cold_tolerance')|float(0),
                 'imin':states('input_number.hc_dispatch_ideal_min_ft')|float(0),
                 'imax':states('input_number.hc_dispatch_ideal_max_ft')|float(0),
-                'callers':'none'} | tojson }}
+                'callers':'none'} | tojson | replace(', ', ',') | replace(': ', ':') }}
           {% else %}
             {% set algorithm = states('input_select.hc_dispatch_algorithm') %}
             {% if algorithm in invalid %}
@@ -295,7 +295,7 @@ template:
               'imax': states('input_number.hc_dispatch_ideal_max_ft')|float(0),
               'callers': (callers | join(',') if callers|length else 'none')
             } %}
-            {{ result | tojson }}
+            {{ result | tojson | replace(', ', ',') | replace(': ', ':') }}
           {% endif %}
         attributes:
           suggested_batch: >
