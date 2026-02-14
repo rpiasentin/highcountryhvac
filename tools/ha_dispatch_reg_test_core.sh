@@ -34,7 +34,8 @@ api_post() {
 
 api_get() {
   local path="$1"
-  curl -s -H "$AUTH_HEADER" "$BASE_URL/$path"
+  # Avoid non-zero exit (pipefail) on transient API errors.
+  curl -s -H "$AUTH_HEADER" "$BASE_URL/$path" || true
 }
 
 get_state() {
