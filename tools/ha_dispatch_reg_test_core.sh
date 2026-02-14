@@ -15,6 +15,7 @@ CALLER_ZONE=${CALLER_ZONE:-z7}
 CALLER_TARGET=${CALLER_TARGET:-70}
 RESET_TARGET=${RESET_TARGET:-55}
 NEAR_ZONE=${NEAR_ZONE:-z5}
+RESTORE_WAIT_SEC=${RESTORE_WAIT_SEC:-45}
 
 CLIMATE_MAP_z3="climate.zone_3_basement_bath_and_common"
 CLIMATE_MAP_z7="climate.zone_7_basement_bar_and_tv_room_south_side"
@@ -128,13 +129,26 @@ set_temp() {
   api_post "services/climate/set_temperature" "{\"entity_id\":\"${climate}\",\"temperature\":${value}}"
 }
 
-header() {
-  echo
-  echo "== $1 =="
-}
-
+header() { echo "== $1 =="; }
 pass() { echo "PASS: $*"; }
 fail() { echo "FAIL: $*"; }
+
+log() { echo "$*" >> "$REPORT_FILE"; }
+
+log_state() {
+  local entity="$1"
+  local st
+  st="$(get_state "$entity")"
+  log "$entity state=$st"
+}
+
+log_attr() {
+  local entity="$1"
+  local attr="$2"
+  local v
+  v="$(get_attr "$entity" "$attr")"
+  log "$entity ${attr}=$v"
+}
 
 reset_registry_state() {
   set_select "input_select.hc_dispatch_reg_state" "idle"
@@ -142,6 +156,7 @@ reset_registry_state() {
   api_post "services/input_text/set_value" '{"entity_id":"input_text.hc_dispatch_reg_active_callers","value":"none"}'
   api_post "services/input_text/set_value" '{"entity_id":"input_text.hc_dispatch_reg_active_batch_id","value":"none"}'
   set_num "input_number.hc_dispatch_reg_active_length_ft" 0
+  set_bool "input_boolean.hc_dispatch_reg_apply_in_progress" "turn_off"
   for z in z3 z7 z9 z5; do
     set_num "input_number.hc_dispatch_reg_${z}_system_override_f" 0
     api_post "services/input_boolean/turn_off" "{\"entity_id\":\"input_boolean.hc_dispatch_reg_${z}_batch_member\"}"
@@ -168,17 +183,20 @@ mkdir -p "$REPORT_DIR"
   echo "Caller target: $CALLER_TARGET"
   echo "Reset target: $RESET_TARGET"
   echo "Near zone: $NEAR_ZONE"
+  echo "Restore wait: ${RESTORE_WAIT_SEC}s"
   echo
 } > "$REPORT_FILE"
 
 header "Setup"
 set_automation "automation.hc_dispatch_registry_manual_abort" "turn_off"
+set_automation "automation.hc_dispatch_registry_apply_batch" "turn_on"
 set_bool "input_boolean.hc_dispatch_reg_enabled" "turn_on"
 set_bool "input_boolean.hc_dispatcher_mode_enabled" "turn_on"
 set_bool "input_boolean.hc_dispatcher_auto_approve" "turn_off"
 set_bool "input_boolean.hc_dispatch_manual_override" "turn_off"
 set_bool "input_boolean.hc_dispatch_opportunistic_enabled" "turn_off"
 set_select "input_select.hc_dispatch_reg_state" "idle"
+set_num "input_number.hc_dispatch_min_run_minutes" 0
 set_num "input_number.hc_dispatch_force_delta_f" 1.0
 set_num "input_number.hc_dispatch_force_cap_f" 75
 set_select "input_select.hc_dispatch_force_mode" "Added Only"
@@ -199,11 +217,13 @@ set_select "input_select.hc_z5_cluster" "Independent"
 
 CALLER_CLIMATE_VAR="CLIMATE_MAP_${CALLER_ZONE}"
 CALLER_CLIMATE="${!CALLER_CLIMATE_VAR}"
+NEAR_CLIMATE_VAR="CLIMATE_MAP_${NEAR_ZONE}"
+NEAR_CLIMATE="${!NEAR_CLIMATE_VAR}"
 set_temp "$CALLER_CLIMATE" "$CALLER_TARGET"
 wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "on" 120 || true
 wait_for_payload_fz 60 || true
 fz="$(get_payload_field "fz")"
-echo "payload.fz=$fz"
+log "payload.fz=$fz"
 api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_approve_batch"}'
 sleep 5
 bm3="$(get_state "input_boolean.hc_dispatch_reg_z3_batch_member")"
@@ -211,14 +231,29 @@ bm7="$(get_state "input_boolean.hc_dispatch_reg_z7_batch_member")"
 bm9="$(get_state "input_boolean.hc_dispatch_reg_z9_batch_member")"
 ba3="$(get_state "input_boolean.hc_dispatch_reg_z3_batch_added")"
 ba9="$(get_state "input_boolean.hc_dispatch_reg_z9_batch_added")"
+ov3="$(get_state "input_number.hc_dispatch_reg_z3_system_override_f")"
+ov9="$(get_state "input_number.hc_dispatch_reg_z9_system_override_f")"
+sp3="$(get_attr "$CLIMATE_MAP_z3" "temperature")"
+sp9="$(get_attr "$CLIMATE_MAP_z9" "temperature")"
 if [[ "$fz" == *"z3"* && "$fz" == *"z7"* && "$fz" == *"z9"* && "$bm3" = "on" && "$bm7" = "on" && "$bm9" = "on" ]]; then
   pass "Matrix cluster expansion (z3,z7,z9)"
 else
   fail "Matrix cluster expansion missing (fz=$fz bm3=$bm3 bm7=$bm7 bm9=$bm9)"
 fi
-echo "batch_added z3=$ba3 z9=$ba9"
-log_snapshot "sensor.hc_dispatch_reg_guardrail_payload"
-log_snapshot "input_text.hc_dispatch_reg_active_zones"
+log "batch_added z3=$ba3 z9=$ba9 override z3=$ov3 z9=$ov9 setpoint z3=$sp3 z9=$sp9"
+
+set_temp "$CALLER_CLIMATE" "$RESET_TARGET"
+wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "off" 120 || true
+sleep "$RESTORE_WAIT_SEC"
+sp3_after="$(get_attr "$CLIMATE_MAP_z3" "temperature")"
+sp9_after="$(get_attr "$CLIMATE_MAP_z9" "temperature")"
+ov3_after="$(get_state "input_number.hc_dispatch_reg_z3_system_override_f")"
+ov9_after="$(get_state "input_number.hc_dispatch_reg_z9_system_override_f")"
+if [ "$sp3_after" = "$RESET_TARGET" ] && [ "$sp9_after" = "$RESET_TARGET" ] && [ "$ov3_after" = "0" ] && [ "$ov9_after" = "0" ]; then
+  pass "Restore after caller stops (cluster additions)"
+else
+  fail "Restore after caller stops (z3 sp=$sp3_after ov=$ov3_after z9 sp=$sp9_after ov=$ov9_after)"
+fi
 
 header "Step 2: Matrix Near-Call (Opportunistic)"
 set_bool "input_boolean.hc_dispatch_opportunistic_enabled" "turn_on"
@@ -245,20 +280,33 @@ PY
   wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "on" 120 || true
   wait_for_payload_fz 60 || true
   fz="$(get_payload_field "fz")"
-  echo "delta(${NEAR_ZONE})=$delta tol=$tol payload.fz=$fz"
+  log "delta(${NEAR_ZONE})=$delta tol=$tol payload.fz=$fz"
   api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_approve_batch"}'
   sleep 5
   bm_near="$(get_state "input_boolean.hc_dispatch_reg_${NEAR_ZONE}_batch_member")"
   ba_near="$(get_state "input_boolean.hc_dispatch_reg_${NEAR_ZONE}_batch_added")"
+  ov_near="$(get_state "input_number.hc_dispatch_reg_${NEAR_ZONE}_system_override_f")"
+  sp_near="$(get_attr "$NEAR_CLIMATE" "temperature")"
   if [[ "$fz" == *"${NEAR_ZONE}"* && "$bm_near" = "on" ]]; then
     pass "Near-call opportunistic included ${NEAR_ZONE}"
   else
     fail "Near-call opportunistic missing ${NEAR_ZONE} (fz=$fz bm=${bm_near} ba=${ba_near})"
   fi
+  log "near batch_added=${ba_near} override=${ov_near} setpoint=${sp_near}"
+
+  set_temp "$CALLER_CLIMATE" "$RESET_TARGET"
+  wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "off" 120 || true
+  sleep "$RESTORE_WAIT_SEC"
+  sp_near_after="$(get_attr "$NEAR_CLIMATE" "temperature")"
+  ov_near_after="$(get_state "input_number.hc_dispatch_reg_${NEAR_ZONE}_system_override_f")"
+  if [ "$sp_near_after" = "$RESET_TARGET" ] && [ "$ov_near_after" = "0" ]; then
+    pass "Restore after caller stops (near-call)"
+  else
+    fail "Restore after caller stops (near-call sp=$sp_near_after ov=$ov_near_after)"
+  fi
 else
   echo "WARN: sensor.hc_${NEAR_ZONE}_delta is not numeric; skipping near-call verification."
 fi
-log_snapshot "sensor.hc_dispatch_reg_guardrail_payload"
 
 header "Step 3: Profile Expansion"
 set_bool "input_boolean.hc_dispatch_opportunistic_enabled" "turn_off"
@@ -273,7 +321,7 @@ set_temp "$CALLER_CLIMATE" "$CALLER_TARGET"
 wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "on" 120 || true
 wait_for_payload_fz 60 || true
 fz="$(get_payload_field "fz")"
-echo "payload.fz=$fz"
+log "payload.fz=$fz"
 api_post "services/input_button/press" '{"entity_id":"input_button.hc_dispatch_approve_batch"}'
 sleep 5
 bm3="$(get_state "input_boolean.hc_dispatch_reg_z3_batch_member")"
@@ -284,7 +332,24 @@ if [[ "$fz" == *"z3"* && "$fz" == *"z7"* && "$fz" == *"z9"* && "$bm3" = "on" && 
 else
   fail "Profile expansion missing (fz=$fz bm3=$bm3 bm7=$bm7 bm9=$bm9)"
 fi
-log_snapshot "sensor.hc_dispatch_reg_guardrail_payload"
+ov3="$(get_state "input_number.hc_dispatch_reg_z3_system_override_f")"
+ov9="$(get_state "input_number.hc_dispatch_reg_z9_system_override_f")"
+sp3="$(get_attr "$CLIMATE_MAP_z3" "temperature")"
+sp9="$(get_attr "$CLIMATE_MAP_z9" "temperature")"
+log "profile override z3=$ov3 z9=$ov9 setpoint z3=$sp3 z9=$sp9"
+
+set_temp "$CALLER_CLIMATE" "$RESET_TARGET"
+wait_for_call_state "binary_sensor.hc_${CALLER_ZONE}_call_for_heat" "off" 120 || true
+sleep "$RESTORE_WAIT_SEC"
+sp3_after="$(get_attr "$CLIMATE_MAP_z3" "temperature")"
+sp9_after="$(get_attr "$CLIMATE_MAP_z9" "temperature")"
+ov3_after="$(get_state "input_number.hc_dispatch_reg_z3_system_override_f")"
+ov9_after="$(get_state "input_number.hc_dispatch_reg_z9_system_override_f")"
+if [ "$sp3_after" = "$RESET_TARGET" ] && [ "$sp9_after" = "$RESET_TARGET" ] && [ "$ov3_after" = "0" ] && [ "$ov9_after" = "0" ]; then
+  pass "Restore after caller stops (profile)"
+else
+  fail "Restore after caller stops (profile z3 sp=$sp3_after ov=$ov3_after z9 sp=$sp9_after ov=$ov9_after)"
+fi
 
 header "Restore"
 set_automation "automation.hc_dispatch_registry_manual_abort" "turn_on"
