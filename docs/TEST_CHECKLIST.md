@@ -13,11 +13,15 @@
 5. Run `tools/ha_entity_audit.sh`; ignore cluster average temp sensors when clusters are empty.
 6. Confirm the rollback reference exists: manual backup **“tuesday feb 10 before rewrite.”**
 7. If using the registry rewrite, complete `docs/DISPATCHER_REGISTRY_CUTOVER.md`.
+8. **Call-for-heat sanity check:** if a climate entity is `off`, its
+   `binary_sensor.hc_z*_call_for_heat` must be `off`. If not, reload templates
+   and verify `packages/high_country_call_for_heat.yaml` is current.
 
 ## Cluster Prerequisites (Matrix Tests)
 1. Ensure cluster assignments are restored after any helper reload.
 2. Example: set Z3, Z7, Z9 to Cluster A and Z5 to Independent.
 3. Ensure Z8 thermostat uses `sensor.dining_temp_temperature` as its temperature sensor.
+4. Confirm clusters are not left at `Independent` before Matrix tests.
 
 ## Prod-Only Safe Test (When Staging Is Unavailable)
 1. Keep dispatcher gate OFF while loading new helpers and dashboards.
@@ -45,6 +49,7 @@
 2. Run `ha_dispatch_reg_test_matrix.sh`.
 3. Verify registry sensors show batch, callers, and active zones.
 4. Confirm added zones are forced and restore behavior is correct.
+5. If the script fails, validate raw payloads; the script may mis-parse JSON.
 
 ## Registry Manual Abort Test (Rewrite)
 1. Run `ha_dispatch_reg_test_manual_abort.sh`.

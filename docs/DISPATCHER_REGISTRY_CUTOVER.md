@@ -47,3 +47,5 @@ This checklist enables the registry-based dispatcher safely and provides rollbac
 ## Notes
 - Registry enabled **disables** legacy actuator and setpoint sync.
 - Manual changes to guardrails or dispatcher controls trigger global abort + cooldown.
+- For testing, you can temporarily enable `input_boolean.hc_dispatch_reg_ignore_manual_changes`
+  to prevent configuration edits from forcing a cooldown.

@@ -24,6 +24,7 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - Rollback reference: manual backup **“tuesday feb 10 before rewrite.”**
 - Rearchitecture progress: registry helpers, registry engine, registry guardrail, and registry controller added; legacy actuator/setpoint sync gated off when registry is enabled.
 - Registry control now includes manual abort + cooldown logic and bootstrap baseline capture on enable.
+- **Stability report (Feb 14, 2026):** testing is not reliable; see `docs/DISPATCHER_STABILITY_REPORT_2026-02-14.md`.
 
 ## Target Operating Model (Behavior)
 - Batch starts when one or more real thermostats call.
@@ -85,3 +86,10 @@ This roadmap applies the POC objectives to the canonical production configuratio
 - Cluster average temp sensors will be unavailable for empty clusters; audit ignores those by design.
 - Caller baseline updates must be honored to avoid the dispatcher re-starting a finished batch.
 - Profile/opportunistic edge cases must be validated separately after matrix stop/restore is confirmed.
+- **Testing reliability is currently a blocker.** The core test script can report failures even when guardrail payloads are correct.
+- **Call-for-heat logic was previously incorrect** (hvac_mode attribute used instead of climate state); template fix is required to prevent false callers.
+
+## Next Reset (Recommended)
+1. Apply the stabilization steps in `docs/DISPATCHER_STABILITY_REPORT_2026-02-14.md`.
+2. Replace core test scripts with a preflight-enforced version.
+3. Only then resume end-to-end validation and manual-abort testing.

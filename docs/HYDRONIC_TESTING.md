@@ -8,6 +8,14 @@ This document provides stepwise testing to isolate dispatcher issues and verify 
 - Cluster assignments are restored after helper reloads.
   - Example: Z3, Z7, Z9 in Cluster A; Z5 Independent.
 - Ensure Z8 thermostat uses `sensor.dining_temp_temperature` as its temperature sensor.
+- **As of Feb 14, 2026:** testing has been unreliable. Read
+  `docs/DISPATCHER_STABILITY_REPORT_2026-02-14.md` before running scripts.
+
+## New Preflight (Required For Registry Tests)
+1. Ensure call-for-heat matches climate state:
+   - If `climate.*` state is `off`, the matching `binary_sensor.hc_z*_call_for_heat` must be `off`.
+2. Force cluster assignments for Matrix tests (Z3/Z7/Z9 = Cluster A).
+3. Enable `input_boolean.hc_dispatch_reg_ignore_manual_changes` during test runs.
 
 ## Feb 10, 2026 Rearchitecture Note
 Dispatcher core logic is slated for rewrite. Upcoming behavior changes:
@@ -26,6 +34,9 @@ Before using the registry rewrite, follow:
 ### Registry Matrix Test (New Dispatcher)
 Script: `ha_dispatch_reg_test_matrix.sh`
 Purpose: confirm registry-based Matrix batching and manual-approval flow.
+
+Note: The current script parsing is brittle and may report false failures.
+Do not treat a failure as conclusive without checking raw guardrail payloads.
 
 Steps:
 1. Run:

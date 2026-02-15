@@ -47,10 +47,13 @@ For each zone `zX`:
 1. **Batch never clears**
    - Check `input_boolean.hc_dispatch_reg_zX_calling` for callers still ON.
    - Check `input_number.hc_dispatch_min_run_minutes` and `input_datetime.hc_dispatch_reg_zX_last_on`.
+   - Verify the climate entity state is `heat`; if it is `off`, the
+     `binary_sensor.hc_zX_call_for_heat` must be `off` or callers will never clear.
 
 2. **Manual change triggers unexpected cooldown**
    - Check `input_text.hc_dispatch_reg_manual_change_entity`.
    - Verify `input_boolean.hc_dispatch_reg_apply_in_progress` state.
+   - For testing, temporarily enable `input_boolean.hc_dispatch_reg_ignore_manual_changes`.
 
 3. **Guardrail blocked**
    - Inspect `sensor.hc_dispatch_reg_guardrail_payload` (`g`, `ml`, `fl`, `cl`).
