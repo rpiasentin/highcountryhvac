@@ -5,7 +5,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.z1_first_floor_bedroom_and_bath','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.z1_first_floor_bedroom_and_bath') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z1_delta') %}
@@ -17,7 +20,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_2_second_floor_office_and_upper_guest','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_2_second_floor_office_and_upper_guest') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z2_delta') %}
@@ -29,7 +35,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_3_basement_bath_and_common','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_3_basement_bath_and_common') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z3_delta') %}
@@ -41,7 +50,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_4_garage','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_4_garage') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z4_delta') %}
@@ -53,7 +65,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_5_virtual_thermostat_first_floor_living','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_5_virtual_thermostat_first_floor_living') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z5_delta') %}
@@ -65,7 +80,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_6_master_thermostat','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_6_master_thermostat') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z6_delta') %}
@@ -77,7 +95,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_7_basement_bar_and_tv_room_south_side','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_7_basement_bar_and_tv_room_south_side') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z7_delta') %}
@@ -89,7 +110,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_8_dining_room','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_8_dining_room') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z8_delta') %}
@@ -101,7 +125,10 @@ template:
         device_class: heat
         state: >
           {% set action = state_attr('climate.zone_9_basement_bedroom','hvac_action') %}
-          {% if action == 'heating' %}
+          {% set mode = states('climate.zone_9_basement_bedroom') %}
+          {% if mode != 'heat' %}
+            false
+          {% elif action == 'heating' %}
             true
           {% else %}
             {% set d = states('sensor.hc_z9_delta') %}
